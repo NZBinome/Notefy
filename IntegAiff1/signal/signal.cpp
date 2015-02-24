@@ -107,7 +107,7 @@ void Signal::set(unsigned char *vectOctet, int fs, int l, int ba, int nc)
             //on lit les charactere dans un int
             for(int b=0;b<ba;++b)   //un echantillon peut etre sur 1,2,3 ou 4 byte
             {
-                a[j]+=vectOctet[f+b+j*3]<<(8*b);
+                a[j]+=vectOctet[f+b+j*nc]<<(8*b);
             }
             //on voudrait avoir la moyenne des deux signal
             double d=a[j]*N;

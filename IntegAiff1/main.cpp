@@ -9,11 +9,12 @@
 #include "libaiff/libaiff/libaiff.h"
 #include "AudioRead/aiffread.h"
 #include "audiomidiconverter/z_audiomidiconverter.h"
+#include "midi/musicinstrument.h"
 
 void myfunction()
 {
     AiffRead f;
-    if(!f.open("raghid24.aif"))
+    if(!f.open("raghid16.aif"))
         return ;
 
     Diviseur d(f.buffer(),f.l(),f.fs(),f.ba(),f.nc());
@@ -24,16 +25,16 @@ void myfunction()
 
     Note n;
 
-    for(int i=0;i<d.d();++i)
-    {
-        s.set(d[i],f.fs(),d.ld(),f.ba(),f.nc());
+//    for(int i=0;i<d.d();++i)
+//    {
+        s.set(d[23],f.fs(),d.ld(),f.ba(),f.nc());
         n.findNote(s.fc());
         n.findVolume(s.p());
         n.set_d(s.l());
 
         c.addNote(n);
-    }
-    c.creerMidiFile("raghidint.mid");
+    //}
+    //c.creerMidiFile("raghidint.mid");
 
 }
 
@@ -43,11 +44,11 @@ int main()
     //myfunction();
     Z_audioMidiConverter amc;
     char mf[24];
-    if(!amc.convert("raghid24.aif",mf))
+    if(!amc.convert("raghid16.aif",mf))
     {
         printf("file not found!\n");
     }
-    amc.chooseInstrument(57);
+    amc.chooseInstrument(MusicInstrument::Bass);
     return 0;
 }
 

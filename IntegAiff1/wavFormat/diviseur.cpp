@@ -6,11 +6,10 @@ Diviseur::Diviseur(unsigned char * b, int l, int fs, int ba, int nc)
     _b=b;
     _l=l;
     ++_b[_l]; //cette objet partage ce tableau, on incremente les liens
-    printf("%d\n",_b[_l]);
     _fs=fs;
     _ba=ba;
     _nc=nc;
-
+    printf("%d\n",_ba);
     _ld=1;
     while(_ld<_fs/10)
     {

@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     freq/freqtable.cpp \
     AudioRead/aiffread.cpp \
     AudioRead/audioread.cpp \
-    audiomidiconverter/z_audiomidiconverter.cpp
+    audiomidiconverter/z_audiomidiconverter.cpp \
+    midi/musicinstrument.cpp
 
 HEADERS += \
     wavFormat/diviseur.h \
@@ -41,5 +42,6 @@ HEADERS += \
     freq/freqtable.h \
     AudioRead/aiffread.h \
     AudioRead/audioread.h \
-    audiomidiconverter/z_audiomidiconverter.h
+    audiomidiconverter/z_audiomidiconverter.h \
+    midi/musicinstrument.h
 
