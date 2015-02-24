@@ -4,9 +4,10 @@
 
 class MidiCreator
 {
+    char *_name;
     const int _dt=100;
     double _fdt;       //facteur pour savaoir le temps en tick du delta time du fichier midi.
-
+    int _inst;
     std::vector<Note> _n;
 
 
@@ -21,7 +22,7 @@ public:
         */
 
     int sizeData(char *&c);
-
+    void chooseInstrument(unsigned char inst);
     void addNote(Note n);
     void creerMidiFile(char * name);
 };

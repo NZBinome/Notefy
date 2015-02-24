@@ -1,6 +1,6 @@
 #include "note.h"
 #include "midicreator.h"
-
+#include <stdio.h>
 #include <fstream>
 
 using namespace std;
@@ -9,6 +9,8 @@ MidiCreator::MidiCreator(int fs)
 {
     double t=1.0/fs;        //un echantillon fait t seconde
     _fdt=t*2*_dt;           //une note de longueur t fait _fdt tick
+    _inst=1;
+    _name=0;
 }
 
 void MidiCreator::addNote(Note n)
@@ -30,10 +32,28 @@ void MidiCreator::addNote(Note n)
     }
 }
 
+void MidiCreator::chooseInstrument(unsigned char inst)
+{
+    _inst=inst;
+    fstream f;
+    f.open(_name,ios::in|ios::out|ios::binary);
+    f.seekp(22,ios::beg);
+    char c[3];
+    c[0]=0;
+    c[1]=192;
+    c[2]=_inst;
+    f.write(c,3*sizeof(char));
+    f.close();
+}
+
 int MidiCreator::sizeData(char *&c)
 {
-    c=new char[1000];
-    int sd=0;
+    printf("size %d\n",_n.size());
+    c=new char[3+_n.size()*14];
+    int sd=3;
+    c[0]=0;
+    c[1]=192;
+    c[2]=_inst;
     for(int i=0;i<_n.size();++i)
     {
         int s;
@@ -46,8 +66,8 @@ int MidiCreator::sizeData(char *&c)
 void MidiCreator::creerMidiFile(char *name)
 {
     fstream f;
-    f.open(name,ios::out|ios::binary);
-
+    _name=name;
+    f.open(_name,ios::out|ios::binary);
     //on ecrit le header du fichier
     char ch[]="MThd";
     f.write(ch,4*sizeof(char));

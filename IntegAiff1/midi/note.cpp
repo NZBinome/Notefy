@@ -23,6 +23,9 @@ void Note::findNote(double f)
 {
     Freqtable * freq=Freqtable::getInstance();
     _n=freq->find(f);
+
+    //juste hek
+    _n+=12;
 }
 
 void Note::findVolume(double p)

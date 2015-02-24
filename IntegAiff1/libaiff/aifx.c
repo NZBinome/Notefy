@@ -93,8 +93,11 @@ init_aifx(AIFF_Ref r)
 	r->segmentSize = wSegmentSize;
 
 	if (len >= 22 && r->format == AIFF_TYPE_AIFC) {
-		if (fread(&aFmt, 1, 4, r->fd) < 4)
-			return (-1);
+//		if (fread(&aFmt, 1, 4, r->fd) < 4)
+//			return (-1);
+        if (fread(z_buf,1,4,r->fd)<4)
+            return (-1);
+        aFmt=z_BigEndian(z_buf);
 		switch (aFmt) {
 		case AUDIO_FORMAT_LPCM:	/* 'NONE' */
 		case AUDIO_FORMAT_lpcm:	/* 'lpcm' (not standard) */

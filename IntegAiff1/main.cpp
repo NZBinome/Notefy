@@ -43,8 +43,11 @@ int main()
     //myfunction();
     Z_audioMidiConverter amc;
     char mf[24];
-    amc.convert("raghid24.aif",mf);
-    printf("%s\n",mf);
+    if(!amc.convert("raghid24.aif",mf))
+    {
+        printf("file not found!\n");
+    }
+    amc.chooseInstrument(57);
     return 0;
 }
 

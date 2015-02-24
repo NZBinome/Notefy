@@ -1,13 +1,13 @@
 #include "freq/freqtable.h"
 #include "libaiff/libaiff/libaiff.h"
 #include "AudioRead/aiffread.h"
-#include "z_audiomidiconverter.h"
 #include "wavFormat/diviseur.h"
 #include "signal/complex.h"
 #include "signal/signal.h"
 #include "midi/note.h"
 #include "midi/midicreator.h"
 #include "signal/melody.h"
+#include "z_audiomidiconverter.h"
 #include <string.h>
 
 
@@ -33,6 +33,7 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
             midiFile[i+1]='m';
             midiFile[i+2]='i';
             midiFile[i+3]='d';
+            midiFile[i+4]=0;
             break;
         }
     }
@@ -46,7 +47,7 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
 
     Melody m(d.d());
 
-    MidiCreator c(f.fs());
+    _c=new MidiCreator(f.fs());
 
     Note n;
 
@@ -67,7 +68,20 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
         //printf("%f  %f\n",s.fc(),s.p());
         n.set_d(s.l());
 
-        c.addNote(n);
+        _c->addNote(n);
     }
-    c.creerMidiFile(midiFile);
+    printf("name, %s\n",midiFile);
+    _c->creerMidiFile(midiFile);
+    return 1;
+}
+
+Z_audioMidiConverter::~Z_audioMidiConverter()
+{
+    if(_c!=0)
+        delete _c;
+}
+
+void Z_audioMidiConverter::chooseInstrument(unsigned char inst)
+{
+    _c->chooseInstrument(inst);
 }
