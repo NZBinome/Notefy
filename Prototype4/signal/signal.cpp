@@ -109,7 +109,7 @@ void Signal::set(unsigned char *vectOctet, int fs, int l, int ba, int nc)
             {
                 a[j]+=vectOctet[f+b+j*3]<<(8*b);
             }
-            //on voudrait avoir la moyenne des deux signal
+            //on voudrait avoir la moyenne des deux signaux
             double d=a[j]*N;
             if(d>=1.0)
                 d-=2.0; //condition necessaire si un echantillon n'est pas code sur 4 byte
