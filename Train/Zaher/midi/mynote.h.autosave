@@ -1,0 +1,11 @@
+#ifndef MYNOTE_H
+#define MYNOTE_H
+
+class MyNote
+{
+    
+public:
+    MyNote();
+};
+
+#endif // MYNOTE_H
