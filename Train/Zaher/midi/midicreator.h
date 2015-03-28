@@ -23,7 +23,6 @@ public:
         */
 
     int sizeData(char *&c);
-    void chooseInstrument(unsigned char inst);
     void addNote(Note n);
     void creerMidiFile(char * name);
 };

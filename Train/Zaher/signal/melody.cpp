@@ -3,6 +3,7 @@
 #include "melody.h"
 #include <string.h>
 #include <stdio.h>
+#include <fstream>
 
 extern const double PI;
 
@@ -13,9 +14,46 @@ Melody::Melody(int n)
     _i=0;
     _n=n;
     _gs=0;
-    _f=new double[n];
-    _p=new double[n];
+    _f=0;
+    _p=0;
+    if(_n!=0)
+    {
+        _f=new double[n];
+        _p=new double[n];
+    }
     _g=0;
+    _scale=0;
+}
+
+void Melody::writeToFile(char *filename) const
+{
+    std::fstream f;
+    f.open(filename,std::ios::out|std::ios::binary);
+    f.write((char*)&_n,sizeof(int));
+    f.write((char*)_f,sizeof(_f));
+    f.write((char*)_p,sizeof(_p));
+    f.write((char*)_scale,sizeof(short));
+    f.close();
+}
+
+void Melody::readFromFile(char *filename)
+{
+    std::fstream f;
+    f.open(filename,std::ios::in|std::ios::binary);
+    int n;
+    f.read((char*)&n,sizeof(int));
+    if(n!=_n)
+    {
+        delete [] _f;
+        delete [] _p;
+        _f=new double[n];
+        _p=new double[n];
+    }
+    _n=n;
+    f.read((char*)_f,sizeof(_f));
+    f.read((char*)_p,sizeof(_p));
+    f.read((char*)_scale,sizeof(short));
+    f.close();
 }
 
 void Melody::gaussian(int n)
@@ -210,8 +248,10 @@ void Melody::valueAt(int i,double v[])
 
 Melody::~Melody()
 {
-    delete [] _f;
-    delete [] _p;
+    if(_f!=0)
+        delete [] _f;
+    if(_g!=0)
+        delete [] _p;
     if(_g!=0)
         delete [] _g;
 }
