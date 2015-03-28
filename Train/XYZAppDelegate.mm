@@ -90,6 +90,12 @@
     instrument.number=1;
     instrument.ImageName=@"drums.png";
     [self.instruments addObject:instrument];
+    
+    instrument=[[XYZInstrument alloc]init];
+    instrument.Name=@"mic";
+    instrument.number=1;
+    instrument.ImageName=@"mic.png";
+    [self.instruments addObject:instrument];
 }
 
 @end

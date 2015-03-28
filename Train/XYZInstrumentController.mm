@@ -9,21 +9,11 @@
 #import "XYZInstrumentController.h"
 
 @interface XYZInstrumentController ()
-@property (strong, nonatomic) NSArray *InstrumentImages;
-@property unsigned short Piano;
-@property unsigned short Guitar;
-@property unsigned short Trompette;
-@property unsigned short Violin;
-@property unsigned short accordion;
+@property XYZAppDelegate* appdel;
 @end
 
 @implementation XYZInstrumentController
-@synthesize InstrumentImages;
-@synthesize Piano;
-@synthesize Guitar;
-@synthesize Trompette;
-@synthesize Violin;
-@synthesize accordion;
+@synthesize appdel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,13 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    appdel=[UIApplication sharedApplication].delegate;
 
-    InstrumentImages=@[@"piano.png",@"guitar.png",@"violin.png",@"drums.png",@"trompette.png",@"mic.png",@"accordion.png"];
-    Piano=1;
-    Guitar=26;
-    Trompette=57;
-    Violin=49;
-    accordion=22;
+
     
     // Do any additional setup after loading the view.
 }
@@ -58,36 +44,30 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return InstrumentImages.count;
+    return appdel.instruments.count;
 }
 
 // The cell that is returned must be retrieved from a call to - dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZInstrument *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Instrument" forIndexPath:indexPath];
+    if (indexPath.row<[appdel.instruments count]) {
     UIImage *InstrumentImage = [[UIImage alloc] init];
-    InstrumentImage = [UIImage imageNamed:[InstrumentImages objectAtIndex:indexPath.row]];
+    XYZInstrument* demoInstrument;
+    demoInstrument=[[XYZInstrument alloc]init];
+    demoInstrument=[appdel.instruments objectAtIndex:indexPath.row];
+    InstrumentImage = [UIImage imageNamed:demoInstrument.ImageName];
     cell.Image.image = InstrumentImage;
+    }
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     XYZInstrument* selectedInstrument;
-    XYZInstrument* demoInstrument;
     selectedInstrument=[[XYZInstrument alloc]init];
-    selectedInstrument.Name=[[InstrumentImages objectAtIndex:indexPath.item] substringToIndex:[[InstrumentImages objectAtIndex:indexPath.item] length]-4];
-    int i=0;
-    while (i<[appdel.instruments count]) {
-        demoInstrument=[[XYZInstrument alloc]init];
-        demoInstrument=[appdel.instruments objectAtIndex:i];
-        if ([selectedInstrument.Name isEqualToString:demoInstrument.Name]) {
-            appdel.newinstrument=demoInstrument;
-            break;
-        }
-        i++;
-    }
+    selectedInstrument=[appdel.instruments objectAtIndex:indexPath.item];
+    appdel.newinstrument=selectedInstrument;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
