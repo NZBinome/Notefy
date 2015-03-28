@@ -19,25 +19,28 @@
 @synthesize savedfiles;
 @synthesize filename;
 
--(void)loadSavedFiles{
+-(void)loadSavedFiles
+{
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     path = [appdel.path stringByAppendingPathComponent:appdel.directory];
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
                                                                         error:NULL];
     savedfiles = [[NSMutableArray alloc] init];
-    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         NSString *name = (NSString *)obj;
-        if (![[name substringToIndex:1] isEqualToString:@"."]) {
+        if (![[name substringToIndex:1] isEqualToString:@"."])
+        {
             [savedfiles addObject:[name substringToIndex:[name length]]];
         }
     }];
-    NSLog(@"%@",savedfiles);
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -83,7 +86,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
-    
     NSString *name= [savedfiles objectAtIndex:indexPath.row];
     cell.textLabel.text = name;
     return cell;

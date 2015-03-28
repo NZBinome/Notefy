@@ -52,7 +52,6 @@
                   stringByAppendingPathComponent:[@"track" stringByAppendingString:[[NSString stringWithFormat:@"%d",Tnumber] stringByAppendingString:@".aif"]]
                   ];
     self.url = [NSURL fileURLWithPath:pathToSave];//FILEPATH];
-    NSLog([@"midi url" stringByAppendingString:[self.url absoluteString]]);
 }
 
 -(void)updateURL:(NSString *)extension

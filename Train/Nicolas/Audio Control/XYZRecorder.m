@@ -18,7 +18,6 @@
 - (BOOL) startAudioSession
 {
     // Prepare the audio session
-    NSLog(@"AUDIO");
     NSError *error;
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryRecord error:&error];
@@ -44,7 +43,6 @@
     
     // Create recorder
     recorder = [[AVAudioRecorder alloc] initWithURL:self.url settings:settings error:&error];
-  //  NSLog([self.url absoluteString]);
     if (!recorder)
     {
         NSLog(@"Error establishing recorder: %@", error.localizedFailureReason);

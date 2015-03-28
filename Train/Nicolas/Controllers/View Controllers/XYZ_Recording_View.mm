@@ -72,149 +72,196 @@
     return self;
 }
 
--(void)recordingTime{
+// (void)recordingTime checks if the recording time is exceeded. If yes, it stops the recording process.
+
+-(void)recordingTime
+{
     recordtime-=1;
     [timer invalidate];
-    if (recordtime<=0) {
+    if (recordtime<=0)
+    {
         [recorder stopRecording];
     }
 }
 
--(void)metronomePlay{
+// (void)metronomePlay Plays the metronome.
+
+-(void)metronomePlay
+{
     NSLog(@"playing metronome");
     metronomePLayer=[[XYZPlayer alloc]init];
     [metronomePLayer metronomePlay];
 }
 
+// (IBAction)Scroll:(id)sender Called when the value of the slider changes. Displays the value of the slider.
+
 - (IBAction)Scroll:(id)sender {
     slidervalue.text=[NSString stringWithFormat:@"%d",(int)slider.value];
 }
 
-- (IBAction)record:(id)sender {
-    NSLog(@"record pressed");
+// (IBAction)record:(id)sender Called when record button is pressed. Creates a recorder, creates a player for that track, plays metronome if it is needed, starts the recording session.
+
+- (IBAction)record:(id)sender
+{
     recordtime=15;
     trackCounter+=1;
-    XYZPlayer* player;
+    [self addPlayer];
     recorder = [[XYZRecorder alloc]init];
+    [self setTrack];
+    recorder.name=track.trackName;
+    [recorder fixURL];
+    if ([Switch isOn])
+    {
+        [self startMetronome];
+    }
+    [recorder startAudioSession];
+    [recorder record];
+    [self startTimer];
+}
+
+// (void)setTrack Creates a default track with "mic" as an instrument.
+
+-(void)setTrack
+{
     track= [[XYZTrack alloc]init];
     track.instrument = [[XYZInstrument alloc]init];
-    player=[[XYZPlayer alloc]init];
     [track initialize];
     track.instrument.Name=@"mic";
     track.trackName=[track.trackName stringByAppendingString:[NSString stringWithFormat:@"%d",trackCounter]];
-    recorder.name=track.trackName;
+}
+
+// (void)startMetronome Starts the timer for the metronome.
+
+-(void)startMetronome
+{
+    metronomeTimer= [NSTimer scheduledTimerWithTimeInterval:(60/slider.value)
+                                                     target:self
+                                                   selector:@selector(metronomePlay)
+                                                   userInfo:nil
+                                                    repeats:YES];
+}
+
+// (void)addPlayer adds a player for a track.
+
+-(void)addPlayer
+{
+    XYZPlayer* player;
+    player=[[XYZPlayer alloc]init];
     [player playerURL:trackCounter];
     [players addObject:player];
-    //NSLog(@"size of players : %d",[players count]);
-    [recorder fixURL];
-    if ([Switch isOn]) {
-        NSLog(@"start metronome");
-        metronomeTimer= [NSTimer scheduledTimerWithTimeInterval:(60/slider.value)
-                                                target:self
-                                              selector:@selector(metronomePlay)
-                                              userInfo:nil
-                                               repeats:YES];
-    }
-    if ([recorder startAudioSession]){
-        NSLog(@"start audio session");
-    }
-    if([recorder record]){
-        NSLog(@"recording");
-    }
+}
+
+// (void)startTimer Starts the timer for the recorder.
+
+-(void)startTimer
+{
     timer= [NSTimer scheduledTimerWithTimeInterval:1.0
-                                           target:self
-                                         selector:@selector(recordingTime)
-                                         userInfo:nil
-                                          repeats:YES];
+                                            target:self
+                                          selector:@selector(recordingTime)
+                                          userInfo:nil
+                                           repeats:YES];
 }
 
-- (IBAction)stopRecord:(id)sender {
-    if([recorder stopRecording]){
-        NSLog(@"stopped recording");
-        [metronomeTimer invalidate];
-        [tracks addObject:track];
-        NSLog(@"before adding rows");
-        [trackTable reloadData];
-        NSLog(@"rows added");
-    }
+// (IBAction)stopRecord:(id)sender is called when the record button is released or when the record time expires. Stops the recorder, adds the recorded tracks and refreshes the table.
+
+- (IBAction)stopRecord:(id)sender
+{
+    [recorder stopRecording];
+    [metronomeTimer invalidate];
+    [tracks addObject:track];
+    [trackTable reloadData];
 }
 
-- (IBAction)play:(id)sender {
-    NSLog(@"play pressed");
+// (IBAction)play:(id)sender is called when the play button is pressed. Plays the selected tracks of the melody.
+
+- (IBAction)play:(id)sender
+{
     int i=0;
-    while (i<[players count]) {
+    while (i<[players count])
+    {
         XYZTrack* demotrack;
         demotrack=[[XYZTrack alloc]init];
         demotrack=[tracks objectAtIndex:i];
-        if (demotrack.isSelected) {
-            if ([demotrack.instrument.Name isEqualToString:@"mic"]) {
+        if (demotrack.isSelected)
+        {
+            if ([demotrack.instrument.Name isEqualToString:@"mic"])
+            {
                 [[players objectAtIndex:i] updateURL:@".aif"];
-                if([[players objectAtIndex:i] XYZplay]){
-                    NSLog(@"Playing");
-                }
-
+                [[players objectAtIndex:i] XYZplay];
             }
-            else{
+            else
+            {
                 [[players objectAtIndex:i] updateURL:@".mid"];
-                if([[players objectAtIndex:i] midiPlay]){
-                    NSLog(@"Playing");
-                }
-
+                [[players objectAtIndex:i] midiPlay];
             }
         }
         ++i;
     }
 }
 
-- (IBAction)save:(id)sender {
-    if (![inputname.text  isEqual: @""]) {
-        if ([selectedfile isEqualToString:@""]) {
-            if ([saver nameExists:inputname.text]) {
+// (IBAction)save:(id)sender Called when the save button is clicked. Saves the melody according to the given name.
+
+- (IBAction)save:(id)sender
+{
+    if (![inputname.text  isEqual: @""])
+    {
+        if ([selectedfile isEqualToString:@""])
+        {
+            if ([saver nameExists:inputname.text])
+            {
                 warninglabel.text=@"Name already exists";
             }
-            else{
-                if([saver save:inputname.text]){
-                    NSLog(@"Saved");
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
+            else
+            {
+                [saver save:inputname.text];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }
-        else{
+        else
+        {
             [saver removeExistsingFile:selectedfile];
             [saver save:inputname.text];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
-    else{
+    else
+    {
         warninglabel.text=@"Please insert a name";
     }
 
 }
 
--(void)dismissKeyboard {
+// (void)dismissKeyboard dismisses the keyboard
+
+-(void)dismissKeyboard
+{
      [self.inputname resignFirstResponder];
 }
 
--(void)cleanAudioFiles{
+// (void)cleanAudioFiles cleans the directory, keeping the saved folder as well as the file of the metronome.
+
+-(void)cleanAudioFiles
+{
     filemgr = [NSFileManager defaultManager];
     NSError *error;
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appdel.path
                                                                         error:NULL];
-   // NSLog(appdel.path);
-    //NSLog(@"%@", dirs);
     NSMutableArray* Audiofiles;
     Audiofiles = [[NSMutableArray alloc] init];
-    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         NSString *name = (NSString *)obj;
-        if (![[name substringToIndex:1] isEqualToString:@"."]) {
+        if (![[name substringToIndex:1] isEqualToString:@"."])
+        {
             [Audiofiles addObject:[name substringToIndex:[name length]]];
         }
     }];
-    NSLog(@"%@",Audiofiles);
     int i=0;
-    while (i<[Audiofiles count]) {
+    while (i<[Audiofiles count])
+    {
         NSString* file=[Audiofiles objectAtIndex:i];
-        if (!([file isEqualToString:@"Saved"] || [file isEqualToString:@"beat.aif"])) {
+        if (!([file isEqualToString:@"Saved"] || [file isEqualToString:@"beat.aif"]))
+        {
             NSString* path=[appdel.path stringByAppendingPathComponent:file];
             [filemgr removeItemAtURL:[NSURL fileURLWithPath:path] error:&error];
         }
@@ -222,12 +269,13 @@
     }
 }
 
+// (void)viewDidLoad executes the tsks when the view loads.
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     appdel=[UIApplication sharedApplication].delegate;
     [self cleanAudioFiles];
-    NSLog(@"new track did load");
     amc=Z_audioMidiConverter();
     selectedfile=appdel.selectedfile;
     appdel.selectedfile = @"";
@@ -240,17 +288,18 @@
 
     saver = [[XYZSaver alloc]init];
     [saver initialize];
-    if ([selectedfile isEqualToString:@""]) {
+    if ([selectedfile isEqualToString:@""])
+    {
         appdel.currentdirectory=@"/Default";
         filemgr = [NSFileManager defaultManager];
         path=[appdel.path stringByAppendingString:@"/Default"];
         [filemgr createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
     }
     
-    if (![selectedfile isEqualToString:@""]){
+    if (![selectedfile isEqualToString:@""])
+    {
         [self navigate_From_Saved:path];
     }
-    
     slidervalue.text=[NSString stringWithFormat:@"%d",(int)slider.value];
     saver.name = saver.oldname;
     [saver directoryURL];
@@ -261,6 +310,8 @@
     [self.view addGestureRecognizer:tap];
 
 }
+
+// (void)navigate_From_Saved Loads the selected saved track, creates the players
 
 -(void)navigate_From_Saved:(NSString*)path
 {
@@ -273,20 +324,14 @@
                                                                         error:NULL];
     [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString *name = (NSString *)obj;
-        if ([[name substringFromIndex:[name length]-4] isEqualToString:@".aif"]) {
+        if ([[name substringFromIndex:[name length]-4] isEqualToString:@".aif"])
+        {
             trackCounter+=1;
-            XYZTrack* demotrack;
-            XYZPlayer* player;
-            demotrack=[[XYZTrack alloc]init];
-            demotrack.instrument=[[XYZInstrument alloc]init];
-            player=[[XYZPlayer alloc]init];
-            [player playerURL:trackCounter];
-            [players addObject:player];
-            demotrack.trackName=[name substringToIndex:[name length]-4];
-            demotrack.isSelected=TRUE;
-            [tracks addObject:demotrack];
+            [self addPlayer];
+            [self addTrack:name];
         }
-        if([[name substringFromIndex:[name length]-4] isEqualToString:@".mid"]){
+        if([[name substringFromIndex:[name length]-4] isEqualToString:@".mid"])
+        {
             NSString* midipath=[path stringByAppendingString:name];
             amc.getInstrument((char*)[midipath UTF8String]);
         }
@@ -294,26 +339,47 @@
     [self getInstrument:path];
 }
 
--(void)getInstrument:(NSString*)path{
+// (void)addTrack adds a track with a given name.
+
+-(void)addTrack:(NSString*)name
+{
+    XYZTrack* demotrack;
+    demotrack=[[XYZTrack alloc]init];
+    demotrack.instrument=[[XYZInstrument alloc]init];
+    demotrack.trackName=[name substringToIndex:[name length]-4];
+    demotrack.isSelected=TRUE;
+    [tracks addObject:demotrack];
+}
+
+// (void)getInstrument For each track of a given melody, it retrieves the last selescted instrument.
+
+-(void)getInstrument:(NSString*)path
+{
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
                                                                         error:NULL];
-    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    {
         NSString *name = (NSString *)obj;
-        if([[name substringFromIndex:[name length]-4] isEqualToString:@".mid"]){
+        if([[name substringFromIndex:[name length]-4] isEqualToString:@".mid"])
+        {
             NSString* midipath=[path stringByAppendingString:[@"/" stringByAppendingString:name]];
             unsigned short instrument;
             instrument=amc.getInstrument((char*)[midipath UTF8String]);
             int i=0;
-            while (i<[tracks count]) {
+            while (i<[tracks count])
+            {
                 XYZTrack* demotrack;
                 demotrack=[tracks objectAtIndex:i];
                 XYZInstrument* demoInstrument;
-                if([demotrack.trackName isEqualToString:[name substringToIndex:[name length]-4]]){
+                if([demotrack.trackName isEqualToString:[name substringToIndex:[name length]-4]])
+                {
                     int j=0;
-                    while (j<[appdel.instruments count]) {
+                    while (j<[appdel.instruments count])
+                    {
                         demoInstrument=[[XYZInstrument alloc]init];
                         demoInstrument=[appdel.instruments objectAtIndex:j];
-                        if (demoInstrument.number==instrument) {
+                        if (demoInstrument.number==instrument)
+                        {
                             demotrack.instrument=demoInstrument;
                         }
                         j++;
@@ -326,10 +392,14 @@
     }];
 }
 
--(void)viewDidAppear:(BOOL)animated{
+// (void)viewDidAppear:(BOOL)animated Executes tasks when the view appears.
+
+-(void)viewDidAppear:(BOOL)animated
+{
     chosenInstrument=appdel.newinstrument.Name;
     appdel.newinstrument.Name=@"";
-        if (appdel.selectedtrack!=-1){
+        if (appdel.selectedtrack!=-1)
+        {
             XYZTrack* demotrack;
             demotrack=[tracks objectAtIndex:appdel.selectedtrack];
             demotrack.instrument.Name=chosenInstrument;
@@ -337,10 +407,12 @@
             [trackTable reloadData];
             NSString* path;
             char array [96];
-                if ([selectedfile isEqualToString:@""]) {
+                if ([selectedfile isEqualToString:@""])
+                {
                 path=[appdel.path stringByAppendingString:[@"/Default/track" stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];
             }
-                else{
+                else
+                {
                     path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/track" ] stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];
                 }
             appdel.selectedtrack=-1;
@@ -357,7 +429,8 @@
 
 #pragma mark - TableView Control
 
--(void)viewWillDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated
+{
     [saver removeNonSaved:[saver.oldname stringByAppendingString:@".aif"]];
 
 }
@@ -391,9 +464,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark){
+    if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
+    {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-    }else{
+    }
+    else
+    {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     }
     XYZTrack* tempTrack;
@@ -410,23 +486,28 @@
 -(void)viewState
 {
     int i=0;
-    while (i<[tracks count]) {
+    while (i<[tracks count])
+    {
         XYZTrack* tempTrack;
         tempTrack=[tracks objectAtIndex:i];
-        if (tempTrack.isSelected) {
+        if (tempTrack.isSelected)
+        {
             NSLog(@"selected");
         }
-        else{
+        else
+        {
             NSLog(@"not selected");
         }
         ++i;
     }
 }
 
--(void)viewInstruments{
+-(void)viewInstruments
+{
     int i=0;
     NSLog(@"haha");
-    while (i<[tracks count]) {
+    while (i<[tracks count])
+    {
         XYZTrack* tempTrack;
         tempTrack=[tracks objectAtIndex:i];
        // NSLog(tempTrack.instrument);
@@ -440,7 +521,8 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"Instruments"]) {
+    if ([[segue identifier] isEqualToString:@"Instruments"])
+    {
     XYZTrack *demotrack;
     demotrack=[[XYZTrack alloc]init];
     demotrack=[tracks objectAtIndex:appdel.selectedtrack];

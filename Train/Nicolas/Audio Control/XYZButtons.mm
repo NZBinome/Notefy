@@ -13,7 +13,8 @@
 @implementation XYZButtons
 @synthesize url;
 @synthesize name;
--(void)fixURL{
+-(void)fixURL
+{
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     NSString *pathToSave;
         pathToSave = [
@@ -23,7 +24,8 @@
     url = [NSURL fileURLWithPath:pathToSave];//FILEPATH];
 }
 
--(void)directoryURL{
+-(void)directoryURL
+{
         XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
         NSString *pathToSave;
         pathToSave = [appdel.path

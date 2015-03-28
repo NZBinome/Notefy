@@ -9,54 +9,58 @@
 #import "XYZSaver.h"
 
 @interface XYZSaver()
+@property XYZAppDelegate* appdel;
 @end
 @implementation XYZSaver
 @synthesize directory;
 @synthesize newurl;
 @synthesize oldname;
+@synthesize appdel;
 
--(BOOL)save:(NSString *)filename{
+-(BOOL)save:(NSString *)filename
+{
     NSError *error;
     NSFileManager *filemgr;
     newurl = [newurl URLByAppendingPathComponent:filename];
     filemgr = [NSFileManager defaultManager];
-    NSLog(@"in save");
-  //  NSLog([self.url absoluteString]);
-  //  NSLog([newurl absoluteString]);
     [filemgr moveItemAtURL:self.url toURL:newurl error:&error];
     return YES;
 }
 
--(void) initialize{
-    XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
+-(void) initialize
+{
+    appdel=[UIApplication sharedApplication].delegate;
     directory = appdel.directory;
     oldname = @"Default";
     newurl = [NSURL fileURLWithPath:[appdel.path stringByAppendingPathComponent:directory]];
 }
 
--(void) copyFromSaved:(NSString *)name{
+-(void) copyFromSaved:(NSString *)name
+{
     NSError *error;
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
+    //XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [filemgr copyItemAtURL:[newurl URLByAppendingPathComponent:name]
                      toURL:[NSURL fileURLWithPath:[appdel.path stringByAppendingPathComponent:name]] error:&error];
 }
 
--(void)removeNonSaved:(NSString *)name{
+-(void)removeNonSaved:(NSString *)name
+{
     NSError *error;
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
+    //XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [filemgr removeItemAtURL:
         [NSURL fileURLWithPath:[appdel.path stringByAppendingPathComponent:name]]
         error:&error];
 }
 
--(BOOL)nameExists:(NSString *)name{
+-(BOOL)nameExists:(NSString *)name
+{
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
+    //XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     BOOL isDir;
     if ([filemgr fileExistsAtPath:[[appdel.path stringByAppendingPathComponent:directory]stringByAppendingPathComponent:name] isDirectory:&isDir])
     {
@@ -65,11 +69,12 @@
     return NO;
 }
 
--(void)removeExistsingFile:(NSString *)name{
+-(void)removeExistsingFile:(NSString *)name
+{
     NSError *error;
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
+   // XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [filemgr removeItemAtURL:
      [NSURL fileURLWithPath:[[appdel.path stringByAppendingPathComponent:directory]stringByAppendingPathComponent:name]]
                        error:&error];

@@ -16,9 +16,9 @@
 #import "XYZAppDelegate.h"
 #import "XYZTrack.h"
 #import "XYZTrackCell.h"
-#import "Zaher/midi/midicreator.h"
-#import "Zaher/audiomidiconverter/z_audiomidiconverter.h"
-#import "Zaher/midi/musicinstrument.h"
+#import "../../../Zaher/midi/midicreator.h"
+#import "../../../Zaher/audiomidiconverter/z_audiomidiconverter.h"
+#import "../../../Zaher/midi/musicinstrument.h"
 
 
 @interface XYZ_Recording_View : UIViewController<UITableViewDelegate,UITableViewDataSource>

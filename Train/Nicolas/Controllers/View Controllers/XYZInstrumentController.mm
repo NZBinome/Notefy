@@ -18,7 +18,8 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
     return self;
@@ -51,7 +52,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZInstrument *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Instrument" forIndexPath:indexPath];
-    if (indexPath.row<[appdel.instruments count]) {
+    if (indexPath.row<[appdel.instruments count])
+    {
     UIImage *InstrumentImage = [[UIImage alloc] init];
     XYZInstrument* demoInstrument;
     demoInstrument=[[XYZInstrument alloc]init];
