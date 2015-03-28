@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *trackTableView;
 @property NSString* chosenInstrument;
 @property XYZAppDelegate *appdel;
+@property NSFileManager *filemgr;
+
 
 @end
 
@@ -59,6 +61,7 @@
 @synthesize trackTableView;
 @synthesize chosenInstrument;
 @synthesize appdel;
+@synthesize filemgr;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -102,7 +105,7 @@
     recorder.name=track.trackName;
     [player playerURL:trackCounter];
     [players addObject:player];
-    NSLog(@"size of players : %d",[players count]);
+    //NSLog(@"size of players : %d",[players count]);
     [recorder fixURL];
     if ([Switch isOn]) {
         NSLog(@"start metronome");
@@ -193,13 +196,12 @@
 }
 
 -(void)cleanAudioFiles{
-    NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
     NSError *error;
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:appdel.path
                                                                         error:NULL];
-    NSLog(appdel.path);
-    NSLog(@"%@", dirs);
+   // NSLog(appdel.path);
+    //NSLog(@"%@", dirs);
     NSMutableArray* Audiofiles;
     Audiofiles = [[NSMutableArray alloc] init];
     [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -240,41 +242,13 @@
     [saver initialize];
     if ([selectedfile isEqualToString:@""]) {
         appdel.currentdirectory=@"/Default";
-        NSFileManager* FM;
-        FM = [NSFileManager defaultManager];
+        filemgr = [NSFileManager defaultManager];
         path=[appdel.path stringByAppendingString:@"/Default"];
-        [FM createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
+        [filemgr createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
     }
     
     if (![selectedfile isEqualToString:@""]){
-        inputname.text = selectedfile;
-        saver.oldname = selectedfile;
-        appdel.currentdirectory=[@"/" stringByAppendingString:selectedfile];
-        [saver copyFromSaved:selectedfile];
-        path=[appdel.path stringByAppendingString:appdel.currentdirectory];
-        NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
-                                                                            error:NULL];
-        [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSString *name = (NSString *)obj;
-            if ([[name substringFromIndex:[name length]-4] isEqualToString:@".aif"]) {
-                trackCounter+=1;
-                XYZTrack* demotrack;
-                XYZPlayer* player;
-                demotrack=[[XYZTrack alloc]init];
-                demotrack.instrument=[[XYZInstrument alloc]init];
-                player=[[XYZPlayer alloc]init];
-                [player playerURL:trackCounter];
-                [players addObject:player];
-                demotrack.trackName=[name substringToIndex:[name length]-4];
-                demotrack.isSelected=TRUE;
-                [tracks addObject:demotrack];
-                }
-            if([[name substringFromIndex:[name length]-4] isEqualToString:@".mid"]){
-                NSString* midipath=[path stringByAppendingString:name];
-                amc.getInstrument((char*)[midipath UTF8String]);
-            }
-        }];
-        [self getInstrument:path];
+        [self navigate_From_Saved:path];
     }
     
     slidervalue.text=[NSString stringWithFormat:@"%d",(int)slider.value];
@@ -286,6 +260,38 @@
     
     [self.view addGestureRecognizer:tap];
 
+}
+
+-(void)navigate_From_Saved:(NSString*)path
+{
+    inputname.text = selectedfile;
+    saver.oldname = selectedfile;
+    appdel.currentdirectory=[@"/" stringByAppendingString:selectedfile];
+    [saver copyFromSaved:selectedfile];
+    path=[appdel.path stringByAppendingString:appdel.currentdirectory];
+    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
+                                                                        error:NULL];
+    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *name = (NSString *)obj;
+        if ([[name substringFromIndex:[name length]-4] isEqualToString:@".aif"]) {
+            trackCounter+=1;
+            XYZTrack* demotrack;
+            XYZPlayer* player;
+            demotrack=[[XYZTrack alloc]init];
+            demotrack.instrument=[[XYZInstrument alloc]init];
+            player=[[XYZPlayer alloc]init];
+            [player playerURL:trackCounter];
+            [players addObject:player];
+            demotrack.trackName=[name substringToIndex:[name length]-4];
+            demotrack.isSelected=TRUE;
+            [tracks addObject:demotrack];
+        }
+        if([[name substringFromIndex:[name length]-4] isEqualToString:@".mid"]){
+            NSString* midipath=[path stringByAppendingString:name];
+            amc.getInstrument((char*)[midipath UTF8String]);
+        }
+    }];
+    [self getInstrument:path];
 }
 
 -(void)getInstrument:(NSString*)path{
@@ -301,21 +307,16 @@
             while (i<[tracks count]) {
                 XYZTrack* demotrack;
                 demotrack=[tracks objectAtIndex:i];
+                XYZInstrument* demoInstrument;
                 if([demotrack.trackName isEqualToString:[name substringToIndex:[name length]-4]]){
-                    if (instrument==1) {
-                        demotrack.instrument.Name=@"piano";
-                    }
-                    if (instrument==26) {
-                        demotrack.instrument.Name=@"guitar";
-                    }
-                    if (instrument==57) {
-                        demotrack.instrument.Name=@"trompette";
-                    }
-                    if (instrument==49) {
-                        demotrack.instrument.Name=@"violin";
-                    }
-                    if (instrument==22) {
-                        demotrack.instrument.Name=@"accordion";
+                    int j=0;
+                    while (j<[appdel.instruments count]) {
+                        demoInstrument=[[XYZInstrument alloc]init];
+                        demoInstrument=[appdel.instruments objectAtIndex:j];
+                        if (demoInstrument.number==instrument) {
+                            demotrack.instrument=demoInstrument;
+                        }
+                        j++;
                     }
                     [tracks replaceObjectAtIndex:i withObject:demotrack];
                 }

@@ -75,27 +75,19 @@
 {
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     XYZInstrument* selectedInstrument;
+    XYZInstrument* demoInstrument;
     selectedInstrument=[[XYZInstrument alloc]init];
     selectedInstrument.Name=[[InstrumentImages objectAtIndex:indexPath.item] substringToIndex:[[InstrumentImages objectAtIndex:indexPath.item] length]-4];
-    if ([selectedInstrument.Name isEqualToString:@"piano"]) {
-        selectedInstrument.number=Piano;
+    int i=0;
+    while (i<[appdel.instruments count]) {
+        demoInstrument=[[XYZInstrument alloc]init];
+        demoInstrument=[appdel.instruments objectAtIndex:i];
+        if ([selectedInstrument.Name isEqualToString:demoInstrument.Name]) {
+            appdel.newinstrument=demoInstrument;
+            break;
+        }
+        i++;
     }
-    if ([selectedInstrument.Name isEqualToString:@"guitar"]) {
-        selectedInstrument.number=Guitar;
-    }
-    if ([selectedInstrument.Name isEqualToString:@"violin"]) {
-        selectedInstrument.number=Violin;
-    }
-    if ([selectedInstrument.Name isEqualToString:@"drums"]) {
-        selectedInstrument.number=Piano; //en attendant
-    }
-    if ([selectedInstrument.Name isEqualToString:@"trompette"]) {
-        selectedInstrument.number=Trompette;
-    }
-    if ([selectedInstrument.Name isEqualToString:@"accordion"]) {
-        selectedInstrument.number=accordion;
-    }
-    appdel.newinstrument=selectedInstrument;
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *Image;
 @property NSString* Name;
 @property unsigned short number;
+@property NSString* ImageName;
 
 @end

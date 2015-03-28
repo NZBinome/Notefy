@@ -18,5 +18,6 @@
 @property NSString *currentdirectory;
 @property NSInteger selectedtrack;
 @property XYZInstrument *newinstrument;
+@property NSMutableArray* instruments;
 
 @end
