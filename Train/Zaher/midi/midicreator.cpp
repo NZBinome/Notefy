@@ -32,20 +32,6 @@ void MidiCreator::addNote(Note n)
     }
 }
 
-void MidiCreator::chooseInstrument(unsigned char inst)
-{
-    _inst=inst;
-    fstream f;
-    f.open(_name,ios::in|ios::out|ios::binary);
-    f.seekp(22,ios::beg);
-    char c[3];
-    c[0]=0;
-    c[1]=192;
-    c[2]=_inst;
-    f.write(c,3*sizeof(char));
-    f.close();
-}
-
 int MidiCreator::sizeData(char *&c)
 {
     //printf("size %d\n",_n.size());

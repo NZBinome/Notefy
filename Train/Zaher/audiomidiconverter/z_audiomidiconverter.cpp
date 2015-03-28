@@ -21,24 +21,8 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
 {
     const int gw=4; //gauss window
 
-    int i=0;
-    while(1)
-    {
-        if(audioFile[i]!='.')
-        {
-            midiFile[i]=audioFile[i];
-            ++i;
-        }
-        else
-        {
-            midiFile[i]='.';
-            midiFile[i+1]='m';
-            midiFile[i+2]='i';
-            midiFile[i+3]='d';
-            midiFile[i+4]=0;
-            break;
-        }
-    }
+
+    openFile();
 
     AiffRead f;
     if(!f.open(audioFile))
@@ -48,6 +32,7 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     Signal s;
 
     Melody m(d.d());
+
 
     
 
@@ -60,6 +45,28 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     }
 
     m.filtreBilateral(gw);
+
+    int ftd=0;
+    while(1)
+    {
+        if(audioFile[ftd]!='.')
+        {
+            midiFile[ftd]=audioFile[ftd];
+            ++i;
+        }
+        else
+        {
+            midiFile[ftd]='.';
+            midiFile[ftd+1]='m';
+            midiFile[ftd+2]='e';
+            midiFile[ftd+3]='l';
+            midiFile[ftd+4]=0;
+            break;
+        }
+    }
+
+    m.writeToFile(midiFile);
+
     _c=new MidiCreator(f.fs());
     for(int i=0;i<d.d();++i)
     {
@@ -72,6 +79,13 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
 
         _c->addNote(n);
     }
+
+    midiFile[ftd]='.';
+    midiFile[ftd+1]='m';
+    midiFile[ftd+2]='i';
+    midiFile[ftd+3]='d';
+    midiFile[ftd+4]=0;
+
     printf("name, %s\n",midiFile);
     _c->creerMidiFile(midiFile);
     return 1;
@@ -88,12 +102,6 @@ unsigned short Z_audioMidiConverter::getInstrument(char * filename)
     return c[2];
 }
 
-Z_audioMidiConverter::~Z_audioMidiConverter()
-{
-    if(_c!=0)
-        delete _c;
-}
-
 void Z_audioMidiConverter::chooseInstrument(unsigned char inst, char * filename)
 {
     //_c->chooseInstrument(inst);
@@ -106,4 +114,34 @@ void Z_audioMidiConverter::chooseInstrument(unsigned char inst, char * filename)
     c[2]=inst;
     f.write(c,3*sizeof(char));
     f.close();
+}
+
+void Z_audioMidiConverter::fix(char *filename)
+{
+    int ftd=0;
+    while(1)
+    {
+        if(filename[ftd]!='.')
+        {
+            filename[ftd]=audioFile[ftd];
+            ++i;
+        }
+        else
+        {
+            midiFile[ftd]='.';
+            midiFile[ftd+1]='m';
+            midiFile[ftd+2]='e';
+            midiFile[ftd+3]='l';
+            midiFile[ftd+4]=0;
+            break;
+        }
+    }
+    Melody m(0);
+    m.readFromFile();
+}
+
+Z_audioMidiConverter::~Z_audioMidiConverter()
+{
+    if(_c!=0)
+        delete _c;
 }
