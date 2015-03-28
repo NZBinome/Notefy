@@ -21,8 +21,6 @@ class Melody
     void _log2F();
     void _exp2F();
 
-    short _scale;
-
     double range(double d);
 
 public:
@@ -32,8 +30,6 @@ public:
     void gaussian(int n);
     void valueAt(int i,double v[]); //v tableau de deux valeur
     //0 la frequence 1 la puissance, on remplit le tableau
-    void writeToFile(char *filename) const;
-    void readFromFile(char *filename);
     ~Melody();
 };
 
