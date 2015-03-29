@@ -22,8 +22,6 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     const int gw=4; //gauss window
 
 
-    openFile();
-
     AiffRead f;
     if(!f.open(audioFile))
         return 0;
@@ -52,7 +50,7 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
         if(audioFile[ftd]!='.')
         {
             midiFile[ftd]=audioFile[ftd];
-            ++i;
+            ++ftd;
         }
         else
         {
@@ -65,7 +63,7 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
         }
     }
 
-    m.writeToFile(midiFile);
+    //m.writeToFile(midiFile);
 
     _c=new MidiCreator(f.fs());
     for(int i=0;i<d.d();++i)
@@ -121,23 +119,18 @@ void Z_audioMidiConverter::fix(char *filename)
     int ftd=0;
     while(1)
     {
-        if(filename[ftd]!='.')
+        if(filename[ftd]='.')
         {
-            filename[ftd]=audioFile[ftd];
-            ++i;
-        }
-        else
-        {
-            midiFile[ftd]='.';
-            midiFile[ftd+1]='m';
-            midiFile[ftd+2]='e';
-            midiFile[ftd+3]='l';
-            midiFile[ftd+4]=0;
+            filename[ftd]='.';
+            filename[ftd+1]='m';
+            filename[ftd+2]='e';
+            filename[ftd+3]='l';
+            filename[ftd+4]=0;
             break;
         }
     }
     Melody m(0);
-    m.readFromFile();
+    m.readFromFile(filename);
 }
 
 Z_audioMidiConverter::~Z_audioMidiConverter()
