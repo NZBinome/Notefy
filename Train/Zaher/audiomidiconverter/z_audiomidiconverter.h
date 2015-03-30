@@ -1,13 +1,14 @@
 #ifndef Z_AUDIOMIDICONVERTER_H
 #define Z_AUDIOMIDICONVERTER_H
 
+#include "../midi/midicreator.h"
+#include "../signal/melody.h"
+
 class Z_audioMidiConverter
 {
-    MidiCreator *_c;
-
+    void melToMid(Melody& m, char *filename);
 public:
     Z_audioMidiConverter();
-
 
     int convert(char *audioFile, char *midiFile);
     void chooseInstrument(unsigned char inst, char * filename);

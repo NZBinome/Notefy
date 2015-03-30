@@ -18,7 +18,7 @@ public:
     void inc_d(int d);
 
 
-    void findNote(double frequence);    //on trouve la note grace a la frequence
+    void findNote(double frequence, int scale);    //on trouve la note grace a la frequence
     void findVolume(double puissance);  //le volume grace a la puissance
     void setNote(unsigned char note);
 

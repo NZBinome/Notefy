@@ -9,7 +9,6 @@ MidiCreator::MidiCreator(int fs)
 {
     double t=1.0/fs;        //un echantillon fait t seconde
     _fdt=t*2*_dt;           //une note de longueur t fait _fdt tick
-    _inst=1;
     //_name=0;
 }
 
@@ -39,7 +38,7 @@ int MidiCreator::sizeData(char *&c)
     int sd=3;
     c[0]=0;
     c[1]=192;
-    c[2]=_inst;
+    c[2]=1;
     for(int i=0;i<_n.size();++i)
     {
         int s;

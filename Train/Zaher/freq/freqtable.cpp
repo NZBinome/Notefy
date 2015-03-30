@@ -37,10 +37,49 @@ int Freqtable::find(double freq)
             i-=j;
         }
     }
-    if(freq-FREQTABLE[i]<FREQTABLE[i+1]-freq)
+    if(freq/FREQTABLE[i]<FREQTABLE[i+1]/freq)
         return i;
     else
         return i+1;
+}
+
+bool Freqtable::inScale(int ind, int scale)
+{
+    const int MAJORSCALE[]={0, 2, 4, 5, 7, 9, 11};
+    int pos=(ind-scale)%12;
+    for(int i=0;i<7;++i)
+    {
+        if(pos==MAJORSCALE[i])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+int Freqtable::find(double freq, int scale, double *diff)
+{
+
+    int iFreq=find(freq);
+    if(inScale(iFreq,scale))
+    {
+        if(diff!=0)
+            *diff=FREQTABLE[iFreq]/freq;
+        return iFreq;
+    }
+    if(freq/FREQTABLE[iFreq-1]<FREQTABLE[iFreq+1]/freq)
+    {
+        if(diff!=0)
+            *diff=FREQTABLE[iFreq-1]/freq;
+        return iFreq-1;
+    }
+    else
+    {
+        if(diff!=0)
+            *diff=FREQTABLE[iFreq+1]/freq;
+        return iFreq+1;
+    }
 }
 
 void Freqtable::setMax(int maxValue)

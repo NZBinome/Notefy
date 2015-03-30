@@ -19,10 +19,14 @@ void Note::inc_d(int d)
     _d+=d;
 }
 
-void Note::findNote(double f)
+void Note::findNote(double f,int scale)
 {
     Freqtable * freq=Freqtable::getInstance();
-    _n=freq->find(f);
+
+    if(scale==-1)
+        _n=freq->find(f);
+    else
+        _n=freq->find(f,scale);
 
     //juste hek
     _n+=12;

@@ -9,20 +9,77 @@ extern const double PI;
 
 const double ilogst=12.0;   //inverse de log d'un semiton
 
-Melody::Melody(int n)
+Melody::Melody(int n, int fs)
 {
     _i=0;
+    _l=0;
+    _fs=fs;
     _n=n;
     _gs=0;
     _f=0;
     _p=0;
     if(_n!=0)
     {
-        _f=new double[n];
-        _p=new double[n];
+        _f=new double[n+1];
+        _p=new double[n+1];
+        _f[_n]=1.0;
+        _p[_n]=1.0;
     }
     _g=0;
-    _scale=0;
+    _scales[0]=0;
+    _scales[1]=1;
+    _scales[2]=2;
+    _scales[3]=3;
+    _scales[4]=4;
+    _scales[5]=5;
+    _scales[6]=6;
+    _scales[7]=7;
+    _scales[8]=8;
+    _scales[9]=9;
+    _scales[10]=10;
+    _scales[11]=11;
+    _scale=-1;
+}
+
+Melody::Melody(Melody &o)
+{
+    _i=o._i;
+    _n=o._n;
+    _l=o._l;
+    _fs=o._fs;
+    _gs=0;
+    _f=o._f;
+    _p=o._p;
+    ++_p[_n];
+    ++_f[_n];
+    _g=0;
+    memcpy(_scales,o._scales,12*sizeof(int));
+    _scale=-1;
+}
+
+Melody& Melody::operator =(Melody& o)
+{
+    if(_n!=0)
+    {
+        if(--_f[_n]==0.0)
+            delete [] _f;
+        if(--_p[_n]==0.0)
+            delete [] _p;
+    }
+
+    _i=o._i;
+    _n=o._n;
+    _l=o._l;
+    _fs=o._fs;
+    _gs=0;
+    _f=o._f;
+    _p=o._p;
+    ++_p[_n];
+    ++_f[_n];
+    _g=0;
+    memcpy(_scales,o._scales,12*sizeof(int));
+    _scale=o._scale;
+    return *this;
 }
 
 void Melody::writeToFile(char *filename) const
@@ -30,9 +87,12 @@ void Melody::writeToFile(char *filename) const
     std::fstream f;
     f.open(filename,std::ios::out|std::ios::binary);
     f.write((char*)&_n,sizeof(int));
-    f.write((char*)_f,sizeof(_f));
-    f.write((char*)_p,sizeof(_p));
-    f.write((char*)_scale,sizeof(short));
+    f.write((char*)&_l,sizeof(int));
+    f.write((char*)&_fs,sizeof(int));
+    f.write((char*)_f,_n*sizeof(double));
+    f.write((char*)_p,_n*sizeof(double));
+    f.write((char*)&_scale,sizeof(int));
+    f.write((char*)_scales,12*sizeof(int));
     f.close();
 }
 
@@ -44,15 +104,25 @@ void Melody::readFromFile(char *filename)
     f.read((char*)&n,sizeof(int));
     if(n!=_n)
     {
-        delete [] _f;
-        delete [] _p;
-        _f=new double[n];
-        _p=new double[n];
+        if(_n!=0)
+        {
+            if(--_f[_n]==0.0)
+                delete [] _f;
+            if(--_p[_n]==0.0)
+                delete [] _p;
+        }
+        _f=new double[n+1];
+        _p=new double[n+1];
+        _f[n]=1.0;
+        _p[n]=1.0;
     }
     _n=n;
-    f.read((char*)_f,sizeof(_f));
-    f.read((char*)_p,sizeof(_p));
-    f.read((char*)_scale,sizeof(short));
+    f.read((char*)&_l,sizeof(int));
+    f.read((char*)&_fs,sizeof(int));
+    f.read((char*)_f,_n*sizeof(double));
+    f.read((char*)_p,_n*sizeof(double));
+    f.read((char*)&_scale,sizeof(int));
+    f.read((char*)_scales,12*sizeof(int));
     f.close();
 }
 
@@ -101,18 +171,6 @@ void Melody::filtreBilateral(int gs)
         gaussian(_gs);
     }
     _log2F();
-
-
-//    printf("\nlog\n");
-//    for(int i=0;i<_i;++i)
-//    {
-//        if(_p[i]!=0)
-//            printf("%f  %f\n",_f[i],_p[i]);
-//    }
-
-    //test sur un filtre guaussien normal
-
-//    printf("\n\n\n");
     double * f=new double[_i];
     for(int i=0;i<_i;++i)
         f[i]=0;
@@ -136,7 +194,6 @@ void Melody::filtreBilateral(int gs)
             else
             {
                 d=range(_f[i]-_f[i-j]);
-                //printf("d %f\n",d);
                 wp+=_g[j]*d;
                 f[i]+=_f[i-j]*_g[j]*d;
             }
@@ -148,82 +205,15 @@ void Melody::filtreBilateral(int gs)
             else
             {
                 d=range(_f[i]-_f[i+j]);
-                //printf("d %f\n",d);
                 wp+=_g[j]*d;
                 f[i]+=_f[i+j]*_g[j]*d;
             }
         }
-        //printf("%f \n",wp);
         f[i]/=wp;
     }
 
     for(int i=0;i<_i;++i)
         _f[i]=f[i];
-//    double * newf=new double[_i];
-//    memset(newf,0,sizeof(newf));
-
-//    for(int i=0;i<_i;++i)
-//    {
-//        double wp=0;
-//        for(int j=0;j<_gs;++j)
-//        {
-//            double x;
-//            if(i+j<_i)
-//            {
-//                x=_f[i]-_f[i+j];
-//                wp+=_g[j]*(1/(PI*_SR)*exp(-x*x/_SR));
-//            }
-//            if(i-j>-1)
-//            {
-//                x=_f[i]-_f[i-j];
-//                wp+=_g[j]*(1/(PI*_SR)*exp(-x*x/_SR));
-//            }
-//        }
-//        for(int j=0;j<_gs;++j)
-//        {
-//            double x;
-//            if(i+j<_i)
-//            {
-//                x=_f[i]-_f[i+j];
-//                newf[i]+=_g[j]*(1.0/(PI*_SR)*exp(-x*x/_SR))*_f[i+j];
-//            }
-//            if(i-j>-1)
-//            {
-//                x=_f[i]-_f[i-j];
-//                newf[i]+=_g[j]*(1.0/(PI*_SR)*exp(-x*x/_SR))*_f[i-j];
-//            }
-//        }
-//        newf[i]*=1.0/wp;
-//    }
-//
-
-//    for(int i=0;i<_i;++i)
-//    {
-//        for(int j=0;j<_gs;++j)
-//        {
-//            if(i+j>=_i)
-//                newf[i]+=_g[j]*_f[i];
-//            else
-//                newf[i]+=_g[j]*_f[i+j];
-//            if(i-j<0)
-//                newf[i]+=_g[j]*_f[i];
-//            else
-//                newf[i]+=_g[j]*_f[i-j];
-//        }
-//    }
-
-//    for(int i=0;i<_i;++i)
-//        _f[i]=newf[i];
-//    delete [] newf;
-
-//    printf("\nfilt\n");
-//    for(int i=0;i<_i;++i)
-//    {
-//        if(_p[i]!=0)
-//            printf("%f  %f\n",_f[i],_p[i]);
-//    }
-
-//    printf("\n\n");
     _exp2F();
 
 }
@@ -246,12 +236,82 @@ void Melody::valueAt(int i,double v[])
     v[1]=_p[i];
 }
 
+void Melody::set_l(int l)
+{
+    _l=l;
+}
+
+int Melody::fs()const
+{
+    return _fs;
+}
+
+int Melody::n()const
+{
+    return _n;
+}
+
+int Melody::l()const
+{
+    return _l;
+}
+
+void Melody::setScales()
+{
+    double diff;
+    Freqtable *f=Freqtable::getInstance();
+    double scalesV[12];
+    memset(scalesV,0,12*sizeof(double));
+    for(int s=0;s<12;++s)
+    {
+        for(int i=0;i<_n;++i)
+        {
+            if(_p[i]!=0)
+            {
+                f->find(_f[i],s,&diff);
+                if(diff<1.0)
+                    diff=1.0/diff;
+                scalesV[s]+=diff;
+            }
+        }
+
+    }
+    for(int i=0;i<12;++i)
+    {
+        for(int j=0;j+i<11;++j)
+        {
+            if(scalesV[_scales[j]]>scalesV[_scales[j+1]])
+            {
+                int temp=_scales[j];
+                _scales[j]=_scales[j+1];
+                _scales[j+1]=temp;
+            }
+        }
+    }
+
+}
+
+int Melody::scale()const
+{
+    if(_scale==-1)
+        return _scale;
+    return _scales[_scale];
+}
+
+void Melody::incScale()
+{
+    ++_scale;
+    _scale=_scale%12;
+}
+
 Melody::~Melody()
 {
     if(_f!=0)
-        delete [] _f;
-    if(_g!=0)
-        delete [] _p;
+        if(--_f[_n]==0)
+            delete [] _f;
+    if(_p!=0)
+        if(--_p[_n]==0)
+            delete [] _p;
     if(_g!=0)
         delete [] _g;
 }
