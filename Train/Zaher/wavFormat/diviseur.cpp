@@ -9,13 +9,11 @@ Diviseur::Diviseur(unsigned char * b, int l, int fs, int ba, int nc)
     _fs=fs;
     _ba=ba;
     _nc=nc;
-    printf("%d\n",_ba);
     _ld=1;
     while(_ld<_fs/10)
     {
         _ld*=2;
     }
-    printf("\n%d\n",_ld);
     _ld*=_ba;
     _d=_l/_ld;
 }
@@ -39,7 +37,6 @@ unsigned char * Diviseur::operator [](int i)
 
 Diviseur::~Diviseur()
 {
-    printf("deleting diviseur\n");
     if(_b!=0)
     {
         if((--_b[_l])==0) //on decremente les liens vers ce tableau

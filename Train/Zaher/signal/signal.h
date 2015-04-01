@@ -15,19 +15,31 @@ class Signal
    // double *_f;     //la puissance de chaque note dans ce signal
 
     double _p;      //la puissance du signal
-    double _fc;        //la frequence de puissance max
+    double _fc;        //la frequence fondamentale
 
     int _n;         //la note
 
     double *_filt;  //tableau filtre
+
+    double _pmax;  //puissance maximale
+    double _fmax;  //frequence a puissance maximale
+
 
     Signal(Signal &o);
     Signal operator=(Signal &o);
 
       //consulter commentaire sur _f
     void fftf(double *x, int N, int i,Complex *F);
+    void methodeParMorceau();   //une methode pour extraction de frequence fondamentale
+    void methodePMIterre();     //par morceau ittere
+    void itere(double *fp, int n);
+    void clusters(double *pr, int n);
 
 public:
+
+
+
+
     Signal();
 
     void set(unsigned char * vectOctet, int fs, int l, int ba, int nc);

@@ -39,6 +39,7 @@ Melody::Melody(int n, int fs)
     _scales[10]=10;
     _scales[11]=11;
     _scale=-1;
+    _pmax=0;
 }
 
 Melody::Melody(Melody &o)
@@ -55,6 +56,7 @@ Melody::Melody(Melody &o)
     _g=0;
     memcpy(_scales,o._scales,12*sizeof(int));
     _scale=-1;
+    _pmax=o._pmax;
 }
 
 Melody& Melody::operator =(Melody& o)
@@ -79,6 +81,7 @@ Melody& Melody::operator =(Melody& o)
     _g=0;
     memcpy(_scales,o._scales,12*sizeof(int));
     _scale=o._scale;
+    _pmax=o._pmax;
     return *this;
 }
 
@@ -100,6 +103,10 @@ void Melody::readFromFile(char *filename)
 {
     std::fstream f;
     f.open(filename,std::ios::in|std::ios::binary);
+    if(!f.is_open())
+    {
+        throw "no file";
+    }
     int n;
     f.read((char*)&n,sizeof(int));
     if(n!=_n)
@@ -142,13 +149,13 @@ void Melody::gaussian(int n)
 
 double Melody::range(double d)
 {
-    if(d<=0.5&&d>=-0.5)
+    if(d<=0.8&&d>=-0.8)
         return 1.0;
-    if(d<=1.0&&d>=-1.0)
+    if(d<=1.2&&d>=-1.2)
         return 0.75;
-    if(d<=1.5&&d>=-1.5)
+    if(d<=1.7&&d>=-1.7)
         return 0.25;
-    if(d<=2.0&&d>=-2.0)
+    if(d<=2.2&&d>=-2.2)
         return 0.1;
     return 0.0;
 }
@@ -158,10 +165,25 @@ void Melody::append(double f, double p)
     _f[_i]=f;
     _p[_i]=p;
     ++_i;
+    if(_pmax<p)
+        _pmax=p;
+}
+
+void Melody::normalize()
+{
 }
 
 void Melody::filtreBilateral(int gs)
 {
+//    printf("\n\nbeforebilatera\n");
+//    for(int i=0;i<_i;++i)
+//    {
+//        printf("%f   \t%f\n",_f[i],_p[i]);
+//    }
+
+    double p=0.5;
+    _pmax=pow(_pmax,p);
+
     if(gs!=_gs)
     {
         if(_g!=0)
@@ -172,8 +194,7 @@ void Melody::filtreBilateral(int gs)
     }
     _log2F();
     double * f=new double[_i];
-    for(int i=0;i<_i;++i)
-        f[i]=0;
+    memset(f,0,_i*sizeof(double));
 
 
     for(int i=0;i<_i;++i)
@@ -210,18 +231,28 @@ void Melody::filtreBilateral(int gs)
             }
         }
         f[i]/=wp;
+        _p[i]=pow(_p[i],p);
     }
 
     for(int i=0;i<_i;++i)
         _f[i]=f[i];
     _exp2F();
 
+//    printf("\n\nMelody\n");
+//    for(int i=0;i<_i;++i)
+//    {
+//        printf("%f   \t%f\n",_f[i],_p[i]);
+//    }
+
 }
 
 void Melody::_log2F()
 {
     for(int i=0;i<_i;++i)
-        _f[i]=ilogst*log2(_f[i]);
+    {
+        if(_f[i]>0)
+            _f[i]=ilogst*log2(_f[i]);
+    }
 }
 
 void Melody::_exp2F()
@@ -276,7 +307,7 @@ void Melody::setScales()
         }
 
     }
-    for(int i=0;i<12;++i)
+    for(int i=0;i<11;++i)
     {
         for(int j=0;j+i<11;++j)
         {
@@ -296,6 +327,11 @@ int Melody::scale()const
     if(_scale==-1)
         return _scale;
     return _scales[_scale];
+}
+
+void Melody::deFix()
+{
+    _scale=-1;
 }
 
 void Melody::incScale()

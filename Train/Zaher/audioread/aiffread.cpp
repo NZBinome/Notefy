@@ -31,7 +31,6 @@ int AiffRead::open(const char *file)
     _l=nSample*channels*ss;
     _b=new unsigned char[_l+1];
     _b[_l]=1;
-    printf("created %d\n",_l);
     AIFF_ReadSamples(ref,_b,_l);
     manipulate(ss);   //to convert samples to little endian
     AIFF_CloseFile(ref);

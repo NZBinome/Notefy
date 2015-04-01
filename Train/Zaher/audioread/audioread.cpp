@@ -37,7 +37,6 @@ int AudioRead::l()
 
 AudioRead::~AudioRead()
 {
-    printf("deleting audioread\n");
     if(_b!=0)
     {
         if((--_b[_l])==0) //on decremente les liens vers ce tableau

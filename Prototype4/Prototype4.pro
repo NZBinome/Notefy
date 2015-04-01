@@ -5,7 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     ../Train/Zaher/wavFormat/diviseur.cpp \
-    ../Train/Zaher/wavFormat/wavread.cpp \
+    ../Train/Zaher/audioread/wavread.cpp \
     ../Train/Zaher/signal/complex.cpp \
     ../Train/Zaher/signal/melody.cpp \
     ../Train/Zaher/signal/signal.cpp \
@@ -24,12 +24,13 @@ SOURCES += main.cpp \
     ../Train/Zaher/freq/freqtable.cpp \
     ../Train/Zaher/audioread/aiffread.cpp \
     ../Train/Zaher/audioread/audioread.cpp \
-    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.cpp
+    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.cpp \
+    ../Train/Zaher/util/util.cpp
 
 
 HEADERS += \
     ../Train/Zaher/wavFormat/diviseur.h \
-    ../Train/Zaher/wavFormat/wavread.h \
+    ../Train/Zaher/audioread/wavread.h \
     ../Train/Zaher/signal/complex.h \
     ../Train/Zaher/signal/melody.h \
     ../Train/Zaher/signal/signal.h \
@@ -44,6 +45,7 @@ HEADERS += \
     ../Train/Zaher/freq/freqtable.h \
     ../Train/Zaher/audioread/aiffread.h \
     ../Train/Zaher/audioread/audioread.h \
-    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h
+    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h \
+    ../Train/Zaher/util/util.h
 
 

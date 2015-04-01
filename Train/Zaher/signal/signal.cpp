@@ -2,6 +2,7 @@
 #include "complex.h"
 #include "signal.h"
 #include "../freq/freqtable.h"
+#include "../util/util.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -20,6 +21,8 @@ Signal::Signal()
     _fc=-1.0;
     _n=-1;
     _filt=0;
+    _pmax=0;
+    _fmax=0;
 }
 
 Signal::~Signal()
@@ -136,6 +139,7 @@ void Signal::reset()
     _p=-1.0;
     _fc=-1.0;
     _n=-1;
+    _pmax=0;
 }
 
 double * Signal::signal()
@@ -172,23 +176,10 @@ void Signal::filter()         //pour filtrer le son initiale pour une meilleur p
 
 }
 
-double * Signal::fourier()
+void Signal::methodeParMorceau()
 {
-    if(_fc!=-1.0)                       //on cree fourier quand on la demande la premiere foi
-        return _f;
-    if(_F==0)               //reeutilisation du pointeur (a tester)
-        _F=new Complex[_l];
-
-    filter();
-    fftf(_s,_l,1,_F);
-    if(_f==0)
-        _f=new double[_l/2];
-
     Freqtable * defaultFreq=Freqtable::getInstance();
-
-    double min=FREQTABLE[defaultFreq->min()];
-
-
+    double min=defaultFreq->FREQTABLE[defaultFreq->min()];
     const int N=8;
     double fc[N];
     double fp[N];
@@ -250,7 +241,7 @@ double * Signal::fourier()
     for(int i=val;i<ind+val;++i)
     {
         if(tab[i]>_p&&tab[i-val]>min)
-        {           
+        {
             _p=tab[i];
             _fc=tab[i-val];
         }
@@ -268,7 +259,7 @@ double * Signal::fourier()
     double max=0;
     int tf;
 
-    //printf("%f  %d  %d  ",_fc,ftd,ftf);
+
     for(int i=ftd;i<ftf;++i)
     {
         if(_f[i]>max)
@@ -280,11 +271,157 @@ double * Signal::fourier()
 
     _fc=tf*_fs*1.0/_l;
 
-    //printf("%f  %f\n",_fc,_p);
-
     delete [] tab;
 
     //fin de code important
+}
+
+void Signal::clusters(double *pr, int n)
+{  
+    Freqtable *df=Freqtable::getInstance();
+
+    double bk[]={0, 0};
+    for(int i=0;i<n;++i)
+    {
+        int j=i;
+        double k[]={0, 0};
+        if(pr[i]<df->FREQTABLE[df->min()])
+            continue;
+        while(pr[j]/pr[i]<sst*sst*sst*sst)
+        {
+            k[0]+=pr[j]*pr[j+n];
+            k[1]+=pr[j+n];
+            if(++j>=n)
+                break;
+        }
+        if(k[1]!=0)
+            k[0]/=k[1];
+        if(k[1]>bk[1])
+        {
+            bk[0]=k[0];
+            bk[1]=k[1];
+        }
+//        else
+//        {
+//            break;
+//        }
+    }
+    _fc=bk[0];
+    _p=bk[1];
+}
+
+void Signal::itere(double *fp, int n)
+{
+    int val=0;
+    double apuiss=1.5;
+    double pseuil=pow(_pmax,apuiss);  //puissance seuil
+
+    Freqtable *df=Freqtable::getInstance();
+    double imaxf=1.0/df->FREQTABLE[df->max()];
+
+    for(int i=1;i<n;++i)
+    {
+        val+=n-i;
+    }
+    double *pr=new double[val*2];
+    int it=0;
+    //double maxValue[]={0, 0}; //0 frequence, 1 puissance
+
+    for(int i=0;i<n-1;++i)
+    {
+        for(int j=i+1;j<n;++j)
+        {
+            pr[it]=fp[j]-fp[i];
+            pr[it+val]=fp[j+n]*fp[i+n];
+
+            if(pr[it+val]>pseuil)
+            {
+                pr[it+val]*=(2-2*pr[it]*imaxf);
+                ++it;
+            }
+//            if(pr[it+val]>maxValue[1])
+//            {
+//                maxValue[1]=pr[it+val];
+//                maxValue[0]=pr[it];
+//            }
+
+        }
+    }
+
+    double *nfp=0;
+    if(it<val)
+    {
+        nfp=new double[it*2];
+        memcpy(nfp,pr,it*sizeof(double));
+        memcpy(nfp+it,pr+val,it*sizeof(double));
+        delete [] pr;
+        pr=nfp;
+    }
+    val=it;
+
+    Util::triRapideDouble(pr,val);
+    
+//    for(int i=0;i<val;++i)
+//        printf("%f     \t\t%f\n",pr[i],pr[i+val]);
+
+    clusters(pr,val);
+    
+    delete [] pr;
+}
+
+void Signal::methodePMIterre()
+{
+    Freqtable * df=Freqtable::getInstance();
+    double min=df->FREQTABLE[12]-df->FREQTABLE[0];
+    double max=df->FREQTABLE[df->max()];
+
+    int n=(int)(max/min);
+
+    double * fp;  //frequence et puissance;
+    fp=new double[n*2];
+
+    memset(fp,0,2*n*sizeof(double));
+    int it=0; //iterator morceau fp
+
+    for(int i=0;i<_l/2;++i)
+    {
+        _f[i]=_F[i].mod();
+        double f=1.0*i*_fs/(_l*1.0);
+
+        if(_f[i]>_pmax)
+        {
+            _fmax=f;
+            _pmax=_f[i];
+        }
+        it=(int)(f/min);
+        if(it<n)
+        {
+            if(_f[i]>=fp[it+n])
+            {
+                fp[it+n]=_f[i];
+                fp[it]=f;
+            }
+        }
+    }
+    itere(fp,n);
+
+    delete [] fp;
+}
+
+
+double * Signal::fourier()
+{
+    if(_fc!=-1.0)                       //on cree fourier quand on la demande la premiere foi
+        return _f;
+    if(_F==0)               //reeutilisation du pointeur (a tester)
+        _F=new Complex[_l];
+
+    filter();
+    fftf(_s,_l,1,_F);
+    if(_f==0)
+        _f=new double[_l/2];
+
+    methodePMIterre();
 
     return _f;
 }
@@ -329,8 +466,8 @@ int Signal::n()
 
     double *f=fourier();
 
-    int minf=(int)(FREQTABLE[min]*ifr);
-    int maxf=(int)(FREQTABLE[max]*ifr);
+    int minf=(int)(defaultFreq->FREQTABLE[min]*ifr);
+    int maxf=(int)(defaultFreq->FREQTABLE[max]*ifr);
 
     //cela ne sera pas necessaire
 
@@ -346,8 +483,8 @@ int Signal::n()
 
     for(int j=0;j<max-min;++j)
     {
-        double sf=FREQTABLE[min+j];
-        int nbf=1+(FREQTABLE[max+24]-sf)/sf;
+        double sf=defaultFreq->FREQTABLE[min+j];
+        int nbf=1+(defaultFreq->FREQTABLE[max+24]-sf)/sf;
 
         double p=0;
         double x=1;
@@ -357,7 +494,7 @@ int Signal::n()
             x*=0.5;
         }
         x=1;
-        for(double freq=sf;freq<FREQTABLE[max+24];freq+=sf)
+        for(double freq=sf;freq<defaultFreq->FREQTABLE[max+24];freq+=sf)
         {
             int d=(int)(freq*ifr);
             ft[1]+=f[d]*x*p;

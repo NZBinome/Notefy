@@ -24,6 +24,7 @@ class Melody
     int _l; //lenght time for midi conversion
     int _fs;
 
+    double _pmax;
 
     double range(double d);
     void _log2F();
@@ -36,6 +37,7 @@ public:
     Melody& operator =(Melody& o);
     void append(double f, double p);
     void filtreBilateral(int gs);
+    void normalize();
     void valueAt(int i,double v[]); //v tableau de deux valeur
     //0 la frequence 1 la puissance, on remplit le tableau
     void writeToFile(char *filename) const;
@@ -43,6 +45,7 @@ public:
     void setScales();
     void set_l(int l);
     void incScale();
+    void deFix();
     int scale()const;
     int fs()const;
     int n()const;
