@@ -120,11 +120,14 @@
     [self startTimer];
 }
 
+//  (IBAction)selectAll:(id)sender Called when Select All button is pressed. Updates the did select attribute of each track to true and refloads the data of the table.
+
 - (IBAction)selectAll:(id)sender
 {
     int i=0;
     XYZTrack* temptrack;
-    while (i<[tracks count]) {
+    while (i<[tracks count])
+    {
         temptrack=[[XYZTrack alloc]init];
         temptrack=[tracks objectAtIndex:i];
         temptrack.isSelected=true;
@@ -134,14 +137,18 @@
     [trackTable reloadData];
 }
 
+// (void)playSelected plays the tracks (.mid or .aif) which have their isSelected attribute to true.
+
 -(void)playSelected
 {
     int i=0;
     XYZTrack* temptrack;
-    while (i<[tracks count]) {
+    while (i<[tracks count])
+    {
         temptrack=[[XYZTrack alloc]init];
         temptrack=[tracks objectAtIndex:i];
-        if (temptrack.isSelected) {
+        if (temptrack.isSelected)
+        {
             if ([temptrack.instrument.Name isEqualToString:@"mic"])
             {
                 [[players objectAtIndex:i] updateURL:@".aif"];
@@ -169,25 +176,31 @@
     track.trackName=[track.trackName stringByAppendingString:[NSString stringWithFormat:@"%d",trackCounter]];
 }
 
+// (IBAction)fix:(id)sender Called when fix button is pressed. For each selected track, we update fix the midi file.
 
 - (IBAction)fix:(id)sender
 {
     int i=0;
     XYZTrack* temptrack;
-    while (i<[tracks count]) {
+    while (i<[tracks count])
+    {
         temptrack=[[XYZTrack alloc]init];
         temptrack=[tracks objectAtIndex:i];
-        if (temptrack.isSelected) {
-            NSString* path;
-            if ([selectedfile isEqualToString:@""])
+        if (![temptrack.instrument.Name isEqualToString:@"mic"])
+        {
+            if (temptrack.isSelected)
             {
-                path=[appdel.path stringByAppendingString:[@"/Default/" stringByAppendingString:[temptrack.trackName stringByAppendingString:@".mid"]]];
+                NSString* path;
+                if ([selectedfile isEqualToString:@""])
+                {
+                    path=[appdel.path stringByAppendingString:[@"/Default/" stringByAppendingString:[temptrack.trackName stringByAppendingString:@".mid"]]];
+                }
+                else
+                {
+                    path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
+                }
+                amc.fix((char*)[path UTF8String]);
             }
-            else
-            {
-                path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
-            }
-            amc.fix((char*)[path UTF8String]);
         }
         ++i;
     }
