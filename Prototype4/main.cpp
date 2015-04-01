@@ -3,16 +3,7 @@
 #include "../Train/Zaher/midi/midicreator.h"
 #include "../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h"
 #include "../Train/Zaher/freq/freqtable.h"
-#include "../Train/Zaher/signal/complex.h"
-#include "../Train/Zaher/signal/signal.h"
-#include "../Train/Zaher/audioread/aiffread.h"
-#include "../Train/Zaher/wavFormat/diviseur.h"
-#include "../Train/Zaher/util/util.h"
-#include "../Train/Zaher/audioread/wavread.h"
 #include <iostream>
-#include <stdio.h>
-#include <ctime>
-#include <string.h>
 
 using namespace std;
 
@@ -20,7 +11,11 @@ void create()
 {
     Z_audioMidiConverter amc;
     char mf[24];
+<<<<<<< HEAD
     if(!amc.convert("kheryet kaleb.wav",mf))
+=======
+    if(!amc.convert("track1.aif",mf))
+>>>>>>> parent of 62ad6e2... unfuddle task #5
     {
         printf("file not found!\n");
     }
@@ -31,7 +26,7 @@ void create()
 void read()
 {
     Z_audioMidiConverter amc;
-    amc.fix("raghid.mid");
+    amc.fix("raghid16.mid");
 }
 
 void freqtabletest()
@@ -45,37 +40,9 @@ void freqtabletest()
     }
 }
 
-void newSignalTest()
-{
-    Wavread f;
-    if(!f.open("kheryet kaleb.wav"))
-        ;
-    Diviseur d(f.buffer(),f.l(),f.fs(),f.ba(),f.nc());
-
-    Signal s;
-
-    s.set(d[10],f.fs(),d.ld(),f.ba(),f.nc());
-    s.fourier();
-}
-
-void testQuickSort()
-{
-    double tab[]={0.9, 0.5, -0.7, 1.0, 4.7, -0.6, 6.2, 1.0, 3.9, 1.0, 1.0, 0.7, 1, 2, 3, 4, 5, 6, 7,8,9,10,11,12};
-    Util::triRapideDouble(tab,12);
-    printf("last tri\n");
-    for(int i=0;i<12;++i)
-    {
-        printf("%f   \t  %f\n",tab[i],tab[i+12]);
-    }
-    printf("\n");
-}
-
-void strlenwkaza()
-{
-}
-
 int main()
 {
+<<<<<<< HEAD
     freopen("log.log","a",stdout);
     time_t t=time(0);
     struct tm * now=localtime(&t);
@@ -86,5 +53,8 @@ int main()
 
 
     printf("\n--\n--\nend run\n--------------------------------------------------------------\n--------------------------------------------------------------\n");
+=======
+    create();
+>>>>>>> parent of 62ad6e2... unfuddle task #5
 }
 
