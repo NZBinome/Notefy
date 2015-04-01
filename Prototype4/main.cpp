@@ -20,7 +20,7 @@ void create()
 {
     Z_audioMidiConverter amc;
     char mf[24];
-    if(!amc.convert("raghid.wav",mf))
+    if(!amc.convert("kheryet kaleb.wav",mf))
     {
         printf("file not found!\n");
     }
@@ -82,7 +82,7 @@ int main()
     printf("\n--\n--\nstart run :: %d/%d/%d -- %d:%d:%d\n--\n",now->tm_year+1900,now->tm_mon+1,now->tm_mday,now->tm_hour,now->tm_min,now->tm_sec);
 
 
-    read();
+    create();
 
 
     printf("\n--\n--\nend run\n--------------------------------------------------------------\n--------------------------------------------------------------\n");
