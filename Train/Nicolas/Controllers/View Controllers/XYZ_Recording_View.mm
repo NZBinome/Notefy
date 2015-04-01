@@ -114,9 +114,48 @@
     {
         [self startMetronome];
     }
+   // [self playSelected];
     [recorder startAudioSession];
     [recorder record];
     [self startTimer];
+}
+
+- (IBAction)selectAll:(id)sender
+{
+    int i=0;
+    XYZTrack* temptrack;
+    while (i<[tracks count]) {
+        temptrack=[[XYZTrack alloc]init];
+        temptrack=[tracks objectAtIndex:i];
+        temptrack.isSelected=true;
+        [tracks replaceObjectAtIndex:i withObject:temptrack];
+        ++i;
+    }
+    [trackTable reloadData];
+}
+
+-(void)playSelected
+{
+    int i=0;
+    XYZTrack* temptrack;
+    while (i<[tracks count]) {
+        temptrack=[[XYZTrack alloc]init];
+        temptrack=[tracks objectAtIndex:i];
+        if (temptrack.isSelected) {
+            if ([temptrack.instrument.Name isEqualToString:@"mic"])
+            {
+                [[players objectAtIndex:i] updateURL:@".aif"];
+                [[players objectAtIndex:i] XYZplay];
+            }
+            else
+            {
+                [[players objectAtIndex:i] updateURL:@".mid"];
+                [[players objectAtIndex:i] midiPlay];
+            }
+
+        }
+        ++i;
+    }
 }
 
 // (void)setTrack Creates a default track with "mic" as an instrument.
@@ -128,6 +167,31 @@
     [track initialize];
     track.instrument.Name=@"mic";
     track.trackName=[track.trackName stringByAppendingString:[NSString stringWithFormat:@"%d",trackCounter]];
+}
+
+
+- (IBAction)fix:(id)sender
+{
+    int i=0;
+    XYZTrack* temptrack;
+    while (i<[tracks count]) {
+        temptrack=[[XYZTrack alloc]init];
+        temptrack=[tracks objectAtIndex:i];
+        if (temptrack.isSelected) {
+            NSString* path;
+            if ([selectedfile isEqualToString:@""])
+            {
+                path=[appdel.path stringByAppendingString:[@"/Default/" stringByAppendingString:[temptrack.trackName stringByAppendingString:@".mid"]]];
+            }
+            else
+            {
+                path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
+            }
+            amc.fix((char*)[path UTF8String]);
+        }
+        ++i;
+    }
+    
 }
 
 // (void)startMetronome Starts the timer for the metronome.
@@ -176,27 +240,7 @@
 
 - (IBAction)play:(id)sender
 {
-    int i=0;
-    while (i<[players count])
-    {
-        XYZTrack* demotrack;
-        demotrack=[[XYZTrack alloc]init];
-        demotrack=[tracks objectAtIndex:i];
-        if (demotrack.isSelected)
-        {
-            if ([demotrack.instrument.Name isEqualToString:@"mic"])
-            {
-                [[players objectAtIndex:i] updateURL:@".aif"];
-                [[players objectAtIndex:i] XYZplay];
-            }
-            else
-            {
-                [[players objectAtIndex:i] updateURL:@".mid"];
-                [[players objectAtIndex:i] midiPlay];
-            }
-        }
-        ++i;
-    }
+    [self playSelected];
 }
 
 // (IBAction)save:(id)sender Called when the save button is clicked. Saves the melody according to the given name.
@@ -410,7 +454,7 @@
                 if ([selectedfile isEqualToString:@""])
                 {
                 path=[appdel.path stringByAppendingString:[@"/Default/track" stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];
-            }
+                }
                 else
                 {
                     path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/track" ] stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];
@@ -459,6 +503,9 @@
     UIImage *InstrumentImage = [[UIImage alloc] init];
     InstrumentImage = [UIImage imageNamed:[demotrack.instrument.Name stringByAppendingString:@".png"]];
     [cell.Button setImage:InstrumentImage forState:UIControlStateNormal];
+    if (demotrack.isSelected) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     return cell;
 }
 
