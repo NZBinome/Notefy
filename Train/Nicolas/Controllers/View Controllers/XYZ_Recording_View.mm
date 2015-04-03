@@ -72,6 +72,8 @@
     return self;
 }
 
+
+
 // (void)recordingTime checks if the recording time is exceeded. If yes, it stops the recording process.
 
 -(void)recordingTime
@@ -103,6 +105,7 @@
 
 - (IBAction)record:(id)sender
 {
+    //[self displayAppDel];
     recordtime=15;
     trackCounter+=1;
     [self addPlayer];
@@ -247,6 +250,7 @@
     [metronomeTimer invalidate];
     [tracks addObject:track];
     [trackTable reloadData];
+    //[self displayAppDel];
 }
 
 // (IBAction)play:(id)sender is called when the play button is pressed. Plays the selected tracks of the melody.
@@ -437,7 +441,9 @@
                         demoInstrument=[appdel.instruments objectAtIndex:j];
                         if (demoInstrument.number==instrument)
                         {
-                            demotrack.instrument=demoInstrument;
+                         //   demotrack.instrument=demoInstrument;
+                            [demotrack.instrument copyInstrument:demoInstrument];
+                            
                         }
                         j++;
                     }
@@ -453,8 +459,10 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    //[self displayAppDel];
     chosenInstrument=appdel.newinstrument.Name;
     appdel.newinstrument.Name=@"";
+    //[self displayAppDel];
         if (appdel.selectedtrack!=-1)
         {
             XYZTrack* demotrack;
@@ -575,6 +583,19 @@
     }
 }
 
+-(void)displayAppDel
+{
+    int i=0;
+    XYZInstrument* demoIns;
+    while (i<[appdel.instruments count]) {
+        demoIns=[[XYZInstrument alloc]init];
+        demoIns=[appdel.instruments objectAtIndex:i];
+        NSLog(demoIns.Name);
+        NSLog(@"%d",demoIns.number);
+        i++;
+    }
+}
+
 
 #pragma mark - Navigation
 
@@ -583,11 +604,15 @@
 {
     if ([[segue identifier] isEqualToString:@"Instruments"])
     {
+        //[self displayAppDel];
     XYZTrack *demotrack;
     demotrack=[[XYZTrack alloc]init];
     demotrack=[tracks objectAtIndex:appdel.selectedtrack];
+       // NSLog(demotrack.trackName);
     appdel.newinstrument.Name=demotrack.instrument.Name;
+        //[self displayAppDel];
     }
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }

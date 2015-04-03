@@ -13,5 +13,6 @@
 @property NSString* Name;
 @property unsigned short number;
 @property NSString* ImageName;
+-(void)copyInstrument:(XYZInstrument*)Instrument;
 
 @end

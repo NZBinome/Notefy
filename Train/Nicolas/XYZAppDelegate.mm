@@ -35,7 +35,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    self.path=@"Users/nicolasjbeyli/Desktop/Git/Notefy/Train/audio_files";
+    self.path=@"Users/nicolasjbeyli/Desktop/Notefy/Train/audio_files";
     self.directory=@"/Saved";
     self.selectedfile=@"";
     self.selectedtrack=-1;
@@ -87,13 +87,13 @@
     
     instrument=[[XYZInstrument alloc]init];
     instrument.Name=@"drums";
-    instrument.number=1;
+    instrument.number=-1;
     instrument.ImageName=@"drums.png";
     [self.instruments addObject:instrument];
     
     instrument=[[XYZInstrument alloc]init];
     instrument.Name=@"mic";
-    instrument.number=1;
+    instrument.number=0;
     instrument.ImageName=@"mic.png";
     [self.instruments addObject:instrument];
 }

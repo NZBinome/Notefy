@@ -38,6 +38,8 @@
 		9B7F28C11A8F9F0A00A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
 		9B7F28C91A8F9F0A00A154F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B7F28C71A8F9F0A00A154F6 /* InfoPlist.strings */; };
 		9B7F28CB1A8F9F0A00A154F6 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */; };
+		9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9DAC3D1ACD3A750006A951 /* util.cpp */; };
+		9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9DAC401ACD3A810006A951 /* wavread.cpp */; };
 		9BA54D291AB4327D00D83431 /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 9BA54D281AB4327D00D83431 /* gs_instruments.dls */; };
 		9BBDF9141A9E177800322797 /* z_audiomidiconverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF8E21A9E177800322797 /* z_audiomidiconverter.cpp */; };
 		9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF8E51A9E177800322797 /* aiffread.cpp */; };
@@ -63,7 +65,6 @@
 		9BBDF9291A9E177800322797 /* melody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF90B1A9E177800322797 /* melody.cpp */; };
 		9BBDF92A1A9E177800322797 /* signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF90D1A9E177800322797 /* signal.cpp */; };
 		9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF9101A9E177800322797 /* diviseur.cpp */; };
-		9BBDF92C1A9E177800322797 /* wavread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF9121A9E177800322797 /* wavread.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,10 @@
 		9B7F28C61A8F9F0A00A154F6 /* TrainTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrainTests-Info.plist"; sourceTree = "<group>"; };
 		9B7F28C81A8F9F0A00A154F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainTests.m; sourceTree = "<group>"; };
+		9B9DAC3D1ACD3A750006A951 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		9B9DAC3E1ACD3A750006A951 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		9B9DAC401ACD3A810006A951 /* wavread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavread.cpp; sourceTree = "<group>"; };
+		9B9DAC411ACD3A810006A951 /* wavread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wavread.h; sourceTree = "<group>"; };
 		9BA54D281AB4327D00D83431 /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
 		9BBDF8E21A9E177800322797 /* z_audiomidiconverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = z_audiomidiconverter.cpp; sourceTree = "<group>"; };
 		9BBDF8E31A9E177800322797 /* z_audiomidiconverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = z_audiomidiconverter.h; sourceTree = "<group>"; };
@@ -165,8 +170,6 @@
 		9BBDF90E1A9E177800322797 /* signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signal.h; sourceTree = "<group>"; };
 		9BBDF9101A9E177800322797 /* diviseur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = diviseur.cpp; sourceTree = "<group>"; };
 		9BBDF9111A9E177800322797 /* diviseur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diviseur.h; sourceTree = "<group>"; };
-		9BBDF9121A9E177800322797 /* wavread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavread.cpp; sourceTree = "<group>"; };
-		9BBDF9131A9E177800322797 /* wavread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wavread.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,9 +354,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9B9DAC3C1ACD3A750006A951 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9B9DAC3D1ACD3A750006A951 /* util.cpp */,
+				9B9DAC3E1ACD3A750006A951 /* util.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		9BBDF8E01A9E177800322797 /* Zaher */ = {
 			isa = PBXGroup;
 			children = (
+				9B9DAC3C1ACD3A750006A951 /* util */,
 				9BBDF8E11A9E177800322797 /* audiomidiconverter */,
 				9BBDF8E41A9E177800322797 /* audioread */,
 				9BBDF8E91A9E177800322797 /* freq */,
@@ -377,6 +390,8 @@
 		9BBDF8E41A9E177800322797 /* audioread */ = {
 			isa = PBXGroup;
 			children = (
+				9B9DAC401ACD3A810006A951 /* wavread.cpp */,
+				9B9DAC411ACD3A810006A951 /* wavread.h */,
 				9BBDF8E51A9E177800322797 /* aiffread.cpp */,
 				9BBDF8E61A9E177800322797 /* aiffread.h */,
 				9BBDF8E71A9E177800322797 /* audioread.cpp */,
@@ -459,8 +474,6 @@
 			children = (
 				9BBDF9101A9E177800322797 /* diviseur.cpp */,
 				9BBDF9111A9E177800322797 /* diviseur.h */,
-				9BBDF9121A9E177800322797 /* wavread.cpp */,
-				9BBDF9131A9E177800322797 /* wavread.h */,
 			);
 			path = wavFormat;
 			sourceTree = "<group>";
@@ -586,18 +599,19 @@
 				9BBDF9181A9E177800322797 /* aifx.c in Sources */,
 				9BBDF9241A9E177800322797 /* midicreator.cpp in Sources */,
 				9BBDF91B1A9E177800322797 /* g711.c in Sources */,
-				9BBDF92C1A9E177800322797 /* wavread.cpp in Sources */,
 				9BBDF9141A9E177800322797 /* z_audiomidiconverter.cpp in Sources */,
 				9BBDF91A1A9E177800322797 /* float32.c in Sources */,
 				9BBDF91F1A9E177800322797 /* lpcm.c in Sources */,
 				9B283BD21AC6FE1900D38762 /* XYZRecorder.m in Sources */,
 				9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */,
 				9BBDF91C1A9E177800322797 /* iff.c in Sources */,
+				9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */,
 				9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */,
 				9B283BD31AC6FE1900D38762 /* XYZSaver.mm in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
 				9B283BD01AC6FE1900D38762 /* XYZButtons.mm in Sources */,
+				9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */,
 				9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */,
 				9BBDF9251A9E177800322797 /* musicinstrument.cpp in Sources */,
 				9BBDF9161A9E177800322797 /* audioread.cpp in Sources */,

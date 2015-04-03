@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     appdel=[UIApplication sharedApplication].delegate;
+   // [self displayAppDel];
     // Do any additional setup after loading the view.
 }
 
@@ -51,12 +52,13 @@
     XYZInstrument *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Instrument" forIndexPath:indexPath];
     if (indexPath.row<[appdel.instruments count])
     {
-    UIImage *InstrumentImage = [[UIImage alloc] init];
-    XYZInstrument* demoInstrument;
-    demoInstrument=[[XYZInstrument alloc]init];
-    demoInstrument=[appdel.instruments objectAtIndex:indexPath.row];
-    InstrumentImage = [UIImage imageNamed:demoInstrument.ImageName];
-    cell.Image.image = InstrumentImage;
+        UIImage *InstrumentImage = [[UIImage alloc] init];
+        XYZInstrument* demoInstrument;
+        demoInstrument=[[XYZInstrument alloc]init];
+        demoInstrument=[appdel.instruments objectAtIndex:indexPath.row];
+        InstrumentImage = [UIImage imageNamed:demoInstrument.ImageName];
+        cell.Image.image = InstrumentImage;
+       // NSLog(demoInstrument.Name);
     }
     return cell;
 }
@@ -66,9 +68,25 @@
     XYZInstrument* selectedInstrument;
     selectedInstrument=[[XYZInstrument alloc]init];
     selectedInstrument=[appdel.instruments objectAtIndex:indexPath.item];
-    appdel.newinstrument=selectedInstrument;
+    [appdel.newinstrument copyInstrument:selectedInstrument];
+    //[self displayAppDel];
     [self.navigationController popViewControllerAnimated:YES];
+    //[self displayAppDel];
 }
+
+-(void)displayAppDel
+{
+    int i=0;
+    XYZInstrument* demoIns;
+    while (i<[appdel.instruments count]) {
+        demoIns=[[XYZInstrument alloc]init];
+        demoIns=[appdel.instruments objectAtIndex:i];
+        NSLog(demoIns.Name);
+        NSLog(@"%d",demoIns.number);
+        i++;
+    }
+}
+
 
 /*
 #pragma mark - Navigation

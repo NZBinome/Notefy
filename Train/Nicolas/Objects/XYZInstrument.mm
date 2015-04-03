@@ -11,6 +11,7 @@
 @implementation XYZInstrument
 @synthesize Name;
 @synthesize number;
+@synthesize ImageName;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,6 +20,13 @@
         // Initialization code
     }
     return self;
+}
+
+-(void)copyInstrument:(XYZInstrument *)Instrument
+{
+    Name=Instrument.Name;
+    number=Instrument.number;
+    ImageName=Instrument.ImageName;
 }
 
 /*
