@@ -1,4 +1,8 @@
 <?php
+
+// Is no longer Used, will probably be removed once converter is fully tested.
+// A Object Oriented approach is being used.
+//////////////////////////////////////////////////////////////////////////////
 $con=mysqli_connect("localhost","root","root","Notefy");
 if (mysqli_connect_errno())
   {
@@ -10,6 +14,8 @@ $Table = $_GET['Table'];
 $Length = $_GET['Length'];
 
 $i=1;
+
+echo "jjj";
 
 // The Select command only works if the parameters we are using to select the row are Integers.
 
@@ -52,7 +58,7 @@ if ($Command=="INSERT")
 		$IdArg="Id" . $i;
 		$ValueArg="Value" . $i;
 		$arg1=$arg1  . $_GET[$IdArg];
-		$arg2=$arg2 . "'" . $_GET[$ValueArg] . "'";
+		$arg2=$arg2  . $_GET[$ValueArg];
 		if($i!=$Length)
 		{
 			$arg2=$arg2 . " , ";
@@ -61,6 +67,7 @@ if ($Command=="INSERT")
 		$i=$i+1;
 	}
 	$query="INSERT INTO " . $Table . " ( " . $arg1 ." ) VALUES ( " . $arg2 ." )";
+	echo $query;
 	if (!mysqli_query($con,$query))
 {
   die('Error: ' . mysqli_error($con));
@@ -89,6 +96,28 @@ if ($Command=="UPDATE")
 	}
 	$arg1=rtrim($arg1,',');
 	$query="UPDATE " . $Table . " SET " . $arg1 ." WHERE " . $arg2;
+	if (!mysqli_query($con,$query))
+	{
+  		die('Error: ' . mysqli_error($con));
+	}
+}
+
+if ($Command=="DELETE") 
+{	
+	$arguments="";
+	while ($i<=$Length) 
+	{
+		$IdArg="Id" . $i;
+		$ValueArg="Value" . $i;
+		$arguments=$arguments . $_GET[$IdArg] ."=" . $_GET[$ValueArg];
+		if ($i!=$Length)
+		{
+			$arguments=$arguments . " AND ";
+		}
+		$i=$i+1;
+	}
+
+	$query="DELETE FROM ". $Table . " WHERE " . $arguments;
 	echo $query;
 	if (!mysqli_query($con,$query))
 	{
