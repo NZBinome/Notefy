@@ -1,8 +1,4 @@
 <?php
-
-// Is no longer Used, will probably be removed once converter is fully tested.
-// A Object Oriented approach is being used.
-//////////////////////////////////////////////////////////////////////////////
 $con=mysqli_connect("localhost","root","root","Notefy");
 if (mysqli_connect_errno())
   {

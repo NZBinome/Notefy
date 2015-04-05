@@ -11,11 +11,12 @@ class  User
     var $Birthday;
     var $Picture_Link;
     var $Converter;
+    var $columns;
 
     function __construct()
     {
-      $this->Converter=new Converter();
-      $this->Converter->setTable("Users");
+      $this->Converter=new Converter("Users");
+      $this->columns=$this->Converter->describe();
     }
 
     function setId($par)
@@ -80,39 +81,55 @@ class  User
 
     function select()
     {
-      $Keys = array("Id");
+      $Keys = array($this->columns[0]);
       $Values = array($this->Id);
       $Results=$this->Converter->select($Keys,$Values);
-      $this->First_Name=$Results['First_Name'];
-      $this->Last_Name=$Results['Last_Name'];
-      $this->Stage_Name=$Results['Stage_Name'];
-      $this->Birthday=$Results['Birthday'];
-      $this->Picture_Link=$Results['Picture_Link'];
+      $i=0;
+      while ($i<count($Results)) 
+      {
+        $this->First_Name=$Results[$i][$this->columns[1]];
+        $this->Last_Name=$Results[$i][$this->columns[2]];
+        $this->Stage_Name=$Results[$i][$this->columns[3]];
+        $this->Picture_Link=$Results[$i][$this->columns[4]];
+        $this->Birthday=$Results[$i][$this->columns[5]];
+        $i=$i+1;
+      }
     }
 
     function insert()
     {
-      $Keys = array("First_Name","Last_Name","Stage_Name","Picture_Link","Birthday");
+      $i=0;
+      while ($i<count($this->columns)-1) {
+        $Keys[$i]=$this->columns[$i+1];
+        $i=$i+1;
+      }
       $Values = array("'$this->First_Name'","'$this->Last_Name'","'$this->Stage_Name'","'$this->Picture_Link'","'$this->Birthday'");
       $this->Id = $this->Converter->insert($Keys,$Values);
     }
 
     function update()
     {
-      $Keys=array("Id","First_Name","Last_Name","Stage_Name","Picture_Link","Birthday");
-      $Values = array("$this->Id","'$this->First_Name'","'$this->Last_Name'","'$this->Stage_Name'","'$this->Picture_Link'","'$this->Birthday'");
-      $this->Converter->update($Keys,$Values);
+      $i=0;
+      while ($i<count($this->columns)-1) {
+        $Keys[$i]=$this->columns[$i+1];
+        $i=$i+1;
+      }
+      $Values = array("'$this->First_Name'","'$this->Last_Name'","'$this->Stage_Name'","'$this->Picture_Link'","'$this->Birthday'");
+      $ParaKeys=array($this->columns[0]);
+      $ParaValues=array("$this->Id");
+      $this->Converter->update($Keys,$Values,$ParaKeys,$ParaValues);
     }
 
     function delete()
     {
-      $Keys = array("Id");
+      $Keys = array($this->columns[0]);
       $Values = array($this->Id);
       $this->Converter->delete($Keys,$Values);
     }
 
     function display()
     {
+      echo "User <br/>";
       echo "Id : " . $this->Id . "<br/>";
       echo "Last_Name : " . $this->Last_Name . "<br/>";
       echo "First_Name : " . $this->First_Name . "<br/>";

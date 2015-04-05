@@ -3,6 +3,11 @@ Class Converter
 {
 	var $Table;
 
+	function __construct($par)
+    {
+    	$this->Table=$par;
+    }
+
 	function setTable($par)
 	{
 		$this->Table=$par;
@@ -11,6 +16,25 @@ Class Converter
 	function getTable()
 	{
 		return $this->Table;
+	}
+
+	function describe()
+	{
+		$con=mysqli_connect("localhost","root","root","Notefy");
+		if (mysqli_connect_errno())
+  		{
+  			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  		}
+  		$describeTable="DESCRIBE " . $this->Table;
+		$description = mysqli_query($con,$describeTable);	
+		$i=0;
+		 while ($column=mysqli_fetch_array($description)) 
+ 			{
+ 				$columns[$i]=$column[0];
+ 				$i=$i+1;
+ 			}
+ 		mysqli_close($con);
+ 		return $columns;
 	}
 
 	function select($Keys, $Values)
@@ -36,13 +60,14 @@ Class Converter
 		$result = mysqli_query($con,$query);
 		$describeTable="DESCRIBE " . $this->Table;
 		$description = mysqli_query($con,$describeTable);	
-
+		$i=0;
 		while($row = mysqli_fetch_array($result))
  		{
  			while ($column=mysqli_fetch_array($description)) 
  			{
- 				$Results[$column[0]]=$row[$column[0]];
+ 				$Results[$i][$column[0]]=$row[$column[0]];
  			}
+ 			$i=$i+1;
  		}
 		mysqli_close($con);
 		return $Results;
@@ -83,7 +108,7 @@ Class Converter
 
 	}
 
-	function update($Keys,$Values)
+	function update($Keys,$Values,$ParaKeys,$ParaValues)
 	{
 		$con=mysqli_connect("localhost","root","root","Notefy");
 		if (mysqli_connect_errno())
@@ -92,20 +117,25 @@ Class Converter
   		}
   		$arg1="";
 		$arg2="";
+
 		$i=0;
-
 		while ($i<count($Keys)) {
-			if($Keys[$i]=="Id")
-			{
-				$arg2=$Keys[$i] . "=" . $Values[$i];
-			}
-			else
-			{
-				$arg1=$arg1 . $Keys[$i] . "=" . $Values[$i] . ",";
-			}
-
+			$arg1=$arg1 . $Keys[$i] . "=" . $Values[$i] . ",";
 			$i = $i+1;
 		}
+
+		$i=0;
+		while ($i<count($ParaKeys)) 
+		{
+			$arg2=$arg2 . $ParaKeys[$i] . "=" . $ParaValues[$i];
+			if ($i!=count($ParaKeys)-1)
+			{
+				$arg2=$arg2 . " AND ";
+			}
+			$i=$i+1;
+		}
+
+
 		$arg1=rtrim($arg1,',');
 		$query="UPDATE " . $this->Table . " SET " . $arg1 ." WHERE " . $arg2;
 		if (!mysqli_query($con,$query))
@@ -137,7 +167,6 @@ Class Converter
 		}
 
 		$query="DELETE FROM ". $this->Table . " WHERE " . $arguments;
-		echo $query;
 		if (!mysqli_query($con,$query))
 		{
   			die('Error: ' . mysqli_error($con));
