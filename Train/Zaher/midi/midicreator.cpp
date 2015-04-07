@@ -33,7 +33,6 @@ void MidiCreator::addNote(Note n)
 
 int MidiCreator::sizeData(char *&c)
 {
-    //printf("size %d\n",_n.size());
     c=new char[3+_n.size()*14];
     int sd=3;
     c[0]=0;

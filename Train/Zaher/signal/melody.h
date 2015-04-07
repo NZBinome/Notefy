@@ -11,6 +11,9 @@ class Melody
 {
     double *_f;
     double *_p;
+    int *_dp;    //positions ou derive de _p forme un pic
+    int _di;     //iterateur de _dp
+    bool _corrected;
 
     double *_g;     //time Gaussian
     int _gs;        //Gaussian size
@@ -25,6 +28,8 @@ class Melody
     int _fs;
 
     double _pmax;
+
+
 
     double range(double d);
     void _log2F();
@@ -46,6 +51,8 @@ public:
     void set_l(int l);
     void incScale();
     void deFix();
+    void correct();    //corrige les notes mal chante
+
     int scale()const;
     int fs()const;
     int n()const;

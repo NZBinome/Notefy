@@ -5,12 +5,12 @@ Diviseur::Diviseur(unsigned char * b, int l, int fs, int ba, int nc)
 {
     _b=b;
     _l=l;
-    ++_b[_l]; //cette objet partage ce tableau, on incremente les liens
+    ++_b[_l]; //cet objet partage ce tableau, on incremente les liens
     _fs=fs;
     _ba=ba;
     _nc=nc;
     _ld=1;
-    while(_ld<_fs/10)
+    while(_ld<_fs/11)
     {
         _ld*=2;
     }

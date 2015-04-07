@@ -34,6 +34,8 @@ class Signal
     void methodePMIterre();     //par morceau ittere
     void itere(double *fp, int n);
     void clusters(double *pr, int n);
+    void correct();
+    void correct2();
 
 public:
 

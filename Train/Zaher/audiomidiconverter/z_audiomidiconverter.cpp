@@ -70,7 +70,6 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     m.set_l(s.l());
 
     m.filtreBilateral(gw);
-    m.normalize();
 
     strcpy(midiFile,audioFile);
     midiFile[n-3]='m';

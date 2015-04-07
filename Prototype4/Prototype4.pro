@@ -5,12 +5,13 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     ../Train/Zaher/wavFormat/diviseur.cpp \
-    ../Train/Zaher/wavFormat/wavread.cpp \
+    ../Train/Zaher/audioread/wavread.cpp \
     ../Train/Zaher/signal/complex.cpp \
     ../Train/Zaher/signal/melody.cpp \
     ../Train/Zaher/signal/signal.cpp \
     ../Train/Zaher/midi/midicreator.cpp \
     ../Train/Zaher/midi/musicinstrument.cpp \
+    ../Train/Zaher/util/util.cpp \
     ../Train/Zaher/midi/note.cpp \
     ../Train/Zaher/libaiff/aifx.c \
     ../Train/Zaher/libaiff/extended.c \
@@ -29,12 +30,13 @@ SOURCES += main.cpp \
 
 HEADERS += \
     ../Train/Zaher/wavFormat/diviseur.h \
-    ../Train/Zaher/wavFormat/wavread.h \
+    ../Train/Zaher/audioread/wavread.h \
     ../Train/Zaher/signal/complex.h \
     ../Train/Zaher/signal/melody.h \
     ../Train/Zaher/signal/signal.h \
     ../Train/Zaher/midi/midicreator.h \
     ../Train/Zaher/midi/musicinstrument.h \
+    ../Train/Zaher/util/util.h \
     ../Train/Zaher/midi/note.h \
     ../Train/Zaher/libaiff/private.h \
     ../Train/Zaher/libaiff/z_util.h \

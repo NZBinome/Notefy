@@ -276,6 +276,35 @@ void Signal::methodeParMorceau()
     //fin de code important
 }
 
+void Signal::correct()
+{
+    int arr;
+    double div;
+    if(_fc!=0)
+    {
+        div=_fmax/_fc;
+        arr=(int)div;
+        if(arr+1.0-div<div-arr)
+            ++arr;
+        _fc=_fmax/arr;
+    }
+}
+
+void Signal::correct2()
+{
+    double rap=(1.0*_l)/(1.0*_fs);
+    int ind=(int)(_fc*rap);
+    int indd=(int)(_fc*rap*(1/(sst*sst)));
+    int indf=(int)(_fc*rap*sst*sst);
+
+    for(int i=indd;i<=indf;++i)
+    {
+        if(_f[i]>_f[ind])
+            ind=i;
+    }
+    _fc=1.0*ind/rap;
+}
+
 void Signal::clusters(double *pr, int n)
 {  
     Freqtable *df=Freqtable::getInstance();
@@ -308,6 +337,7 @@ void Signal::clusters(double *pr, int n)
     }
     _fc=bk[0];
     _p=bk[1];
+    correct2();  //slightly better result
 }
 
 void Signal::itere(double *fp, int n)
@@ -361,9 +391,6 @@ void Signal::itere(double *fp, int n)
 
     Util::triRapideDouble(pr,val);
     
-//    for(int i=0;i<val;++i)
-//        printf("%f     \t\t%f\n",pr[i],pr[i+val]);
-
     clusters(pr,val);
     
     delete [] pr;
@@ -509,25 +536,5 @@ int Signal::n()
         ft[1]=0;
     }
     _p=ft[0]*0.127;
-
-//    for(int i=0;i<max-min;++i)
-//        printf("%d  %f\n",i+min,ft[i]);
-
-
-
-//    for(int i=min;i<max;++i)
-//    {
-//        double sf=FREQTABLE[defaultFreq->min()+i];
-
-
-//        for(double f=sf;f<FREQTABLE[defaultFreq->max()];f+=sf)
-//        {
-//            ++n;
-
-//        }
-//        int vv=1+(FREQTABLE[defaultFreq->max()]-sf)/sf;
-//        printf("%f  %d  %d\n",sf,n,vv);
-//        n=0;
-//    }
     return _n;
 }

@@ -84,5 +84,4 @@ int Wavread::open(const char *file)
 
 Wavread::~Wavread()
 {
-
 }
