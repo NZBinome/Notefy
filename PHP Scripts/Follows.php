@@ -1,22 +1,45 @@
 <?php
 
-include 'Converter.php';
-
-
 
 class Follows
 {
 	var $Follower;
 	var $Followed;
 	var $Date;
+	var $Key_Follower;
+	var $Key_Followed;
+	var $Key_Date;
 	var $Converter;
-	var $columns;
 
-	function __construct()
-	{
-		$this->Converter = new Converter("Follows");
-		$this->columns=$this->Converter->describe();
-	}
+	function __construct() 
+    { 
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+        if (method_exists($this,$f='__construct'.$i)) { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+    }
+
+    function __construct2($Follower,$Followed)
+    {
+      $this->__construct0();
+      $this->Follower=$Follower;
+      $this->Followed=$Followed;
+      $this->select();
+    }
+
+    function __construct0()
+    {
+      $this->Converter=new Bridge("Follows");
+      $this->setKeys();
+    }
+
+    function setKeys()
+    {
+    	$this->Key_Follower=$this->Converter->Attributes[0];
+    	$this->Key_Followed=$this->Converter->Attributes[1];
+    	$this->Key_Date=$this->Converter->Attributes[2];
+    }
 
 	function setFollower($par)
 	{
@@ -50,41 +73,45 @@ class Follows
 
 	function insert()
 	{
-		$i=0;
-        while ($i<count($this->columns)) 
-        {
-            $Keys[$i]=$this->columns[$i];
-            $i=$i+1;
-        }
+		$Keys[0]=$this->Key_Follower;
+		$Keys[1]=$this->Key_Followed;
+		$Keys[2]=$this->Key_Date;
 		$Values = array($this->Follower,$this->Followed,"'$this->Date'");
 		$this->Converter->insert($Keys,$Values);
 	}
 
 	function update()
 	{
-		$Keys = array($this->columns[2]);
+		$Keys = array($this->Key_Date);
 		$Values = array("'$this->Date'");
-		$ParaKeys = array($this->columns[0],$this->columns[1]);
+		$ParaKeys = array($this->Key_Follower,$this->Key_Followed);
 		$ParaValues = array($this->Follower,$this->Followed);
 		$this->Converter->update($Keys,$Values,$ParaKeys,$ParaValues);
 	}
 
+	function setFollows($Result)
+	{
+		$this->Follower=$Result[$this->Key_Follower];
+		$this->Followed=$Result[$this->Key_Followed];
+		$this->Date=$Result[$this->Key_Date];
+	}
+
 	function select()
 	{
-		$Keys = array($this->columns[0],$this->columns[1]);
+		$Keys = array($this->Key_Follower,$this->Key_Followed);
 		$Values = array($this->Follower,$this->Followed);
 		$Results=$this->Converter->select($Keys,$Values);
       	$i=0;
       	while ($i<count($Results)) 
       	{
-      		$this->Date=$Results[$i][$this->columns[2]];
+      		$this->setFollows($Results[$i]);
       		$i=$i+1;
       	}
 	}
 
 	function delete()
 	{
-		$Keys = array($this->columns[0],$this->columns[1]);
+		$Keys = array($this->Key_Follower,$this->Key_Followed);
 		$Values = array($this->Follower,$this->Followed);
 		$this->Converter->delete($Keys,$Values);
 	}

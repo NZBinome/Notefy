@@ -1,21 +1,45 @@
 <?php
 
-include 'Converter.php';
-
-
 
 class Share
 {
 	var $Sharer;
 	var $Melody;
 	var $Date;
+	var $Key_Sharer;
+	var $Key_Melody;
+	var $Key_Date;
 	var $Converter;
-	var $columns;
 
-	function __construct()
-	{
-		$this->Converter = new Converter("Share");
-		$this->columns=$this->Converter->describe();	}
+	function __construct() 
+    { 
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+        if (method_exists($this,$f='__construct'.$i)) { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+    }
+
+    function __construct2($Sharer,$Melody)
+    {
+      $this->__construct0();
+      $this->Sharer=$Sharer;
+      $this->Melody=$Melody;
+      $this->select();
+    }
+
+    function __construct0()
+    {
+      $this->Converter=new Bridge("Share");
+      $this->setKeys();
+    }
+
+    function setKeys()
+    {
+    	$this->Key_Sharer=$this->Converter->Attributes[0];
+    	$this->Key_Melody=$this->Converter->Attributes[1];
+    	$this->Key_Date=$this->Converter->Attributes[2];
+    }
 
 	function setSharer($par)
 	{
@@ -49,41 +73,45 @@ class Share
 
 	function insert()
 	{
-		$i=0;
-        while ($i<count($this->columns)) 
-        {
-            $Keys[$i]=$this->columns[$i];
-            $i=$i+1;
-        }
+        $Keys[0]=$this->Key_Sharer;
+        $Keys[1]=$this->Key_Melody;
+        $Keys[2]=$this->Key_Date;
 		$Values = array($this->Sharer,$this->Melody,"'$this->Date'");
 		$this->Converter->insert($Keys,$Values);
 	}
 
 	function update()
 	{
-		$Keys = array($this->columns[2]);
+		$Keys = array($this->Key_Date);
 		$Values = array("'$this->Date'");
-		$ParaKeys = array($this->columns[0],$this->columns[1]);
+		$ParaKeys = array($this->Key_Sharer,$this->Key_Melody);
 		$ParaValues = array($this->Sharer,$this->Melody);
 		$this->Converter->update($Keys,$Values,$ParaKeys,$ParaValues);
 	}
 
+	function setShare($Result)
+	{
+		$this->Sharer=$Result[$this->Key_Sharer];
+		$this->Melody=$Result[$this->Key_Melody];
+		$this->Date=$Result[$this->Key_Date];
+	}
+
 	function select()
 	{
-		$Keys = array($this->columns[0],$this->columns[1]);
+		$Keys = array($this->Key_Sharer,$this->Key_Melody);
 		$Values = array($this->Sharer,$this->Melody);
 		$Results=$this->Converter->select($Keys,$Values);
       	$i=0;
       	while ($i<count($Results)) 
       	{
-      		$this->Date=$Results[$i][$this->columns[2]];
+      		$this->setShare($Results[$i]);
       		$i=$i+1;
       	}
 	}
 
 	function delete()
 	{
-		$Keys = array($this->columns[0],$this->columns[1]);
+		$Keys = array($this->Key_Sharer,$this->Key_Melody);
 		$Values = array($this->Sharer,$this->Melody);
 		$this->Converter->delete($Keys,$Values);
 	}

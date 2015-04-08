@@ -1,21 +1,49 @@
 <?php
 
-include ('Converter.php');
 
 class  Comment
 {
     var $Id;
     var $Writer;
     var $Melody;
-    var $Comment;
+    var $Script;
     var $Date;
+    var $Key_Id;
+    var $Key_Writer;
+    var $Key_Melody;
+    var $Key_Script;
+    var $Key_Date;
     var $Converter;
-    var $columns;
 
-    function __construct()
+    function __construct() 
+    { 
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+        if (method_exists($this,$f='__construct'.$i)) { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+    }
+
+    function __construct1($Id)
     {
-      $this->Converter=new Converter("Comment");
-      $this->columns=$this->Converter->describe();
+      $this->__construct0();
+      $this->Id=$Id;
+      $this->select();
+    }
+
+    function __construct0()
+    {
+      $this->Converter=new Bridge("Comment");
+      $this->setKeys();
+    }
+
+    function setKeys()
+    {
+      $this->Key_Id=$this->Converter->Attributes[0];
+      $this->Key_Writer=$this->Converter->Attributes[1];
+      $this->Key_Melody=$this->Converter->Attributes[2];
+      $this->Key_Script=$this->Converter->Attributes[3];
+      $this->Key_Date=$this->Converter->Attributes[4];
     }
 
     function setId($par)
@@ -33,9 +61,9 @@ class  Comment
        $this->Melody = $par;
     }
 
-    function setComment($par)
+    function setScript($par)
     {
-       $this->Comment = $par;
+       $this->Script = $par;
     }
 
     function setDate($par)
@@ -58,9 +86,9 @@ class  Comment
        return $this->Melody;
     }
 
-    function getComment()
+    function getScript()
     {
-       return $this->Comment;
+       return $this->Script;
     }
 
     function getDate()
@@ -68,49 +96,54 @@ class  Comment
       return $this->Date;
     }
 
+    function setComment($Result)
+    {
+        $this->Id=$Result[$this->Key_Id];
+        $this->Writer=$Result[$this->Key_Writer];
+        $this->Melody=$Result[$this->Key_Melody];
+        $this->Script=$Result[$this->Key_Script];
+        $this->Date=$Result[$this->Key_Date];
+    }
+
     function select()
     {
-      $Keys = array($this->columns[0]);
+      $Keys = array($this->Key_Id);
       $Values = array($this->Id);
       $Results=$this->Converter->select($Keys,$Values);
       $i=0;
       while ($i<count($Results)) 
       {
-        $this->Writer=$Results[$i][$this->columns[1]];
-        $this->Melody=$Results[$i][$this->columns[2]];
-        $this->Comment=$Results[$i][$this->columns[3]];
-        $this->Date=$Results[$i][$this->columns[4]];
+        $this->setComment($Results[$i]);
         $i=$i+1;
       }
+    }
+
+    function setParameters()
+    {
+      $Keys[0]=$this->Key_Writer;
+      $Keys[1]=$this->Key_Melody;
+      $Keys[2]=$this->Key_Script;
+      $Keys[3]=$this->Key_Date;
+      return $Keys;
     }
 
     function insert()
     {
-      $i=0;
-      while ($i<count($this->columns)-1) {
-        $Keys[$i]=$this->columns[$i+1];
-        $i=$i+1;
-      }
-      $Values = array("'$this->Writer'","'$this->Melody'","'$this->Comment'","'$this->Date'");
-      $this->Id = $this->Converter->insert($Keys,$Values);
+      $Values = array("'$this->Writer'","'$this->Melody'","'$this->Script'","'$this->Date'");
+      $this->Id = $this->Converter->insert($this->setParameters(),$Values);
     }
 
     function update()
     {
-      $i=0;
-      while ($i<count($this->columns)-1) {
-        $Keys[$i]=$this->columns[$i+1];
-        $i=$i+1;
-      }
-      $Values = array("'$this->Writer'","'$this->Melody'","'$this->Comment'","'$this->Date'");
-      $ParaKeys=array($this->columns[0]);
+      $Values = array("'$this->Writer'","'$this->Melody'","'$this->Script'","'$this->Date'");
+      $ParaKeys=array($this->Key_Id);
       $ParaValues=array("$this->Id");
-      $this->Converter->update($Keys,$Values,$ParaKeys,$ParaValues);
+      $this->Converter->update($this->setParameters(),$Values,$ParaKeys,$ParaValues);
     }
 
     function delete()
     {
-      $Keys = array($this->columns[0]);
+      $Keys = array($this->Key_Id);
       $Values = array($this->Id);
       $this->Converter->delete($Keys,$Values);
     }
@@ -121,7 +154,7 @@ class  Comment
       echo "Id : " . $this->Id . "<br/>";
       echo "Writer : " . $this->Writer . "<br/>";
       echo "Melody : " . $this->Melody . "<br/>";
-      echo "Comment : " . $this->Comment . "<br/>";
+      echo "Comment : " . $this->Script . "<br/>";
       echo "Date : " . $this->Date . "<br/>";
     }
 

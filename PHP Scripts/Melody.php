@@ -1,6 +1,5 @@
 <?php
 
-include ('Converter.php');
 class  Melody
 {
 	var $Id;
@@ -8,13 +7,42 @@ class  Melody
 	var $Title;
 	var $Date;
 	var $User_Id;
+    var $Key_Id;
+    var $Key_File_Link;
+    var $Key_Title;
+    var $Key_Date;
+    var $Key_User_Id;
 	var $Converter;
-    var $columns;
 
-	function __construct()
+    function __construct() 
+    { 
+        $a = func_get_args(); 
+        $i = func_num_args(); 
+        if (method_exists($this,$f='__construct'.$i)) { 
+            call_user_func_array(array($this,$f),$a); 
+        } 
+    }
+
+    function __construct1($Id)
     {
-    	$this->Converter=new Converter("Melodies");
-        $this->columns=$this->Converter->describe();
+      $this->__construct0();
+      $this->Id=$Id;
+      $this->select();
+    }
+
+    function __construct0()
+    {
+      $this->Converter=new Bridge("Melodies");
+      $this->setKeys();
+    }
+
+    function setKeys()
+    {
+        $this->Key_Id=$this->Converter->Attributes[0];
+        $this->Key_File_Link=$this->Converter->Attributes[1];
+        $this->Key_Title=$this->Converter->Attributes[2];
+        $this->Key_Date=$this->Converter->Attributes[3];
+        $this->Key_User_Id=$this->Converter->Attributes[4];
     }
 
     function setId($par)
@@ -67,52 +95,53 @@ class  Melody
     	return $this->User_Id;
     }
 
+    function setMelody($Result)
+    {
+        $this->Id=$Result[$this->Key_Id];
+        $this->File_Link=$Result[$this->Key_File_Link];
+        $this->Title=$Result[$this->Key_Title];
+        $this->Date=$Result[$this->Key_Date];
+        $this->User_Id=$Result[$this->Key_User_Id]; 
+    }
+
     function select()
     {
-    	$Keys = array($this->columns[0]);
+    	$Keys = array($this->Key_Id);
     	$Values = array($this->Id);
     	$Results=$this->Converter->select($Keys,$Values);
         $i=0;
         while ($i<count($Results)) 
         {
-    	   $this->File_Link=$Results[$i][$this->columns[1]];
-    	   $this->Title=$Results[$i][$this->columns[2]];
-    	   $this->Date=$Results[$i][$this->columns[3]];
-    	   $this->User_Id=$Results[$i][$this->columns[4]];
+    	   $this->setMelody($Results[$i]);
            $i=$i+1;
         }
     }
 
+    function setParameters(){
+        $Keys[0]=$this->Key_File_Link;
+        $Keys[1]=$this->Key_Title;
+        $Keys[2]=$this->Key_Date;
+        $Keys[3]=$this->Key_User_Id;
+        return $Keys;
+    }
+
     function insert()
     {
-        $i=0;
-        while ($i<count($this->columns)-1) 
-        {
-            $Keys[$i]=$this->columns[$i+1];
-            $i=$i+1;
-        }
-
       	$Values = array("'$this->File_Link'","'$this->Title'","'$this->Date'","'$this->User_Id'");
-      	$this->Id = $this->Converter->insert($Keys,$Values);
+      	$this->Id = $this->Converter->insert($this->setParameters(),$Values);
     }
 
     function update()
     {
-    	$i=0;
-        while ($i<count($this->columns)-1) 
-        {
-            $Keys[$i]=$this->columns[$i+1];
-            $i=$i+1;
-        }
       	$Values = array("'$this->File_Link'","'$this->Title'","'$this->Date'","'$this->User_Id'");
-        $ParaKeys=array($this->columns[0]);
+        $ParaKeys=array($this->Key_Id);
         $ParaValues=array("$this->Id");
-        $this->Converter->update($Keys,$Values,$ParaKeys,$ParaValues);
+        $this->Converter->update($this->setParameters(),$Values,$ParaKeys,$ParaValues);
     }
 
     function delete()
     {
-    	$Keys = array($this->columns[0]);
+    	$Keys = array($this->Key_Id);
       	$Values = array($this->Id);
       	$this->Converter->delete($Keys,$Values);
     }
