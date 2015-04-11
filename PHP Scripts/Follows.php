@@ -53,7 +53,7 @@ class Follows
 
 	function setDate($par)
 	{
-		$this->Date=date("Y-m-d",strtotime($par));
+		$this->Date=date("Y-m-d H:i:s",strtotime($par));
 	}
 
 	function getFollower()
@@ -101,7 +101,8 @@ class Follows
 		$Keys = array($this->Key_Follower,$this->Key_Followed);
 		$Values = array($this->Follower,$this->Followed);
 		$Results=$this->Converter->select($Keys,$Values);
-      	$i=0;
+		$this->setFollows($Results[0]);
+      	$i=1;
       	while ($i<count($Results)) 
       	{
       		$this->setFollows($Results[$i]);
@@ -122,6 +123,16 @@ class Follows
 		echo "Follower : " . $this->Follower . "<br/>";
 		echo "Followed : " . $this->Followed . "<br/>";
 		echo "Date : " . $this->Date . "<br/>";
+	}
+
+	function toXML()
+	{
+		$echo = "<Follows>";
+      	$echo = $echo . "<Follower>" . $this->Follower . "</Follower>";
+      	$echo = $echo . "<Followed>" . $this->Followed . "</Followed>";
+      	$echo = $echo . "<Date>" . $this->Date . "</Date>";    
+      	$echo = $echo . "</Follows>";
+      	return $echo ;
 	}
 
 

@@ -35,12 +35,17 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    
+    //////temporary
+    [[NSUserDefaults standardUserDefaults]  setInteger:1 forKey:@"AccountId"];
+    ///////////
     self.path=@"Users/nicolasjbeyli/Desktop/Notefy/Train/audio_files";
     self.directory=@"/Saved";
     self.selectedfile=@"";
     self.selectedtrack=-1;
     self.newinstrument=[[XYZInstrument alloc]init];
     self.instruments=[[NSMutableArray alloc]init];
+    self.ServerLocation=@"http://localhost:8888/";
     [self createInstruments];
     
     

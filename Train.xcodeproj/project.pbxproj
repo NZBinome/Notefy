@@ -41,6 +41,13 @@
 		9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9DAC3D1ACD3A750006A951 /* util.cpp */; };
 		9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9DAC401ACD3A810006A951 /* wavread.cpp */; };
 		9BA54D291AB4327D00D83431 /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 9BA54D281AB4327D00D83431 /* gs_instruments.dls */; };
+		9BA95C7D1AD6BCAF003EE700 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C771AD6BCAF003EE700 /* Background.png */; };
+		9BA95C7E1AD6BCAF003EE700 /* Cadre.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C781AD6BCAF003EE700 /* Cadre.png */; };
+		9BA95C7F1AD6BCAF003EE700 /* My profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C791AD6BCAF003EE700 /* My profile.png */; };
+		9BA95C801AD6BCAF003EE700 /* New Melody.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C7A1AD6BCAF003EE700 /* New Melody.png */; };
+		9BA95C811AD6BCAF003EE700 /* News feed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C7B1AD6BCAF003EE700 /* News feed.png */; };
+		9BA95C821AD6BCAF003EE700 /* Saved files.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C7C1AD6BCAF003EE700 /* Saved files.png */; };
+		9BA95C841AD6C064003EE700 /* How to.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA95C831AD6C064003EE700 /* How to.png */; };
 		9BBDF9141A9E177800322797 /* z_audiomidiconverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF8E21A9E177800322797 /* z_audiomidiconverter.cpp */; };
 		9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF8E51A9E177800322797 /* aiffread.cpp */; };
 		9BBDF9161A9E177800322797 /* audioread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF8E71A9E177800322797 /* audioread.cpp */; };
@@ -65,6 +72,11 @@
 		9BBDF9291A9E177800322797 /* melody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF90B1A9E177800322797 /* melody.cpp */; };
 		9BBDF92A1A9E177800322797 /* signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF90D1A9E177800322797 /* signal.cpp */; };
 		9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDF9101A9E177800322797 /* diviseur.cpp */; };
+		9BE2C7671AD7B31800F2A0BF /* XYZUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C7661AD7B31800F2A0BF /* XYZUser.m */; };
+		9BE2C76A1AD7B41000F2A0BF /* XYZProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C7691AD7B41000F2A0BF /* XYZProfile.m */; };
+		9BE2C76D1AD7DD9000F2A0BF /* XYZMelody.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C76C1AD7DD9000F2A0BF /* XYZMelody.m */; };
+		9BE2C7701AD7F06000F2A0BF /* XYZMelodyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */; };
+		9BE2C7731AD8FE1700F2A0BF /* XYZMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +141,13 @@
 		9B9DAC401ACD3A810006A951 /* wavread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavread.cpp; sourceTree = "<group>"; };
 		9B9DAC411ACD3A810006A951 /* wavread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wavread.h; sourceTree = "<group>"; };
 		9BA54D281AB4327D00D83431 /* gs_instruments.dls */ = {isa = PBXFileReference; lastKnownFileType = file; path = gs_instruments.dls; sourceTree = "<group>"; };
+		9BA95C771AD6BCAF003EE700 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		9BA95C781AD6BCAF003EE700 /* Cadre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cadre.png; sourceTree = "<group>"; };
+		9BA95C791AD6BCAF003EE700 /* My profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "My profile.png"; sourceTree = "<group>"; };
+		9BA95C7A1AD6BCAF003EE700 /* New Melody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "New Melody.png"; sourceTree = "<group>"; };
+		9BA95C7B1AD6BCAF003EE700 /* News feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "News feed.png"; sourceTree = "<group>"; };
+		9BA95C7C1AD6BCAF003EE700 /* Saved files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Saved files.png"; sourceTree = "<group>"; };
+		9BA95C831AD6C064003EE700 /* How to.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "How to.png"; sourceTree = "<group>"; };
 		9BBDF8E21A9E177800322797 /* z_audiomidiconverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = z_audiomidiconverter.cpp; sourceTree = "<group>"; };
 		9BBDF8E31A9E177800322797 /* z_audiomidiconverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = z_audiomidiconverter.h; sourceTree = "<group>"; };
 		9BBDF8E51A9E177800322797 /* aiffread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffread.cpp; sourceTree = "<group>"; };
@@ -170,6 +189,16 @@
 		9BBDF90E1A9E177800322797 /* signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signal.h; sourceTree = "<group>"; };
 		9BBDF9101A9E177800322797 /* diviseur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = diviseur.cpp; sourceTree = "<group>"; };
 		9BBDF9111A9E177800322797 /* diviseur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diviseur.h; sourceTree = "<group>"; };
+		9BE2C7651AD7B31800F2A0BF /* XYZUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZUser.h; sourceTree = "<group>"; };
+		9BE2C7661AD7B31800F2A0BF /* XYZUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZUser.m; sourceTree = "<group>"; };
+		9BE2C7681AD7B41000F2A0BF /* XYZProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZProfile.h; sourceTree = "<group>"; };
+		9BE2C7691AD7B41000F2A0BF /* XYZProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZProfile.m; sourceTree = "<group>"; };
+		9BE2C76B1AD7DD9000F2A0BF /* XYZMelody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMelody.h; sourceTree = "<group>"; };
+		9BE2C76C1AD7DD9000F2A0BF /* XYZMelody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMelody.m; sourceTree = "<group>"; };
+		9BE2C76E1AD7F06000F2A0BF /* XYZMelodyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMelodyCell.h; sourceTree = "<group>"; };
+		9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMelodyCell.m; sourceTree = "<group>"; };
+		9BE2C7711AD8FE1700F2A0BF /* XYZMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMenu.h; sourceTree = "<group>"; };
+		9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +266,8 @@
 			children = (
 				9B283BBD1AC6FE1900D38762 /* XYZTrackCell.h */,
 				9B283BBE1AC6FE1900D38762 /* XYZTrackCell.mm */,
+				9BE2C76E1AD7F06000F2A0BF /* XYZMelodyCell.h */,
+				9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */,
 			);
 			path = "Object Controllers";
 			sourceTree = "<group>";
@@ -252,6 +283,10 @@
 				9B283BC51AC6FE1900D38762 /* XYZSaved_Files.mm */,
 				9B283BC61AC6FE1900D38762 /* XYZViewController.h */,
 				9B283BC71AC6FE1900D38762 /* XYZViewController.mm */,
+				9BE2C7681AD7B41000F2A0BF /* XYZProfile.h */,
+				9BE2C7691AD7B41000F2A0BF /* XYZProfile.m */,
+				9BE2C7711AD8FE1700F2A0BF /* XYZMenu.h */,
+				9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -263,6 +298,10 @@
 				9B283BCB1AC6FE1900D38762 /* XYZInstrument.mm */,
 				9B283BCC1AC6FE1900D38762 /* XYZTrack.h */,
 				9B283BCD1AC6FE1900D38762 /* XYZTrack.mm */,
+				9BE2C7651AD7B31800F2A0BF /* XYZUser.h */,
+				9BE2C7661AD7B31800F2A0BF /* XYZUser.m */,
+				9BE2C76B1AD7DD9000F2A0BF /* XYZMelody.h */,
+				9BE2C76C1AD7DD9000F2A0BF /* XYZMelody.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -314,6 +353,7 @@
 		9B7F28A51A8F9F0900A154F6 /* Train */ = {
 			isa = PBXGroup;
 			children = (
+				9BA95C761AD6BCAF003EE700 /* other images */,
 				9BA54D281AB4327D00D83431 /* gs_instruments.dls */,
 				9B7F28B11A8F9F0900A154F6 /* Main.storyboard */,
 				9B7F28B71A8F9F0900A154F6 /* Images.xcassets */,
@@ -361,6 +401,20 @@
 				9B9DAC3E1ACD3A750006A951 /* util.h */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		9BA95C761AD6BCAF003EE700 /* other images */ = {
+			isa = PBXGroup;
+			children = (
+				9BA95C831AD6C064003EE700 /* How to.png */,
+				9BA95C771AD6BCAF003EE700 /* Background.png */,
+				9BA95C781AD6BCAF003EE700 /* Cadre.png */,
+				9BA95C791AD6BCAF003EE700 /* My profile.png */,
+				9BA95C7A1AD6BCAF003EE700 /* New Melody.png */,
+				9BA95C7B1AD6BCAF003EE700 /* News feed.png */,
+				9BA95C7C1AD6BCAF003EE700 /* Saved files.png */,
+			);
+			path = "other images";
 			sourceTree = "<group>";
 		};
 		9BBDF8E01A9E177800322797 /* Zaher */ = {
@@ -560,15 +614,22 @@
 				9B283BE51AC6FE7C00D38762 /* accordion.png in Resources */,
 				9B283BEA1AC6FE7C00D38762 /* trompette.png in Resources */,
 				9B283BEB1AC6FE7C00D38762 /* violin.png in Resources */,
+				9BA95C811AD6BCAF003EE700 /* News feed.png in Resources */,
+				9BA95C7F1AD6BCAF003EE700 /* My profile.png in Resources */,
 				9BBDF9261A9E177800322797 /* mynote.h.autosave in Resources */,
 				9BA54D291AB4327D00D83431 /* gs_instruments.dls in Resources */,
 				9B283BE71AC6FE7C00D38762 /* guitar.png in Resources */,
 				9B7F28B31A8F9F0900A154F6 /* Main.storyboard in Resources */,
 				9BBDF9211A9E177800322797 /* Makefile.in in Resources */,
+				9BA95C821AD6BCAF003EE700 /* Saved files.png in Resources */,
 				9B283BE61AC6FE7C00D38762 /* drums.png in Resources */,
+				9BA95C7E1AD6BCAF003EE700 /* Cadre.png in Resources */,
+				9BA95C841AD6C064003EE700 /* How to.png in Resources */,
 				9BBDF91D1A9E177800322797 /* config.h.in in Resources */,
+				9BA95C7D1AD6BCAF003EE700 /* Background.png in Resources */,
 				9B283BE81AC6FE7C00D38762 /* mic.png in Resources */,
 				9B283BE91AC6FE7C00D38762 /* piano.png in Resources */,
+				9BA95C801AD6BCAF003EE700 /* New Melody.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +655,8 @@
 				9B283BDC1AC6FE1900D38762 /* XYZAppDelegate.mm in Sources */,
 				9B283BD41AC6FE1900D38762 /* XYZTrackCell.mm in Sources */,
 				9B283BD61AC6FE1900D38762 /* XYZInstrumentController.mm in Sources */,
+				9BE2C7701AD7F06000F2A0BF /* XYZMelodyCell.m in Sources */,
+				9BE2C76A1AD7B41000F2A0BF /* XYZProfile.m in Sources */,
 				9BBDF9291A9E177800322797 /* melody.cpp in Sources */,
 				9B283BD81AC6FE1900D38762 /* XYZViewController.mm in Sources */,
 				9BBDF9181A9E177800322797 /* aifx.c in Sources */,
@@ -608,12 +671,14 @@
 				9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */,
 				9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */,
 				9B283BD31AC6FE1900D38762 /* XYZSaver.mm in Sources */,
+				9BE2C7671AD7B31800F2A0BF /* XYZUser.m in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
 				9B283BD01AC6FE1900D38762 /* XYZButtons.mm in Sources */,
 				9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */,
 				9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */,
 				9BBDF9251A9E177800322797 /* musicinstrument.cpp in Sources */,
+				9BE2C7731AD8FE1700F2A0BF /* XYZMenu.m in Sources */,
 				9BBDF9161A9E177800322797 /* audioread.cpp in Sources */,
 				9BBDF9271A9E177800322797 /* note.cpp in Sources */,
 				9B283BD71AC6FE1900D38762 /* XYZSaved_Files.mm in Sources */,
@@ -622,6 +687,7 @@
 				9BBDF91E1A9E177800322797 /* libaiff.c in Sources */,
 				9B283BD11AC6FE1900D38762 /* XYZPlayer.m in Sources */,
 				9B283BD91AC6FE1900D38762 /* main.m in Sources */,
+				9BE2C76D1AD7DD9000F2A0BF /* XYZMelody.m in Sources */,
 				9BBDF9231A9E177800322797 /* z_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

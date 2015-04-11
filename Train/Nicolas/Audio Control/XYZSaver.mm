@@ -40,7 +40,6 @@
     NSError *error;
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    //XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [filemgr copyItemAtURL:[newurl URLByAppendingPathComponent:name]
                      toURL:[NSURL fileURLWithPath:[appdel.path stringByAppendingPathComponent:name]] error:&error];
 }
@@ -50,7 +49,6 @@
     NSError *error;
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    //XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [filemgr removeItemAtURL:
         [NSURL fileURLWithPath:[appdel.path stringByAppendingPathComponent:name]]
         error:&error];
@@ -60,7 +58,6 @@
 {
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-    //XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     BOOL isDir;
     if ([filemgr fileExistsAtPath:[[appdel.path stringByAppendingPathComponent:directory]stringByAppendingPathComponent:name] isDirectory:&isDir])
     {
@@ -74,7 +71,6 @@
     NSError *error;
     NSFileManager *filemgr;
     filemgr = [NSFileManager defaultManager];
-   // XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [filemgr removeItemAtURL:
      [NSURL fileURLWithPath:[[appdel.path stringByAppendingPathComponent:directory]stringByAppendingPathComponent:name]]
                        error:&error];

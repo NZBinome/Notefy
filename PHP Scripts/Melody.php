@@ -62,7 +62,7 @@ class  Melody
 
     function setDate($par)
     {
-    	$this->Date=date("Y-m-d",strtotime($par));
+    	$this->Date=date("Y-m-d H:i:s",strtotime($par));
     }
 
     function setUser_Id($par)
@@ -154,6 +154,18 @@ class  Melody
     	echo "Title : " . $this->Title . "<br/>";
     	echo "Date : " . $this->Date . "<br/>";
     	echo "User_Id : " . $this->User_Id . "<br/>";
+    }
+
+    function toXML()
+    {
+        $echo = "<Melody>";
+        $echo = $echo . "<Id>" . $this->Id . "</Id>";
+        $echo = $echo . "<File_Link>" . $this->File_Link . "</File_Link>";
+        $echo = $echo . "<Title>" . $this->Title . "</Title>";
+        $echo = $echo . "<Date>" . $this->Date . "</Date>";
+        $echo = $echo . "<User_Id>" . $this->User_Id . "</User_Id>";
+        $echo = $echo . "</Melody>";
+        return $echo ;
     }
 }
 ?>

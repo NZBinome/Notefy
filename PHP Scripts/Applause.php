@@ -53,7 +53,7 @@ class Applause
 
 	function setDate($par)
 	{
-		$this->Date=date("Y-m-d",strtotime($par));
+		$this->Date=date("Y-m-d H:i:s",strtotime($par));
 	}
 
 	function getSpectator()
@@ -101,7 +101,8 @@ class Applause
 		$Keys = array($this->Key_Spectator,$this->Key_Melody);
 		$Values = array($this->Spectator,$this->Melody);
 		$Results=$this->Converter->select($Keys,$Values);
-      	$i=0;
+		$this->setApplause($Results[0]);
+      	$i=1;
       	while ($i<count($Results)) 
       	{
       		$this->setApplause($Results[$i]);
@@ -122,6 +123,16 @@ class Applause
 		echo "Spectator : " . $this->Spectator . "<br/>";
 		echo "Melody : " . $this->Melody . "<br/>";
 		echo "Date : " . $this->Date . "<br/>";
+	}
+
+	function toXML()
+	{
+		$echo = "<Applause>";
+      	$echo = $echo . "<Spectator>" . $this->Spectator . "</Spectator>";
+      	$echo = $echo . "<Melody>" . $this->Melody . "</Melody>";
+      	$echo = $echo . "<Date>" . $this->Date . "</Date>";
+      	$echo = $echo . "</Applause>";
+      	return $echo ;
 	}
 
 

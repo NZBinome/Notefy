@@ -126,7 +126,8 @@ class  User
       $Keys = array($this->Key_Id);
       $Values = array($this->Id);
       $Results=$this->Converter->select($Keys,$Values);
-      $i=0;
+      $this->setUser($Results[0]);
+      $i=1;
       while ($i<count($Results)) 
       {
         $this->setUser($Results[$i]);
@@ -174,6 +175,19 @@ class  User
       echo "Stage_Name : " . $this->Stage_Name . "<br/>";
       echo "Birthday : " . $this->Birthday . "<br/>";
       echo "Picture_Link : " . $this->Picture_Link . "<br/>";
+    }
+
+    function toXML()
+    {
+      $echo = "<User>";
+      $echo = $echo . "<Id>" . $this->Id . "</Id>";
+      $echo = $echo . "<Last_Name>" . $this->Last_Name . "</Last_Name>";
+      $echo = $echo . "<First_Name>" . $this->First_Name . "</First_Name>";
+      $echo = $echo . "<Stage_Name>" . $this->Stage_Name . "</Stage_Name>";
+      $echo = $echo . "<Birthday>" . $this->Birthday . "</Birthday>";
+      $echo = $echo . "<Picture_Link>" . $this->Picture_Link . "</Picture_Link>";
+      $echo = $echo . "</User>";
+      return $echo ;
     }
 
 }

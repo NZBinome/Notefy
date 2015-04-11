@@ -68,7 +68,7 @@ class  Comment
 
     function setDate($par)
     {
-      $this->Date=date("Y-m-d",strtotime($par));
+      $this->Date=date("Y-m-d H:i:s",strtotime($par));
     }
 
     function getId()
@@ -110,7 +110,8 @@ class  Comment
       $Keys = array($this->Key_Id);
       $Values = array($this->Id);
       $Results=$this->Converter->select($Keys,$Values);
-      $i=0;
+      $this->setComment($Results[0]);
+      $i=1;
       while ($i<count($Results)) 
       {
         $this->setComment($Results[$i]);
@@ -150,12 +151,24 @@ class  Comment
 
     function display()
     {
-      echo "User <br/>";
+      echo "Comment <br/>";
       echo "Id : " . $this->Id . "<br/>";
       echo "Writer : " . $this->Writer . "<br/>";
       echo "Melody : " . $this->Melody . "<br/>";
-      echo "Comment : " . $this->Script . "<br/>";
+      echo "Script : " . $this->Script . "<br/>";
       echo "Date : " . $this->Date . "<br/>";
+    }
+
+    function toXML()
+    {
+      $echo = "<Comment>";
+      $echo = $echo . "<Id>" . $this->Id . "</Id>";
+      $echo = $echo . "<Writer>" . $this->Writer . "</Writer>";
+      $echo = $echo . "<Melody>" . $this->Melody . "</Melody>";
+      $echo = $echo . "<Script>" . $this->Script . "</Script>";
+      $echo = $echo . "<Date>" . $this->Date . "</Date>";
+      $echo = $echo . "</Comment>";
+      return $echo ;
     }
 
 }

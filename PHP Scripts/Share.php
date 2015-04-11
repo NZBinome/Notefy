@@ -53,7 +53,7 @@ class Share
 
 	function setDate($par)
 	{
-		$this->Date=date("Y-m-d",strtotime($par));
+		$this->Date=date("Y-m-d H:i:s",strtotime($par));
 	}
 
 	function getSharer()
@@ -101,7 +101,8 @@ class Share
 		$Keys = array($this->Key_Sharer,$this->Key_Melody);
 		$Values = array($this->Sharer,$this->Melody);
 		$Results=$this->Converter->select($Keys,$Values);
-      	$i=0;
+		$this->setShare($Results[0]);
+      	$i=1;
       	while ($i<count($Results)) 
       	{
       		$this->setShare($Results[$i]);
@@ -122,6 +123,16 @@ class Share
 		echo "Sharer : " . $this->Sharer . "<br/>";
 		echo "Melody : " . $this->Melody . "<br/>";
 		echo "Date : " . $this->Date . "<br/>";
+	}
+
+	function toXML()
+	{
+		$echo = "<Share>";
+      	$echo = $echo . "<Sharer>" . $this->Sharer . "</Sharer>";
+      	$echo = $echo . "<Melody>" . $this->Melody . "</Melody>";
+      	$echo = $echo . "<Date>" . $this->Date . "</Date>";
+      	$echo = $echo . "</Share>";
+      	return $echo ;
 	}
 
 

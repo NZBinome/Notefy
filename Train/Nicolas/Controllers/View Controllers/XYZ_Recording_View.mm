@@ -34,6 +34,7 @@
 @property NSString* chosenInstrument;
 @property XYZAppDelegate *appdel;
 @property NSFileManager *filemgr;
+@property NSString* ServerLocation;
 
 
 @end
@@ -62,6 +63,7 @@
 @synthesize chosenInstrument;
 @synthesize appdel;
 @synthesize filemgr;
+@synthesize ServerLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -336,6 +338,7 @@
 {
     [super viewDidLoad];
     appdel=[UIApplication sharedApplication].delegate;
+    ServerLocation=appdel.ServerLocation;
     [self cleanAudioFiles];
     amc=Z_audioMidiConverter();
     selectedfile=appdel.selectedfile;
@@ -369,6 +372,7 @@
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    //[self upload:@"kdkd" AsFile:@"hdhd"];
 
 }
 
@@ -454,6 +458,89 @@
         }
     }];
 }
+
+
+- (IBAction)share:(id)sender
+{
+    NSLog(@"hahaha");
+    
+    NSString* path;
+    path=[appdel.path stringByAppendingString:appdel.currentdirectory];
+    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
+                                                                        error:NULL];
+    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *name = (NSString *)obj;
+        [self upload:name];
+    }];
+    
+    [self insertMelody];
+}
+
+-(void)insertMelody
+{
+    NSLog(@"kdkdkdk");
+    NSError *error;
+    NSLog(@"%@",ServerLocation);
+    int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
+    NSString *path=[ServerLocation stringByAppendingString:@"InsertMelody.php?UserId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    path = [path stringByAppendingString:@"&MelodyName="];
+    path = [path stringByAppendingString:inputname.text];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    NSLog(@"%@",content);
+}
+
+-(void)upload:(NSString*)Filename
+{
+    int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
+    NSString* UserId = [NSString stringWithFormat:@"%d",AccountId];
+    
+    NSString* trackname= [[@"Content-Disposition: attachment; name=\"userfile\";filename=\"" stringByAppendingString:Filename] stringByAppendingString:@"\"\r\n"];
+    
+    NSString *urlString = [appdel.ServerLocation stringByAppendingString:@"UploadMelody.php"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    NSMutableData *body = [NSMutableData data];
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    
+    
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    // file
+    NSData* Data = [[NSData alloc] initWithContentsOfFile:@"Users/nicolasjbeyli/Desktop/Notefy/Train/audio_files/Saved/test4/track1.aif"];
+    
+    
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Disposition: form-data; name= \"UserId\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[UserId dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Disposition: form-data; name= \"MelodyName\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[inputname.text dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [body appendData:[trackname dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:Data]];
+    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    // close form
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    // set request body
+    
+    [request setHTTPBody:body];
+    //return and test
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+  //  NSLog(returnString);
+}
+     
+
+
 
 // (void)viewDidAppear:(BOOL)animated Executes tasks when the view appears.
 

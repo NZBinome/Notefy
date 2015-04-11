@@ -19,5 +19,6 @@
 @property NSInteger selectedtrack;
 @property XYZInstrument *newinstrument;
 @property NSMutableArray* instruments;
+@property NSString* ServerLocation;
 
 @end

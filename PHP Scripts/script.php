@@ -10,12 +10,14 @@ include 'Comment.php';
 include 'Applause.php';
 
 
-$Toolkit1 = new Toolkit();
+//$Toolkit1 = new Toolkit();
 //$Toolkit1->getMelodiesOfUser(1);
-$Toolkit1->getFollowers(2);
+//$Toolkit1->getFollowers(2);
 //$Toolkit1->getFollowed(1);
+//$User1=new User(2);
+//$User1->echoUser();
 
-
+echo date("Y-m-d h:i:sa");
 
 
 //$User1 = new User(2);
