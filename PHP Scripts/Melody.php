@@ -109,7 +109,8 @@ class  Melody
     	$Keys = array($this->Key_Id);
     	$Values = array($this->Id);
     	$Results=$this->Converter->select($Keys,$Values);
-        $i=0;
+        $this->setMelody($Results[0]);
+        $i=1;
         while ($i<count($Results)) 
         {
     	   $this->setMelody($Results[$i]);

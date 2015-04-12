@@ -252,6 +252,8 @@
     [metronomeTimer invalidate];
     [tracks addObject:track];
     [trackTable reloadData];
+    [trackTable reloadData];
+    
     //[self displayAppDel];
 }
 
@@ -459,6 +461,9 @@
     }];
 }
 
+- (IBAction)Back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (IBAction)share:(id)sender
 {
@@ -474,6 +479,7 @@
     }];
     
     [self insertMelody];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)insertMelody
@@ -611,14 +617,159 @@
     UIImage *InstrumentImage = [[UIImage alloc] init];
     InstrumentImage = [UIImage imageNamed:[demotrack.instrument.Name stringByAppendingString:@".png"]];
     [cell.Button setImage:InstrumentImage forState:UIControlStateNormal];
+    
+    
+    if (indexPath.row==0)
+    {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 271, 99)];
+        imageView.tag = 2;
+        [cell.contentView addSubview:imageView];
+        UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:2];
+        pImgView.image = [UIImage imageNamed:@"Rectangle 1.png"];
+        [cell.contentView sendSubviewToBack:pImgView];
+    }
+    
+    
+    else if (indexPath.row==1)
+    {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 279*620/708, 99)];
+        imageView.tag = 2;
+        [cell.contentView addSubview:imageView];
+        UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:2];
+        pImgView.image = [UIImage imageNamed:@"Rectangle 2.png"];
+        [cell.contentView sendSubviewToBack:pImgView];
+    }
+    
+    else
+    {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 279*625*625/(708*708), 99*0.55)];
+        imageView.tag = 2;
+        [cell.contentView addSubview:imageView];
+        UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:2];
+        pImgView.image = [UIImage imageNamed:@"Rectangle 3.png"];
+        [cell.contentView sendSubviewToBack:pImgView];
+    }
+    /*
     if (demotrack.isSelected) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }*/
+    if(demotrack.isSelected)
+    {
+        if (indexPath.row==0) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(271-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré filled.png"];
+        }
+        else if (indexPath.row==1) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*620/708-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré filled.png"];
+        }
+        else {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*625*625/(708*708)-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré filled.png"];
+        }
+    }
+    else
+    {
+        if (indexPath.row==0) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(271-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré unfilled.png"];
+        }
+        else if (indexPath.row==1) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*620/708-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré unfilled.png"];
+        }
+        else {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*625*625/(708*708)-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré unfilled.png"];
+        }
     }
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row<2)
+    {
+        return 99;
+    }
+    else
+    {
+        return 54;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    XYZTrack* tempTrack;
+    tempTrack=[tracks objectAtIndex:indexPath.row];
+    XYZTrackCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (tempTrack.isSelected) {
+        if (indexPath.row==0) {
+            NSLog(@"selected");
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(271-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré unfilled.png"];
+        }
+        else if (indexPath.row==1) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*620/708-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré unfilled.png"];
+        }
+        else {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*625*625/(708*708)-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré unfilled.png"];
+        }
+    }
+    else{
+        if (indexPath.row==0) {
+            NSLog(@"selected");
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(271-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré filled.png"];
+        }
+        else if (indexPath.row==1) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*620/708-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré filled.png"];
+        }
+        else {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(279*625*625/(708*708)-40, 17, 20, 20)];
+            imageView.tag = 3;
+            [cell.contentView addSubview:imageView];
+            UIImageView* pImgView = (UIImageView*)[cell.contentView viewWithTag:3];
+            pImgView.image = [UIImage imageNamed:@"Carré filled.png"];
+        }
+    }
+    
+    /*
     if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
     {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
@@ -626,9 +777,9 @@
     else
     {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    XYZTrack* tempTrack;
-    tempTrack=[tracks objectAtIndex:indexPath.row];
+    }*/
+    //XYZTrack* tempTrack;
+    //tempTrack=[tracks objectAtIndex:indexPath.row];
     tempTrack.isSelected=(!tempTrack.isSelected);
     [tracks replaceObjectAtIndex:indexPath.row withObject:tempTrack];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

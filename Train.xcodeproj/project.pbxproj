@@ -77,6 +77,26 @@
 		9BE2C76D1AD7DD9000F2A0BF /* XYZMelody.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C76C1AD7DD9000F2A0BF /* XYZMelody.m */; };
 		9BE2C7701AD7F06000F2A0BF /* XYZMelodyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */; };
 		9BE2C7731AD8FE1700F2A0BF /* XYZMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */; };
+		9BE2C7841AD9406700F2A0BF /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7741AD9406700F2A0BF /* Back.png */; };
+		9BE2C7851AD9406700F2A0BF /* Cadre .png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7751AD9406700F2A0BF /* Cadre .png */; };
+		9BE2C7861AD9406700F2A0BF /* Carré filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7761AD9406700F2A0BF /* Carré filled.png */; };
+		9BE2C7871AD9406700F2A0BF /* Carré unfilled.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7771AD9406700F2A0BF /* Carré unfilled.png */; };
+		9BE2C7881AD9406700F2A0BF /* Fix.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7781AD9406700F2A0BF /* Fix.png */; };
+		9BE2C7891AD9406700F2A0BF /* Instru 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7791AD9406700F2A0BF /* Instru 1.png */; };
+		9BE2C78A1AD9406700F2A0BF /* Instru 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C77A1AD9406700F2A0BF /* Instru 2.png */; };
+		9BE2C78B1AD9406700F2A0BF /* Instru 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C77B1AD9406700F2A0BF /* Instru 3.png */; };
+		9BE2C78C1AD9406700F2A0BF /* Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C77C1AD9406700F2A0BF /* Play.png */; };
+		9BE2C78D1AD9406700F2A0BF /* Record.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C77D1AD9406700F2A0BF /* Record.png */; };
+		9BE2C78E1AD9406700F2A0BF /* Rectangle 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C77E1AD9406700F2A0BF /* Rectangle 1.png */; };
+		9BE2C78F1AD9406700F2A0BF /* Rectangle 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C77F1AD9406700F2A0BF /* Rectangle 2.png */; };
+		9BE2C7901AD9406700F2A0BF /* Rectangle 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7801AD9406700F2A0BF /* Rectangle 3.png */; };
+		9BE2C7911AD9406700F2A0BF /* Save.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7811AD9406700F2A0BF /* Save.png */; };
+		9BE2C7921AD9406700F2A0BF /* Select all.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7821AD9406700F2A0BF /* Select all.png */; };
+		9BE2C7931AD9406700F2A0BF /* Share.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7831AD9406700F2A0BF /* Share.png */; };
+		9BF7C4691ADAB73C007BEEED /* XYZFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4681ADAB73C007BEEED /* XYZFeedCell.m */; };
+		9BF7C46C1ADABB60007BEEED /* XYZNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */; };
+		9BF7C46F1ADABEBD007BEEED /* XYZFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C46E1ADABEBD007BEEED /* XYZFeed.m */; };
+		9BF7C4721ADABFD6007BEEED /* XYZCreate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4711ADABFD6007BEEED /* XYZCreate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +219,30 @@
 		9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMelodyCell.m; sourceTree = "<group>"; };
 		9BE2C7711AD8FE1700F2A0BF /* XYZMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMenu.h; sourceTree = "<group>"; };
 		9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMenu.m; sourceTree = "<group>"; };
+		9BE2C7741AD9406700F2A0BF /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		9BE2C7751AD9406700F2A0BF /* Cadre .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cadre .png"; sourceTree = "<group>"; };
+		9BE2C7761AD9406700F2A0BF /* Carré filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Carré filled.png"; sourceTree = "<group>"; };
+		9BE2C7771AD9406700F2A0BF /* Carré unfilled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Carré unfilled.png"; sourceTree = "<group>"; };
+		9BE2C7781AD9406700F2A0BF /* Fix.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fix.png; sourceTree = "<group>"; };
+		9BE2C7791AD9406700F2A0BF /* Instru 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Instru 1.png"; sourceTree = "<group>"; };
+		9BE2C77A1AD9406700F2A0BF /* Instru 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Instru 2.png"; sourceTree = "<group>"; };
+		9BE2C77B1AD9406700F2A0BF /* Instru 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Instru 3.png"; sourceTree = "<group>"; };
+		9BE2C77C1AD9406700F2A0BF /* Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Play.png; sourceTree = "<group>"; };
+		9BE2C77D1AD9406700F2A0BF /* Record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Record.png; sourceTree = "<group>"; };
+		9BE2C77E1AD9406700F2A0BF /* Rectangle 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 1.png"; sourceTree = "<group>"; };
+		9BE2C77F1AD9406700F2A0BF /* Rectangle 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 2.png"; sourceTree = "<group>"; };
+		9BE2C7801AD9406700F2A0BF /* Rectangle 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle 3.png"; sourceTree = "<group>"; };
+		9BE2C7811AD9406700F2A0BF /* Save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Save.png; sourceTree = "<group>"; };
+		9BE2C7821AD9406700F2A0BF /* Select all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Select all.png"; sourceTree = "<group>"; };
+		9BE2C7831AD9406700F2A0BF /* Share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share.png; sourceTree = "<group>"; };
+		9BF7C4671ADAB73C007BEEED /* XYZFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFeedCell.h; sourceTree = "<group>"; };
+		9BF7C4681ADAB73C007BEEED /* XYZFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFeedCell.m; sourceTree = "<group>"; };
+		9BF7C46A1ADABB60007BEEED /* XYZNewsFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZNewsFeed.h; sourceTree = "<group>"; };
+		9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZNewsFeed.m; sourceTree = "<group>"; };
+		9BF7C46D1ADABEBD007BEEED /* XYZFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFeed.h; sourceTree = "<group>"; };
+		9BF7C46E1ADABEBD007BEEED /* XYZFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFeed.m; sourceTree = "<group>"; };
+		9BF7C4701ADABFD6007BEEED /* XYZCreate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCreate.h; sourceTree = "<group>"; };
+		9BF7C4711ADABFD6007BEEED /* XYZCreate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCreate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +312,8 @@
 				9B283BBE1AC6FE1900D38762 /* XYZTrackCell.mm */,
 				9BE2C76E1AD7F06000F2A0BF /* XYZMelodyCell.h */,
 				9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */,
+				9BF7C4671ADAB73C007BEEED /* XYZFeedCell.h */,
+				9BF7C4681ADAB73C007BEEED /* XYZFeedCell.m */,
 			);
 			path = "Object Controllers";
 			sourceTree = "<group>";
@@ -287,6 +333,8 @@
 				9BE2C7691AD7B41000F2A0BF /* XYZProfile.m */,
 				9BE2C7711AD8FE1700F2A0BF /* XYZMenu.h */,
 				9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */,
+				9BF7C46A1ADABB60007BEEED /* XYZNewsFeed.h */,
+				9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -302,6 +350,10 @@
 				9BE2C7661AD7B31800F2A0BF /* XYZUser.m */,
 				9BE2C76B1AD7DD9000F2A0BF /* XYZMelody.h */,
 				9BE2C76C1AD7DD9000F2A0BF /* XYZMelody.m */,
+				9BF7C46D1ADABEBD007BEEED /* XYZFeed.h */,
+				9BF7C46E1ADABEBD007BEEED /* XYZFeed.m */,
+				9BF7C4701ADABFD6007BEEED /* XYZCreate.h */,
+				9BF7C4711ADABFD6007BEEED /* XYZCreate.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -406,6 +458,22 @@
 		9BA95C761AD6BCAF003EE700 /* other images */ = {
 			isa = PBXGroup;
 			children = (
+				9BE2C7741AD9406700F2A0BF /* Back.png */,
+				9BE2C7751AD9406700F2A0BF /* Cadre .png */,
+				9BE2C7761AD9406700F2A0BF /* Carré filled.png */,
+				9BE2C7771AD9406700F2A0BF /* Carré unfilled.png */,
+				9BE2C7781AD9406700F2A0BF /* Fix.png */,
+				9BE2C7791AD9406700F2A0BF /* Instru 1.png */,
+				9BE2C77A1AD9406700F2A0BF /* Instru 2.png */,
+				9BE2C77B1AD9406700F2A0BF /* Instru 3.png */,
+				9BE2C77C1AD9406700F2A0BF /* Play.png */,
+				9BE2C77D1AD9406700F2A0BF /* Record.png */,
+				9BE2C77E1AD9406700F2A0BF /* Rectangle 1.png */,
+				9BE2C77F1AD9406700F2A0BF /* Rectangle 2.png */,
+				9BE2C7801AD9406700F2A0BF /* Rectangle 3.png */,
+				9BE2C7811AD9406700F2A0BF /* Save.png */,
+				9BE2C7821AD9406700F2A0BF /* Select all.png */,
+				9BE2C7831AD9406700F2A0BF /* Share.png */,
 				9BA95C831AD6C064003EE700 /* How to.png */,
 				9BA95C771AD6BCAF003EE700 /* Background.png */,
 				9BA95C781AD6BCAF003EE700 /* Cadre.png */,
@@ -611,13 +679,22 @@
 			files = (
 				9B7F28B81A8F9F0900A154F6 /* Images.xcassets in Resources */,
 				9B7F28AA1A8F9F0900A154F6 /* InfoPlist.strings in Resources */,
+				9BE2C7911AD9406700F2A0BF /* Save.png in Resources */,
+				9BE2C78A1AD9406700F2A0BF /* Instru 2.png in Resources */,
+				9BE2C78F1AD9406700F2A0BF /* Rectangle 2.png in Resources */,
+				9BE2C7861AD9406700F2A0BF /* Carré filled.png in Resources */,
+				9BE2C78B1AD9406700F2A0BF /* Instru 3.png in Resources */,
 				9B283BE51AC6FE7C00D38762 /* accordion.png in Resources */,
+				9BE2C7851AD9406700F2A0BF /* Cadre .png in Resources */,
 				9B283BEA1AC6FE7C00D38762 /* trompette.png in Resources */,
+				9BE2C7931AD9406700F2A0BF /* Share.png in Resources */,
+				9BE2C78E1AD9406700F2A0BF /* Rectangle 1.png in Resources */,
 				9B283BEB1AC6FE7C00D38762 /* violin.png in Resources */,
 				9BA95C811AD6BCAF003EE700 /* News feed.png in Resources */,
 				9BA95C7F1AD6BCAF003EE700 /* My profile.png in Resources */,
 				9BBDF9261A9E177800322797 /* mynote.h.autosave in Resources */,
 				9BA54D291AB4327D00D83431 /* gs_instruments.dls in Resources */,
+				9BE2C7881AD9406700F2A0BF /* Fix.png in Resources */,
 				9B283BE71AC6FE7C00D38762 /* guitar.png in Resources */,
 				9B7F28B31A8F9F0900A154F6 /* Main.storyboard in Resources */,
 				9BBDF9211A9E177800322797 /* Makefile.in in Resources */,
@@ -626,9 +703,16 @@
 				9BA95C7E1AD6BCAF003EE700 /* Cadre.png in Resources */,
 				9BA95C841AD6C064003EE700 /* How to.png in Resources */,
 				9BBDF91D1A9E177800322797 /* config.h.in in Resources */,
+				9BE2C7901AD9406700F2A0BF /* Rectangle 3.png in Resources */,
+				9BE2C7871AD9406700F2A0BF /* Carré unfilled.png in Resources */,
 				9BA95C7D1AD6BCAF003EE700 /* Background.png in Resources */,
 				9B283BE81AC6FE7C00D38762 /* mic.png in Resources */,
 				9B283BE91AC6FE7C00D38762 /* piano.png in Resources */,
+				9BE2C7921AD9406700F2A0BF /* Select all.png in Resources */,
+				9BE2C78D1AD9406700F2A0BF /* Record.png in Resources */,
+				9BE2C7841AD9406700F2A0BF /* Back.png in Resources */,
+				9BE2C78C1AD9406700F2A0BF /* Play.png in Resources */,
+				9BE2C7891AD9406700F2A0BF /* Instru 1.png in Resources */,
 				9BA95C801AD6BCAF003EE700 /* New Melody.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,16 +739,19 @@
 				9B283BDC1AC6FE1900D38762 /* XYZAppDelegate.mm in Sources */,
 				9B283BD41AC6FE1900D38762 /* XYZTrackCell.mm in Sources */,
 				9B283BD61AC6FE1900D38762 /* XYZInstrumentController.mm in Sources */,
+				9BF7C46C1ADABB60007BEEED /* XYZNewsFeed.m in Sources */,
 				9BE2C7701AD7F06000F2A0BF /* XYZMelodyCell.m in Sources */,
 				9BE2C76A1AD7B41000F2A0BF /* XYZProfile.m in Sources */,
 				9BBDF9291A9E177800322797 /* melody.cpp in Sources */,
 				9B283BD81AC6FE1900D38762 /* XYZViewController.mm in Sources */,
+				9BF7C4691ADAB73C007BEEED /* XYZFeedCell.m in Sources */,
 				9BBDF9181A9E177800322797 /* aifx.c in Sources */,
 				9BBDF9241A9E177800322797 /* midicreator.cpp in Sources */,
 				9BBDF91B1A9E177800322797 /* g711.c in Sources */,
 				9BBDF9141A9E177800322797 /* z_audiomidiconverter.cpp in Sources */,
 				9BBDF91A1A9E177800322797 /* float32.c in Sources */,
 				9BBDF91F1A9E177800322797 /* lpcm.c in Sources */,
+				9BF7C46F1ADABEBD007BEEED /* XYZFeed.m in Sources */,
 				9B283BD21AC6FE1900D38762 /* XYZRecorder.m in Sources */,
 				9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */,
 				9BBDF91C1A9E177800322797 /* iff.c in Sources */,
@@ -688,6 +775,7 @@
 				9B283BD11AC6FE1900D38762 /* XYZPlayer.m in Sources */,
 				9B283BD91AC6FE1900D38762 /* main.m in Sources */,
 				9BE2C76D1AD7DD9000F2A0BF /* XYZMelody.m in Sources */,
+				9BF7C4721ADABFD6007BEEED /* XYZCreate.m in Sources */,
 				9BBDF9231A9E177800322797 /* z_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
