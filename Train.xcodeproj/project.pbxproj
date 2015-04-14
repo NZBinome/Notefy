@@ -95,8 +95,11 @@
 		9BE2C7931AD9406700F2A0BF /* Share.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE2C7831AD9406700F2A0BF /* Share.png */; };
 		9BF7C4691ADAB73C007BEEED /* XYZFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4681ADAB73C007BEEED /* XYZFeedCell.m */; };
 		9BF7C46C1ADABB60007BEEED /* XYZNewsFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */; };
-		9BF7C46F1ADABEBD007BEEED /* XYZFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C46E1ADABEBD007BEEED /* XYZFeed.m */; };
 		9BF7C4721ADABFD6007BEEED /* XYZCreate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4711ADABFD6007BEEED /* XYZCreate.m */; };
+		9BF7C4751ADAC7B6007BEEED /* XYZShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4741ADAC7B6007BEEED /* XYZShare.m */; };
+		9BF7C4781ADC27AD007BEEED /* XYZFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4771ADC27AD007BEEED /* XYZFeed.m */; };
+		9BF7C47B1ADC28A6007BEEED /* XYZComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C47A1ADC28A6007BEEED /* XYZComment.m */; };
+		9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C47D1ADC3712007BEEED /* XYZApplause.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,10 +242,16 @@
 		9BF7C4681ADAB73C007BEEED /* XYZFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFeedCell.m; sourceTree = "<group>"; };
 		9BF7C46A1ADABB60007BEEED /* XYZNewsFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZNewsFeed.h; sourceTree = "<group>"; };
 		9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZNewsFeed.m; sourceTree = "<group>"; };
-		9BF7C46D1ADABEBD007BEEED /* XYZFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFeed.h; sourceTree = "<group>"; };
-		9BF7C46E1ADABEBD007BEEED /* XYZFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFeed.m; sourceTree = "<group>"; };
 		9BF7C4701ADABFD6007BEEED /* XYZCreate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCreate.h; sourceTree = "<group>"; };
 		9BF7C4711ADABFD6007BEEED /* XYZCreate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCreate.m; sourceTree = "<group>"; };
+		9BF7C4731ADAC7B6007BEEED /* XYZShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZShare.h; sourceTree = "<group>"; };
+		9BF7C4741ADAC7B6007BEEED /* XYZShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZShare.m; sourceTree = "<group>"; };
+		9BF7C4761ADC27AD007BEEED /* XYZFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFeed.h; sourceTree = "<group>"; };
+		9BF7C4771ADC27AD007BEEED /* XYZFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFeed.m; sourceTree = "<group>"; };
+		9BF7C4791ADC28A6007BEEED /* XYZComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZComment.h; sourceTree = "<group>"; };
+		9BF7C47A1ADC28A6007BEEED /* XYZComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZComment.m; sourceTree = "<group>"; };
+		9BF7C47C1ADC3712007BEEED /* XYZApplause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZApplause.h; sourceTree = "<group>"; };
+		9BF7C47D1ADC3712007BEEED /* XYZApplause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZApplause.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +351,8 @@
 		9B283BC91AC6FE1900D38762 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				9BF7C4761ADC27AD007BEEED /* XYZFeed.h */,
+				9BF7C4771ADC27AD007BEEED /* XYZFeed.m */,
 				9B283BCA1AC6FE1900D38762 /* XYZInstrument.h */,
 				9B283BCB1AC6FE1900D38762 /* XYZInstrument.mm */,
 				9B283BCC1AC6FE1900D38762 /* XYZTrack.h */,
@@ -350,10 +361,14 @@
 				9BE2C7661AD7B31800F2A0BF /* XYZUser.m */,
 				9BE2C76B1AD7DD9000F2A0BF /* XYZMelody.h */,
 				9BE2C76C1AD7DD9000F2A0BF /* XYZMelody.m */,
-				9BF7C46D1ADABEBD007BEEED /* XYZFeed.h */,
-				9BF7C46E1ADABEBD007BEEED /* XYZFeed.m */,
 				9BF7C4701ADABFD6007BEEED /* XYZCreate.h */,
 				9BF7C4711ADABFD6007BEEED /* XYZCreate.m */,
+				9BF7C4731ADAC7B6007BEEED /* XYZShare.h */,
+				9BF7C4741ADAC7B6007BEEED /* XYZShare.m */,
+				9BF7C4791ADC28A6007BEEED /* XYZComment.h */,
+				9BF7C47A1ADC28A6007BEEED /* XYZComment.m */,
+				9BF7C47C1ADC3712007BEEED /* XYZApplause.h */,
+				9BF7C47D1ADC3712007BEEED /* XYZApplause.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -743,7 +758,9 @@
 				9BE2C7701AD7F06000F2A0BF /* XYZMelodyCell.m in Sources */,
 				9BE2C76A1AD7B41000F2A0BF /* XYZProfile.m in Sources */,
 				9BBDF9291A9E177800322797 /* melody.cpp in Sources */,
+				9BF7C4751ADAC7B6007BEEED /* XYZShare.m in Sources */,
 				9B283BD81AC6FE1900D38762 /* XYZViewController.mm in Sources */,
+				9BF7C4781ADC27AD007BEEED /* XYZFeed.m in Sources */,
 				9BF7C4691ADAB73C007BEEED /* XYZFeedCell.m in Sources */,
 				9BBDF9181A9E177800322797 /* aifx.c in Sources */,
 				9BBDF9241A9E177800322797 /* midicreator.cpp in Sources */,
@@ -751,7 +768,6 @@
 				9BBDF9141A9E177800322797 /* z_audiomidiconverter.cpp in Sources */,
 				9BBDF91A1A9E177800322797 /* float32.c in Sources */,
 				9BBDF91F1A9E177800322797 /* lpcm.c in Sources */,
-				9BF7C46F1ADABEBD007BEEED /* XYZFeed.m in Sources */,
 				9B283BD21AC6FE1900D38762 /* XYZRecorder.m in Sources */,
 				9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */,
 				9BBDF91C1A9E177800322797 /* iff.c in Sources */,
@@ -761,6 +777,7 @@
 				9BE2C7671AD7B31800F2A0BF /* XYZUser.m in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
+				9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */,
 				9B283BD01AC6FE1900D38762 /* XYZButtons.mm in Sources */,
 				9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */,
 				9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */,
@@ -770,6 +787,7 @@
 				9BBDF9271A9E177800322797 /* note.cpp in Sources */,
 				9B283BD71AC6FE1900D38762 /* XYZSaved_Files.mm in Sources */,
 				9BBDF9281A9E177800322797 /* complex.cpp in Sources */,
+				9BF7C47B1ADC28A6007BEEED /* XYZComment.m in Sources */,
 				9BBDF9191A9E177800322797 /* extended.c in Sources */,
 				9BBDF91E1A9E177800322797 /* libaiff.c in Sources */,
 				9B283BD11AC6FE1900D38762 /* XYZPlayer.m in Sources */,

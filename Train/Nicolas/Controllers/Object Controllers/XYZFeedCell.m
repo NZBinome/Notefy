@@ -9,6 +9,14 @@
 #import "XYZFeedCell.h"
 
 @implementation XYZFeedCell
+@synthesize ProfilePic;
+@synthesize UserName;
+@synthesize Action;
+@synthesize MelodyName;
+@synthesize Time;
+@synthesize NumberApplause;
+@synthesize NumberComment;
+@synthesize NumberShare;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

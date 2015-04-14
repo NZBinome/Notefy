@@ -7,6 +7,8 @@ include 'Toolkit.php';
 include 'Feed.php';
 include 'Share.php';
 include 'Follows.php';
+include 'Comment.php';
+include 'Applause.php';
 
 
 $UserId = $_GET['UserId'];
@@ -45,6 +47,33 @@ while ($i<count($Followed))
 		$j =$j+1;
 		$k=$k+1;
 	}
+
+
+	$j = 0;
+	$Comments = $Toolkit1->getCommentsOfUser($Users[$i]->getId());
+	while ($j <count($Comments)) 
+	{
+		$Melody = new Melody($Comments[$j]->getMelody());
+		$Feeds[$k] = new Feed($Users[$i]->getId(),$Melody->getId(),"Comment",$Comments[$j]->getDate());
+		$Dates[$k] = $Comments[$j]->getDate();
+		$j =$j+1;
+		$k=$k+1;
+	}
+
+
+	$j = 0;
+	$Applaue = $Toolkit1->getApplauseofUser($Users[$i]->getId());
+	while ($j <count($Applaue)) 
+	{
+		$Melody = new Melody($Applaue[$j]->getMelody());
+		$Feeds[$k] = new Feed($Users[$i]->getId(),$Melody->getId(),"Applause",$Applaue[$j]->getDate());
+		$Dates[$k] = $Applaue[$j]->getDate();
+		$j =$j+1;
+		$k=$k+1;
+	}
+
+
+
 	$i = $i + 1;
 }
 

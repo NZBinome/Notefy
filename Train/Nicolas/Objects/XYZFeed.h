@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "../Controllers/Object Controllers/XYZFeedCell.h"
+#import "../XYZAppDelegate.h"
+#import "XYZUser.h"
+#import "XYZMelody.h"
 
 @interface XYZFeed : NSObject
-@property NSString* Date;
 -(void)fillCell:(XYZFeedCell*)cell;
+
 
 @end

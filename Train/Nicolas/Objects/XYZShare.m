@@ -1,14 +1,14 @@
 //
-//  XYZCreate.m
+//  XYZShare.m
 //  Train
 //
 //  Created by Nicolas Jbeyli on 4/12/15.
 //  Copyright (c) 2015 Nicolas Jbeyli. All rights reserved.
 //
 
-#import "XYZCreate.h"
+#import "XYZShare.h"
+@implementation XYZShare
 
-@implementation XYZCreate
 @synthesize User;
 @synthesize Melody;
 @synthesize Date;
@@ -32,7 +32,7 @@
 {
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
-    cell.Action.text=@"Creation";
+    cell.Action.text=@"Share";
     cell.Time.text=Date;
     
     NSString* fullpath;
@@ -44,7 +44,7 @@
         fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
     }
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
-
+    
 }
 
 @end

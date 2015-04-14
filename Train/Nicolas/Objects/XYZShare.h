@@ -1,5 +1,5 @@
 //
-//  XYZCreate.h
+//  XYZShare.h
 //  Train
 //
 //  Created by Nicolas Jbeyli on 4/12/15.
@@ -8,11 +8,11 @@
 
 #import "XYZUser.h"
 #import "XYZMelody.h"
-#import "../XYZAppDelegate.h"
 #import "XYZFeed.h"
+#import "../XYZAppDelegate.h"
 #import "../Controllers/Object Controllers/XYZFeedCell.h"
 
-@interface XYZCreate : XYZFeed
+@interface XYZShare : XYZFeed
 @property NSString* Date;
 @property NSString* ServerLocation;
 @property XYZUser* User;

@@ -72,11 +72,41 @@ class Toolkit
 		return $Applause;
 	}
 
+	function getApplauseofUser($UserId)
+	{
+		$this->Bridge->setTable("Applause");
+		$Keys = array($this->Bridge->Attributes[0]);
+		$Values = array($UserId);
+		$Results = $this->Bridge->select($Keys,$Values);
+		$i=0;
+		while ($i<count($Results)) {	
+			$Applause[$i]= new Applause();
+			$Applause[$i]->setApplause($Results[$i]);
+			$i=$i+1;
+		}
+		return $Applause;
+	}
+
 	function getComments($Melody)
 	{
 		$this->Bridge->setTable("Comment");
 		$Keys = array($this->Bridge->Attributes[2]);
 		$Values = array($Melody);
+		$Results = $this->Bridge->select($Keys,$Values);
+		$i=0;
+		while ($i<count($Results)) {	
+			$Comment[$i]= new Comment();
+			$Comment[$i]->setComment($Results[$i]);
+			$i=$i+1;
+		}
+		return $Comment;
+	}
+
+	function getCommentsOfUser($UserId)
+	{
+		$this->Bridge->setTable("Comment");
+		$Keys = array($this->Bridge->Attributes[1]);
+		$Values = array($UserId);
 		$Results = $this->Bridge->select($Keys,$Values);
 		$i=0;
 		while ($i<count($Results)) {	

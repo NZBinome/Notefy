@@ -1,18 +1,19 @@
 //
-//  XYZCreate.m
+//  XYZApplause.m
 //  Train
 //
-//  Created by Nicolas Jbeyli on 4/12/15.
+//  Created by Nicolas Jbeyli on 4/13/15.
 //  Copyright (c) 2015 Nicolas Jbeyli. All rights reserved.
 //
 
-#import "XYZCreate.h"
+#import "XYZApplause.h"
 
-@implementation XYZCreate
+@implementation XYZApplause
 @synthesize User;
 @synthesize Melody;
 @synthesize Date;
 @synthesize ServerLocation;
+
 
 - (id)init
 {
@@ -28,11 +29,12 @@
     return self;
 }
 
+
 -(void)fillCell:(XYZFeedCell *)cell
 {
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
-    cell.Action.text=@"Creation";
+    cell.Action.text=@"Applause";
     cell.Time.text=Date;
     
     NSString* fullpath;
@@ -44,7 +46,8 @@
         fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
     }
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
-
+    
 }
+
 
 @end

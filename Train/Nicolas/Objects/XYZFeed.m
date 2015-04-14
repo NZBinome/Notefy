@@ -9,6 +9,6 @@
 #import "XYZFeed.h"
 
 @implementation XYZFeed
-@synthesize Date;
+
 
 @end
