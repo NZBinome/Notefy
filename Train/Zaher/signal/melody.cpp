@@ -9,6 +9,11 @@ extern const double PI;
 
 const double ilogst=12.0;   //inverse de log d'un semiton
 
+Melody::Melody():Melody(0,0)
+{
+
+}
+
 Melody::Melody(int n, int fs)
 {
     _i=0;
@@ -448,6 +453,47 @@ int Melody::distNum()
     return _di;
 }
 
+
+void Melody::set_fs(int fs)
+{
+    _fs=fs;
+}
+
+void Melody::set_tfp(double *tfp, int ns)
+{
+    if(_tfp!=0)
+        if(--_tfp[_n+_n]==0.0)
+            delete [] _tfp;
+    _n=ns;
+    _i=ns;
+
+    _tfp=tfp;
+    ++_tfp[_n+_n];
+    _f=_tfp;
+    _p=_tfp+_n;
+}
+
+void Melody::set_dp(int *dp, int di)
+{
+    if(_dp!=0)
+        if(--_dp[_di]==0)
+            delete [] _dp;
+
+    _di=di;
+
+    _dp=dp;
+    ++_dp[_di];
+}
+
+void Melody::set_scl(int scl[])
+{
+    memcpy(_scales,scl,12*sizeof(int));
+}
+
+void Melody::set_scale(int cs)
+{
+    _scale=cs;
+}
 
 Melody::~Melody()
 {

@@ -6,10 +6,10 @@
 
 class Z_audioMidiConverter
 {
-    void melToMid(Melody& m, char *filename);
+
 public:
     Z_audioMidiConverter();
-
+    void melToMid(Melody& m, char *filename);
     int convert(char *audioFile, char *midiFile);
     void chooseInstrument(unsigned char inst, char * filename);
     static unsigned short getInstrument(char * filename);

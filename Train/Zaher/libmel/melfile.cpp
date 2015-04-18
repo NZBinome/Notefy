@@ -38,8 +38,10 @@ int MelFile::getToChunk(const int cid)
     int size=0;
     int fcid;
     _file.seekg(8,ios::beg);
+    int t;
     do
     {
+        t=_file.tellg();
         _file.seekg(size,ios::cur);
         _file.read((char*)&fcid,sizeof(int));
         _file.read((char*)&size,sizeof(int));
@@ -78,6 +80,7 @@ void MelFile::getInfo()
 void MelFile::getFreq()
 {
     int size=getToChunk(FREQ);
+    int t;
     if(size)
     {
          myDelete(_tfp,_ns+_ns);
@@ -86,8 +89,10 @@ void MelFile::getFreq()
         {
             _tfp=new double[_ns+_ns+1];
             _tfp[_ns+_ns]=1.0;
-            _file.read((char*)_tfp,(_ns*_ns)*sizeof(double));
+            _file.read((char*)_tfp,(_ns+_ns)*sizeof(double));
         }
+        t=_file.tellg();
+        t=0;
     }
 }
 
@@ -457,6 +462,21 @@ void MelFile::getFrom(Melody &m)
     set_scl(scl);
 }
 
+void MelFile::writeTo(Melody &m)
+{
+    m.set_l(_lt);
+    m.set_fs(_fs);
+    if(_cr||_qt)
+    {
+        //something about the melody
+    }
+    else
+    {
+        m.set_tfp(_tfp,_ns);
+    }
+    m.set_scl(_scl);
+    m.set_scale(_cs);
+}
 
 MelFile::~MelFile()
 {

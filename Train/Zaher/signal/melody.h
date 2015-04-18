@@ -41,16 +41,20 @@ class Melody
     Melody& operator =(Melody& o);
 
 public:
+    Melody();
     Melody(int n, int fs);
     void append(double f, double p);
     void filtreBilateral(int gs);
     void normalize();
     void valueAt(int i,double v[]); //v tableau de deux valeur
     //0 la frequence 1 la puissance, on remplit le tableau
+
     void writeToFile(char *filename) const;
     void readFromFile(char *filename);
+
     void setScales();
     void set_l(int l);
+    void set_fs(int fs);
     void incScale();
     void deFix();
     void correct();    //corrige les notes mal chante
@@ -60,11 +64,18 @@ public:
     int n()const;
     int l()const;
 
+
+
     void getScal(int scl[]);
     double * freqPow();
     double * distFreq();
     int *distPlace();
     int distNum();
+
+    void set_tfp(double *tfp, int ns);
+    void set_dp(int * dp, int di);
+    void set_scl(int scl[]);
+    void set_scale(int cs);
 
 
     ~Melody();

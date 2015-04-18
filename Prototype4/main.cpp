@@ -91,8 +91,26 @@ void melFiled()
     f.close();
 }
 
+void melfiledw()
+{
+    MelFile f;
+
+    f.read("hash.mel");
+
+    f.getInfo();
+    f.getFreq();
+    f.getScal();
+
+    Melody m;
+
+    f.writeTo(m);
+
+    Z_audioMidiConverter amc;
+    amc.melToMid(m,"hash.mid");
+}
+
 int main()
 {
-    create();
+    melfiledw();
 }
 
