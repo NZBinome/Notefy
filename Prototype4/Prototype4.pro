@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     ../Train/Zaher/freq/freqtable.cpp \
     ../Train/Zaher/audioread/aiffread.cpp \
     ../Train/Zaher/audioread/audioread.cpp \
-    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.cpp
+    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.cpp \
+    ../Train/Zaher/libmel/melfile.cpp
 
 
 HEADERS += \
@@ -46,6 +47,7 @@ HEADERS += \
     ../Train/Zaher/freq/freqtable.h \
     ../Train/Zaher/audioread/aiffread.h \
     ../Train/Zaher/audioread/audioread.h \
-    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h
+    ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h \
+    ../Train/Zaher/libmel/melfile.h
 
 

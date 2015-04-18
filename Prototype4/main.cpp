@@ -3,6 +3,11 @@
 #include "../Train/Zaher/midi/midicreator.h"
 #include "../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h"
 #include "../Train/Zaher/freq/freqtable.h"
+#include "../Train/Zaher/libmel/melfile.h"
+#include "../Train/Zaher/audioread/aiffread.h"
+#include "../Train/Zaher/wavFormat/diviseur.h"
+#include "../Train/Zaher/signal/complex.h"
+#include "../Train/Zaher/signal/signal.h"
 #include <ctime>
 #include <iostream>
 
@@ -12,7 +17,7 @@ void create()
 {
     Z_audioMidiConverter amc;
     char mf[24];
-    if(!amc.convert("track2.aif",mf))
+    if(!amc.convert("track1.aif",mf))
     {
         printf("file not found!\n");
     }
@@ -45,7 +50,7 @@ void prototype4()
     printf("\n--\n--\nstart run :: %d/%d/%d -- %d:%d:%d\n--\n",now->tm_year+1900,now->tm_mon+1,now->tm_mday,now->tm_hour,now->tm_min,now->tm_sec);
 
 
-    read();
+    create();
 
 
     printf("\n--\n--\nend run\n--------------------------------------------------------------\n--------------------------------------------------------------\n");
@@ -53,12 +58,41 @@ void prototype4()
 
 void prototype5()
 {
+
     freopen("C:/MATLAB7/work/projet 5as/melodieRafinemet.m","w",stdout);
     create();
+
+}
+
+void melFiled()
+{
+    AiffRead ar;
+    ar.open("track1.aif");
+    Diviseur d(ar.buffer(),ar.l(),ar.fs(),ar.ba(),ar.nc());
+    Signal s;
+
+    Melody m(d.d(),ar.fs());
+
+    for(int i=0;i<d.d();++i)
+    {
+        s.set(d[i],ar.fs(),d.ld(),ar.ba(),ar.nc());
+        m.append(s.fc(),s.p());
+    }
+
+    m.set_l(s.l());
+    m.filtreBilateral(4);
+
+    m.setScales();
+
+    MelFile f;
+
+    f.getFrom(m);
+    f.create("hash.mel");
+    f.close();
 }
 
 int main()
 {
-    prototype4();
+    create();
 }
 

@@ -9,10 +9,11 @@
 
 class Melody
 {
+    double *_tfp;
     double *_f;
     double *_p;
     int *_dp;    //positions ou derive de _p forme un pic
-    int _di;     //iterateur de _dp
+    int _di;     //iterateur de _dp, after last value not usable
     bool _corrected;
 
     double *_g;     //time Gaussian
@@ -36,10 +37,11 @@ class Melody
     void _exp2F();
     void gaussian(int n);
 
-public:
-    Melody(int n, int fs);
     Melody(Melody& o);
     Melody& operator =(Melody& o);
+
+public:
+    Melody(int n, int fs);
     void append(double f, double p);
     void filtreBilateral(int gs);
     void normalize();
@@ -57,6 +59,13 @@ public:
     int fs()const;
     int n()const;
     int l()const;
+
+    void getScal(int scl[]);
+    double * freqPow();
+    double * distFreq();
+    int *distPlace();
+    int distNum();
+
 
     ~Melody();
 };

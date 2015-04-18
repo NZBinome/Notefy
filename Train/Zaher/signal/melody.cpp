@@ -23,12 +23,11 @@ Melody::Melody(int n, int fs)
     _corrected=false;
     if(_n!=0)
     {
-        _f=new double[n+1];
-        _p=new double[n+1];
+        _tfp=new double[_n+_n+1];
+        _f=_tfp;
+        _p=_tfp+_n;
         _dp=new int[n];
-        _f[_n]=1.0;
-        _p[_n]=1.0;
-        _dp[_n-1]=1;
+        _tfp[_n+_n]=1.0;
     }
     _g=0;
     _scales[0]=0;
@@ -311,6 +310,12 @@ void Melody::filtreBilateral(int gs)
         _f[i]=f[i];
     _exp2F();
 
+    ++_di;
+    int *dp=new int[_di+1];
+    memcpy(dp,_dp,_di*sizeof(int));
+    delete [] _dp;
+    _dp=dp;
+    _dp[_di]=1;
 }
 
 
@@ -418,17 +423,40 @@ void Melody::incScale()
     _scale=_scale%12;
 }
 
+void Melody::getScal(int scl[])
+{
+    memcpy(scl,_scales,12*sizeof(int));
+}
+
+double * Melody::freqPow()
+{
+    return _tfp;
+}
+
+double * Melody::distFreq()
+{
+    return 0;
+}
+
+int  * Melody::distPlace()
+{
+    return _dp;
+}
+
+int Melody::distNum()
+{
+    return _di;
+}
+
+
 Melody::~Melody()
 {
-    if(_f!=0)
-        if(--_f[_n]==0)
-            delete [] _f;
-    if(_p!=0)
-        if(--_p[_n]==0)
-            delete [] _p;
+    if(_tfp!=0)
+        if(--_tfp[_n+_n]==0.0)
+            delete [] _tfp;
     if(_g!=0)
         delete [] _g;
     if(_dp!=0)
-        if(--_dp[_n-1]==0)
+        if(--_dp[_di]==0)
             delete [] _dp;
 }
