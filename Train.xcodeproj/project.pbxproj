@@ -100,6 +100,12 @@
 		9BF7C4781ADC27AD007BEEED /* XYZFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4771ADC27AD007BEEED /* XYZFeed.m */; };
 		9BF7C47B1ADC28A6007BEEED /* XYZComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C47A1ADC28A6007BEEED /* XYZComment.m */; };
 		9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C47D1ADC3712007BEEED /* XYZApplause.m */; };
+		9BF7C4811ADE5F26007BEEED /* XYZCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4801ADE5F26007BEEED /* XYZCommentCell.m */; };
+		9BF7C4841ADE5F59007BEEED /* XYZApplauseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4831ADE5F59007BEEED /* XYZApplauseCell.m */; };
+		9BF7C4871ADE5F9B007BEEED /* XYZShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4861ADE5F9B007BEEED /* XYZShareCell.m */; };
+		9BF7C48A1ADE5FB8007BEEED /* XYZFollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */; };
+		9BF7C48D1ADE5FEE007BEEED /* XYZCreateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */; };
+		9BF7C4901ADE682F007BEEED /* XYZFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C48F1ADE682F007BEEED /* XYZFollow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +258,18 @@
 		9BF7C47A1ADC28A6007BEEED /* XYZComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZComment.m; sourceTree = "<group>"; };
 		9BF7C47C1ADC3712007BEEED /* XYZApplause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZApplause.h; sourceTree = "<group>"; };
 		9BF7C47D1ADC3712007BEEED /* XYZApplause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZApplause.m; sourceTree = "<group>"; };
+		9BF7C47F1ADE5F26007BEEED /* XYZCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCommentCell.h; sourceTree = "<group>"; };
+		9BF7C4801ADE5F26007BEEED /* XYZCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCommentCell.m; sourceTree = "<group>"; };
+		9BF7C4821ADE5F59007BEEED /* XYZApplauseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZApplauseCell.h; sourceTree = "<group>"; };
+		9BF7C4831ADE5F59007BEEED /* XYZApplauseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZApplauseCell.m; sourceTree = "<group>"; };
+		9BF7C4851ADE5F9B007BEEED /* XYZShareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZShareCell.h; sourceTree = "<group>"; };
+		9BF7C4861ADE5F9B007BEEED /* XYZShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZShareCell.m; sourceTree = "<group>"; };
+		9BF7C4881ADE5FB8007BEEED /* XYZFollowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFollowCell.h; sourceTree = "<group>"; };
+		9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFollowCell.m; sourceTree = "<group>"; };
+		9BF7C48B1ADE5FEE007BEEED /* XYZCreateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCreateCell.h; sourceTree = "<group>"; };
+		9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCreateCell.m; sourceTree = "<group>"; };
+		9BF7C48E1ADE682F007BEEED /* XYZFollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFollow.h; sourceTree = "<group>"; };
+		9BF7C48F1ADE682F007BEEED /* XYZFollow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFollow.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +341,16 @@
 				9BE2C76F1AD7F06000F2A0BF /* XYZMelodyCell.m */,
 				9BF7C4671ADAB73C007BEEED /* XYZFeedCell.h */,
 				9BF7C4681ADAB73C007BEEED /* XYZFeedCell.m */,
+				9BF7C47F1ADE5F26007BEEED /* XYZCommentCell.h */,
+				9BF7C4801ADE5F26007BEEED /* XYZCommentCell.m */,
+				9BF7C4821ADE5F59007BEEED /* XYZApplauseCell.h */,
+				9BF7C4831ADE5F59007BEEED /* XYZApplauseCell.m */,
+				9BF7C4851ADE5F9B007BEEED /* XYZShareCell.h */,
+				9BF7C4861ADE5F9B007BEEED /* XYZShareCell.m */,
+				9BF7C4881ADE5FB8007BEEED /* XYZFollowCell.h */,
+				9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */,
+				9BF7C48B1ADE5FEE007BEEED /* XYZCreateCell.h */,
+				9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */,
 			);
 			path = "Object Controllers";
 			sourceTree = "<group>";
@@ -369,6 +397,8 @@
 				9BF7C47A1ADC28A6007BEEED /* XYZComment.m */,
 				9BF7C47C1ADC3712007BEEED /* XYZApplause.h */,
 				9BF7C47D1ADC3712007BEEED /* XYZApplause.m */,
+				9BF7C48E1ADE682F007BEEED /* XYZFollow.h */,
+				9BF7C48F1ADE682F007BEEED /* XYZFollow.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -747,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF7C48A1ADE5FB8007BEEED /* XYZFollowCell.m in Sources */,
 				9BBDF9171A9E177800322797 /* freqtable.cpp in Sources */,
 				9BBDF9221A9E177800322797 /* pascal.c in Sources */,
 				9BBDF92A1A9E177800322797 /* signal.cpp in Sources */,
@@ -768,6 +799,7 @@
 				9BBDF9141A9E177800322797 /* z_audiomidiconverter.cpp in Sources */,
 				9BBDF91A1A9E177800322797 /* float32.c in Sources */,
 				9BBDF91F1A9E177800322797 /* lpcm.c in Sources */,
+				9BF7C48D1ADE5FEE007BEEED /* XYZCreateCell.m in Sources */,
 				9B283BD21AC6FE1900D38762 /* XYZRecorder.m in Sources */,
 				9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */,
 				9BBDF91C1A9E177800322797 /* iff.c in Sources */,
@@ -775,9 +807,11 @@
 				9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */,
 				9B283BD31AC6FE1900D38762 /* XYZSaver.mm in Sources */,
 				9BE2C7671AD7B31800F2A0BF /* XYZUser.m in Sources */,
+				9BF7C4871ADE5F9B007BEEED /* XYZShareCell.m in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
 				9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */,
+				9BF7C4811ADE5F26007BEEED /* XYZCommentCell.m in Sources */,
 				9B283BD01AC6FE1900D38762 /* XYZButtons.mm in Sources */,
 				9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */,
 				9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */,
@@ -786,6 +820,7 @@
 				9BBDF9161A9E177800322797 /* audioread.cpp in Sources */,
 				9BBDF9271A9E177800322797 /* note.cpp in Sources */,
 				9B283BD71AC6FE1900D38762 /* XYZSaved_Files.mm in Sources */,
+				9BF7C4841ADE5F59007BEEED /* XYZApplauseCell.m in Sources */,
 				9BBDF9281A9E177800322797 /* complex.cpp in Sources */,
 				9BF7C47B1ADC28A6007BEEED /* XYZComment.m in Sources */,
 				9BBDF9191A9E177800322797 /* extended.c in Sources */,
@@ -794,6 +829,7 @@
 				9B283BD91AC6FE1900D38762 /* main.m in Sources */,
 				9BE2C76D1AD7DD9000F2A0BF /* XYZMelody.m in Sources */,
 				9BF7C4721ADABFD6007BEEED /* XYZCreate.m in Sources */,
+				9BF7C4901ADE682F007BEEED /* XYZFollow.m in Sources */,
 				9BBDF9231A9E177800322797 /* z_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

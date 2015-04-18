@@ -34,6 +34,8 @@
 @property BOOL isScript;
 @property XYZApplause* Applause;
 @property BOOL isApplause;
+@property BOOL isFollow;
+@property XYZFollow* Follow;
 
 @end
 
@@ -63,6 +65,8 @@
 @synthesize isScript;
 @synthesize Applause;
 @synthesize isApplause;
+@synthesize isFollow;
+@synthesize Follow;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,7 +85,7 @@
                    stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:url]
                                                encoding:NSUTF8StringEncoding error:&error];
-    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSData* data = [content dataUsingEncoding:NSUTF8StringEncoding];
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
     [parser setDelegate:self];
     [parser parse];
@@ -152,6 +156,12 @@
         isFeed = true;
     }
     
+    if ([elementName isEqualToString:@"Follow"]) {
+        Follow = [[XYZFollow alloc]init];
+        isFollow = true;
+        isFeed = true;
+    }
+    
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
@@ -197,6 +207,9 @@
             if (isApplause) {
                 Applause.Date=string;
             }
+            if (isFollow) {
+                Follow.Date=string;
+            }
         }
         isDate=false;
     }
@@ -239,6 +252,20 @@
         Share.Melody = Melody;
         [Feeds addObject:Share];
         isShare = false;
+        isFeed=false;
+    }
+    
+    if ([elementName isEqualToString:@"Follower"]) {
+            Follow.Follower = User1;
+    }
+    
+    if ([elementName isEqualToString:@"Followed"]) {
+        Follow.Followed=User1;
+    }
+    
+    if ([elementName isEqualToString:@"Follow"]) {
+        [Feeds addObject:Follow];
+        isFollow=false;
         isFeed=false;
     }
     
@@ -323,9 +350,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XYZFeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
+    XYZFeedCell *cell;
     XYZFeed* DemoFeed;
     DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
+    
+    if ([DemoFeed isKindOfClass:[XYZComment class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
+    }
+    else if ([DemoFeed isKindOfClass:[XYZShare class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ShareCell" forIndexPath:indexPath];
+    }
+    else if ([DemoFeed isKindOfClass:[XYZApplause class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ApplauseCell" forIndexPath:indexPath];
+    }
+    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CreateCell" forIndexPath:indexPath];
+    }
+    else if ([DemoFeed isKindOfClass:[XYZFollow class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"FollowCell" forIndexPath:indexPath];
+    }
     [DemoFeed fillCell:cell];
     
     return cell;
@@ -348,6 +391,28 @@
      [tracks replaceObjectAtIndex:indexPath.row withObject:tempTrack];
      [tableView deselectRowAtIndexPath:indexPath animated:YES];
      */
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XYZFeed* DemoFeed;
+    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
+    if ([DemoFeed isKindOfClass:[XYZComment class]]) {
+        return 78;
+    }
+    else if ([DemoFeed isKindOfClass:[XYZShare class]]){
+        return 85;
+    }
+    else if ([DemoFeed isKindOfClass:[XYZApplause class]]){
+        return 66;
+    }
+    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
+        return 85;
+    }
+    else if ([DemoFeed isKindOfClass:[XYZFollow class]]){
+        return 85;
+    }
+    return 102;
 }
 
 

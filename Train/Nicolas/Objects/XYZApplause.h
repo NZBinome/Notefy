@@ -9,11 +9,13 @@
 #import "XYZFeed.h"
 #import "XYZUser.h"
 #import "XYZMelody.h"
+#import "../Controllers/Object Controllers/XYZApplauseCell.h"
+
 
 @interface XYZApplause : XYZFeed
 @property NSString* Date;
 @property NSString* ServerLocation;
 @property XYZUser* User;
 @property XYZMelody* Melody;
--(void)fillCell:(XYZFeedCell*)cell;
+-(void)fillCell:(XYZApplauseCell*)cell;
 @end

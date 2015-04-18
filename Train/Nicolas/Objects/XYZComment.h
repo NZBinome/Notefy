@@ -9,6 +9,8 @@
 #import "XYZFeed.h"
 #import "XYZUser.h"
 #import "XYZMelody.h"
+#import "../Controllers/Object Controllers/XYZCommentCell.h"
+
 
 @interface XYZComment : XYZFeed
 @property XYZUser* User;
@@ -17,5 +19,5 @@
 @property int Id;
 @property NSString* Date;
 @property NSString* ServerLocation;
--(void)fillCell:(XYZFeedCell *)cell;
+-(void)fillCell:(XYZCommentCell *)cell;
 @end

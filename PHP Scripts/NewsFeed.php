@@ -4,11 +4,15 @@ include 'User.php';
 include 'Melody.php';
 include 'Bridge.php';
 include 'Toolkit.php';
-include 'Feed.php';
 include 'Share.php';
 include 'Follows.php';
 include 'Comment.php';
 include 'Applause.php';
+include 'ApplauseFeed.php';
+include 'CommentFeed.php';
+include 'ShareFeed.php';
+include 'CreateFeed.php';
+include 'FollowFeed.php';
 
 
 $UserId = $_GET['UserId'];
@@ -30,7 +34,7 @@ while ($i<count($Followed))
 	$Melodies = $Toolkit1->getMelodiesOfUser($Users[$i]->getId());
 	while ($j <count($Melodies)) 
 	{
-		$Feeds[$k] = new Feed($Users[$i]->getId(),$Melodies[$j]->getId(),"Create",$Melodies[$j]->getDate());
+		$Feeds[$k] = new CreateFeed($Users[$i]->getId(),$Melodies[$j]->getId(),"Create",$Melodies[$j]->getDate());
 		$Dates[$k] = $Melodies[$j]->getDate();
 		$j =$j+1;
 		$k=$k+1;
@@ -42,7 +46,7 @@ while ($i<count($Followed))
 	while ($j <count($Shares)) 
 	{
 		$Melody = new Melody($Shares[$j]->getMelody());
-		$Feeds[$k] = new Feed($Users[$i]->getId(),$Melody->getId(),"Share",$Shares[$j]->getDate());
+		$Feeds[$k] = new ShareFeed($Users[$i]->getId(),$Melody->getId(),"Share",$Shares[$j]->getDate());
 		$Dates[$k] = $Shares[$j]->getDate();
 		$j =$j+1;
 		$k=$k+1;
@@ -54,7 +58,7 @@ while ($i<count($Followed))
 	while ($j <count($Comments)) 
 	{
 		$Melody = new Melody($Comments[$j]->getMelody());
-		$Feeds[$k] = new Feed($Users[$i]->getId(),$Melody->getId(),"Comment",$Comments[$j]->getDate());
+		$Feeds[$k] = new CommentFeed($Users[$i]->getId(),$Melody->getId(),"Comment",$Comments[$j]->getDate(),$Comments[$j]->getScript());
 		$Dates[$k] = $Comments[$j]->getDate();
 		$j =$j+1;
 		$k=$k+1;
@@ -62,20 +66,34 @@ while ($i<count($Followed))
 
 
 	$j = 0;
-	$Applaue = $Toolkit1->getApplauseofUser($Users[$i]->getId());
-	while ($j <count($Applaue)) 
+	$Applause = $Toolkit1->getApplauseofUser($Users[$i]->getId());
+
+	while ($j <count($Applause)) 
 	{
-		$Melody = new Melody($Applaue[$j]->getMelody());
-		$Feeds[$k] = new Feed($Users[$i]->getId(),$Melody->getId(),"Applause",$Applaue[$j]->getDate());
-		$Dates[$k] = $Applaue[$j]->getDate();
+		$Melody = new Melody($Applause[$j]->getMelody());
+		$Feeds[$k] = new ApplauseFeed($Users[$i]->getId(),$Melody->getId(),"Applause",$Applause[$j]->getDate());
+		$Dates[$k] = $Applause[$j]->getDate();
 		$j =$j+1;
 		$k=$k+1;
 	}
 
 
+	$j = 0;
+	$Follows = $Toolkit1->getFollowed($Users[$i]->getId());
+
+	while ($j <count($Follows)) 
+	{
+		$FollowedUser = new User($Follows[$j]->getFollowed());
+		$Feeds[$k] = new FollowFeed($Users[$i]->getId(),$FollowedUser->getId(),"Follow",$Follows[$j]->getDate());
+		$Dates[$k] = $Follows[$j]->getDate();
+		$j =$j+1;
+		$k=$k+1;
+	}
 
 	$i = $i + 1;
 }
+
+
 
 array_multisort($Dates, $Feeds);
 

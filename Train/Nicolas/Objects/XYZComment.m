@@ -30,10 +30,11 @@
     return self;
 }
 
--(void)fillCell:(XYZFeedCell *)cell
+-(void)fillCell:(XYZCommentCell *)cell
 {
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
+    cell.Comment.text=Script;
     cell.Action.text=@"Comment";
     cell.Time.text=Date;
     

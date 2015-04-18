@@ -10,13 +10,13 @@
 #import "XYZMelody.h"
 #import "../XYZAppDelegate.h"
 #import "XYZFeed.h"
-#import "../Controllers/Object Controllers/XYZFeedCell.h"
+#import "../Controllers/Object Controllers/XYZCreateCell.h"
 
 @interface XYZCreate : XYZFeed
 @property NSString* Date;
 @property NSString* ServerLocation;
 @property XYZUser* User;
 @property XYZMelody* Melody;
--(void)fillCell:(XYZFeedCell*)cell;
+-(void)fillCell:(XYZCreateCell*)cell;
 
 @end

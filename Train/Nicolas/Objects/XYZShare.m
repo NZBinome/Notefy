@@ -28,7 +28,7 @@
     return self;
 }
 
--(void)fillCell:(XYZFeedCell *)cell
+-(void)fillCell:(XYZShareCell *)cell
 {
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];

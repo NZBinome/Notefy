@@ -30,7 +30,7 @@
 }
 
 
--(void)fillCell:(XYZFeedCell *)cell
+-(void)fillCell:(XYZApplauseCell *)cell
 {
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
