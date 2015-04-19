@@ -441,6 +441,11 @@ int Melody::scale()const
     return _scales[_scale];
 }
 
+int Melody::scaleN() const
+{
+    return _scale;
+}
+
 void Melody::deFix()
 {
     _scale=-1;
@@ -448,11 +453,6 @@ void Melody::deFix()
 
 void Melody::incScale()
 {
-    if(!_corrected)
-    {
-        correct();
-        _corrected=true;
-    }
     ++_scale;
     _scale=_scale%12;
 }

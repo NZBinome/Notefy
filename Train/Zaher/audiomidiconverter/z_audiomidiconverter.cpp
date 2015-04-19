@@ -8,6 +8,7 @@
 #include "../midi/note.h"
 #include "../signal/melody.h"
 #include "../audioread/wavread.h"
+#include "../libmel/melfile.h"
 #include "z_audiomidiconverter.h"
 #include <string.h>
 
@@ -78,7 +79,10 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     midiFile[n]=0;
 
     m.setScales();
-    m.writeToFile(midiFile);
+
+    MelFile mf;
+    mf.getFrom(m);
+    mf.create(midiFile);
 
     midiFile[n-3]='m';
     midiFile[n-2]='i';
@@ -128,14 +132,34 @@ void Z_audioMidiConverter::fix(char *filename, bool deFix)
     melfile[n-1]='l';
     melfile[n]=0;
 
-    Melody m(0,0);
-    m.readFromFile(melfile);
+    Melody m;
+    MelFile mf;
+    mf.manipulate(melfile);
+    mf.getInfo();
+    mf.getFreq();
+    mf.getScal();
+    mf.getCoqa();
+
+    mf.writeTo(m);
+
     if(deFix)
         m.deFix();
     else
-        m.incScale();
+    {
+        if(!mf.isCorrected())
+        {
+            m.decompose();
+            mf.set_dft_dnp_dnpqt(m.correct(),m.distPlace(),0,m.distNum());
+        }
+        else
+        {
+            m.incScale();
+            mf.choose_cs(m.scaleN());
+        }
+    }
+
     melToMid(m,filename);
-    m.writeToFile(melfile);
+    mf.flush();
 
     chooseInstrument(inst,filename);
 }

@@ -17,7 +17,7 @@ void create()
 {
     Z_audioMidiConverter amc;
     char mf[24];
-    if(!amc.convert("track1.aif",mf))
+    if(!amc.convert("petra.wav",mf))
     {
         printf("file not found!\n");
     }
@@ -28,7 +28,7 @@ void create()
 void read()
 {
     Z_audioMidiConverter amc;
-    amc.fix("track1.mid");
+    amc.fix("petra.mid");
 }
 
 void freqtabletest()
@@ -124,9 +124,7 @@ void melFilem()
     f.getCoqa();
 
     f.writeTo(m);
-    m.decompose();
     m.setScales();
-    f.set_dft_dnp_dnpqt(m.correct(),m.distPlace(),0,m.distNum());
     int scl[12];
     m.getScal(scl);
     f.set_scl(scl);
@@ -137,4 +135,3 @@ int main()
 {
     read();
 }
-

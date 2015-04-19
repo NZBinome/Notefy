@@ -63,6 +63,7 @@ public:
     double * correct();    //corrige les notes mal chante
 
     int scale()const;
+    int scaleN()const;
     int fs()const;
     int n()const;
     int l()const;
