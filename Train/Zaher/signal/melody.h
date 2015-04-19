@@ -36,6 +36,8 @@ class Melody
     void _log2F();
     void _exp2F();
     void gaussian(int n);
+    void calculDerive(int i, double &d);
+
 
     Melody(Melody& o);
     Melody& operator =(Melody& o);
@@ -57,7 +59,8 @@ public:
     void set_fs(int fs);
     void incScale();
     void deFix();
-    void correct();    //corrige les notes mal chante
+    void decompose();  //remplir _dp
+    double * correct();    //corrige les notes mal chante
 
     int scale()const;
     int fs()const;

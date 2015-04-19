@@ -21,6 +21,7 @@ Melody::Melody(int n, int fs)
     _fs=fs;
     _n=n;
     _gs=0;
+    _tfp=0;
     _f=0;
     _p=0;
     _dp=0;
@@ -203,14 +204,44 @@ void Melody::normalize()
 {
 }
 
-void Melody::correct()
+void Melody::calculDerive(int i,double &d)
+{
+    double nder=_p[i+1]-_p[i];
+    if(nder>d&&nder>0&&d<=0)
+    {
+        _dp[_di++]=i+1;
+    }
+    d=nder;
+}
+
+void Melody::decompose()
+{
+    if(_dp!=0)
+        return;
+    _dp=new int[_n];
+    double derive=0.0;
+    for(int i=0;i<_n-1;++i)
+    {
+        calculDerive(i,derive);
+    }
+
+    //ce bloc est meme que celui a la fin de filtreBilateral
+    _dp[_di++]=_n-1;
+    int *dp=new int[_di+1];
+    memcpy(dp,_dp,_di*sizeof(int));
+    delete [] _dp;
+    _dp=dp;
+    _dp[_di]=1;
+}
+
+double *Melody::correct()
 {
     int it=0;
     double avg=0;
     double sum=0;
 
-    double *mFreq=new double[_di];
-    memset(mFreq,0,_di*sizeof(double));
+    double *mFreq=new double[_di+1];
+    memset(mFreq,0,(_di+1)*sizeof(double));
 
     for(int i=0;i<_n;++i)
     {
@@ -237,7 +268,7 @@ void Melody::correct()
             _f[i]=mFreq[it];
     }
 
-    delete []mFreq;
+    return mFreq;
 }
 
 void Melody::filtreBilateral(int gs)
@@ -265,12 +296,7 @@ void Melody::filtreBilateral(int gs)
 
         if(i<_i-1)
         {
-            double nder=_p[i+1]-_p[i];
-            if(nder>derive&&nder>0&&derive<=0)
-            {
-                _dp[_di++]=i+1;
-            }
-            derive=nder;
+            calculDerive(i,derive);
         }
         _dp[_di]=_i-1;
 
@@ -315,12 +341,15 @@ void Melody::filtreBilateral(int gs)
         _f[i]=f[i];
     _exp2F();
 
+    //ce bloc est mem que celui de decompose
     ++_di;
     int *dp=new int[_di+1];
     memcpy(dp,_dp,_di*sizeof(int));
     delete [] _dp;
     _dp=dp;
     _dp[_di]=1;
+
+    //ici on calcule directement les limites des note
 }
 
 

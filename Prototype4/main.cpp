@@ -28,7 +28,7 @@ void create()
 void read()
 {
     Z_audioMidiConverter amc;
-    amc.fix("track2.mid");
+    amc.fix("track1.mid");
 }
 
 void freqtabletest()
@@ -82,7 +82,7 @@ void melFiled()
     m.set_l(s.l());
     m.filtreBilateral(4);
 
-    m.setScales();
+    //m.setScales();
 
     MelFile f;
 
@@ -91,7 +91,7 @@ void melFiled()
     f.close();
 }
 
-void melfiledw()
+void melFiledw()
 {
     MelFile f;
 
@@ -100,17 +100,41 @@ void melfiledw()
     f.getInfo();
     f.getFreq();
     f.getScal();
+    f.getCoqa();
 
     Melody m;
 
     f.writeTo(m);
 
     Z_audioMidiConverter amc;
-    amc.melToMid(m,"hash.mid");
+    amc.melToMid(m,"hash1.mid");
+}
+
+void melFilem()
+{
+    MelFile f;
+
+    f.manipulate("hash.mel");
+
+    Melody m;
+
+    f.getInfo();
+    f.getFreq();
+    f.getScal();
+    f.getCoqa();
+
+    f.writeTo(m);
+    m.decompose();
+    m.setScales();
+    f.set_dft_dnp_dnpqt(m.correct(),m.distPlace(),0,m.distNum());
+    int scl[12];
+    m.getScal(scl);
+    f.set_scl(scl);
+    f.flush();
 }
 
 int main()
 {
-    melfiledw();
+    read();
 }
 

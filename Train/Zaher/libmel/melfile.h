@@ -20,14 +20,29 @@ class MelFile
     bool _cr;   //if melodie corrected
     bool _qt;   //if melodie quantized
 
+    short _flags; //to track modification when manipulating
+    int _endof;
+    int _fsize;
+
+    //flags
+    static const short SCCR=0x0001; //scale set
+    static const short SCCH=0x0002; //scale changed
+    static const short DECO=0x0004; //melody decomposed
+    static const short CORR=0x0008; //melody corrected
+    static const short QANT=0x0010; //melody quantized
+    static const short SICH=0x0020; //file size changed
+    //eoflags
+
+    //IDs
     static const int MEL=0x204c454d;
     static const int INFO=0x4f464e49;
     static const int FREQ=0x51455246;
     static const int SCAL=0x4c414353;
     static const int COQA=0x41514f43;
+    //eoIDs
 
     int getToChunk(const int cid);
-    bool verifyChunk(const int cid, int pos);
+    bool verifyChunk(const int cid, int pos, int &size);
 
 
     //simplyfi
@@ -45,6 +60,7 @@ class MelFile
     int createFreq();
     int createScal();
     int createCoqa();
+    void addQuantized();
     void writeSize(int size);
 
     //end of functions used in melFile creation
@@ -77,6 +93,8 @@ public:
 
 
     bool manipulate(char *filename);
+
+    void flush();   //write in file all that changed
 
 
     void close();

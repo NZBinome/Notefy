@@ -15,11 +15,15 @@ MelFile::MelFile()
     _cs=-2;
     _dn=0;
     _cr=0;
+    _dc=false;
     _cr=false;
     _qt=false;
+    _flags=0;
+    _endof=0;
+    _fsize=0;
 }
 
-bool MelFile::verifyChunk(const int cid, int pos)
+bool MelFile::verifyChunk(const int cid, int pos, int &size)
 {
     if(!_file.is_open())
         return false;
@@ -27,7 +31,10 @@ bool MelFile::verifyChunk(const int cid, int pos)
     _file.seekg(pos,ios::beg);
     _file.read((char*)&fcid,sizeof(int));
     if(fcid==cid)
+    {
+        _file.read((char*)&size,sizeof(int));
         return true;
+    }
     return false;
 }
 
@@ -38,10 +45,8 @@ int MelFile::getToChunk(const int cid)
     int size=0;
     int fcid;
     _file.seekg(8,ios::beg);
-    int t;
     do
     {
-        t=_file.tellg();
         _file.seekg(size,ios::cur);
         _file.read((char*)&fcid,sizeof(int));
         _file.read((char*)&size,sizeof(int));
@@ -61,7 +66,7 @@ bool MelFile::read(char *filename)
     if(!_file.is_open())
         return false;
 
-    if(!verifyChunk(MEL,0))
+    if(!verifyChunk(MEL,0,_fsize))
         return false;
 
     return true;
@@ -80,7 +85,6 @@ void MelFile::getInfo()
 void MelFile::getFreq()
 {
     int size=getToChunk(FREQ);
-    int t;
     if(size)
     {
          myDelete(_tfp,_ns+_ns);
@@ -91,8 +95,6 @@ void MelFile::getFreq()
             _tfp[_ns+_ns]=1.0;
             _file.read((char*)_tfp,(_ns+_ns)*sizeof(double));
         }
-        t=_file.tellg();
-        t=0;
     }
 }
 
@@ -252,6 +254,11 @@ int MelFile::createCoqa()
 
 }
 
+void MelFile::addQuantized()
+{
+    _file.write((char*)_dnpqt,_dn*sizeof(int));
+}
+
 void MelFile::writeSize(int size)
 {
     _file.seekg(4,ios::beg);
@@ -303,21 +310,21 @@ void MelFile::set_dft_dnp_dnpqt(double *dft, int *dnp, int *dnpqt, int dn)
     _dn=dn;
     if(dnp!=0)
     {
+        _flags!=DECO;
         _dc=true;
         _dnp=dnp;
         ++_dnp[_dn];
     }
     if(dft!=0)
     {
+        _flags|=CORR;
         _cr=true;
         _dft=dft;
         ++_dft[_dn];
     }
     if(dnpqt!=0)
-    {
-        _qt=true;
-        _dnpqt=dnpqt;
-        ++_dnpqt[_dn];
+    {      
+        set_dnpqt(dnpqt);
     }
 }
 
@@ -325,6 +332,7 @@ void MelFile::set_dnpqt(int *dnpqt)
 {
     if(_cr&&!_qt)
     {
+        _flags|=QANT;
         _qt=true;
         _dnpqt=dnpqt;
         ++_dnpqt[_dn];
@@ -333,12 +341,16 @@ void MelFile::set_dnpqt(int *dnpqt)
 
 void MelFile::set_scl(int scl[])
 {
-    _cs=-1;
+    choose_cs(-1);
     memcpy(_scl,scl,12*sizeof(int));
 }
 
 void MelFile::choose_cs(int cs)
 {
+    if(_cs==-2)
+        _flags|=SCCR;
+    else
+        _flags|=SCCH;
     _cs=cs;
 }
 
@@ -346,13 +358,76 @@ bool MelFile::manipulate(char *filename)
 {
     if(_file.is_open())
         return false;
-    read(filename);
     _file.open(filename,ios::binary|ios::out|ios::in);
     if(!_file.is_open())
         return false;
+    if(!verifyChunk(MEL,0,_fsize))
+        return false;
+
+    _file.seekg(0,ios::end);
+    _endof=_file.tellg();
+    _flags=0;
     return true;
 }
 
+void MelFile::flush()
+{
+    if(!_file.is_open())
+        return ;
+    int t;
+    int s;
+    unsigned char *buff;
+    if(_flags&SCCR)
+    {
+        printf("sc_created\n");
+        _flags|=SICH;
+        s=getToChunk(SCAL);
+        t=_file.tellg();
+        _file.seekg(s,ios::cur);
+        buff=new unsigned char[_endof-t-s];
+        _file.read((char*)buff,_endof-t-s);
+        _file.seekp(t-8,ios::beg);
+        createScal();
+        _file.write((char*)buff,_endof-t-s);
+        delete [] buff;
+    }
+    if(_flags&SCCH)
+    {
+        printf("sc_changed\n");
+        s=getToChunk(SCAL);
+        _file.seekg(-8,ios::cur);
+        createScal();
+    }
+    if((_flags&CORR)||(_flags&DECO))
+    {
+        printf("corrected\n");
+        _flags|=SICH;
+        s=getToChunk(COQA);
+        t=_file.tellg();
+        _file.seekg(s,ios::cur);
+        buff=new unsigned char[_endof-t-s];
+        _file.read((char*)buff,_endof-t-s);
+        _file.seekp(t-8,ios::beg);
+        createCoqa();
+        if(_flags&QANT)
+        {
+            printf("quantized\n");
+            addQuantized();
+        }
+        _file.write((char*)buff,_endof-t-s);
+        delete [] buff;
+
+    }
+    if(_flags&SICH)
+    {
+        int s=0;
+        s+=getToChunk(FREQ);
+        s+=getToChunk(SCAL);
+        s+=getToChunk(INFO);
+        s+=getToChunk(COQA);
+        writeSize(s);
+    }
+}
 
 void MelFile::close()
 {
@@ -436,8 +511,10 @@ void MelFile::myDelete(double *&p, int size)
     if(p!=0)
     {
         if(--p[size]==0.0)
+        {
             delete [] p;
-        p=0;
+            p=0;
+        }
     }
 }
 void MelFile::myDelete(int *&p, int size)
@@ -445,8 +522,10 @@ void MelFile::myDelete(int *&p, int size)
     if(p!=0)
     {
         if(--p[size]==0)
+        {
             delete [] p;
-        p=0;
+            p=0;
+        }
     }
 }
 
@@ -466,9 +545,37 @@ void MelFile::writeTo(Melody &m)
 {
     m.set_l(_lt);
     m.set_fs(_fs);
-    if(_cr||_qt)
+    if(_cr)
     {
         //something about the melody
+        if(_qt)
+        {
+            m.set_dp(_dnpqt,_dn);
+        }
+        else
+        {
+            m.set_dp(_dnp,_dn);
+        }
+
+        double *tfp=new double[_ns+_ns+1];
+        tfp[_ns+_ns]=0.0;
+        int it=0;
+
+        for(int i=0;i<_ns;++i)
+        {
+            if(i==_dnp[it+1])
+                ++it;
+            tfp[i]=_tfp[i];
+            if(tfp[i]!=1.0)
+                tfp[i]=_dft[it];
+        }
+        for(int i=_ns;i<_ns+_ns;++i)
+        {
+            tfp[i]=_tfp[i];
+        }
+
+        m.set_tfp(tfp,_ns);
+
     }
     else
     {
@@ -489,8 +596,8 @@ MelFile::~MelFile()
     }
     if(_dft!=0)
     {
-        if(--_tfp[_dn]==0.0)
-            delete [] _tfp;
+        if(--_dft[_dn]==0.0)
+            delete [] _dft;
     }
     if(_dnp!=0)
     {
