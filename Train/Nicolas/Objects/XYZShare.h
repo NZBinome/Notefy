@@ -17,6 +17,7 @@
 @property NSString* ServerLocation;
 @property XYZUser* User;
 @property XYZMelody* Melody;
+@property XYZUser* Sharer;
 -(void)fillCell:(XYZShareCell*)cell;
 
 @end

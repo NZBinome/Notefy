@@ -467,8 +467,6 @@
 
 - (IBAction)share:(id)sender
 {
-    NSLog(@"hahaha");
-    
     NSString* path;
     path=[appdel.path stringByAppendingString:appdel.currentdirectory];
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
@@ -484,9 +482,7 @@
 
 -(void)insertMelody
 {
-    NSLog(@"kdkdkdk");
     NSError *error;
-    NSLog(@"%@",ServerLocation);
     int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
     NSString *path=[ServerLocation stringByAppendingString:@"InsertMelody.php?UserId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
@@ -494,7 +490,7 @@
     path = [path stringByAppendingString:inputname.text];
     NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
-    NSLog(@"%@",content);
+   // NSLog(@"%@",content);
 }
 
 -(void)upload:(NSString*)Filename
@@ -515,8 +511,19 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     // file
-    NSData* Data = [[NSData alloc] initWithContentsOfFile:@"Users/nicolasjbeyli/Desktop/Notefy/Train/audio_files/Saved/test4/track1.aif"];
-    
+    NSString* path;
+    if ([selectedfile isEqualToString:@""])
+    {
+        path = [appdel.path stringByAppendingString:@"/Default/"];
+    }
+    else
+    {
+        path = [[appdel.path stringByAppendingString:@"/"] stringByAppendingString:selectedfile];
+        path = [path stringByAppendingString:@"/"];
+    }
+    path = [path stringByAppendingString:Filename];
+        NSData* Data = [[NSData alloc] initWithContentsOfFile:path];
+
     
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"Content-Disposition: form-data; name= \"UserId\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -541,7 +548,7 @@
     [request setHTTPBody:body];
     //return and test
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    //NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
   //  NSLog(returnString);
 }
      

@@ -46,7 +46,9 @@
         fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
     }
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
-    
+    cell.MelodyName.tag = Melody.Id;
+    cell.UserName.tag = User.Id;
+
 }
 
 

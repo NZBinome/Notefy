@@ -19,7 +19,6 @@
 @property BOOL isTitle;
 @property BOOL isPicture_Link;
 @property NSMutableArray* Feeds;
-@property XYZFeed* Feed;
 @property XYZCreate* Create;
 @property XYZShare* Share;
 @property NSString* ServerLocation;
@@ -36,6 +35,9 @@
 @property BOOL isApplause;
 @property BOOL isFollow;
 @property XYZFollow* Follow;
+@property (weak, nonatomic) IBOutlet UIButton *MyProfile;
+@property int UserId;
+@property int MelodyId;
 
 @end
 
@@ -51,7 +53,6 @@
 @synthesize isTitle;
 @synthesize isUser;
 @synthesize Feeds;
-@synthesize Feed;
 @synthesize ServerLocation;
 @synthesize Share;
 @synthesize Create;
@@ -67,6 +68,9 @@
 @synthesize isApplause;
 @synthesize isFollow;
 @synthesize Follow;
+@synthesize MyProfile;
+@synthesize UserId;
+@synthesize MelodyId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,7 +136,6 @@
     
     if ([elementName isEqualToString:@"Share"])
     {
-        
         Share = [[XYZShare alloc]init];
         isShare = true;
         isFeed=true;
@@ -248,7 +251,6 @@
     }
     if ([elementName isEqualToString:@"Share"])
     {
-        Share.User = User1;
         Share.Melody = Melody;
         [Feeds addObject:Share];
         isShare = false;
@@ -261,6 +263,14 @@
     
     if ([elementName isEqualToString:@"Followed"]) {
         Follow.Followed=User1;
+    }
+    
+    if ([elementName isEqualToString:@"Sharer"]) {
+        Share.Sharer = User1;
+    }
+    
+    if ([elementName isEqualToString:@"Original"]) {
+        Share.User = User1;
     }
     
     if ([elementName isEqualToString:@"Follow"]) {
@@ -299,7 +309,8 @@
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     ServerLocation=appdel.ServerLocation;
     int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
-
+    MyProfile.tag = AccountId;
+    
     FeedTable.dataSource = self;
     FeedTable.delegate = self;
     Feeds = [[NSMutableArray alloc]init];
@@ -333,7 +344,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)melodyPressed:(UIControl*)sender
+{
+    //NSLog(@"button tag : %d",sender.tag);
+    MelodyId = sender.tag;
+    [self performSegueWithIdentifier:@"MelodyPressed" sender:self];
+    
+}
 
+-(IBAction)userPressed:(UIControl*)sender
+{
+    UserId = sender.tag;
+    [self performSegueWithIdentifier:@"Profile" sender:self];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -401,7 +424,7 @@
         return 78;
     }
     else if ([DemoFeed isKindOfClass:[XYZShare class]]){
-        return 85;
+        return 111;
     }
     else if ([DemoFeed isKindOfClass:[XYZApplause class]]){
         return 66;
@@ -423,13 +446,33 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
  
-    if ([segue.identifier isEqualToString:@"MyProfile"])
+    if ([segue.identifier isEqualToString:@"Profile"])
     {
-        int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
-        [segue.destinationViewController setId:AccountId];
+        [segue.destinationViewController setId:UserId];
     }
+    if ([segue.identifier isEqualToString:@"MelodyPressed"]) {
+        [segue.destinationViewController initializeMelodyId:MelodyId];
+    }
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+}
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([identifier isEqualToString:@"Profile"])
+    {
+        if (UserId == 0) {
+            return NO;
+        }
+    }
+    
+    if ([identifier isEqualToString:@"MelodyPressed"]) {
+        if (MelodyId == 0) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 
