@@ -1,0 +1,28 @@
+//readind Plugin
+
+inClass: MrsWatson
+{
+	result   = buildPluginChain(pluginChain, programOptionsGetString(programOptions, OPTION_PLUGIN), pluginSearchRoot)
+	//ReturnCode            //PluginChain (*),  //PluginName (ex: Oud.dll)
+
+	builPluginChain:
+		pluginChainAddFromArgumentString(pluginChain, String, searchRoot)
+		//Construct pluginChain in pointer pluginChain
+
+	pluginChainAddFromArgumentString:
+	inClass: PluginChain
+	{
+		function: pluginChainAddFromArgumentString(PluginChain, CharString, CharString)
+		// Expect a semicolon-separated string of plugins with comma separators for preset names
+        // Example: plugin1,preset1name;plugin2,preset2name
+
+
+        //without preset
+        plugin = pluginFactory(pluginNameBuffer, searchpath)
+        inClass
+
+        pluginChainAppend(pluginChain, plugin, preset)
+
+	}
+
+}

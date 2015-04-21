@@ -26,7 +26,8 @@ SOURCES += main.cpp \
     ../Train/Zaher/audioread/aiffread.cpp \
     ../Train/Zaher/audioread/audioread.cpp \
     ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.cpp \
-    ../Train/Zaher/libmel/melfile.cpp
+    ../Train/Zaher/libmel/melfile.cpp \
+    ../Train/Zaher/signal/mixer.cpp
 
 
 HEADERS += \
@@ -48,6 +49,7 @@ HEADERS += \
     ../Train/Zaher/audioread/aiffread.h \
     ../Train/Zaher/audioread/audioread.h \
     ../Train/Zaher/audiomidiconverter/z_audiomidiconverter.h \
-    ../Train/Zaher/libmel/melfile.h
+    ../Train/Zaher/libmel/melfile.h \
+    ../Train/Zaher/signal/mixer.h
 
 
