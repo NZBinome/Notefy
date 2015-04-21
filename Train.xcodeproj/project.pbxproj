@@ -27,6 +27,7 @@
 		9B283BE91AC6FE7C00D38762 /* piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE21AC6FE7C00D38762 /* piano.png */; };
 		9B283BEA1AC6FE7C00D38762 /* trompette.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE31AC6FE7C00D38762 /* trompette.png */; };
 		9B283BEB1AC6FE7C00D38762 /* violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE41AC6FE7C00D38762 /* violin.png */; };
+		9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */; };
 		9B7F28A01A8F9F0900A154F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F289F1A8F9F0900A154F6 /* Foundation.framework */; };
 		9B7F28A21A8F9F0900A154F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A11A8F9F0900A154F6 /* CoreGraphics.framework */; };
 		9B7F28A41A8F9F0900A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
@@ -151,6 +152,8 @@
 		9B283BE21AC6FE7C00D38762 /* piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano.png; sourceTree = "<group>"; };
 		9B283BE31AC6FE7C00D38762 /* trompette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trompette.png; sourceTree = "<group>"; };
 		9B283BE41AC6FE7C00D38762 /* violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = violin.png; sourceTree = "<group>"; };
+		9B4945E01AE2ADF6009EE15A /* XYZMelodyListen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMelodyListen.h; sourceTree = "<group>"; };
+		9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMelodyListen.m; sourceTree = "<group>"; };
 		9B7F289C1A8F9F0900A154F6 /* Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Train.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F289F1A8F9F0900A154F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B7F28A11A8F9F0900A154F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -372,6 +375,8 @@
 				9BE2C7721AD8FE1700F2A0BF /* XYZMenu.m */,
 				9BF7C46A1ADABB60007BEEED /* XYZNewsFeed.h */,
 				9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */,
+				9B4945E01AE2ADF6009EE15A /* XYZMelodyListen.h */,
+				9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -810,6 +815,7 @@
 				9BF7C4871ADE5F9B007BEEED /* XYZShareCell.m in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
+				9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */,
 				9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */,
 				9BF7C4811ADE5F26007BEEED /* XYZCommentCell.m in Sources */,
 				9B283BD01AC6FE1900D38762 /* XYZButtons.mm in Sources */,

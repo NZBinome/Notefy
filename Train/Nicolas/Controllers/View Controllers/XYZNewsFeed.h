@@ -20,6 +20,7 @@
 #import "../Object Controllers/XYZShareCell.h"
 #import "../../Objects/XYZComment.h"
 #import "../../Objects/XYZApplause.h"
+#import "XYZMelodyListen.h"
 
 @interface XYZNewsFeed : UIViewController<UITableViewDelegate,UITableViewDataSource,NSXMLParserDelegate>
 

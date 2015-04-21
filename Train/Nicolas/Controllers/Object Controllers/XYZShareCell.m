@@ -14,6 +14,7 @@
 @synthesize ProfilePic;
 @synthesize UserName;
 @synthesize Action;
+@synthesize SharerName;
 
 - (id)initWithFrame:(CGRect)frame
 {

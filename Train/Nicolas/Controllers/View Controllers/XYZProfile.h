@@ -11,8 +11,11 @@
 #import "../../Objects/XYZMelody.h"
 #import "../Object Controllers/XYZMelodyCell.h"
 #import "../../XYZAppDelegate.h"
+#import "../../Objects/XYZCreate.h"
+#import "../../Objects/XYZShare.h"
+#import "XYZMelodyListen.h"
 
-@interface XYZProfile : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface XYZProfile : UIViewController<UITableViewDelegate,UITableViewDataSource,NSXMLParserDelegate>
 
 -(void)setId:(int)Id;
 

@@ -58,6 +58,8 @@
         fullpath = [ServerLocation stringByAppendingString:Followed.Picture_link];
     }
     cell.FollowedPP.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
+    cell.Followed.tag = Followed.Id;
+    cell.Follower.tag = Follower.Id;
     
 }
 

@@ -13,6 +13,7 @@
 @synthesize Melody;
 @synthesize Date;
 @synthesize ServerLocation;
+@synthesize Sharer;
 
 - (id)init
 {
@@ -30,6 +31,7 @@
 
 -(void)fillCell:(XYZShareCell *)cell
 {
+    [cell.SharerName setTitle:Sharer.Stage_Name forState:UIControlStateNormal];
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.Action.text=@"Share";
@@ -44,7 +46,9 @@
         fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
     }
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
-    
+    cell.MelodyName.tag = Melody.Id;
+    cell.UserName.tag = User.Id;
+    cell.SharerName.tag = Sharer.Id;
 }
 
 @end

@@ -34,7 +34,6 @@
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.Action.text=@"Creation";
     cell.Time.text=Date;
-    
     NSString* fullpath;
     if (!User.Picture_link) {
         fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
@@ -44,6 +43,9 @@
         fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
     }
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
+    
+    cell.MelodyName.tag = Melody.Id;
+    cell.UserName.tag = User.Id;
 
 }
 

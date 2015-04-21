@@ -27,7 +27,8 @@
 @property BOOL isTitle;
 @property BOOL isDate;
 @property XYZMelody* Melody;
-@property NSMutableArray* Melodies;
+@property XYZUser* User1;
+@property NSMutableArray* Feeds;
 @property (weak, nonatomic) IBOutlet UITableView *MelodyTable;
 @property int UserId;
 @property int Followed;
@@ -36,6 +37,13 @@
 @property BOOL isFollower;
 @property BOOL isFollowed;
 @property BOOL isFan;
+@property BOOL isId;
+@property XYZCreate* Create;
+@property XYZShare* Share;
+@property BOOL isFeed;
+@property BOOL isCreate;
+@property BOOL isShare;
+@property int ChosenMelody;
 
 @end
 
@@ -58,7 +66,7 @@
 @synthesize isTitle;
 @synthesize isDate;
 @synthesize Melody;
-@synthesize Melodies;
+@synthesize Feeds;
 @synthesize MelodyTable;
 @synthesize UserId;
 @synthesize Followed;
@@ -67,6 +75,14 @@
 @synthesize isFollowed;
 @synthesize isFollower;
 @synthesize isFan;
+@synthesize User1;
+@synthesize isId;
+@synthesize Create;
+@synthesize Share;
+@synthesize isFeed;
+@synthesize isCreate;
+@synthesize isShare;
+@synthesize ChosenMelody;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -90,21 +106,27 @@
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
     [parser setDelegate:self];
     [parser parse];
-    [self assign];
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
 {
+    if (isFeed)
+    {
+        isDate=[elementName isEqualToString:@"Date"];
+    }
     if (isUser)
     {
+        isId = [elementName isEqualToString:@"Id"];
         isFirst_Name=[elementName isEqualToString:@"First_Name"];
         isLast_Name=[elementName isEqualToString:@"Last_Name"];
         isStage_Name=[elementName isEqualToString:@"Stage_Name"];
         isPicture_Link=[elementName isEqualToString:@"Picture_Link"];
+
     }
     
     if (isMelody)
     {
+        isId = [elementName isEqualToString:@"Id"];
         isDate=[elementName isEqualToString:@"Date"];
         isFile_Link=[elementName isEqualToString:@"File_Link"];
         isTitle=[elementName isEqualToString:@"Title"];
@@ -117,6 +139,7 @@
 
     if ([elementName isEqualToString:@"User"])
     {
+        User1 = [[XYZUser alloc]init];
         isUser=true;
     }
     
@@ -130,6 +153,16 @@
         isMelody=true;
         Melody=[[XYZMelody alloc]init];
     }
+    if ([elementName isEqualToString:@"Share"]) {
+        Share = [[XYZShare alloc]init];
+        isFeed=true;
+        isShare=true;
+    }
+    if ([elementName isEqualToString:@"Create"]) {
+        Create = [[XYZCreate alloc]init];
+        isFeed=true;
+        isCreate=true;
+    }
 }
 
 -(void)setId:(int)Id
@@ -140,23 +173,36 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
     if (isStage_Name) {
-        User.Stage_Name=string;
+        User1.Stage_Name=string;
         isStage_Name=false;
     }
     if (isLast_Name) {
-        User.Last_Name=string;
+        User1.Last_Name=string;
         isLast_Name=false;
     }
     if (isFirst_Name) {
-        User.First_Name=string;
+        User1.First_Name=string;
         isFirst_Name=false;
     }
     if (isPicture_Link) {
-        User.Picture_link=string;
+        User1.Picture_link=string;
         isPicture_Link=false;
     }
     if (isDate) {
-        Melody.Date=string;
+        if (isMelody)
+        {
+            Melody.Date=string;
+        }
+        
+        else
+        {
+            if (isShare) {
+                Share.Date=string;
+            }
+            if (isCreate) {
+                Create.Date=string;
+            }
+        }
         isDate=false;
     }
     if (isFile_Link) {
@@ -177,6 +223,15 @@
         Follower=[string intValue];
         isFollower=false;
     }
+    
+    if (isId) {
+        if (isUser) {
+            User1.Id=[string intValue];
+        }
+        if (isMelody) {
+            Melody.Id=[string intValue];
+        }
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
@@ -186,15 +241,44 @@
     {
         isUser=false;
     }
+    
+    if ([elementName isEqualToString:@"Sharer"]) {
+        Share.Sharer = User1;
+    }
+    
+    if ([elementName isEqualToString:@"Original"]) {
+        Share.User = User1;
+    }
+    
     if ([elementName isEqualToString:@"Melody"])
     {
         isMelody=false;
-        [Melodies addObject:Melody];
+    }
+    if ([elementName isEqualToString:@"Create"]) {
+
+        Create.User=User1;
+        Create.Melody = Melody;
+        [Feeds addObject:Create];
+        isCreate=false;
+    }
+    if ([elementName isEqualToString:@"Share"]) {
+
+        Share.Melody = Melody;
+        [Feeds addObject:Share];
+        isShare=false;
+    }
+    if ([elementName isEqualToString:@"Header"]) {
+        User.Id = User1.Id;
+        User.Stage_Name = User1.Stage_Name;
+        User.Picture_link = User1.Picture_link;
+        User.Last_Name = User1.Last_Name;
+        User.First_Name = User1.First_Name;
     }
     if ([elementName isEqualToString:@"Follows"])
     {
         isFollow=false;
     }
+
 }
 
 -(void)assign
@@ -223,7 +307,7 @@
     MelodyTable.delegate = self;
     ServerLocation=appdel.ServerLocation;
     User=[[XYZUser alloc]init];
-    Melodies=[[NSMutableArray alloc]init];
+    Feeds=[[NSMutableArray alloc]init];
     User.Id=UserId;
     
     ///////////////////////////////////// TO BE REMOVED /////////////////
@@ -233,14 +317,10 @@
     /////////////////////////////////////
     
     
+    [self InitializeView];
     
-    NSString *path=[ServerLocation stringByAppendingString:@"GetUser.php?UserId="];
-    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", User.Id]];
-    path = [path stringByAppendingString:@"&Follower="];
-    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
     
-    [self getData:path];
-
+    
     if (AccountId == User.Id)
     {
         BecomeAFan.hidden=true;
@@ -254,6 +334,50 @@
             [BecomeAFan setTitle:@"Already a Fan" forState:UIControlStateNormal];
         }
     }
+}
+
+-(void)InitializeView
+{
+    NSString *path=[ServerLocation stringByAppendingString:@"GetUser.php?UserId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", User.Id]];
+    path = [path stringByAppendingString:@"&Follower="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    [self getData:path];
+    [self assign];
+    
+    path=[ServerLocation stringByAppendingString:@"GetMelodies.php?UserId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", User.Id]];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        // Perform async operation
+        // Call your method/function here
+        // Example:
+        // NSString *result = [anObject calculateSomething];
+        [self getData:path];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            // Update UI
+            // Example:
+            // self.myLabel.text = result;
+            [MelodyTable reloadData];
+            //[self assign];
+            
+        });
+    });
+}
+
+- (IBAction)melodyPressed:(UIControl*)sender
+{
+    ChosenMelody = sender.tag;
+    [self performSegueWithIdentifier:@"MelodyPressed" sender:self];
+    
+}
+
+-(IBAction)userPressed:(UIControl*)sender
+{
+    [Feeds removeAllObjects];
+    User.Id = sender.tag;
+    [self InitializeView];
 }
 
 
@@ -287,18 +411,31 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [Melodies count];
+    return [Feeds count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    XYZFeedCell *cell;
+    XYZFeed* DemoFeed;
+    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
+    if ([DemoFeed isKindOfClass:[XYZShare class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ShareCell" forIndexPath:indexPath];
+    }
+    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CreateCell" forIndexPath:indexPath];
+    }
+    /*
     XYZMelodyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Melody" forIndexPath:indexPath];
     XYZMelody* DemoMel;
     DemoMel=[[XYZMelody alloc]init];
     DemoMel= [Melodies objectAtIndex:indexPath.row];
     cell.MelodyName.text = DemoMel.Title;
     cell.MelodyDate.text=DemoMel.Date;
+     */
+    [DemoFeed fillCell:cell];
+
     return cell;
 }
 
@@ -321,6 +458,18 @@
      */
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XYZFeed* DemoFeed;
+    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
+    if ([DemoFeed isKindOfClass:[XYZShare class]]){
+        return 111;
+    }
+    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
+        return 85;
+    }
+    return 102;
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -329,7 +478,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -337,7 +486,21 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"MelodyPressed"]) {
+        [segue.destinationViewController initializeMelodyId:ChosenMelody];
+    }
 }
-*/
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([identifier isEqualToString:@"MelodyPressed"])
+    {
+        if (ChosenMelody == 0) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 
 @end
