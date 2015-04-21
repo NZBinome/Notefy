@@ -19,7 +19,15 @@ inClass: MrsWatson
 
         //without preset
         plugin = pluginFactory(pluginNameBuffer, searchpath)
-        inClass
+        inClass: Plugin
+        {
+        	function: pluginFactory(pluginName, pluginRoot)
+        	return newPluginVst2x(pluginName, pluginRoot)
+        	inClass: PluginVst2x
+        	{
+        		
+        	}
+        }
 
         pluginChainAppend(pluginChain, plugin, preset)
 

@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\BuildInfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\ProgramOption.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\AudioSettings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\PcmSampleBuffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\SampleBuffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\CharString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\Endian.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\File.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\LinkedList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\PlatformInfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io\RiffFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io\SampleSource.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io\SampleSourceAudiofile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io\SampleSourcePcm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io\SampleSourceSilence.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\io\SampleSourceWave.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\logging\ErrorReporter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\logging\EventLogger.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\logging\LogPrinter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\midi\MidiEvent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\midi\MidiSequence.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\midi\MidiSource.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\midi\MidiSourceFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\Plugin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginChain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginGain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginLimiter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginPassthru.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginPreset.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginPresetFxp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginPresetInternalProgram.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginSilence.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginVst2x.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginVst2xHostCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginVst2xId.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginVst2xLinux.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginVst2xMac.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plugin\PluginVst2xWindows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\time\AudioClock.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\time\TaskTimer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MrsWatson.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MrsWatsonOptions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main\MrsWatsonMain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\app\BuildInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\app\ProgramOption.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\app\ReturnCodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\AudioSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\PcmSampleBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\SampleBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\CharString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\Endian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\LinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\PlatformInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\io\RiffFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\io\SampleSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\io\SampleSourceAudiofile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\io\SampleSourcePcm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\io\SampleSourceSilence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\io\SampleSourceWave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\logging\ErrorReporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\logging\EventLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\logging\LogPrinter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\midi\MidiEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\midi\MidiSequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\midi\MidiSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\midi\MidiSourceFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\Plugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginChain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginGain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginLimiter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginPassthru.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginPreset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginPresetFxp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginPresetInternalProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginSilence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginVst2x.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginVst2xHostCallback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plugin\PluginVst2xId.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\time\AudioClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\time\TaskTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MrsWatson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\MrsWatsonOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

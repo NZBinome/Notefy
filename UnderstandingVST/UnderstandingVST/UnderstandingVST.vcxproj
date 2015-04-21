@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main\MrsWatsonMain.c" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="source\app\BuildInfo.c" />
+    <ClCompile Include="source\app\ProgramOption.c" />
+    <ClCompile Include="source\audio\AudioSettings.c" />
+    <ClCompile Include="source\audio\PcmSampleBuffer.c" />
+    <ClCompile Include="source\audio\SampleBuffer.c" />
+    <ClCompile Include="source\base\CharString.c" />
+    <ClCompile Include="source\base\Endian.c" />
+    <ClCompile Include="source\base\File.c" />
+    <ClCompile Include="source\base\LinkedList.c" />
+    <ClCompile Include="source\base\PlatformInfo.c" />
+    <ClCompile Include="source\io\RiffFile.c" />
+    <ClCompile Include="source\io\SampleSource.c" />
+    <ClCompile Include="source\io\SampleSourceAudiofile.c" />
+    <ClCompile Include="source\io\SampleSourcePcm.c" />
+    <ClCompile Include="source\io\SampleSourceSilence.c" />
+    <ClCompile Include="source\io\SampleSourceWave.c" />
+    <ClCompile Include="source\logging\ErrorReporter.c" />
+    <ClCompile Include="source\logging\EventLogger.c" />
+    <ClCompile Include="source\logging\LogPrinter.c" />
+    <ClCompile Include="source\midi\MidiEvent.c" />
+    <ClCompile Include="source\midi\MidiSequence.c" />
+    <ClCompile Include="source\midi\MidiSource.c" />
+    <ClCompile Include="source\midi\MidiSourceFile.c" />
+    <ClCompile Include="source\MrsWatson.c" />
+    <ClCompile Include="source\MrsWatsonOptions.c" />
+    <ClCompile Include="source\plugin\Plugin.c" />
+    <ClCompile Include="source\plugin\PluginChain.c" />
+    <ClCompile Include="source\plugin\PluginGain.c" />
+    <ClCompile Include="source\plugin\PluginLimiter.c" />
+    <ClCompile Include="source\plugin\PluginPassthru.c" />
+    <ClCompile Include="source\plugin\PluginPreset.c" />
+    <ClCompile Include="source\plugin\PluginPresetFxp.c" />
+    <ClCompile Include="source\plugin\PluginPresetInternalProgram.c" />
+    <ClCompile Include="source\plugin\PluginSilence.c" />
+    <ClCompile Include="source\plugin\PluginVst2x.cpp" />
+    <ClCompile Include="source\plugin\PluginVst2xHostCallback.cpp" />
+    <ClCompile Include="source\plugin\PluginVst2xId.c" />
+    <ClCompile Include="source\plugin\PluginVst2xLinux.cpp" />
+    <ClCompile Include="source\plugin\PluginVst2xMac.cpp" />
+    <ClCompile Include="source\plugin\PluginVst2xWindows.cpp" />
+    <ClCompile Include="source\time\AudioClock.c" />
+    <ClCompile Include="source\time\TaskTimer.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\app\BuildInfo.h" />
+    <ClInclude Include="source\app\ProgramOption.h" />
+    <ClInclude Include="source\app\ReturnCodes.h" />
+    <ClInclude Include="source\audio\AudioSettings.h" />
+    <ClInclude Include="source\audio\PcmSampleBuffer.h" />
+    <ClInclude Include="source\audio\SampleBuffer.h" />
+    <ClInclude Include="source\base\CharString.h" />
+    <ClInclude Include="source\base\Endian.h" />
+    <ClInclude Include="source\base\File.h" />
+    <ClInclude Include="source\base\LinkedList.h" />
+    <ClInclude Include="source\base\PlatformInfo.h" />
+    <ClInclude Include="source\base\Types.h" />
+    <ClInclude Include="source\io\RiffFile.h" />
+    <ClInclude Include="source\io\SampleSource.h" />
+    <ClInclude Include="source\io\SampleSourceAudiofile.h" />
+    <ClInclude Include="source\io\SampleSourcePcm.h" />
+    <ClInclude Include="source\io\SampleSourceSilence.h" />
+    <ClInclude Include="source\io\SampleSourceWave.h" />
+    <ClInclude Include="source\logging\ErrorReporter.h" />
+    <ClInclude Include="source\logging\EventLogger.h" />
+    <ClInclude Include="source\logging\LogPrinter.h" />
+    <ClInclude Include="source\midi\MidiEvent.h" />
+    <ClInclude Include="source\midi\MidiSequence.h" />
+    <ClInclude Include="source\midi\MidiSource.h" />
+    <ClInclude Include="source\midi\MidiSourceFile.h" />
+    <ClInclude Include="source\MrsWatson.h" />
+    <ClInclude Include="source\MrsWatsonOptions.h" />
+    <ClInclude Include="source\plugin\Plugin.h" />
+    <ClInclude Include="source\plugin\PluginChain.h" />
+    <ClInclude Include="source\plugin\PluginGain.h" />
+    <ClInclude Include="source\plugin\PluginLimiter.h" />
+    <ClInclude Include="source\plugin\PluginPassthru.h" />
+    <ClInclude Include="source\plugin\PluginPreset.h" />
+    <ClInclude Include="source\plugin\PluginPresetFxp.h" />
+    <ClInclude Include="source\plugin\PluginPresetInternalProgram.h" />
+    <ClInclude Include="source\plugin\PluginSilence.h" />
+    <ClInclude Include="source\plugin\PluginVst2x.h" />
+    <ClInclude Include="source\plugin\PluginVst2xHostCallback.h" />
+    <ClInclude Include="source\plugin\PluginVst2xId.h" />
+    <ClInclude Include="source\time\AudioClock.h" />
+    <ClInclude Include="source\time\TaskTimer.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D5D31948-DB65-41E4-8AEC-24DB5B7DDDC6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>UnderstandingVST</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\..\DebugVS</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
