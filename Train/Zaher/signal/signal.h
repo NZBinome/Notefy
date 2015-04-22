@@ -51,6 +51,13 @@ public:
     ba le nombre de byte pour un echantillon, inclu tous les channel
     nc nombre de channel*/
 
+    void set(double * signal, int fs, int l);
+    /*signal est le signal en double
+     * l la longueur du signal
+     */
+    unsigned char * rawData(int ba);
+
+
     void reset();
 
     double *signal();

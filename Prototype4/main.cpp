@@ -131,7 +131,15 @@ void melFilem()
     f.flush();
 }
 
+void mix()
+{
+    Z_audioMidiConverter amc;
+    char *a[]={"track1.aif","track2.aif","track3.aif"};
+
+    amc.mix(a,3,"mix.aif");
+}
+
 int main()
 {
-    read();
+    mix();
 }

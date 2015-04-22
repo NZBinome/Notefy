@@ -14,6 +14,7 @@ public:
     void chooseInstrument(unsigned char inst, char * filename);
     static unsigned short getInstrument(char * filename);
     void fix(char * filename, bool deFix=false);
+    void mix(char ** files, int numberOfFiles, char *destFile);
     ~Z_audioMidiConverter();
 };
 

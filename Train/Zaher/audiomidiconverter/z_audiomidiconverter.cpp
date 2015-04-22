@@ -5,13 +5,42 @@
 #include "../wavFormat/diviseur.h"
 #include "../signal/complex.h"
 #include "../signal/signal.h"
+#include "../signal/mixer.h"
 #include "../midi/note.h"
 #include "../signal/melody.h"
 #include "../audioread/wavread.h"
 #include "../libmel/melfile.h"
+#include "../audiowrite/aiffwrite.h"
 #include "z_audiomidiconverter.h"
 #include <string.h>
 
+
+enum FileType{
+    MID,
+    AIF,
+    WAV,
+    INV
+};
+
+inline FileType _z_amc_getFileTye(char *f)
+{
+    int n=strlen(f);
+    char end[4];
+    for(int i=0;i<4;++i)
+    {
+        end[i]=f[n+i-4];
+    }
+    if(end[0]=='.')
+    {
+        if(end[1]=='m'&&end[2]=='i'&&end[3]=='d')
+            return MID;
+        else if(end[1]=='a'&&end[2]=='i'&&end[3]=='f')
+            return AIF;
+        else if(end[1]=='w'&&end[3]=='a'&&end[3]=='v')
+            return WAV;
+    }
+    return INV;
+}
 
 Z_audioMidiConverter::Z_audioMidiConverter()
 {
@@ -39,13 +68,13 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     int n=strlen(audioFile);
     AudioRead *f;
 
-    if(audioFile[n-3]=='w'&&audioFile[n-2]=='a'&&audioFile[n-1]=='v')
+    if(_z_amc_getFileTye(audioFile)==WAV)
     {
         f=new Wavread();
         if(!f->open(audioFile))
             return 0;
     }
-    else if((audioFile[n-3]=='a'&&audioFile[n-2]=='i'&&audioFile[n-1]=='f'))
+    else if(_z_amc_getFileTye(audioFile)==AIF)
     {
         f=new AiffRead();
         if(!f->open(audioFile))
@@ -162,6 +191,52 @@ void Z_audioMidiConverter::fix(char *filename, bool deFix)
     mf.flush();
 
     chooseInstrument(inst,filename);
+}
+
+
+void Z_audioMidiConverter::mix(char **f, int n, char *df)
+{
+    AudioRead **af=new AudioRead*[n];
+    for(int i=0;i<n;++i)
+    {
+        switch(_z_amc_getFileTye(f[i]))
+        {
+            case AIF:
+                af[i]=new AiffRead();
+                break;
+            case WAV:
+                af[i]=new Wavread();
+                break;
+            case MID:
+                throw("not suported yet");
+            default:
+                throw("not supported files");
+        }
+    }
+    Signal *s=new Signal[n];
+    for(int i=0;i<n;++i)
+    {
+        af[i]->open(f[i]);
+        s[i].set(af[i]->buffer(),af[i]->fs(),af[i]->l(),af[i]->ba(),af[i]->nc());
+    }
+    Mixer m;
+    m.addSignals(s,n);
+    Signal *mix=m.mix();
+
+    AiffWrite aw;
+    int ba=2;
+    aw.set_l(mix->l()*ba);
+    aw.set_fs(mix->fs());
+    aw.set_ba(ba);
+    aw.set_buffer(mix->rawData(ba));
+
+    aw.write(df);
+    delete [] s;
+    for(int i=0;i<n;++i)
+    {
+        delete af[i];
+    }
+    delete [] af;
 }
 
 Z_audioMidiConverter::~Z_audioMidiConverter()

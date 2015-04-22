@@ -489,13 +489,13 @@ err1:
 		free(w);
 		goto err0;
 	}
-	hdr.hid = ARRANGE_BE32(AIFF_FORM);
+    hdr.hid = z_BigEndianI(AIFF_FORM);
 	w->len = 4;
-	hdr.len = ARRANGE_BE32(4);
+    hdr.len = z_BigEndianI(4);
 	if (flags & F_AIFC)
-		hdr.fid = ARRANGE_BE32(AIFF_AIFC);
+        hdr.fid = z_BigEndianI(AIFF_AIFC);
 	else
-		hdr.fid = ARRANGE_BE32(AIFF_AIFF);
+        hdr.fid = z_BigEndianI(AIFF_AIFF);
 
 	if (fwrite(&hdr, 1, 12, w->fd) < 12) {
 err2:
@@ -516,9 +516,9 @@ err2:
 		uint32_t vers;
 		ASSERT(sizeof(IFFChunk) == 8);
 
-		chk.id = ARRANGE_BE32(AIFF_FVER);
-		chk.len = ARRANGE_BE32(4);
-		vers = ARRANGE_BE32(AIFC_STD_DRAFT_082691);
+        chk.id = z_BigEndianI(AIFF_FVER);
+        chk.len = z_BigEndianI(4);
+        vers = z_BigEndianI(AIFC_STD_DRAFT_082691);
 
 		if (fwrite(&chk, 1, 8, w->fd) < 8 || 
 		    fwrite(&vers, 1, 4, w->fd) < 4) {
@@ -619,26 +619,27 @@ AIFF_SetAudioFormat(AIFF_Ref w, int channels, double sRate, int bitsPerSample)
 		 */
 		ckLen += 4;
 		if (w->flags & LPCM_LTE_ENDIAN)
-			enc = AUDIO_FORMAT_sowt;
+            enc = AUDIO_FORMAT_sowt;
 		else
-			enc = AUDIO_FORMAT_LPCM;
+            enc = AUDIO_FORMAT_LPCM;
 
 		encName = get_aifx_enc_name(enc);
 		ckLen += PASCALOutGetLength(encName);
 	}
 	
-	chk.id = ARRANGE_BE32(AIFF_COMM);
-	chk.len = ARRANGE_BE32(ckLen);
+    chk.id = z_BigEndianI(AIFF_COMM);
+    chk.len = z_BigEndianI(ckLen);
+
 
 	if (fwrite(&chk, 1, 8, w->fd) < 8) {
 		return -1;
 	}
 	/* Fill in the chunk */
 	c.numChannels = (uint16_t) channels;
-	c.numChannels = ARRANGE_BE16(c.numChannels);
+    c.numChannels = z_BigEndian16I(c.numChannels);
 	c.numSampleFrames = 0;
 	c.sampleSize = (uint16_t) bitsPerSample;
-	c.sampleSize = ARRANGE_BE16(c.sampleSize);
+    c.sampleSize = z_BigEndian16I(c.sampleSize);
 	ieee754_write_extended(sRate, buffer);
 
 	/*
@@ -659,6 +660,8 @@ AIFF_SetAudioFormat(AIFF_Ref w, int channels, double sRate, int bitsPerSample)
 	 * On AIFF-C, write the encoding + encstring
 	 * (encstring is a PASCAL string)
 	 */
+
+    enc=z_BigEndianI(enc);
 	if (w->flags & F_AIFC) {
 		if (fwrite(&enc, 1, 4, w->fd) != 4)
 			return -1;
@@ -697,8 +700,8 @@ AIFF_StartWritingSamples(AIFF_Ref w)
 	if (w->stat != 1)
 		return 0;
 
-	chk.id = ARRANGE_BE32(AIFF_SSND);
-	chk.len = ARRANGE_BE32(8);
+    chk.id = z_BigEndianI(AIFF_SSND);
+    chk.len = z_BigEndianI(8);
 
 	if (fwrite(&chk, 1, 8, w->fd) < 8) {
 		return -1;
@@ -903,12 +906,12 @@ AIFF_EndWritingSamples(AIFF_Ref w)
 	if (fread(&chk, 1, 8, w->fd) < 8) {
 		return -1;
 	}
-	if (chk.id != ARRANGE_BE32(AIFF_SSND)) {
+    if (chk.id != z_BigEndianI(AIFF_SSND)) {
 		return -1;
 	}
-	len = ARRANGE_BE32(chk.len);
+    len = z_BigEndianI(chk.len);
 	len += (uint32_t) (w->sampleBytes);
-	chk.len = ARRANGE_BE32(len);
+    chk.len = z_BigEndianI(len);
 
 	if (fseek(w->fd, of, SEEK_SET) < 0) {
 		return -1;
@@ -924,7 +927,7 @@ AIFF_EndWritingSamples(AIFF_Ref w)
 		return -1;
 	}
 	
-	if (chk.id != ARRANGE_BE32(AIFF_COMM)) {
+    if (chk.id != z_BigEndianI(AIFF_COMM)) {
 		return -1;
 	}
 	if (fread(&(c.numChannels), 1, 2, w->fd) < 2
@@ -933,14 +936,14 @@ AIFF_EndWritingSamples(AIFF_Ref w)
 		return -1;
 	}
 	/* Correct the data of the chunk */
-	c.numChannels = ARRANGE_BE16(c.numChannels);
-	c.sampleSize = ARRANGE_BE16(c.sampleSize);
+    c.numChannels = z_BigEndian16I(c.numChannels);
+    c.sampleSize = z_BigEndian16I(c.sampleSize);
 	segment = w->segmentSize;
 
 	c.numSampleFrames = ((uint32_t) (w->sampleBytes) / c.numChannels) / segment;
-	c.numChannels = ARRANGE_BE16(c.numChannels);
-	c.numSampleFrames = ARRANGE_BE32(c.numSampleFrames);
-	c.sampleSize = ARRANGE_BE16(c.sampleSize);
+    c.numChannels = z_BigEndian16I(c.numChannels);
+    c.numSampleFrames = z_BigEndianI(c.numSampleFrames);
+    c.sampleSize = z_BigEndian16I(c.sampleSize);
 
 	/* Write out */
 	of += 10;
@@ -1100,14 +1103,14 @@ AIFF_WriteClose(AIFF_Ref w)
 		free(w);
 		return -1;
 	}
-	if (hdr.hid != ARRANGE_BE32(AIFF_FORM)) {
+    if (hdr.hid != z_BigEndianI(AIFF_FORM)) {
 		fclose(w->fd);
 		free(w);
 		return -1;
 	}
 	/* Fix the 'length' field */
 	hdr.len = (uint32_t) (w->len);
-	hdr.len = ARRANGE_BE32(hdr.len);
+    hdr.len = z_BigEndianI(hdr.len);
 
 	if (fseek(w->fd, 0, SEEK_SET) < 0) {
 		fclose(w->fd);

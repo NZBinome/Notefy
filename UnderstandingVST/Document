@@ -25,11 +25,32 @@ inClass: MrsWatson
         	return newPluginVst2x(pluginName, pluginRoot)
         	inClass: PluginVst2x
         	{
-        		
+        		//Create a plugin, and setting parameters,
+        		//plugin Name mainly, and other functions
+
+        		//openPlugin=_openVst2xPlugin
+        		//processAudio=_processAudioVst2xPlugin
+        		//processMidiEvents=_processMidiEventsVst2xPlugin
+        		// extraData of type void * (PluginVst2xData) that contain the AEffect
+        		...
         	}
+
         }
 
         pluginChainAppend(pluginChain, plugin, preset)
+        openPlugin(plugin)
+        inClass: Plugin
+        {
+        	function: self->openPlugin(self) //self is plugin
+        	// openPlugin = _openVst2xPlugin
+        	inClass: PluginVst2x
+        	{
+        		// we declare, AEffect *pluginHandle;
+        		data->libraryHandle=getLibraryHandleForPlugin(plugin->pluginAbsolutePath)
+        		
+
+        	}
+        }
 
 	}
 

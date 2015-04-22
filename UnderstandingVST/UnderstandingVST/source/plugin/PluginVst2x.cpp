@@ -27,7 +27,7 @@
 
 // C++ includes
 #define VST_FORCE_DEPRECATED 0
-#include "aeffectx.h"
+#include "../../vst/pluginterfaces/vst2.x/aeffectx.h"
 #include "../plugin/PluginVst2xHostCallback.h"
 
 // C includes

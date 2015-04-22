@@ -42,6 +42,25 @@ Signal::~Signal()
 
 }
 
+void Signal::set(double *signal, int fs, int l)
+{
+    reset();
+    _l=l;
+     if(_s!=0)
+        delete [] _s;
+     _s=signal;
+     if(_filt!=0)
+         delete [] _filt;
+     _filt=0;
+     if(_f!=0)
+         delete [] _f;
+     _f=0;
+     if(_F!=0)
+         delete [] _F;
+     _F=0;
+     _fs=fs;
+}
+
 void Signal::set(unsigned char *vectOctet, int fs, int l, int ba, int nc)
 {
     reset();
@@ -117,14 +136,57 @@ void Signal::set(unsigned char *vectOctet, int fs, int l, int ba, int nc)
             if(d>=1.0)
                 d-=2.0; //condition necessaire si un echantillon n'est pas code sur 4 byte
             _s[i]+=d;
-            if(_s[i]>=1)
-                _s[i]-=2;
+//            if(_s[i]>=1)
+//                _s[i]-=2;
         }
         _s[i]/=nc;
     }
 
     delete [] a;
 }
+
+unsigned char * Signal::rawData(int ba)
+{
+    unsigned char * rd=new unsigned char[ba*_l];
+
+    int N;
+    switch (ba) {
+    case 1:
+        N=128;
+        break;
+    case 2:
+        N=32768;
+        break;
+    case 3:
+        N=8388608;
+        break;
+    case 4:
+        N=2147483648;
+        break;
+    default:
+        break;
+    }
+
+    for(int i=0;i<_l;++i)
+    {
+        double v=_s[i];
+        if(N!=2147483648)
+        {
+            if(v<0)
+                v+=2.0;
+        }
+
+        int d=v*N;
+
+        for(int b=0;b<ba;++b)
+        {
+            rd[i*ba+b]=d>>(8*b);
+        }
+    }
+    return rd;
+
+}
+
 
 void Signal::reset()
 {
