@@ -374,7 +374,7 @@
     [self startGraph];
     [self setupSampler:self.presetNumber];
     [self loadMIDIFile];
-    NSLog(@"starting music player");
+    //NSLog(@"starting music player");
     MusicPlayerStart(self.musicPlayer);
     return 1;
 }

@@ -8,6 +8,7 @@
 
 #import "XYZMelodyListen.h"
 
+@import AVFoundation;
 @interface XYZMelodyListen ()
 @property int MelodyId;
 @property NSString* ServerLocation;
@@ -30,7 +31,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *Time;
 @property (weak, nonatomic) IBOutlet UILabel *MelodyName;
 @property (weak, nonatomic) IBOutlet UIImageView *ProfilePicture;
-
+@property AVPlayer* Player;
+@property NSURL* URL;
 
 @end
 
@@ -56,6 +58,9 @@
 @synthesize MelodyName;
 @synthesize Time;
 @synthesize ProfilePicture;
+@synthesize URL;
+
+@synthesize Player;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -231,6 +236,39 @@
     });
 }
 
+- (IBAction)play:(id)sender {
+        [Player play];
+}
+
+- (IBAction)pause:(id)sender {
+    [Player pause];
+}
+
+
+-(void)startPlaybackForItemWithURL
+{
+    
+    // First create an AVPlayerItem
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:URL];
+    
+    // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+    
+    // Pass the AVPlayerItem to a new player
+    Player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+    
+    // Begin playback
+    [Player play];
+    
+}
+
+-(void)itemDidFinishPlaying:(NSNotification *) notification {
+    // Will be called when AVPlayer finishes playing playerItem
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:URL];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+    Player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+}
+
 - (void)viewDidLoad
 {
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
@@ -243,7 +281,13 @@
     [self InitializeView];
     
     UserName.tag = Creator.Id;
+    URL = [[NSURL alloc]init];
+    URL = [NSURL URLWithString:[ServerLocation stringByAppendingString:@"Melodies/1/HEllo/track1.aif"]];
+    [self startPlaybackForItemWithURL];
+    
 
+    //[self createStreamer];
+    //[streamer start];
     // Do any additional setup after loading the view.
 }
 

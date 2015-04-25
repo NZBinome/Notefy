@@ -10,10 +10,14 @@
 #import "../../XYZAppDelegate.h"
 #import "../../Objects/XYZMelody.h"
 #import "../../Objects/XYZUser.h"
+//#import "../../Audio Control/AudioStreamer.h"
 
 
 @interface XYZMelodyListen : UIViewController<NSXMLParserDelegate>
 
+//@property AudioStreamer *streamer;
+//@property NSTimer *progressUpdateTimer;
+    
 -(void)initializeMelodyId:(int)_MelodyId;
 
 @end
