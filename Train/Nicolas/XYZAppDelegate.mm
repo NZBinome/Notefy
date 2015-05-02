@@ -39,7 +39,15 @@
     //////temporary
     [[NSUserDefaults standardUserDefaults]  setInteger:1 forKey:@"AccountId"];
     ///////////
-    self.path=@"Users/nicolasjbeyli/Desktop/Notefy/Train/audio_files";
+
+    int isFirstTime;
+    isFirstTime=[[NSUserDefaults standardUserDefaults] integerForKey:@"isFirstTime"];
+
+    
+    
+    NSArray *writablePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [writablePaths lastObject];
+    self.path = [documentsPath stringByAppendingPathComponent:@"audio_files"];
     self.directory=@"/Saved";
     self.selectedfile=@"";
     self.selectedtrack=-1;
@@ -48,8 +56,30 @@
     self.ServerLocation=@"http://localhost:8888/";
     [self createInstruments];
     
+    if (isFirstTime != 1) {
+        [self FirstTime];
+    }
+    
+    
+   // NSLog(@"File: %@", fileInDocuments);
+    
+    
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+-(void)FirstTime
+{
+    [[NSUserDefaults standardUserDefaults]  setInteger:1 forKey:@"isFirstTime"];
+    NSFileManager *filemgr;
+    filemgr = [NSFileManager defaultManager];
+    [filemgr createDirectoryAtPath:[self.path stringByAppendingString:self.directory] withIntermediateDirectories:YES attributes:nil error:NULL];
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *bundlePath = [bundle bundlePath];
+    
+    NSString* beat = [bundlePath stringByAppendingPathComponent:@"beat.aif"];
+    NSError *error;
+    [filemgr moveItemAtURL:[NSURL fileURLWithPath:beat] toURL:[NSURL fileURLWithPath:[self.path stringByAppendingPathComponent:@"beat.aif"]] error:&error];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

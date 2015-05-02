@@ -14,7 +14,6 @@
 		9B283BD41AC6FE1900D38762 /* XYZTrackCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BBE1AC6FE1900D38762 /* XYZTrackCell.mm */; };
 		9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BC11AC6FE1900D38762 /* XYZ_Recording_View.mm */; };
 		9B283BD61AC6FE1900D38762 /* XYZInstrumentController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BC31AC6FE1900D38762 /* XYZInstrumentController.mm */; };
-		9B283BD71AC6FE1900D38762 /* XYZSaved_Files.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BC51AC6FE1900D38762 /* XYZSaved_Files.mm */; };
 		9B283BD81AC6FE1900D38762 /* XYZViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BC71AC6FE1900D38762 /* XYZViewController.mm */; };
 		9B283BD91AC6FE1900D38762 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BC81AC6FE1900D38762 /* main.m */; };
 		9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B283BCB1AC6FE1900D38762 /* XYZInstrument.mm */; };
@@ -27,6 +26,7 @@
 		9B283BE91AC6FE7C00D38762 /* piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE21AC6FE7C00D38762 /* piano.png */; };
 		9B283BEA1AC6FE7C00D38762 /* trompette.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE31AC6FE7C00D38762 /* trompette.png */; };
 		9B283BEB1AC6FE7C00D38762 /* violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE41AC6FE7C00D38762 /* violin.png */; };
+		9B44D8111AF4CFFB00C2CD45 /* beat.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9B44D8101AF4CFFB00C2CD45 /* beat.aif */; };
 		9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */; };
 		9B4945E61AE63CBF009EE15A /* melfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B4945E41AE63CBF009EE15A /* melfile.cpp */; };
 		9B7F28A01A8F9F0900A154F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F289F1A8F9F0900A154F6 /* Foundation.framework */; };
@@ -40,6 +40,10 @@
 		9B7F28C11A8F9F0A00A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
 		9B7F28C91A8F9F0A00A154F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B7F28C71A8F9F0A00A154F6 /* InfoPlist.strings */; };
 		9B7F28CB1A8F9F0A00A154F6 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */; };
+		9B9495241AEB83D200EA94AE /* mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495221AEB83D200EA94AE /* mixer.cpp */; };
+		9B94952A1AEB83E600EA94AE /* aiffwrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495261AEB83E600EA94AE /* aiffwrite.cpp */; };
+		9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495281AEB83E600EA94AE /* audiowrite.cpp */; };
+		9B94952E1AEB875100EA94AE /* XYZSavedMelodies.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9B94952D1AEB875100EA94AE /* XYZSavedMelodies.mm */; };
 		9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9DAC3D1ACD3A750006A951 /* util.cpp */; };
 		9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9DAC401ACD3A810006A951 /* wavread.cpp */; };
 		9BA54D291AB4327D00D83431 /* gs_instruments.dls in Resources */ = {isa = PBXBuildFile; fileRef = 9BA54D281AB4327D00D83431 /* gs_instruments.dls */; };
@@ -135,8 +139,6 @@
 		9B283BC11AC6FE1900D38762 /* XYZ_Recording_View.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XYZ_Recording_View.mm; sourceTree = "<group>"; };
 		9B283BC21AC6FE1900D38762 /* XYZInstrumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZInstrumentController.h; sourceTree = "<group>"; };
 		9B283BC31AC6FE1900D38762 /* XYZInstrumentController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XYZInstrumentController.mm; sourceTree = "<group>"; };
-		9B283BC41AC6FE1900D38762 /* XYZSaved_Files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSaved_Files.h; sourceTree = "<group>"; };
-		9B283BC51AC6FE1900D38762 /* XYZSaved_Files.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XYZSaved_Files.mm; sourceTree = "<group>"; };
 		9B283BC61AC6FE1900D38762 /* XYZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZViewController.h; sourceTree = "<group>"; };
 		9B283BC71AC6FE1900D38762 /* XYZViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XYZViewController.mm; sourceTree = "<group>"; };
 		9B283BC81AC6FE1900D38762 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Nicolas/main.m; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		9B283BE21AC6FE7C00D38762 /* piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano.png; sourceTree = "<group>"; };
 		9B283BE31AC6FE7C00D38762 /* trompette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trompette.png; sourceTree = "<group>"; };
 		9B283BE41AC6FE7C00D38762 /* violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = violin.png; sourceTree = "<group>"; };
+		9B44D8101AF4CFFB00C2CD45 /* beat.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = beat.aif; path = audio_files/beat.aif; sourceTree = "<group>"; };
 		9B4945E01AE2ADF6009EE15A /* XYZMelodyListen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMelodyListen.h; sourceTree = "<group>"; };
 		9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMelodyListen.m; sourceTree = "<group>"; };
 		9B4945E41AE63CBF009EE15A /* melfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = melfile.cpp; sourceTree = "<group>"; };
@@ -171,6 +174,14 @@
 		9B7F28C61A8F9F0A00A154F6 /* TrainTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrainTests-Info.plist"; sourceTree = "<group>"; };
 		9B7F28C81A8F9F0A00A154F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainTests.m; sourceTree = "<group>"; };
+		9B9495221AEB83D200EA94AE /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
+		9B9495231AEB83D200EA94AE /* mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mixer.h; sourceTree = "<group>"; };
+		9B9495261AEB83E600EA94AE /* aiffwrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffwrite.cpp; sourceTree = "<group>"; };
+		9B9495271AEB83E600EA94AE /* aiffwrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiffwrite.h; sourceTree = "<group>"; };
+		9B9495281AEB83E600EA94AE /* audiowrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiowrite.cpp; sourceTree = "<group>"; };
+		9B9495291AEB83E600EA94AE /* audiowrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audiowrite.h; sourceTree = "<group>"; };
+		9B94952C1AEB875100EA94AE /* XYZSavedMelodies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZSavedMelodies.h; sourceTree = "<group>"; };
+		9B94952D1AEB875100EA94AE /* XYZSavedMelodies.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XYZSavedMelodies.mm; sourceTree = "<group>"; };
 		9B9DAC3D1ACD3A750006A951 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		9B9DAC3E1ACD3A750006A951 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		9B9DAC401ACD3A810006A951 /* wavread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavread.cpp; sourceTree = "<group>"; };
@@ -368,8 +379,6 @@
 				9B283BC11AC6FE1900D38762 /* XYZ_Recording_View.mm */,
 				9B283BC21AC6FE1900D38762 /* XYZInstrumentController.h */,
 				9B283BC31AC6FE1900D38762 /* XYZInstrumentController.mm */,
-				9B283BC41AC6FE1900D38762 /* XYZSaved_Files.h */,
-				9B283BC51AC6FE1900D38762 /* XYZSaved_Files.mm */,
 				9B283BC61AC6FE1900D38762 /* XYZViewController.h */,
 				9B283BC71AC6FE1900D38762 /* XYZViewController.mm */,
 				9BE2C7681AD7B41000F2A0BF /* XYZProfile.h */,
@@ -380,6 +389,8 @@
 				9BF7C46B1ADABB60007BEEED /* XYZNewsFeed.m */,
 				9B4945E01AE2ADF6009EE15A /* XYZMelodyListen.h */,
 				9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */,
+				9B94952C1AEB875100EA94AE /* XYZSavedMelodies.h */,
+				9B94952D1AEB875100EA94AE /* XYZSavedMelodies.mm */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -467,6 +478,7 @@
 		9B7F28A51A8F9F0900A154F6 /* Train */ = {
 			isa = PBXGroup;
 			children = (
+				9B44D8101AF4CFFB00C2CD45 /* beat.aif */,
 				9BA95C761AD6BCAF003EE700 /* other images */,
 				9BA54D281AB4327D00D83431 /* gs_instruments.dls */,
 				9B7F28B11A8F9F0900A154F6 /* Main.storyboard */,
@@ -506,6 +518,17 @@
 				9B7F28C71A8F9F0A00A154F6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9B9495251AEB83E600EA94AE /* audiowrite */ = {
+			isa = PBXGroup;
+			children = (
+				9B9495261AEB83E600EA94AE /* aiffwrite.cpp */,
+				9B9495271AEB83E600EA94AE /* aiffwrite.h */,
+				9B9495281AEB83E600EA94AE /* audiowrite.cpp */,
+				9B9495291AEB83E600EA94AE /* audiowrite.h */,
+			);
+			path = audiowrite;
 			sourceTree = "<group>";
 		};
 		9B9DAC3C1ACD3A750006A951 /* util */ = {
@@ -550,6 +573,7 @@
 		9BBDF8E01A9E177800322797 /* Zaher */ = {
 			isa = PBXGroup;
 			children = (
+				9B9495251AEB83E600EA94AE /* audiowrite */,
 				9B4945E31AE63CBF009EE15A /* libmel */,
 				9B9DAC3C1ACD3A750006A951 /* util */,
 				9BBDF8E11A9E177800322797 /* audiomidiconverter */,
@@ -644,6 +668,8 @@
 		9BBDF9081A9E177800322797 /* signal */ = {
 			isa = PBXGroup;
 			children = (
+				9B9495221AEB83D200EA94AE /* mixer.cpp */,
+				9B9495231AEB83D200EA94AE /* mixer.h */,
 				9BBDF9091A9E177800322797 /* complex.cpp */,
 				9BBDF90A1A9E177800322797 /* complex.h */,
 				9BBDF90B1A9E177800322797 /* melody.cpp */,
@@ -746,6 +772,7 @@
 				9BE2C78A1AD9406700F2A0BF /* Instru 2.png in Resources */,
 				9BE2C78F1AD9406700F2A0BF /* Rectangle 2.png in Resources */,
 				9BE2C7861AD9406700F2A0BF /* Carré filled.png in Resources */,
+				9B44D8111AF4CFFB00C2CD45 /* beat.aif in Resources */,
 				9BE2C78B1AD9406700F2A0BF /* Instru 3.png in Resources */,
 				9B283BE51AC6FE7C00D38762 /* accordion.png in Resources */,
 				9BE2C7851AD9406700F2A0BF /* Cadre .png in Resources */,
@@ -799,6 +826,7 @@
 				9BBDF9171A9E177800322797 /* freqtable.cpp in Sources */,
 				9BBDF9221A9E177800322797 /* pascal.c in Sources */,
 				9BBDF92A1A9E177800322797 /* signal.cpp in Sources */,
+				9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */,
 				9B283BDB1AC6FE1900D38762 /* XYZTrack.mm in Sources */,
 				9B283BDC1AC6FE1900D38762 /* XYZAppDelegate.mm in Sources */,
 				9B283BD41AC6FE1900D38762 /* XYZTrackCell.mm in Sources */,
@@ -824,8 +852,10 @@
 				9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */,
 				9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */,
 				9B283BD31AC6FE1900D38762 /* XYZSaver.mm in Sources */,
+				9B94952A1AEB83E600EA94AE /* aiffwrite.cpp in Sources */,
 				9BE2C7671AD7B31800F2A0BF /* XYZUser.m in Sources */,
 				9BF7C4871ADE5F9B007BEEED /* XYZShareCell.m in Sources */,
+				9B94952E1AEB875100EA94AE /* XYZSavedMelodies.mm in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
 				9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */,
@@ -836,9 +866,9 @@
 				9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */,
 				9BBDF9251A9E177800322797 /* musicinstrument.cpp in Sources */,
 				9BE2C7731AD8FE1700F2A0BF /* XYZMenu.m in Sources */,
+				9B9495241AEB83D200EA94AE /* mixer.cpp in Sources */,
 				9BBDF9161A9E177800322797 /* audioread.cpp in Sources */,
 				9BBDF9271A9E177800322797 /* note.cpp in Sources */,
-				9B283BD71AC6FE1900D38762 /* XYZSaved_Files.mm in Sources */,
 				9BF7C4841ADE5F59007BEEED /* XYZApplauseCell.m in Sources */,
 				9BBDF9281A9E177800322797 /* complex.cpp in Sources */,
 				9BF7C47B1ADC28A6007BEEED /* XYZComment.m in Sources */,

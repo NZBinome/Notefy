@@ -14,6 +14,9 @@
 @synthesize ProfilePic;
 @synthesize UserName;
 @synthesize Action;
+@synthesize ApplauseCount;
+@synthesize CommentCount;
+@synthesize ShareCount;
 @synthesize SharerName;
 
 - (id)initWithFrame:(CGRect)frame

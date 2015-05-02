@@ -15,5 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *Action;
 @property (weak, nonatomic) IBOutlet UILabel *Time;
+@property (weak, nonatomic) IBOutlet UILabel *ApplauseCount;
+@property (weak, nonatomic) IBOutlet UILabel *CommentCount;
+@property (weak, nonatomic) IBOutlet UILabel *ShareCount;
 
 @end

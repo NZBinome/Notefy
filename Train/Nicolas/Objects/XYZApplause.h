@@ -17,5 +17,8 @@
 @property NSString* ServerLocation;
 @property XYZUser* User;
 @property XYZMelody* Melody;
+@property NSString* ApplauseCount;
+@property NSString* ShareCount;
+@property NSString* CommentCount;
 -(void)fillCell:(XYZApplauseCell*)cell;
 @end

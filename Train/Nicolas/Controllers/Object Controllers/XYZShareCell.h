@@ -15,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *UserName;
 @property (weak, nonatomic) IBOutlet UILabel *Action;
 @property (weak, nonatomic) IBOutlet UIButton *SharerName;
+@property (weak, nonatomic) IBOutlet UILabel *ApplauseCount;
+@property (weak, nonatomic) IBOutlet UILabel *CommentCount;
+@property (weak, nonatomic) IBOutlet UILabel *ShareCount;
 
 @end

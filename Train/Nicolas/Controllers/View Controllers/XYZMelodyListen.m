@@ -33,6 +33,23 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ProfilePicture;
 @property AVPlayer* Player;
 @property NSURL* URL;
+@property int AccountId;
+@property BOOL isApplause;
+@property BOOL isShare;
+@property int Spectator;
+@property int ListenedMelody;
+@property int Sharer;
+@property int SharedMelody;
+@property BOOL isSpectator;
+@property BOOL isListenedMelody;
+@property BOOL isSharer;
+@property BOOL isSharedMelody;
+@property (weak, nonatomic) IBOutlet UIButton *Applause;
+@property (weak, nonatomic) IBOutlet UIButton *Share;
+@property BOOL didApplaud;
+@property BOOL didShare;
+
+
 
 @end
 
@@ -59,8 +76,23 @@
 @synthesize Time;
 @synthesize ProfilePicture;
 @synthesize URL;
-
+@synthesize AccountId;
 @synthesize Player;
+@synthesize  isShare;
+@synthesize isApplause;
+@synthesize SharedMelody;
+@synthesize Sharer;
+@synthesize Spectator;
+@synthesize ListenedMelody;
+@synthesize isSharedMelody;
+@synthesize isSharer;
+@synthesize isSpectator;
+@synthesize isListenedMelody;
+@synthesize Share;
+@synthesize Applause;
+@synthesize didApplaud;
+@synthesize didShare;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -101,6 +133,15 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
 {
+    
+    if (isShare) {
+        isSharer = [elementName isEqualToString:@"Sharer"];
+        isSharedMelody = [elementName isEqualToString:@"Melody"];
+    }
+    if (isApplause) {
+        isSpectator = [elementName isEqualToString:@"Spectator"];
+        isListenedMelody = [elementName isEqualToString:@"Melody"];
+    }
 
     if (isUser)
     {
@@ -116,6 +157,14 @@
         isId = [elementName isEqualToString:@"Id"];
         isDate=[elementName isEqualToString:@"Date"];
         isTitle=[elementName isEqualToString:@"Title"];
+    }
+    
+    if ([elementName isEqualToString:@"Applause"]) {
+        isApplause = true;
+    }
+    
+    if ([elementName isEqualToString:@"Share"]) {
+        isShare = true;
     }
     
     if ([elementName isEqualToString:@"User"])
@@ -171,6 +220,22 @@
         Melody.Title=string;
         isTitle=false;
     }
+    if (isListenedMelody) {
+        ListenedMelody = [string intValue];
+        isListenedMelody = false;
+    }
+    if (isSpectator) {
+        Spectator = [string intValue];
+        isSpectator = false;
+    }
+    if (isSharedMelody) {
+        SharedMelody = [string intValue];
+        isSharedMelody=false;
+    }
+    if (isSharer) {
+        Sharer = [string intValue];
+        isSharer=false;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
@@ -188,7 +253,12 @@
         Creator = User1;
         SelectedMelody = Melody;
     }
-
+    if ([elementName isEqualToString:@"Applause"]) {
+        isApplause=false;
+    }
+    if ([elementName isEqualToString:@"Share"]) {
+        isApplause=false;
+    }
 }
 
 -(void)assign
@@ -206,6 +276,15 @@
         fullpath = [ServerLocation stringByAppendingString:Creator.Picture_link];
     }
     ProfilePicture.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
+    if ((AccountId==Spectator)&&(SelectedMelody.Id==ListenedMelody)) {
+        didApplaud = true;
+        [Applause setTitle:@"You Applauded" forState:UIControlStateNormal];
+    }
+    if ((AccountId==Sharer)&&(SelectedMelody.Id==SharedMelody)) {
+        didShare = true;
+        [Share setTitle:@"You Shared" forState:UIControlStateNormal];
+    }
+    
 }
 
 -(void)InitializeView
@@ -213,10 +292,12 @@
     NSString *path=[ServerLocation stringByAppendingString:@"GetMelody.php?MelodyId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", SelectedMelody.Id]];
     [self getData:path];
+    path=[ServerLocation stringByAppendingString:@"GetShareApplause.php?UserId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    path = [path stringByAppendingString:@"&MelodyId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d",SelectedMelody.Id]];
+    [self getData:path];
     [self assign];
-    
-    
-    
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
@@ -273,6 +354,9 @@
 {
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     ServerLocation = appdel.ServerLocation;
+    AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
+    didApplaud=false;
+    didShare=false;
     [super viewDidLoad];
     SelectedMelody = [[XYZMelody alloc]init];
     Creator = [[XYZUser alloc]init];
@@ -295,6 +379,58 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)applause:(id)sender {
+    NSString* path;
+    NSError *error;
+
+    if (didApplaud) {
+        path=[ServerLocation stringByAppendingString:@"DeleteApplause.php?UserId="];
+        [Applause setTitle:@"Applaud" forState:UIControlStateNormal];
+
+    }
+    else
+    {
+        path=[ServerLocation stringByAppendingString:@"InsertApplause.php?UserId="];
+        [Applause setTitle:@"You Applauded" forState:UIControlStateNormal];
+
+    }
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    path = [path stringByAppendingString:@"&MelodyId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d",SelectedMelody.Id]];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    didApplaud = !didApplaud;
+
+}
+
+- (IBAction)share:(id)sender {
+    NSString* path;
+    NSError *error;
+    
+    if (didShare) {
+        path=[ServerLocation stringByAppendingString:@"DeleteShare.php?UserId="];
+        [Share setTitle:@"Share" forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+        path=[ServerLocation stringByAppendingString:@"InsertShare.php?UserId="];
+        [Share setTitle:@"You Shared" forState:UIControlStateNormal];
+        
+    }
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    path = [path stringByAppendingString:@"&MelodyId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d",SelectedMelody.Id]];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    didShare = !didShare;
+}
+
+
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

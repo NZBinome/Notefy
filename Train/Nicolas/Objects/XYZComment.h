@@ -19,5 +19,8 @@
 @property int Id;
 @property NSString* Date;
 @property NSString* ServerLocation;
+@property NSString* ApplauseCount;
+@property NSString* ShareCount;
+@property NSString* CommentCount;
 -(void)fillCell:(XYZCommentCell *)cell;
 @end

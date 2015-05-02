@@ -12,6 +12,9 @@
 @synthesize User;
 @synthesize Melody;
 @synthesize Date;
+@synthesize ApplauseCount;
+@synthesize ShareCount;
+@synthesize CommentCount;
 @synthesize ServerLocation;
 
 

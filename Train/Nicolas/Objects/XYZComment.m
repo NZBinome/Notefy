@@ -14,6 +14,9 @@
 @synthesize Script;
 @synthesize Id;
 @synthesize  Date;
+@synthesize ApplauseCount;
+@synthesize ShareCount;
+@synthesize CommentCount;
 @synthesize ServerLocation;
 
 - (id)init

@@ -81,7 +81,7 @@
     while (i<[appdel.instruments count]) {
         demoIns=[[XYZInstrument alloc]init];
         demoIns=[appdel.instruments objectAtIndex:i];
-        NSLog(demoIns.Name);
+       // NSLog(demoIns.Name);
         NSLog(@"%d",demoIns.number);
         i++;
     }

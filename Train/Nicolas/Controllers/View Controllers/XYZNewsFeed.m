@@ -38,6 +38,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *MyProfile;
 @property int UserId;
 @property int MelodyId;
+@property BOOL isApplauseCount;
+@property BOOL isCommentCount;
+@property BOOL isShareCount;
 
 @end
 
@@ -71,6 +74,9 @@
 @synthesize MyProfile;
 @synthesize UserId;
 @synthesize MelodyId;
+@synthesize isApplauseCount;
+@synthesize isCommentCount;
+@synthesize isShareCount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -101,6 +107,9 @@
     if (isFeed)
     {
         isDate=[elementName isEqualToString:@"Date"];
+        isShareCount = [elementName isEqualToString:@"ShareCount"];
+        isCommentCount = [elementName isEqualToString:@"CommentCount"];
+        isApplauseCount = [elementName isEqualToString:@"ApplauseCount"];
     }
     if (isComment) {
         isScript=[elementName isEqualToString:@"Script"];
@@ -215,6 +224,33 @@
             }
         }
         isDate=false;
+    }
+    if (isShareCount) {
+        if (isShare) {
+            Share.ShareCount=string;
+        }
+        if (isCreate) {
+            Create.ShareCount=string;
+        }
+        isShareCount=false;
+    }
+    if (isApplauseCount) {
+        if (isShare) {
+            Share.ApplauseCount=string;
+        }
+        if (isCreate) {
+            Create.ApplauseCount=string;
+        }
+        isApplauseCount=false;
+    }
+    if (isCommentCount) {
+        if (isShare) {
+            Share.CommentCount=string;
+        }
+        if (isCreate) {
+            Create.CommentCount=string;
+        }
+        isCommentCount=false;
     }
     if (isId) {
         if (isUser) {
@@ -438,6 +474,9 @@
     return 102;
 }
 
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 #pragma mark - Navigation

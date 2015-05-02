@@ -18,6 +18,9 @@
 @property XYZUser* User;
 @property XYZMelody* Melody;
 @property XYZUser* Sharer;
+@property NSString* ApplauseCount;
+@property NSString* ShareCount;
+@property NSString* CommentCount;
 -(void)fillCell:(XYZShareCell*)cell;
 
 @end

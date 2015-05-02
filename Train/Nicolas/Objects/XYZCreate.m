@@ -12,6 +12,9 @@
 @synthesize User;
 @synthesize Melody;
 @synthesize Date;
+@synthesize ApplauseCount;
+@synthesize ShareCount;
+@synthesize CommentCount;
 @synthesize ServerLocation;
 
 - (id)init
@@ -34,6 +37,9 @@
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.Action.text=@"Creation";
     cell.Time.text=Date;
+    cell.ShareCount.text = [ShareCount stringByAppendingString:@" S"];
+    cell.ApplauseCount.text = [ApplauseCount stringByAppendingString:@" A"];
+    cell.CommentCount.text = [CommentCount stringByAppendingString:@" C"];
     NSString* fullpath;
     if (!User.Picture_link) {
         fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];

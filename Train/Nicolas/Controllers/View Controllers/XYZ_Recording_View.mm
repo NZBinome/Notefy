@@ -571,7 +571,7 @@
             [tracks replaceObjectAtIndex:appdel.selectedtrack withObject:demotrack];
             [trackTable reloadData];
             NSString* path;
-            char array [96];
+            char array [256];
                 if ([selectedfile isEqualToString:@""])
                 {
                 path=[appdel.path stringByAppendingString:[@"/Default/track" stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];

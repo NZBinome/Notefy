@@ -13,6 +13,9 @@
 @synthesize Melody;
 @synthesize Date;
 @synthesize ServerLocation;
+@synthesize ApplauseCount;
+@synthesize ShareCount;
+@synthesize CommentCount;
 @synthesize Sharer;
 
 - (id)init
@@ -34,6 +37,9 @@
     [cell.SharerName setTitle:Sharer.Stage_Name forState:UIControlStateNormal];
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
+    cell.ShareCount.text = [ShareCount stringByAppendingString:@" S"];
+    cell.ApplauseCount.text = [ApplauseCount stringByAppendingString:@" A"];
+    cell.CommentCount.text = [CommentCount stringByAppendingString:@" C"];
     cell.Action.text=@"Share";
     cell.Time.text=Date;
     
