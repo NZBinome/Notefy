@@ -10,7 +10,7 @@ Diviseur::Diviseur(unsigned char * b, int l, int fs, int ba, int nc)
     _ba=ba;
     _nc=nc;
     _ld=1;
-    while(_ld<_fs/11)
+    while(_ld<_fs/10)
     {
         _ld*=2;
     }

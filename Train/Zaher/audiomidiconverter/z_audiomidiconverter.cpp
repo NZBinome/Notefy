@@ -149,7 +149,7 @@ void Z_audioMidiConverter::chooseInstrument(unsigned char inst, char * filename)
 
 void Z_audioMidiConverter::fix(char *filename, bool deFix)
 {
-    char melfile[100];
+    char melfile[256];
     int n=strlen(filename);
 
     strcpy(melfile,filename);

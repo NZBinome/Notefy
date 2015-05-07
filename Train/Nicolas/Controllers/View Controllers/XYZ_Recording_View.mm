@@ -202,7 +202,7 @@
                 }
                 else
                 {
-                    path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
+                    path=[appdel.path stringByAppendingString:[[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/"] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
                 }
                 amc.fix((char*)[path UTF8String]);
             }
