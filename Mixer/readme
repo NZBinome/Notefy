@@ -1,0 +1,7 @@
+brew install libsndfile lame
+brew install --with-libsndfile fluidsynth
+
+
+
+two commans to install fluidsynth audio midi converter
+

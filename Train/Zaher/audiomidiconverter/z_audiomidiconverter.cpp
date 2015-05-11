@@ -204,6 +204,10 @@ void Z_audioMidiConverter::setSoundFontPath(const char * p)
 
 int Z_audioMidiConverter::iconvert(const char *midiFil, char *midiAltered)
 {
+    if(_converter==0||_soundfont==0)
+    {
+        throw "No converter or soundfont selected for midi to audio conversion\n";
+    }
     sprintf(midiAltered, "%s.aif" ,midiFil);
     int pid = fork();
     if (pid==0) {
@@ -218,6 +222,7 @@ int Z_audioMidiConverter::iconvert(const char *midiFil, char *midiAltered)
 
 void Z_audioMidiConverter::mix(const char **f, int n, const char *df)
 {
+    double vref=0.8;
     AudioRead **af=new AudioRead*[n];
     for(int i=0;i<n;++i)
     {
@@ -241,8 +246,7 @@ void Z_audioMidiConverter::mix(const char **f, int n, const char *df)
                 af[i]->open(midiAltered);
                 break;
             default:
-                sprintf(exception, "not supported file %s", f[i]);
-                throw(exception);
+                throw "not supported file";
         }
     }
     Signal *s=new Signal[n];
@@ -250,24 +254,16 @@ void Z_audioMidiConverter::mix(const char **f, int n, const char *df)
     for(int i=0;i<n;++i)
     {
         s[i].set(af[i]->buffer(),af[i]->fs(),af[i]->l(),af[i]->ba(),af[i]->nc());
-        double thisval=s[i].s_max();
-        if(maxval<thisval)
-            maxval=thisval;
     }
     for(int i=0;i<n;++i)
     {
-        s[i].mult(maxval/s[i].s_max());
+        s[i].mult(vref/s[i].s_max());
     }
     
     Mixer m;
     m.addSignals(s,n);
     Signal *mix;
-    try {
-        mix=m.mix();
-
-    } catch (const char *exception) {
-        throw exception;
-    }
+    mix=m.mix();
     
     AiffWrite aw;
     int ba=2;

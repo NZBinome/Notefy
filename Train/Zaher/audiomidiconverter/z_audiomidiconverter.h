@@ -4,7 +4,8 @@
 #include "../midi/midicreator.h"
 #include "../signal/melody.h"
 
-enum FileType{
+enum FileType
+{
     MID,
     AIF,
     WAV,
@@ -13,6 +14,8 @@ enum FileType{
 
 class Z_audioMidiConverter
 {
+
+    
     char * _converter;
     char * _soundfont;
     FileType _z_amc_getFileType(const char *f);

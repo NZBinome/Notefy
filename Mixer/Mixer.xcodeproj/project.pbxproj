@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FFD0D3DD1B00D768004263BB /* options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD0D3DB1B00D768004263BB /* options.cpp */; };
 		FFDA578A1AFE538B00438448 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57891AFE538B00438448 /* main.cpp */; };
 		FFDA58041AFE60EC00438448 /* z_audiomidiconverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57BD1AFE60EC00438448 /* z_audiomidiconverter.cpp */; };
 		FFDA58061AFE60EC00438448 /* aiffread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57C11AFE60EC00438448 /* aiffread.cpp */; };
@@ -50,6 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FFD0D3DB1B00D768004263BB /* options.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = options.cpp; sourceTree = "<group>"; };
+		FFD0D3DC1B00D768004263BB /* options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = options.h; sourceTree = "<group>"; };
 		FFDA57861AFE538B00438448 /* Mixer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Mixer; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFDA57891AFE538B00438448 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FFDA57BD1AFE60EC00438448 /* z_audiomidiconverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = z_audiomidiconverter.cpp; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				FFDA57891AFE538B00438448 /* main.cpp */,
+				FFD0D3DB1B00D768004263BB /* options.cpp */,
+				FFD0D3DC1B00D768004263BB /* options.h */,
 			);
 			path = Mixer;
 			sourceTree = "<group>";
@@ -358,6 +363,7 @@
 				FFDA58061AFE60EC00438448 /* aiffread.cpp in Sources */,
 				FFDA58081AFE60EC00438448 /* wavread.cpp in Sources */,
 				FFDA58131AFE60EC00438448 /* lpcm.c in Sources */,
+				FFD0D3DD1B00D768004263BB /* options.cpp in Sources */,
 				FFDA58101AFE60EC00438448 /* g711.c in Sources */,
 				FFDA58111AFE60EC00438448 /* iff.c in Sources */,
 				FFDA58201AFE60EC00438448 /* melody.cpp in Sources */,
@@ -485,6 +491,7 @@
 				FFDA578F1AFE538B00438448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
