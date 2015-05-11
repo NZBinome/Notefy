@@ -59,6 +59,11 @@ public:
 
 
     void reset();
+    
+    double s_ssum()const;
+    double s_pow()const;
+    double s_max()const;
+    void mult(double x);
 
     double *signal();
     int l();

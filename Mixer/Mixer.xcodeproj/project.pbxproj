@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FFDA578A1AFE538B00438448 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57891AFE538B00438448 /* main.cpp */; };
+		FFDA58041AFE60EC00438448 /* z_audiomidiconverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57BD1AFE60EC00438448 /* z_audiomidiconverter.cpp */; };
+		FFDA58061AFE60EC00438448 /* aiffread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57C11AFE60EC00438448 /* aiffread.cpp */; };
+		FFDA58071AFE60EC00438448 /* audioread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57C31AFE60EC00438448 /* audioread.cpp */; };
+		FFDA58081AFE60EC00438448 /* wavread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57C51AFE60EC00438448 /* wavread.cpp */; };
+		FFDA58091AFE60EC00438448 /* aiffwrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57C81AFE60EC00438448 /* aiffwrite.cpp */; };
+		FFDA580A1AFE60EC00438448 /* audiowrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57CA1AFE60EC00438448 /* audiowrite.cpp */; };
+		FFDA580B1AFE60EC00438448 /* freqtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57CD1AFE60EC00438448 /* freqtable.cpp */; };
+		FFDA580D1AFE60EC00438448 /* aifx.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57D11AFE60EC00438448 /* aifx.c */; };
+		FFDA580E1AFE60EC00438448 /* extended.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57D21AFE60EC00438448 /* extended.c */; };
+		FFDA580F1AFE60EC00438448 /* float32.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57D31AFE60EC00438448 /* float32.c */; };
+		FFDA58101AFE60EC00438448 /* g711.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57D41AFE60EC00438448 /* g711.c */; };
+		FFDA58111AFE60EC00438448 /* iff.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57D51AFE60EC00438448 /* iff.c */; };
+		FFDA58121AFE60EC00438448 /* libaiff.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57DC1AFE60EC00438448 /* libaiff.c */; };
+		FFDA58131AFE60EC00438448 /* lpcm.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57DD1AFE60EC00438448 /* lpcm.c */; };
+		FFDA58151AFE60EC00438448 /* pascal.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57E01AFE60EC00438448 /* pascal.c */; };
+		FFDA58161AFE60EC00438448 /* z_util.c in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57E21AFE60EC00438448 /* z_util.c */; };
+		FFDA58171AFE60EC00438448 /* melfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57E51AFE60EC00438448 /* melfile.cpp */; };
+		FFDA581A1AFE60EC00438448 /* midicreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57EB1AFE60EC00438448 /* midicreator.cpp */; };
+		FFDA581B1AFE60EC00438448 /* musicinstrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57ED1AFE60EC00438448 /* musicinstrument.cpp */; };
+		FFDA581C1AFE60EC00438448 /* note.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57F01AFE60EC00438448 /* note.cpp */; };
+		FFDA581F1AFE60EC00438448 /* complex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57F51AFE60EC00438448 /* complex.cpp */; };
+		FFDA58201AFE60EC00438448 /* melody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57F71AFE60EC00438448 /* melody.cpp */; };
+		FFDA58211AFE60EC00438448 /* mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57F91AFE60EC00438448 /* mixer.cpp */; };
+		FFDA58221AFE60EC00438448 /* signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57FB1AFE60EC00438448 /* signal.cpp */; };
+		FFDA58231AFE60EC00438448 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA57FE1AFE60EC00438448 /* util.cpp */; };
+		FFDA58241AFE60EC00438448 /* diviseur.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFDA58011AFE60EC00438448 /* diviseur.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FFDA57841AFE538B00438448 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FFDA57861AFE538B00438448 /* Mixer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Mixer; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFDA57891AFE538B00438448 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FFDA57BD1AFE60EC00438448 /* z_audiomidiconverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = z_audiomidiconverter.cpp; sourceTree = "<group>"; };
+		FFDA57BE1AFE60EC00438448 /* z_audiomidiconverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = z_audiomidiconverter.h; sourceTree = "<group>"; };
+		FFDA57C11AFE60EC00438448 /* aiffread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffread.cpp; sourceTree = "<group>"; };
+		FFDA57C21AFE60EC00438448 /* aiffread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiffread.h; sourceTree = "<group>"; };
+		FFDA57C31AFE60EC00438448 /* audioread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audioread.cpp; sourceTree = "<group>"; };
+		FFDA57C41AFE60EC00438448 /* audioread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audioread.h; sourceTree = "<group>"; };
+		FFDA57C51AFE60EC00438448 /* wavread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavread.cpp; sourceTree = "<group>"; };
+		FFDA57C61AFE60EC00438448 /* wavread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wavread.h; sourceTree = "<group>"; };
+		FFDA57C81AFE60EC00438448 /* aiffwrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffwrite.cpp; sourceTree = "<group>"; };
+		FFDA57C91AFE60EC00438448 /* aiffwrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiffwrite.h; sourceTree = "<group>"; };
+		FFDA57CA1AFE60EC00438448 /* audiowrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audiowrite.cpp; sourceTree = "<group>"; };
+		FFDA57CB1AFE60EC00438448 /* audiowrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = audiowrite.h; sourceTree = "<group>"; };
+		FFDA57CD1AFE60EC00438448 /* freqtable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = freqtable.cpp; sourceTree = "<group>"; };
+		FFDA57CE1AFE60EC00438448 /* freqtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = freqtable.h; sourceTree = "<group>"; };
+		FFDA57D11AFE60EC00438448 /* aifx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aifx.c; sourceTree = "<group>"; };
+		FFDA57D21AFE60EC00438448 /* extended.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extended.c; sourceTree = "<group>"; };
+		FFDA57D31AFE60EC00438448 /* float32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = float32.c; sourceTree = "<group>"; };
+		FFDA57D41AFE60EC00438448 /* g711.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = g711.c; sourceTree = "<group>"; };
+		FFDA57D51AFE60EC00438448 /* iff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = iff.c; sourceTree = "<group>"; };
+		FFDA57D71AFE60EC00438448 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		FFDA57D81AFE60EC00438448 /* config.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.h.in; sourceTree = "<group>"; };
+		FFDA57D91AFE60EC00438448 /* config.vc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.vc.h; sourceTree = "<group>"; };
+		FFDA57DA1AFE60EC00438448 /* endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = endian.h; sourceTree = "<group>"; };
+		FFDA57DB1AFE60EC00438448 /* libaiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libaiff.h; sourceTree = "<group>"; };
+		FFDA57DC1AFE60EC00438448 /* libaiff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libaiff.c; sourceTree = "<group>"; };
+		FFDA57DD1AFE60EC00438448 /* lpcm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lpcm.c; sourceTree = "<group>"; };
+		FFDA57E01AFE60EC00438448 /* pascal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pascal.c; sourceTree = "<group>"; };
+		FFDA57E11AFE60EC00438448 /* private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = private.h; sourceTree = "<group>"; };
+		FFDA57E21AFE60EC00438448 /* z_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = z_util.c; sourceTree = "<group>"; };
+		FFDA57E31AFE60EC00438448 /* z_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = z_util.h; sourceTree = "<group>"; };
+		FFDA57E51AFE60EC00438448 /* melfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = melfile.cpp; sourceTree = "<group>"; };
+		FFDA57E61AFE60EC00438448 /* melfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = melfile.h; sourceTree = "<group>"; };
+		FFDA57EB1AFE60EC00438448 /* midicreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midicreator.cpp; sourceTree = "<group>"; };
+		FFDA57EC1AFE60EC00438448 /* midicreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midicreator.h; sourceTree = "<group>"; };
+		FFDA57ED1AFE60EC00438448 /* musicinstrument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = musicinstrument.cpp; sourceTree = "<group>"; };
+		FFDA57EE1AFE60EC00438448 /* musicinstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = musicinstrument.h; sourceTree = "<group>"; };
+		FFDA57F01AFE60EC00438448 /* note.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = note.cpp; sourceTree = "<group>"; };
+		FFDA57F11AFE60EC00438448 /* note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = note.h; sourceTree = "<group>"; };
+		FFDA57F51AFE60EC00438448 /* complex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = complex.cpp; sourceTree = "<group>"; };
+		FFDA57F61AFE60EC00438448 /* complex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = complex.h; sourceTree = "<group>"; };
+		FFDA57F71AFE60EC00438448 /* melody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = melody.cpp; sourceTree = "<group>"; };
+		FFDA57F81AFE60EC00438448 /* melody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = melody.h; sourceTree = "<group>"; };
+		FFDA57F91AFE60EC00438448 /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
+		FFDA57FA1AFE60EC00438448 /* mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mixer.h; sourceTree = "<group>"; };
+		FFDA57FB1AFE60EC00438448 /* signal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = signal.cpp; sourceTree = "<group>"; };
+		FFDA57FC1AFE60EC00438448 /* signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = signal.h; sourceTree = "<group>"; };
+		FFDA57FE1AFE60EC00438448 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		FFDA57FF1AFE60EC00438448 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		FFDA58011AFE60EC00438448 /* diviseur.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = diviseur.cpp; sourceTree = "<group>"; };
+		FFDA58021AFE60EC00438448 /* diviseur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = diviseur.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FFDA57831AFE538B00438448 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FFDA577D1AFE538B00438448 = {
+			isa = PBXGroup;
+			children = (
+				FFDA57B91AFE60EC00438448 /* Zaher */,
+				FFDA57881AFE538B00438448 /* Mixer */,
+				FFDA57871AFE538B00438448 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FFDA57871AFE538B00438448 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57861AFE538B00438448 /* Mixer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FFDA57881AFE538B00438448 /* Mixer */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57891AFE538B00438448 /* main.cpp */,
+			);
+			path = Mixer;
+			sourceTree = "<group>";
+		};
+		FFDA57B91AFE60EC00438448 /* Zaher */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57BA1AFE60EC00438448 /* audiomidiconverter */,
+				FFDA57BF1AFE60EC00438448 /* audioread */,
+				FFDA57C71AFE60EC00438448 /* audiowrite */,
+				FFDA57CC1AFE60EC00438448 /* freq */,
+				FFDA57CF1AFE60EC00438448 /* libaiff */,
+				FFDA57E41AFE60EC00438448 /* libmel */,
+				FFDA57E71AFE60EC00438448 /* midi */,
+				FFDA57F21AFE60EC00438448 /* signal */,
+				FFDA57FD1AFE60EC00438448 /* util */,
+				FFDA58001AFE60EC00438448 /* wavFormat */,
+			);
+			name = Zaher;
+			path = ../Train/Zaher;
+			sourceTree = "<group>";
+		};
+		FFDA57BA1AFE60EC00438448 /* audiomidiconverter */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57BD1AFE60EC00438448 /* z_audiomidiconverter.cpp */,
+				FFDA57BE1AFE60EC00438448 /* z_audiomidiconverter.h */,
+			);
+			path = audiomidiconverter;
+			sourceTree = "<group>";
+		};
+		FFDA57BF1AFE60EC00438448 /* audioread */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57C11AFE60EC00438448 /* aiffread.cpp */,
+				FFDA57C21AFE60EC00438448 /* aiffread.h */,
+				FFDA57C31AFE60EC00438448 /* audioread.cpp */,
+				FFDA57C41AFE60EC00438448 /* audioread.h */,
+				FFDA57C51AFE60EC00438448 /* wavread.cpp */,
+				FFDA57C61AFE60EC00438448 /* wavread.h */,
+			);
+			path = audioread;
+			sourceTree = "<group>";
+		};
+		FFDA57C71AFE60EC00438448 /* audiowrite */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57C81AFE60EC00438448 /* aiffwrite.cpp */,
+				FFDA57C91AFE60EC00438448 /* aiffwrite.h */,
+				FFDA57CA1AFE60EC00438448 /* audiowrite.cpp */,
+				FFDA57CB1AFE60EC00438448 /* audiowrite.h */,
+			);
+			path = audiowrite;
+			sourceTree = "<group>";
+		};
+		FFDA57CC1AFE60EC00438448 /* freq */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57CD1AFE60EC00438448 /* freqtable.cpp */,
+				FFDA57CE1AFE60EC00438448 /* freqtable.h */,
+			);
+			path = freq;
+			sourceTree = "<group>";
+		};
+		FFDA57CF1AFE60EC00438448 /* libaiff */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57D11AFE60EC00438448 /* aifx.c */,
+				FFDA57D21AFE60EC00438448 /* extended.c */,
+				FFDA57D31AFE60EC00438448 /* float32.c */,
+				FFDA57D41AFE60EC00438448 /* g711.c */,
+				FFDA57D51AFE60EC00438448 /* iff.c */,
+				FFDA57D61AFE60EC00438448 /* libaiff */,
+				FFDA57DC1AFE60EC00438448 /* libaiff.c */,
+				FFDA57DD1AFE60EC00438448 /* lpcm.c */,
+				FFDA57E01AFE60EC00438448 /* pascal.c */,
+				FFDA57E11AFE60EC00438448 /* private.h */,
+				FFDA57E21AFE60EC00438448 /* z_util.c */,
+				FFDA57E31AFE60EC00438448 /* z_util.h */,
+			);
+			path = libaiff;
+			sourceTree = "<group>";
+		};
+		FFDA57D61AFE60EC00438448 /* libaiff */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57D71AFE60EC00438448 /* config.h */,
+				FFDA57D81AFE60EC00438448 /* config.h.in */,
+				FFDA57D91AFE60EC00438448 /* config.vc.h */,
+				FFDA57DA1AFE60EC00438448 /* endian.h */,
+				FFDA57DB1AFE60EC00438448 /* libaiff.h */,
+			);
+			path = libaiff;
+			sourceTree = "<group>";
+		};
+		FFDA57E41AFE60EC00438448 /* libmel */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57E51AFE60EC00438448 /* melfile.cpp */,
+				FFDA57E61AFE60EC00438448 /* melfile.h */,
+			);
+			path = libmel;
+			sourceTree = "<group>";
+		};
+		FFDA57E71AFE60EC00438448 /* midi */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57EB1AFE60EC00438448 /* midicreator.cpp */,
+				FFDA57EC1AFE60EC00438448 /* midicreator.h */,
+				FFDA57ED1AFE60EC00438448 /* musicinstrument.cpp */,
+				FFDA57EE1AFE60EC00438448 /* musicinstrument.h */,
+				FFDA57F01AFE60EC00438448 /* note.cpp */,
+				FFDA57F11AFE60EC00438448 /* note.h */,
+			);
+			path = midi;
+			sourceTree = "<group>";
+		};
+		FFDA57F21AFE60EC00438448 /* signal */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57F51AFE60EC00438448 /* complex.cpp */,
+				FFDA57F61AFE60EC00438448 /* complex.h */,
+				FFDA57F71AFE60EC00438448 /* melody.cpp */,
+				FFDA57F81AFE60EC00438448 /* melody.h */,
+				FFDA57F91AFE60EC00438448 /* mixer.cpp */,
+				FFDA57FA1AFE60EC00438448 /* mixer.h */,
+				FFDA57FB1AFE60EC00438448 /* signal.cpp */,
+				FFDA57FC1AFE60EC00438448 /* signal.h */,
+			);
+			path = signal;
+			sourceTree = "<group>";
+		};
+		FFDA57FD1AFE60EC00438448 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA57FE1AFE60EC00438448 /* util.cpp */,
+				FFDA57FF1AFE60EC00438448 /* util.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		FFDA58001AFE60EC00438448 /* wavFormat */ = {
+			isa = PBXGroup;
+			children = (
+				FFDA58011AFE60EC00438448 /* diviseur.cpp */,
+				FFDA58021AFE60EC00438448 /* diviseur.h */,
+			);
+			path = wavFormat;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FFDA57851AFE538B00438448 /* Mixer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FFDA578D1AFE538B00438448 /* Build configuration list for PBXNativeTarget "Mixer" */;
+			buildPhases = (
+				FFDA57821AFE538B00438448 /* Sources */,
+				FFDA57831AFE538B00438448 /* Frameworks */,
+				FFDA57841AFE538B00438448 /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mixer;
+			productName = Mixer;
+			productReference = FFDA57861AFE538B00438448 /* Mixer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FFDA577E1AFE538B00438448 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Zaher Hamadeh";
+				TargetAttributes = {
+					FFDA57851AFE538B00438448 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+				};
+			};
+			buildConfigurationList = FFDA57811AFE538B00438448 /* Build configuration list for PBXProject "Mixer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FFDA577D1AFE538B00438448;
+			productRefGroup = FFDA57871AFE538B00438448 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FFDA57851AFE538B00438448 /* Mixer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FFDA57821AFE538B00438448 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFDA580B1AFE60EC00438448 /* freqtable.cpp in Sources */,
+				FFDA581A1AFE60EC00438448 /* midicreator.cpp in Sources */,
+				FFDA581C1AFE60EC00438448 /* note.cpp in Sources */,
+				FFDA58241AFE60EC00438448 /* diviseur.cpp in Sources */,
+				FFDA58221AFE60EC00438448 /* signal.cpp in Sources */,
+				FFDA58151AFE60EC00438448 /* pascal.c in Sources */,
+				FFDA58071AFE60EC00438448 /* audioread.cpp in Sources */,
+				FFDA581F1AFE60EC00438448 /* complex.cpp in Sources */,
+				FFDA58171AFE60EC00438448 /* melfile.cpp in Sources */,
+				FFDA580F1AFE60EC00438448 /* float32.c in Sources */,
+				FFDA578A1AFE538B00438448 /* main.cpp in Sources */,
+				FFDA58121AFE60EC00438448 /* libaiff.c in Sources */,
+				FFDA580E1AFE60EC00438448 /* extended.c in Sources */,
+				FFDA58061AFE60EC00438448 /* aiffread.cpp in Sources */,
+				FFDA58081AFE60EC00438448 /* wavread.cpp in Sources */,
+				FFDA58131AFE60EC00438448 /* lpcm.c in Sources */,
+				FFDA58101AFE60EC00438448 /* g711.c in Sources */,
+				FFDA58111AFE60EC00438448 /* iff.c in Sources */,
+				FFDA58201AFE60EC00438448 /* melody.cpp in Sources */,
+				FFDA58041AFE60EC00438448 /* z_audiomidiconverter.cpp in Sources */,
+				FFDA581B1AFE60EC00438448 /* musicinstrument.cpp in Sources */,
+				FFDA58091AFE60EC00438448 /* aiffwrite.cpp in Sources */,
+				FFDA580A1AFE60EC00438448 /* audiowrite.cpp in Sources */,
+				FFDA580D1AFE60EC00438448 /* aifx.c in Sources */,
+				FFDA58231AFE60EC00438448 /* util.cpp in Sources */,
+				FFDA58161AFE60EC00438448 /* z_util.c in Sources */,
+				FFDA58211AFE60EC00438448 /* mixer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FFDA578B1AFE538B00438448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FFDA578C1AFE538B00438448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FFDA578E1AFE538B00438448 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FFDA578F1AFE538B00438448 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FFDA57811AFE538B00438448 /* Build configuration list for PBXProject "Mixer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFDA578B1AFE538B00438448 /* Debug */,
+				FFDA578C1AFE538B00438448 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FFDA578D1AFE538B00438448 /* Build configuration list for PBXNativeTarget "Mixer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FFDA578E1AFE538B00438448 /* Debug */,
+				FFDA578F1AFE538B00438448 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FFDA577E1AFE538B00438448 /* Project object */;
+}

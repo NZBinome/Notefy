@@ -13,16 +13,12 @@
 #include "../audiowrite/aiffwrite.h"
 #include "z_audiomidiconverter.h"
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 
-enum FileType{
-    MID,
-    AIF,
-    WAV,
-    INV
-};
 
-inline FileType _z_amc_getFileTye(char *f)
+FileType Z_audioMidiConverter::_z_amc_getFileType(const char *f)
 {
     int n=strlen(f);
     char end[4];
@@ -44,6 +40,8 @@ inline FileType _z_amc_getFileTye(char *f)
 
 Z_audioMidiConverter::Z_audioMidiConverter()
 {
+    _converter=0;
+    _soundfont=0;
 }
 
 void Z_audioMidiConverter::melToMid(Melody &m, char* filename)
@@ -68,13 +66,13 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     int n=strlen(audioFile);
     AudioRead *f;
 
-    if(_z_amc_getFileTye(audioFile)==WAV)
+    if(_z_amc_getFileType(audioFile)==WAV)
     {
         f=new Wavread();
         if(!f->open(audioFile))
             return 0;
     }
-    else if(_z_amc_getFileTye(audioFile)==AIF)
+    else if(_z_amc_getFileType(audioFile)==AIF)
     {
         f=new AiffRead();
         if(!f->open(audioFile))
@@ -193,36 +191,84 @@ void Z_audioMidiConverter::fix(char *filename, bool deFix)
     chooseInstrument(inst,filename);
 }
 
+void Z_audioMidiConverter::setConverterPath(const char * p)
+{
+    _converter=new char[strlen(p)];
+    strcpy(_converter, p);
+}
+void Z_audioMidiConverter::setSoundFontPath(const char * p)
+{
+    _soundfont=new char[strlen(p)];
+    strcpy(_soundfont, p);
+}
 
-void Z_audioMidiConverter::mix(char **f, int n, char *df)
+int Z_audioMidiConverter::iconvert(const char *midiFil, char *midiAltered)
+{
+    sprintf(midiAltered, "%s.aif" ,midiFil);
+    int pid = fork();
+    if (pid==0) {
+        printf("%s %s -T aiff -F %s %s %s\n",_converter,_converter,midiAltered,_soundfont,midiFil);
+        execl(_converter, _converter, "-T", "aiff", "-F", midiAltered, _soundfont, midiFil, NULL);
+    }
+    int returnStatus;
+    waitpid(pid, &returnStatus, 0);
+    
+    return 1;
+}
+
+void Z_audioMidiConverter::mix(const char **f, int n, const char *df)
 {
     AudioRead **af=new AudioRead*[n];
     for(int i=0;i<n;++i)
     {
-        switch(_z_amc_getFileTye(f[i]))
+        FileType ft=_z_amc_getFileType(f[i]);
+        char exception[100];
+        char midiAltered[256];
+        
+        switch(ft)
         {
             case AIF:
                 af[i]=new AiffRead();
+                af[i]->open(f[i]);
                 break;
             case WAV:
                 af[i]=new Wavread();
+                af[i]->open(f[i]);
                 break;
             case MID:
-                throw("not suported yet");
+                iconvert(f[i],midiAltered);
+                af[i]=new AiffRead();
+                af[i]->open(midiAltered);
+                break;
             default:
-                throw("not supported files");
+                sprintf(exception, "not supported file %s", f[i]);
+                throw(exception);
         }
     }
     Signal *s=new Signal[n];
+    double maxval=0;
     for(int i=0;i<n;++i)
     {
-        af[i]->open(f[i]);
         s[i].set(af[i]->buffer(),af[i]->fs(),af[i]->l(),af[i]->ba(),af[i]->nc());
+        double thisval=s[i].s_max();
+        if(maxval<thisval)
+            maxval=thisval;
     }
+    for(int i=0;i<n;++i)
+    {
+        s[i].mult(maxval/s[i].s_max());
+    }
+    
     Mixer m;
     m.addSignals(s,n);
-    Signal *mix=m.mix();
+    Signal *mix;
+    try {
+        mix=m.mix();
 
+    } catch (const char *exception) {
+        throw exception;
+    }
+    
     AiffWrite aw;
     int ba=2;
     aw.set_l(mix->l()*ba);
@@ -230,6 +276,7 @@ void Z_audioMidiConverter::mix(char **f, int n, char *df)
     aw.set_ba(ba);
     aw.set_buffer(mix->rawData(ba));
 
+    printf("%s\n",df);
     aw.write(df);
     delete [] s;
     for(int i=0;i<n;++i)
@@ -241,4 +288,6 @@ void Z_audioMidiConverter::mix(char **f, int n, char *df)
 
 Z_audioMidiConverter::~Z_audioMidiConverter()
 {
+    delete [] _converter;
+    delete [] _soundfont;
 }

@@ -310,7 +310,7 @@ void MelFile::set_dft_dnp_dnpqt(double *dft, int *dnp, int *dnpqt, int dn)
     _dn=dn;
     if(dnp!=0)
     {
-        _flags!=DECO;
+        _flags|=DECO;
         _dc=true;
         _dnp=dnp;
         ++_dnp[_dn];

@@ -97,7 +97,7 @@ void Signal::set(unsigned char *vectOctet, int fs, int l, int ba, int nc)
 
     ba/=nc;     //ba inclu tous les channel, pour recuperer l'echantillon de chaque channel
 
-    double N;
+    double N=0;
     switch (ba) {
     case 1:
         N=1/128.0;
@@ -149,7 +149,7 @@ unsigned char * Signal::rawData(int ba)
 {
     unsigned char * rd=new unsigned char[ba*_l];
 
-    int N;
+    int N=0;
     switch (ba) {
     case 1:
         N=128;
@@ -202,6 +202,42 @@ void Signal::reset()
     _fc=-1.0;
     _n=-1;
     _pmax=0;
+}
+
+double Signal::s_ssum()const
+{
+    double sum=0;
+    for (int i=0; i<_l; ++i)
+    {
+        sum+=_s[i]*_s[i];
+    }
+    return sum;
+}
+
+double Signal::s_pow()const
+{
+    return s_ssum()/_l;
+}
+
+double Signal::s_max()const
+{
+    double maxv=0;
+    for( int i=0; i<_l; ++i)
+    {
+        if (maxv<_s[i])
+        {
+            maxv=_s[i];
+        }
+    }
+    return maxv;
+}
+
+void Signal::mult(double x)
+{
+    for (int i=0; i<_l; ++i)
+    {
+        _s[i]*=x;
+    }
 }
 
 double * Signal::signal()
@@ -319,7 +355,7 @@ void Signal::methodeParMorceau()
     int ftf=_fc*fdst*_l/_fs;
 
     double max=0;
-    int tf;
+    int tf=0;
 
 
     for(int i=ftd;i<ftf;++i)

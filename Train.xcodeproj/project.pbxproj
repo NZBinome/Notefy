@@ -38,8 +38,6 @@
 		9B7F28BF1A8F9F0A00A154F6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28BE1A8F9F0A00A154F6 /* XCTest.framework */; };
 		9B7F28C01A8F9F0A00A154F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F289F1A8F9F0900A154F6 /* Foundation.framework */; };
 		9B7F28C11A8F9F0A00A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
-		9B7F28C91A8F9F0A00A154F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B7F28C71A8F9F0A00A154F6 /* InfoPlist.strings */; };
-		9B7F28CB1A8F9F0A00A154F6 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */; };
 		9B9495241AEB83D200EA94AE /* mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495221AEB83D200EA94AE /* mixer.cpp */; };
 		9B94952A1AEB83E600EA94AE /* aiffwrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495261AEB83E600EA94AE /* aiffwrite.cpp */; };
 		9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495281AEB83E600EA94AE /* audiowrite.cpp */; };
@@ -171,9 +169,6 @@
 		9B7F28B71A8F9F0900A154F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9B7F28BD1A8F9F0A00A154F6 /* TrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F28BE1A8F9F0A00A154F6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		9B7F28C61A8F9F0A00A154F6 /* TrainTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrainTests-Info.plist"; sourceTree = "<group>"; };
-		9B7F28C81A8F9F0A00A154F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainTests.m; sourceTree = "<group>"; };
 		9B9495221AEB83D200EA94AE /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
 		9B9495231AEB83D200EA94AE /* mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mixer.h; sourceTree = "<group>"; };
 		9B9495261AEB83E600EA94AE /* aiffwrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffwrite.cpp; sourceTree = "<group>"; };
@@ -449,7 +444,6 @@
 			isa = PBXGroup;
 			children = (
 				9B7F28A51A8F9F0900A154F6 /* Train */,
-				9B7F28C41A8F9F0A00A154F6 /* TrainTests */,
 				9B7F289E1A8F9F0900A154F6 /* Frameworks */,
 				9B7F289D1A8F9F0900A154F6 /* Products */,
 			);
@@ -498,24 +492,6 @@
 				9B7F28A71A8F9F0900A154F6 /* Train-Info.plist */,
 				9B7F28A81A8F9F0900A154F6 /* InfoPlist.strings */,
 				9B7F28AD1A8F9F0900A154F6 /* Train-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9B7F28C41A8F9F0A00A154F6 /* TrainTests */ = {
-			isa = PBXGroup;
-			children = (
-				9B7F28CA1A8F9F0A00A154F6 /* TrainTests.m */,
-				9B7F28C51A8F9F0A00A154F6 /* Supporting Files */,
-			);
-			path = TrainTests;
-			sourceTree = "<group>";
-		};
-		9B7F28C51A8F9F0A00A154F6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9B7F28C61A8F9F0A00A154F6 /* TrainTests-Info.plist */,
-				9B7F28C71A8F9F0A00A154F6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -811,7 +787,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B7F28C91A8F9F0A00A154F6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,7 +863,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B7F28CB1A8F9F0A00A154F6 /* TrainTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,14 +891,6 @@
 				9B7F28B21A8F9F0900A154F6 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9B7F28C71A8F9F0A00A154F6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9B7F28C81A8F9F0A00A154F6 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
