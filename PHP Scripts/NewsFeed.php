@@ -46,7 +46,8 @@ while ($i<count($Followed))
 	while ($j <count($Shares)) 
 	{
 		$Melody = new Melody($Shares[$j]->getMelody());
-		$Feeds[$k] = new ShareFeed($Users[$i]->getId(),$Melody->getId(),"Share",$Shares[$j]->getDate());
+		$Original = new User($Melody->getUser_Id());
+		$Feeds[$k] = new ShareFeed($Users[$i]->getId(),$Melody->getId(),$Original->getId(),"Share",$Shares[$j]->getDate());
 		$Dates[$k] = $Shares[$j]->getDate();
 		$j =$j+1;
 		$k=$k+1;

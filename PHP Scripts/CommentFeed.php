@@ -8,6 +8,9 @@ class CommentFeed
 	var $User;
 	var $Melody;
 	var $Script;
+	var $ApplauseCount;
+	var $ShareCount;
+	var $CommentCount;
 
 
 	function __construct() 
@@ -26,6 +29,15 @@ class CommentFeed
 		$this->Type = $type;
 		$this->Date = $Time;
 		$this->Script = $_Script;
+		$this->getCounts();
+	}
+
+	function getCounts()
+	{
+		$Toolkit1 = new Toolkit();
+		$this->ApplauseCount = $Toolkit1->getApplauseCount($this->Melody->getId());
+		$this->ShareCount = $Toolkit1->getShareCount($this->Melody->getId());
+		$this->CommentCount = $Toolkit1->getCommentCount($this->Melody->getId());
 	}
 
 	function toXML()
@@ -35,6 +47,9 @@ class CommentFeed
 		$ToSend = $ToSend . $this->User->toXML();
 		$ToSend = $ToSend . $this->Melody->toXML();
 		$ToSend = $ToSend . "<Script>" . $this->Script . "</Script>";
+		$ToSend = $ToSend ."<ApplauseCount> $this->ApplauseCount </ApplauseCount>";
+		$ToSend = $ToSend ."<ShareCount> $this->ShareCount </ShareCount>";
+		$ToSend = $ToSend ."<CommentCount> $this->CommentCount </CommentCount>";
 		$ToSend = $ToSend . "</$this->Type>";
 		return $ToSend;
 	}

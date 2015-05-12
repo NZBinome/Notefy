@@ -48,6 +48,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *Share;
 @property BOOL didApplaud;
 @property BOOL didShare;
+@property (weak, nonatomic) IBOutlet UITextView *CommentText;
+@property (weak, nonatomic) IBOutlet UIButton *Comment;
+@property CGFloat offset;
+@property BOOL isCommentFeed;
+@property NSMutableArray* Comments;
+@property XYZComment* CommentFeed;
+@property (weak, nonatomic) IBOutlet UITableView *CommentTable;
+@property BOOL isScript;
+
+
 
 
 
@@ -92,8 +102,14 @@
 @synthesize Applause;
 @synthesize didApplaud;
 @synthesize didShare;
-
-
+@synthesize CommentText;
+@synthesize Comment;
+@synthesize offset;
+@synthesize isCommentFeed;
+@synthesize CommentFeed;
+@synthesize Comments;
+@synthesize CommentTable;
+@synthesize isScript;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -112,7 +128,7 @@
 -(IBAction)userPressed:(UIControl*)sender
 {
     UserId = sender.tag;
-    [self performSegueWithIdentifier:@"Profile" sender:self];
+    [self performSegueWithIdentifier:@"ProfileFromListen" sender:self];
 }
 
 
@@ -152,6 +168,10 @@
         isPicture_Link=[elementName isEqualToString:@"Picture_Link"];
     }
     
+    if (isCommentFeed) {
+            isScript=[elementName isEqualToString:@"Script"];
+    }
+    
     if (isMelody)
     {
         isId = [elementName isEqualToString:@"Id"];
@@ -178,6 +198,10 @@
     {
         isMelody=true;
         Melody=[[XYZMelody alloc]init];
+    }
+    if ([elementName isEqualToString:@"Comment"]) {
+        isCommentFeed=true;
+        CommentFeed = [[XYZComment alloc]init];
     }
 }
 
@@ -236,6 +260,10 @@
         Sharer = [string intValue];
         isSharer=false;
     }
+    if (isScript) {
+        CommentFeed.Script=string;
+        isScript=false;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
@@ -258,6 +286,12 @@
     }
     if ([elementName isEqualToString:@"Share"]) {
         isApplause=false;
+    }
+    if ([elementName isEqualToString:@"Comment"]) {
+        CommentFeed.User=User1;
+        CommentFeed.Melody=Melody;
+        [Comments addObject:CommentFeed];
+        isCommentFeed = false;
     }
 }
 
@@ -284,6 +318,18 @@
         didShare = true;
         [Share setTitle:@"You Shared" forState:UIControlStateNormal];
     }
+    
+}
+
+- (IBAction)Comment:(id)sender {
+    NSString *path=[ServerLocation stringByAppendingString:@"WriteComment.php?UserId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    path = [path stringByAppendingString:@"&MelodyId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", SelectedMelody.Id]];
+    path = [path stringByAppendingString:@"&Script="];
+    path = [path stringByAppendingString:CommentText.text];
+    CommentText.text=@"";
+    [self getData:path];
     
 }
 
@@ -357,11 +403,13 @@
     AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
     didApplaud=false;
     didShare=false;
+    Comments = [[NSMutableArray alloc]init];
     [super viewDidLoad];
     SelectedMelody = [[XYZMelody alloc]init];
     Creator = [[XYZUser alloc]init];
     SelectedMelody.Id = MelodyId;
-    
+    CommentTable.dataSource = self;
+    CommentTable.delegate = self;
     [self InitializeView];
     
     UserName.tag = Creator.Id;
@@ -369,10 +417,41 @@
     URL = [NSURL URLWithString:[ServerLocation stringByAppendingString:@"Melodies/1/HEllo/track1.aif"]];
     [self startPlaybackForItemWithURL];
     
+    NSString* path;
+    NSError *error;
 
+    path=[ServerLocation stringByAppendingString:@"GetComments.php?MelodyId="];
+    path=[path stringByAppendingString:[NSString stringWithFormat:@"%d", SelectedMelody.Id]];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+     NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+    [parser setDelegate:self];
+    [parser parse];
+    [CommentTable reloadData];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    [self registerForKeyboardNotifications];
     //[self createStreamer];
     //[streamer start];
     // Do any additional setup after loading the view.
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [self deregisterFromKeyboardNotifications];
+    
+    [super viewWillDisappear:animated];
+    
+}
+
+-(void)dismissKeyboard
+{
+    [CommentText resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -402,7 +481,6 @@
     NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
     didApplaud = !didApplaud;
-
 }
 
 - (IBAction)share:(id)sender {
@@ -430,8 +508,137 @@
 
 
 - (IBAction)back:(id)sender {
+    NSLog(@"back pressed");
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+- (void)registerForKeyboardNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+}
+
+- (void)deregisterFromKeyboardNotifications {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidHideNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    
+}
+
+- (void)keyboardWasShown:(NSNotification *)notification {
+    
+    NSDictionary* info = [notification userInfo];
+    
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    offset= self.view.frame.size.height - CommentText.frame.origin.y - CommentText.frame.size.height;
+    
+    CommentText.frame = CGRectMake(CommentText.frame.origin.x, CommentText.frame.origin.y - keyboardSize.height+ offset, CommentText.frame.size.width, CommentText.frame.size.height);
+    Comment.frame = CGRectMake(Comment.frame.origin.x, Comment.frame.origin.y - keyboardSize.height + offset, Comment.frame.size.width, Comment.frame.size.height);
+    
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)notification {
+    
+    //[self.scrollView setContentOffset:CGPointZero animated:YES];
+    NSDictionary* info = [notification userInfo];
+    
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    CommentText.frame = CGRectMake(CommentText.frame.origin.x, CommentText.frame.origin.y + keyboardSize.height- offset, CommentText.frame.size.width, CommentText.frame.size.height);
+    Comment.frame = CGRectMake(Comment.frame.origin.x, Comment.frame.origin.y + keyboardSize.height - offset, Comment.frame.size.width, Comment.frame.size.height);
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [Comments count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    XYZCommentOfMelody *cell;
+    cell = [tableView dequeueReusableCellWithIdentifier:@"Comment" forIndexPath:indexPath];
+    if (indexPath.row<[Comments count]) {
+    XYZComment* DemoComment;
+    
+    DemoComment = [Comments objectAtIndex:indexPath.row];
+    [cell.Username setTitle:DemoComment.User.Stage_Name forState:UIControlStateNormal];
+    cell.Username.tag=DemoComment.User.Id;
+    cell.Script.text=DemoComment.Script;
+    NSString* fullpath;
+    if (!DemoComment.User.Picture_link) {
+        fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
+    }
+    else
+    {
+        fullpath = [ServerLocation stringByAppendingString:DemoComment.User.Picture_link];
+    }
+    cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
+    }
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    /*
+     if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
+     {
+     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+     }
+     else
+     {
+     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+     }
+     XYZTrack* tempTrack;
+     tempTrack=[tracks objectAtIndex:indexPath.row];
+     tempTrack.isSelected=(!tempTrack.isSelected);
+     [tracks replaceObjectAtIndex:indexPath.row withObject:tempTrack];
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+     */
+}
+
+/*
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+ 
+    XYZFeed* DemoFeed;
+    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
+    if ([DemoFeed isKindOfClass:[XYZShare class]]){
+        return 111;
+    }
+    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
+        return 85;
+    }
+ 
+    return 102;
+}
+
+*/
 
 
 #pragma mark - Navigation
@@ -439,7 +646,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"Profile"])
+    if ([segue.identifier isEqualToString:@"ProfileFromListen"])
     {
         [segue.destinationViewController setId:UserId];
     }
@@ -451,7 +658,7 @@
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    if([identifier isEqualToString:@"Profile"])
+    if([identifier isEqualToString:@"ProfileFromListen"])
     {
         if (UserId == 0) {
             return NO;

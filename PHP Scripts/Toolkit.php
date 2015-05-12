@@ -148,6 +148,26 @@ class Toolkit
 		return $Share;
 	}
 
+	function getApplauseCount($Melody)
+	{
+		$this->Bridge->setTable("Applause");
+		$Results = $this->Bridge->getCount($this->Bridge->Attributes[1],$Melody);
+		return $Results;
+	}
+
+	function getShareCount($Melody)
+	{
+		$this->Bridge->setTable("Share");
+		$Results = $this->Bridge->getCount($this->Bridge->Attributes[1],$Melody);
+		return $Results;
+	}
+
+	function getCommentCount($Melody)
+	{
+		$this->Bridge->setTable("Comment");
+		$Results = $this->Bridge->getCount($this->Bridge->Attributes[2],$Melody);
+		return $Results;
+	}
 	
 }
 

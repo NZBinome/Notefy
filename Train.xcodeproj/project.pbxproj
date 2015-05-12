@@ -38,6 +38,13 @@
 		9B7F28BF1A8F9F0A00A154F6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28BE1A8F9F0A00A154F6 /* XCTest.framework */; };
 		9B7F28C01A8F9F0A00A154F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F289F1A8F9F0900A154F6 /* Foundation.framework */; };
 		9B7F28C11A8F9F0A00A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+		9B85CEC41B009F6000085C4C /* XYZCommentOfMelody.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B85CEC31B009F6000085C4C /* XYZCommentOfMelody.m */; };
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 		9B9495241AEB83D200EA94AE /* mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495221AEB83D200EA94AE /* mixer.cpp */; };
 		9B94952A1AEB83E600EA94AE /* aiffwrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495261AEB83E600EA94AE /* aiffwrite.cpp */; };
 		9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495281AEB83E600EA94AE /* audiowrite.cpp */; };
@@ -169,6 +176,14 @@
 		9B7F28B71A8F9F0900A154F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9B7F28BD1A8F9F0A00A154F6 /* TrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F28BE1A8F9F0A00A154F6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+		9B85CEC21B009F6000085C4C /* XYZCommentOfMelody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCommentOfMelody.h; sourceTree = "<group>"; };
+		9B85CEC31B009F6000085C4C /* XYZCommentOfMelody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCommentOfMelody.m; sourceTree = "<group>"; };
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 		9B9495221AEB83D200EA94AE /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
 		9B9495231AEB83D200EA94AE /* mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mixer.h; sourceTree = "<group>"; };
 		9B9495261AEB83E600EA94AE /* aiffwrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffwrite.cpp; sourceTree = "<group>"; };
@@ -363,6 +378,8 @@
 				9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */,
 				9BF7C48B1ADE5FEE007BEEED /* XYZCreateCell.h */,
 				9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */,
+				9B85CEC21B009F6000085C4C /* XYZCommentOfMelody.h */,
+				9B85CEC31B009F6000085C4C /* XYZCommentOfMelody.m */,
 			);
 			path = "Object Controllers";
 			sourceTree = "<group>";
@@ -833,6 +850,7 @@
 				9B94952E1AEB875100EA94AE /* XYZSavedMelodies.mm in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
+				9B85CEC41B009F6000085C4C /* XYZCommentOfMelody.m in Sources */,
 				9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */,
 				9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */,
 				9BF7C4811ADE5F26007BEEED /* XYZCommentCell.m in Sources */,
