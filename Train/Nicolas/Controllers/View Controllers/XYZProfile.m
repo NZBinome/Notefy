@@ -296,6 +296,9 @@
     }
     ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
 }
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 - (void)viewDidLoad
@@ -334,6 +337,7 @@
             [BecomeAFan setTitle:@"Already a Fan" forState:UIControlStateNormal];
         }
     }
+    ChosenMelody=0;
 }
 
 -(void)InitializeView
@@ -369,7 +373,7 @@
 - (IBAction)melodyPressed:(UIControl*)sender
 {
     ChosenMelody = sender.tag;
-    [self performSegueWithIdentifier:@"MelodyPressed" sender:self];
+    //[self performSegueWithIdentifier:@"ProfileMelodyPressed" sender:self];
     
 }
 
@@ -486,14 +490,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"MelodyPressed"]) {
+    if ([segue.identifier isEqualToString:@"ProfileMelodyPressed"]) {
         [segue.destinationViewController initializeMelodyId:ChosenMelody];
     }
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    if([identifier isEqualToString:@"MelodyPressed"])
+    if([identifier isEqualToString:@"ProfileMelodyPressed"])
     {
         if (ChosenMelody == 0) {
             return NO;

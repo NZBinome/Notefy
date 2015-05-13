@@ -187,8 +187,10 @@
 {
     int i=0;
     XYZTrack* temptrack;
+
     while (i<[tracks count])
     {
+
         temptrack=[[XYZTrack alloc]init];
         temptrack=[tracks objectAtIndex:i];
         if (![temptrack.instrument.Name isEqualToString:@"mic"])
@@ -204,6 +206,7 @@
                 {
                     path=[appdel.path stringByAppendingString:[[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/"] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
                 }
+                NSLog(path);
                 amc.fix((char*)[path UTF8String]);
             }
         }

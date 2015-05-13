@@ -10,10 +10,12 @@
 #import "../../XYZAppDelegate.h"
 #import "../../Objects/XYZMelody.h"
 #import "../../Objects/XYZUser.h"
+#import "../Object Controllers/XYZCommentOfMelody.h"
+#import "../../Objects/XYZComment.h"
 //#import "../../Audio Control/AudioStreamer.h"
 
 
-@interface XYZMelodyListen : UIViewController<NSXMLParserDelegate>
+@interface XYZMelodyListen : UIViewController<NSXMLParserDelegate,UITableViewDelegate,UITableViewDataSource>
 
 //@property AudioStreamer *streamer;
 //@property NSTimer *progressUpdateTimer;

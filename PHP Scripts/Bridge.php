@@ -185,6 +185,19 @@ Class Bridge
 
 	}
 
+	function getCount($Key,$Value)
+	{
+		$this->openConnection();
+		$query = "SELECT COUNT(" . $Key . ") AS " . $Key . " FROM " . $this->Table . " WHERE " . $Key . "=" . $Value;
+		$result = mysqli_query($this->con,$query);
+		while($row = mysqli_fetch_array($result))
+ 		{
+ 			return $row[$Key];
+ 		}
+
+  		$this->closeConnection();
+	}
+
 	function setAttributes()
 	{
       	$columns=$this->describe();

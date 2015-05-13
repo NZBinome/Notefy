@@ -90,7 +90,7 @@ class  Melody
     	return $this->Date;
     }
 
-    function getUser_Id($par)
+    function getUser_Id()
     {
     	return $this->User_Id;
     }
