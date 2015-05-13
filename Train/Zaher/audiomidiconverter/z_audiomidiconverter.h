@@ -18,11 +18,13 @@ class Z_audioMidiConverter
     
     char * _converter;
     char * _soundfont;
+    int _tempo;
     FileType _z_amc_getFileType(const char *f);
 
 public:
     Z_audioMidiConverter();
     void melToMid(Melody& m, char *filename);
+    void setTempo(int tempo);
     int convert(char *audioFile, char *midiFile);
     void setConverterPath(const char *p);
     void setSoundFontPath(const char * p);

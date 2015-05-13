@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
+extern const int refTempo;
 
 FileType Z_audioMidiConverter::_z_amc_getFileType(const char *f)
 {
@@ -42,11 +42,13 @@ Z_audioMidiConverter::Z_audioMidiConverter()
 {
     _converter=0;
     _soundfont=0;
+    _tempo=100;
 }
 
 void Z_audioMidiConverter::melToMid(Melody &m, char* filename)
 {
     MidiCreator c(m.fs());
+    c.setTempo(_tempo);
     Note n;
     for(int i=0;i<m.n();++i)
     {
@@ -58,6 +60,11 @@ void Z_audioMidiConverter::melToMid(Melody &m, char* filename)
         c.addNote(n);
     }
     c.creerMidiFile(filename);
+}
+
+void Z_audioMidiConverter::setTempo(int tempo)
+{
+    _tempo=tempo;
 }
 
 int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)

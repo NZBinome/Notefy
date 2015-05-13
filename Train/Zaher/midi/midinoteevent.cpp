@@ -1,0 +1,17 @@
+//
+//  midinoteevent.cpp
+//  Train
+//
+//  Created by Zaher Hamadeh on 5/13/15.
+//  Copyright (c) 2015 Nicolas Jbeyli. All rights reserved.
+//
+
+#include "midinoteevent.h"
+
+int MidiNoteEvent::collectData(unsigned char * buff)
+{
+    _data[0]=buff[0]&0x0F; //midi Channel
+    _data[1]=buff[1];      //note launched
+    _data[2]=buff[2];      //velocity
+    return 3;
+}

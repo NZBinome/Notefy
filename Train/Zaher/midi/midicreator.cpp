@@ -5,10 +5,13 @@
 
 using namespace std;
 
+extern const int refTempo=120;
+
 MidiCreator::MidiCreator(int fs)
 {
     double t=1.0/fs;        //un echantillon fait t seconde
     _fdt=t*2*_dt;           //une note de longueur t fait _fdt tick
+    _tempo=refTempo;
     //_name=0;
 }
 
@@ -33,11 +36,20 @@ void MidiCreator::addNote(Note n)
 
 int MidiCreator::sizeData(char *&c)
 {
-    c=new char[3+_n.size()*14];
-    int sd=3;
+    int sd=3+7;
+    c=new char[sd+_n.size()*14];
     c[0]=0;
     c[1]=192;
     c[2]=1;
+    c[3]=0;
+    c[4]=0xFF;
+    c[5]=0x51;
+    c[6]=0x03;
+    int timeUsec=(60*1000000)/_tempo;
+    c[7]=(char)((timeUsec>>16)&0xFF);
+    c[8]=(char)((timeUsec>>8)&0xFF);
+    c[9]=(char)((timeUsec)&0xFF);
+    
     for(int i=0;i<_n.size();++i)
     {
         int s;
@@ -45,6 +57,12 @@ int MidiCreator::sizeData(char *&c)
         sd+=s;
     }
     return sd;
+}
+
+void MidiCreator::setTempo(int tempo)
+{
+    _fdt*=(1.0*tempo)/(1.0*_tempo);
+    _tempo=tempo;
 }
 
 void MidiCreator::creerMidiFile(char *name)
@@ -55,7 +73,6 @@ void MidiCreator::creerMidiFile(char *name)
     //on ecrit le header du fichier
     char ch[]="MThd";
     f.write(ch,4*sizeof(char));
-
     //la taille du header
     int data=6;
     unsigned char c;
@@ -92,6 +109,8 @@ void MidiCreator::creerMidiFile(char *name)
     char ch2[]="MTrk";
     f.write(ch2,4*sizeof(char));
 
+    
+    
     //la taille du MIDI data
     char *d=0;
     data=sizeData(d)+4;
