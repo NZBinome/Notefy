@@ -211,18 +211,18 @@ void Z_audioMidiConverter::setSoundFontPath(const char * p)
 
 int Z_audioMidiConverter::iconvert(const char *midiFil, char *midiAltered)
 {
-//    if(_converter==0||_soundfont==0)
-//    {
-//        throw "No converter or soundfont selected for midi to audio conversion\n";
-//    }
-//    sprintf(midiAltered, "%s.aif" ,midiFil);
-//    int pid = fork();
-//    if (pid==0) {
-//        printf("%s %s -T aiff -F %s %s %s\n",_converter,_converter,midiAltered,_soundfont,midiFil);
-//        execl(_converter, _converter, "-T", "aiff", "-F", midiAltered, _soundfont, midiFil, NULL);
-//    }
-//    int returnStatus;
-//    waitpid(pid, &returnStatus, 0);
+    if(_converter==0||_soundfont==0)
+    {
+        throw "No converter or soundfont selected for midi to audio conversion\n";
+    }
+    sprintf(midiAltered, "%s.aif" ,midiFil);
+    int pid = fork();
+    if (pid==0) {
+        printf("%s %s -T aiff -F %s %s %s\n",_converter,_converter,midiAltered,_soundfont,midiFil);
+        execl(_converter, _converter, "-T", "aiff", "-F", midiAltered, _soundfont, midiFil, NULL);
+    }
+    int returnStatus;
+    waitpid(pid, &returnStatus, 0);
     
     return 1;
 }

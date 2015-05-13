@@ -43,6 +43,7 @@ int MidiManipulator::getToChunk(const int cid)
         _f.seekg(size,ios::cur);
         _f.read((char*)&fcid,sizeof(int));
         _f.read((char*)&size,sizeof(int));
+        size=Util::swift(size);
         if(_f.eof())
             return 0;
     }while(fcid!=cid);
@@ -56,19 +57,34 @@ void MidiManipulator::readHeader()
     _f.read((char *)&_mf, 2);
     _f.read((char *)&_nt, 2);
     _f.read((char *)&_tpqn, 2);
+    _mf=Util::swift(_mf);
+    _nt=Util::swift(_nt);
+    _tpqn=Util::swift(_tpqn);
 }
 
 void MidiManipulator::readBody()
 {
     int bs=getToChunk(_MTrk);
     unsigned char * buff=new unsigned char[bs];
+    _f.read((char *)buff, bs);
+    unsigned char * b=buff;
     int s=0;
     do
     {
-        _e.push_back(MidiEvent::createMidiEvent(buff, s));
-        buff+=s;
-        buff+=((MidiEvent *)_e.back())->collectData(buff);
-    }while(((MidiEvent *)_e.back())->type()==MidiEvent::_ME_EOT);
+        _e.push_back(MidiEvent::createMidiEvent(b, s));
+        b+=s;
+        b+=((MidiEvent *)_e.back())->collectData(b);
+    }while(((MidiEvent *)_e.back())->type()!=MidiEvent::_ME_EOT);
+    delete [] buff;
+}
+
+void MidiManipulator::quantize(int base)
+{
+    int offset,last=offset=0;
+    for(int i=0; i<_e.size(); ++i)
+    {
+        ((MidiEvent *)_e[i])->quantizeL(base,offset,last);
+    }
 }
 
 void MidiManipulator::close()

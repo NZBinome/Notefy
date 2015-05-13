@@ -14,6 +14,10 @@ public:
     {
         return ((b>>24)&0x000000ff)|((b>>8)&0x0000ff00)|((b<<8)&0x00ff0000)|((b<<24)&0xff000000);
     }
+    static inline short swift(short b)
+    {
+        return ((b>>8)&0x00ff)|((b<<8)&0xff00);
+    }
 };
 
 #endif // UTIL_H

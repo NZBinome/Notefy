@@ -29,7 +29,14 @@ SOURCES += main.cpp \
     ../Train/Zaher/libmel/melfile.cpp \
     ../Train/Zaher/signal/mixer.cpp \
     ../Train/Zaher/audiowrite/audiowrite.cpp \
-    ../Train/Zaher/audiowrite/aiffwrite.cpp
+    ../Train/Zaher/audiowrite/aiffwrite.cpp \
+    ../Train/Zaher/midi/midieotevent.cpp \
+    ../Train/Zaher/midi/midievent.cpp \
+    ../Train/Zaher/midi/midimanipulator.cpp \
+    ../Train/Zaher/midi/midinoteevent.cpp \
+    ../Train/Zaher/midi/midiprogramchangeevent.cpp \
+    ../Train/Zaher/midi/miditempoevent.cpp \
+    ../Train/Zaher/midi/miditextevent.cpp
 
 
 HEADERS += \
@@ -54,6 +61,13 @@ HEADERS += \
     ../Train/Zaher/libmel/melfile.h \
     ../Train/Zaher/signal/mixer.h \
     ../Train/Zaher/audiowrite/audiowrite.h \
-    ../Train/Zaher/audiowrite/aiffwrite.h
+    ../Train/Zaher/audiowrite/aiffwrite.h \
+    ../Train/Zaher/midi/midieotevent.h \
+    ../Train/Zaher/midi/midievent.h \
+    ../Train/Zaher/midi/midimanipulator.h \
+    ../Train/Zaher/midi/midinoteevent.h \
+    ../Train/Zaher/midi/midiprogramchangeevent.h \
+    ../Train/Zaher/midi/miditempoevent.h \
+    ../Train/Zaher/midi/miditextevent.h
 
 

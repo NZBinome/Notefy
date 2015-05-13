@@ -34,6 +34,7 @@ public:
     void open(const char * filename);
     void readHeader();
     void readBody();
+    void quantize(int base);
     void close();
     ~MidiManipulator();
 };

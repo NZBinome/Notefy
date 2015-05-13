@@ -8,6 +8,7 @@
 #include "../Train/Zaher/wavFormat/diviseur.h"
 #include "../Train/Zaher/signal/complex.h"
 #include "../Train/Zaher/signal/signal.h"
+#include "../Train/Zaher/midi/midimanipulator.h"
 #include <ctime>
 #include <iostream>
 
@@ -133,13 +134,26 @@ void melFilem()
 
 void mix()
 {
-    Z_audioMidiConverter amc;
-    char *a[]={"track1.aif","track2.aif","track3.aif"};
+}
 
-    amc.mix(a,3,"mix.aif");
+
+void quantize()
+{
+    freopen("log.log","a",stdout);
+    time_t t=time(0);
+    struct tm * now=localtime(&t);
+    printf("\n--\n--\nstart run :: %d/%d/%d -- %d:%d:%d\n--\n",now->tm_year+1900,now->tm_mon+1,now->tm_mday,now->tm_hour,now->tm_min,now->tm_sec);
+
+    MidiManipulator mm;
+    mm.open("hash1.mid");
+    mm.quantize(50);
+    mm.close();
+
+    printf("\n--\n--\nend run\n--------------------------------------------------------------\n--------------------------------------------------------------\n");
+
 }
 
 int main()
 {
-    mix();
+    quantize();
 }

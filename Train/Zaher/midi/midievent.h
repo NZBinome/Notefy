@@ -26,10 +26,11 @@ public:
     static const unsigned char _PC=0xC0; //instrument changed
     
     
+    int length()const;
     
     static MidiEvent * createMidiEvent(unsigned char * buff,int &s);
     void setL(unsigned char * vlq, int s); //read start time from variable length quantity
-    void quantizeL(int base);              //quantize _l, closer to multiple of base.
+    void quantizeL(int base, int &offset, int &last);              //quantize _l, closer to multiple of base.
     
     static void vlqSize(unsigned char * buff, int &s);
     static unsigned int vlqInt(unsigned int vlq);

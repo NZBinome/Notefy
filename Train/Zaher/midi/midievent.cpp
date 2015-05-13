@@ -11,7 +11,7 @@
 #include "midieotevent.h"
 #include "miditempoevent.h"
 #include "midiprogramchangeevent.h"
-
+#include <stdio.h>
 
 MidiEvent * MidiEvent::createMidiEvent(unsigned char *buff, int &s)
 {
@@ -59,13 +59,18 @@ MidiEvent * MidiEvent::createMidiEvent(unsigned char *buff, int &s)
     return etr;
 }
 
+int MidiEvent::length()const
+{
+    return _l;
+}
+
 void MidiEvent::vlqSize(unsigned char * buff, int &s)
 {
     s=0;
-    do
+    while(buff[s++]&0x80)
     {
-        ++s;
-    }while (buff[s]&0x80);
+
+    }
 }
 
 unsigned int MidiEvent::intVlq(unsigned int l)
@@ -95,7 +100,7 @@ unsigned int MidiEvent::vlqInt(unsigned int vlq)
 
 unsigned int MidiEvent::ucharVlq(unsigned char *vlqc, int s)
 {
-    unsigned int v;
+    unsigned int v=0;
     for(int i=0;i<s;++i)
     {
         v|=((unsigned int)vlqc[i])<<(8*i);
@@ -120,15 +125,19 @@ void MidiEvent::setL(unsigned char *vlq, int s)
     _l=vlqInt(ucharVlq(vlq, s));
 }
 
-void MidiEvent::quantizeL(int base)
+void MidiEvent::quantizeL(int base, int &offset, int &last)
 {
-    int div=_l/base;
-    if (_l-div*base<(div+1)*base-_l)
+    offset+=_l;
+    int div=offset/base;
+    if (offset-div*base<(div+1)*base-offset)
     {
         _l=div*base;
     }
     else
         _l=(div+1)*base;
+    _l-=last;
+    last+=_l;
+    printf("qu %d\n",_l);
 }
 
 unsigned char MidiEvent::type()
