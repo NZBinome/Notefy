@@ -38,13 +38,6 @@
 		9B7F28BF1A8F9F0A00A154F6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28BE1A8F9F0A00A154F6 /* XCTest.framework */; };
 		9B7F28C01A8F9F0A00A154F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F289F1A8F9F0900A154F6 /* Foundation.framework */; };
 		9B7F28C11A8F9F0A00A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-		9B85CEC41B009F6000085C4C /* XYZCommentOfMelody.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B85CEC31B009F6000085C4C /* XYZCommentOfMelody.m */; };
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 		9B9495241AEB83D200EA94AE /* mixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495221AEB83D200EA94AE /* mixer.cpp */; };
 		9B94952A1AEB83E600EA94AE /* aiffwrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495261AEB83E600EA94AE /* aiffwrite.cpp */; };
 		9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B9495281AEB83E600EA94AE /* audiowrite.cpp */; };
@@ -117,6 +110,13 @@
 		9BF7C48A1ADE5FB8007BEEED /* XYZFollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */; };
 		9BF7C48D1ADE5FEE007BEEED /* XYZCreateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */; };
 		9BF7C4901ADE682F007BEEED /* XYZFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C48F1ADE682F007BEEED /* XYZFollow.m */; };
+		FFD2ACBB1B025E1B00D269EB /* midimanipulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACB91B025E1B00D269EB /* midimanipulator.cpp */; };
+		FFD2ACBE1B031FF300D269EB /* midievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACBC1B031FF300D269EB /* midievent.cpp */; };
+		FFD2ACC11B03275A00D269EB /* midinoteevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACBF1B03275A00D269EB /* midinoteevent.cpp */; };
+		FFD2ACC41B0352C800D269EB /* miditextevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACC21B0352C800D269EB /* miditextevent.cpp */; };
+		FFD2ACFA1B0358C000D269EB /* midieotevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACF81B0358C000D269EB /* midieotevent.cpp */; };
+		FFD2ACFD1B03591D00D269EB /* miditempoevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACFB1B03591D00D269EB /* miditempoevent.cpp */; };
+		FFD2AD001B037AC200D269EB /* midiprogramchangeevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACFE1B037AC200D269EB /* midiprogramchangeevent.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,14 +176,6 @@
 		9B7F28B71A8F9F0900A154F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9B7F28BD1A8F9F0A00A154F6 /* TrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F28BE1A8F9F0A00A154F6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-		9B85CEC21B009F6000085C4C /* XYZCommentOfMelody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCommentOfMelody.h; sourceTree = "<group>"; };
-		9B85CEC31B009F6000085C4C /* XYZCommentOfMelody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCommentOfMelody.m; sourceTree = "<group>"; };
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
 		9B9495221AEB83D200EA94AE /* mixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mixer.cpp; sourceTree = "<group>"; };
 		9B9495231AEB83D200EA94AE /* mixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mixer.h; sourceTree = "<group>"; };
 		9B9495261AEB83E600EA94AE /* aiffwrite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = aiffwrite.cpp; sourceTree = "<group>"; };
@@ -297,6 +289,20 @@
 		9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCreateCell.m; sourceTree = "<group>"; };
 		9BF7C48E1ADE682F007BEEED /* XYZFollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFollow.h; sourceTree = "<group>"; };
 		9BF7C48F1ADE682F007BEEED /* XYZFollow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFollow.m; sourceTree = "<group>"; };
+		FFD2ACB91B025E1B00D269EB /* midimanipulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midimanipulator.cpp; sourceTree = "<group>"; };
+		FFD2ACBA1B025E1B00D269EB /* midimanipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midimanipulator.h; sourceTree = "<group>"; };
+		FFD2ACBC1B031FF300D269EB /* midievent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midievent.cpp; sourceTree = "<group>"; };
+		FFD2ACBD1B031FF300D269EB /* midievent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midievent.h; sourceTree = "<group>"; };
+		FFD2ACBF1B03275A00D269EB /* midinoteevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midinoteevent.cpp; sourceTree = "<group>"; };
+		FFD2ACC01B03275A00D269EB /* midinoteevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midinoteevent.h; sourceTree = "<group>"; };
+		FFD2ACC21B0352C800D269EB /* miditextevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = miditextevent.cpp; sourceTree = "<group>"; };
+		FFD2ACC31B0352C800D269EB /* miditextevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miditextevent.h; sourceTree = "<group>"; };
+		FFD2ACF81B0358C000D269EB /* midieotevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midieotevent.cpp; sourceTree = "<group>"; };
+		FFD2ACF91B0358C000D269EB /* midieotevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midieotevent.h; sourceTree = "<group>"; };
+		FFD2ACFB1B03591D00D269EB /* miditempoevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = miditempoevent.cpp; sourceTree = "<group>"; };
+		FFD2ACFC1B03591D00D269EB /* miditempoevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miditempoevent.h; sourceTree = "<group>"; };
+		FFD2ACFE1B037AC200D269EB /* midiprogramchangeevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midiprogramchangeevent.cpp; sourceTree = "<group>"; };
+		FFD2ACFF1B037AC200D269EB /* midiprogramchangeevent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midiprogramchangeevent.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,8 +384,6 @@
 				9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */,
 				9BF7C48B1ADE5FEE007BEEED /* XYZCreateCell.h */,
 				9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */,
-				9B85CEC21B009F6000085C4C /* XYZCommentOfMelody.h */,
-				9B85CEC31B009F6000085C4C /* XYZCommentOfMelody.m */,
 			);
 			path = "Object Controllers";
 			sourceTree = "<group>";
@@ -654,6 +658,20 @@
 				9BBDF9051A9E177800322797 /* mynote.h.autosave */,
 				9BBDF9061A9E177800322797 /* note.cpp */,
 				9BBDF9071A9E177800322797 /* note.h */,
+				FFD2ACB91B025E1B00D269EB /* midimanipulator.cpp */,
+				FFD2ACBA1B025E1B00D269EB /* midimanipulator.h */,
+				FFD2ACBC1B031FF300D269EB /* midievent.cpp */,
+				FFD2ACBD1B031FF300D269EB /* midievent.h */,
+				FFD2ACBF1B03275A00D269EB /* midinoteevent.cpp */,
+				FFD2ACC01B03275A00D269EB /* midinoteevent.h */,
+				FFD2ACC21B0352C800D269EB /* miditextevent.cpp */,
+				FFD2ACC31B0352C800D269EB /* miditextevent.h */,
+				FFD2ACF81B0358C000D269EB /* midieotevent.cpp */,
+				FFD2ACF91B0358C000D269EB /* midieotevent.h */,
+				FFD2ACFB1B03591D00D269EB /* miditempoevent.cpp */,
+				FFD2ACFC1B03591D00D269EB /* miditempoevent.h */,
+				FFD2ACFE1B037AC200D269EB /* midiprogramchangeevent.cpp */,
+				FFD2ACFF1B037AC200D269EB /* midiprogramchangeevent.h */,
 			);
 			path = midi;
 			sourceTree = "<group>";
@@ -817,6 +835,7 @@
 				9BF7C48A1ADE5FB8007BEEED /* XYZFollowCell.m in Sources */,
 				9BBDF9171A9E177800322797 /* freqtable.cpp in Sources */,
 				9BBDF9221A9E177800322797 /* pascal.c in Sources */,
+				FFD2ACC11B03275A00D269EB /* midinoteevent.cpp in Sources */,
 				9BBDF92A1A9E177800322797 /* signal.cpp in Sources */,
 				9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */,
 				9B283BDB1AC6FE1900D38762 /* XYZTrack.mm in Sources */,
@@ -826,6 +845,8 @@
 				9BF7C46C1ADABB60007BEEED /* XYZNewsFeed.m in Sources */,
 				9BE2C7701AD7F06000F2A0BF /* XYZMelodyCell.m in Sources */,
 				9BE2C76A1AD7B41000F2A0BF /* XYZProfile.m in Sources */,
+				FFD2ACC41B0352C800D269EB /* miditextevent.cpp in Sources */,
+				FFD2ACFA1B0358C000D269EB /* midieotevent.cpp in Sources */,
 				9BBDF9291A9E177800322797 /* melody.cpp in Sources */,
 				9BF7C4751ADAC7B6007BEEED /* XYZShare.m in Sources */,
 				9B283BD81AC6FE1900D38762 /* XYZViewController.mm in Sources */,
@@ -850,24 +871,27 @@
 				9B94952E1AEB875100EA94AE /* XYZSavedMelodies.mm in Sources */,
 				9BBDF9201A9E177800322797 /* Makefile in Sources */,
 				9B283BD51AC6FE1900D38762 /* XYZ_Recording_View.mm in Sources */,
-				9B85CEC41B009F6000085C4C /* XYZCommentOfMelody.m in Sources */,
 				9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */,
 				9BF7C47E1ADC3712007BEEED /* XYZApplause.m in Sources */,
 				9BF7C4811ADE5F26007BEEED /* XYZCommentCell.m in Sources */,
 				9B283BD01AC6FE1900D38762 /* XYZButtons.mm in Sources */,
 				9B9DAC3F1ACD3A750006A951 /* util.cpp in Sources */,
 				9B283BDA1AC6FE1900D38762 /* XYZInstrument.mm in Sources */,
+				FFD2ACFD1B03591D00D269EB /* miditempoevent.cpp in Sources */,
 				9BBDF9251A9E177800322797 /* musicinstrument.cpp in Sources */,
+				FFD2ACBB1B025E1B00D269EB /* midimanipulator.cpp in Sources */,
 				9BE2C7731AD8FE1700F2A0BF /* XYZMenu.m in Sources */,
 				9B9495241AEB83D200EA94AE /* mixer.cpp in Sources */,
 				9BBDF9161A9E177800322797 /* audioread.cpp in Sources */,
 				9BBDF9271A9E177800322797 /* note.cpp in Sources */,
+				FFD2AD001B037AC200D269EB /* midiprogramchangeevent.cpp in Sources */,
 				9BF7C4841ADE5F59007BEEED /* XYZApplauseCell.m in Sources */,
 				9BBDF9281A9E177800322797 /* complex.cpp in Sources */,
 				9BF7C47B1ADC28A6007BEEED /* XYZComment.m in Sources */,
 				9BBDF9191A9E177800322797 /* extended.c in Sources */,
 				9BBDF91E1A9E177800322797 /* libaiff.c in Sources */,
 				9B283BD11AC6FE1900D38762 /* XYZPlayer.m in Sources */,
+				FFD2ACBE1B031FF300D269EB /* midievent.cpp in Sources */,
 				9B4945E61AE63CBF009EE15A /* melfile.cpp in Sources */,
 				9B283BD91AC6FE1900D38762 /* main.m in Sources */,
 				9BE2C76D1AD7DD9000F2A0BF /* XYZMelody.m in Sources */,
