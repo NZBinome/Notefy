@@ -26,6 +26,8 @@
 		9B283BE91AC6FE7C00D38762 /* piano.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE21AC6FE7C00D38762 /* piano.png */; };
 		9B283BEA1AC6FE7C00D38762 /* trompette.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE31AC6FE7C00D38762 /* trompette.png */; };
 		9B283BEB1AC6FE7C00D38762 /* violin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B283BE41AC6FE7C00D38762 /* violin.png */; };
+		9B3DBA241B0493D400D8FF58 /* XYZCommentOfMelody.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3DBA231B0493D400D8FF58 /* XYZCommentOfMelody.m */; };
+		9B3DBA271B04965F00D8FF58 /* XYZProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3DBA261B04965F00D8FF58 /* XYZProfileInfo.m */; };
 		9B44D8111AF4CFFB00C2CD45 /* beat.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9B44D8101AF4CFFB00C2CD45 /* beat.aif */; };
 		9B4945E21AE2ADF6009EE15A /* XYZMelodyListen.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */; };
 		9B4945E61AE63CBF009EE15A /* melfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B4945E41AE63CBF009EE15A /* melfile.cpp */; };
@@ -160,6 +162,10 @@
 		9B283BE21AC6FE7C00D38762 /* piano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano.png; sourceTree = "<group>"; };
 		9B283BE31AC6FE7C00D38762 /* trompette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trompette.png; sourceTree = "<group>"; };
 		9B283BE41AC6FE7C00D38762 /* violin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = violin.png; sourceTree = "<group>"; };
+		9B3DBA221B0493D400D8FF58 /* XYZCommentOfMelody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZCommentOfMelody.h; sourceTree = "<group>"; };
+		9B3DBA231B0493D400D8FF58 /* XYZCommentOfMelody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCommentOfMelody.m; sourceTree = "<group>"; };
+		9B3DBA251B04965F00D8FF58 /* XYZProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZProfileInfo.h; sourceTree = "<group>"; };
+		9B3DBA261B04965F00D8FF58 /* XYZProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZProfileInfo.m; sourceTree = "<group>"; };
 		9B44D8101AF4CFFB00C2CD45 /* beat.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = beat.aif; path = audio_files/beat.aif; sourceTree = "<group>"; };
 		9B4945E01AE2ADF6009EE15A /* XYZMelodyListen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZMelodyListen.h; sourceTree = "<group>"; };
 		9B4945E11AE2ADF6009EE15A /* XYZMelodyListen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZMelodyListen.m; sourceTree = "<group>"; };
@@ -368,6 +374,8 @@
 		9B283BBC1AC6FE1900D38762 /* Object Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B3DBA221B0493D400D8FF58 /* XYZCommentOfMelody.h */,
+				9B3DBA231B0493D400D8FF58 /* XYZCommentOfMelody.m */,
 				9B283BBD1AC6FE1900D38762 /* XYZTrackCell.h */,
 				9B283BBE1AC6FE1900D38762 /* XYZTrackCell.mm */,
 				9BE2C76E1AD7F06000F2A0BF /* XYZMelodyCell.h */,
@@ -384,6 +392,8 @@
 				9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */,
 				9BF7C48B1ADE5FEE007BEEED /* XYZCreateCell.h */,
 				9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */,
+				9B3DBA251B04965F00D8FF58 /* XYZProfileInfo.h */,
+				9B3DBA261B04965F00D8FF58 /* XYZProfileInfo.m */,
 			);
 			path = "Object Controllers";
 			sourceTree = "<group>";
@@ -849,6 +859,7 @@
 				FFD2ACFA1B0358C000D269EB /* midieotevent.cpp in Sources */,
 				9BBDF9291A9E177800322797 /* melody.cpp in Sources */,
 				9BF7C4751ADAC7B6007BEEED /* XYZShare.m in Sources */,
+				9B3DBA241B0493D400D8FF58 /* XYZCommentOfMelody.m in Sources */,
 				9B283BD81AC6FE1900D38762 /* XYZViewController.mm in Sources */,
 				9BF7C4781ADC27AD007BEEED /* XYZFeed.m in Sources */,
 				9BF7C4691ADAB73C007BEEED /* XYZFeedCell.m in Sources */,
@@ -862,6 +873,7 @@
 				9B283BD21AC6FE1900D38762 /* XYZRecorder.m in Sources */,
 				9BBDF92B1A9E177800322797 /* diviseur.cpp in Sources */,
 				9BBDF91C1A9E177800322797 /* iff.c in Sources */,
+				9B3DBA271B04965F00D8FF58 /* XYZProfileInfo.m in Sources */,
 				9B9DAC421ACD3A810006A951 /* wavread.cpp in Sources */,
 				9BBDF9151A9E177800322797 /* aiffread.cpp in Sources */,
 				9B283BD31AC6FE1900D38762 /* XYZSaver.mm in Sources */,

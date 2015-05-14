@@ -9,9 +9,6 @@
 #import "XYZProfile.h"
 
 @interface XYZProfile ()
-@property (weak, nonatomic) IBOutlet UILabel *Last_Name;
-@property (weak, nonatomic) IBOutlet UILabel *First_Name;
-@property (weak, nonatomic) IBOutlet UILabel *Stage_Name;
 @property BOOL isUser;
 @property BOOL isFirst_Name;
 @property BOOL isLast_Name;
@@ -19,9 +16,7 @@
 @property BOOL isPicture_Link;
 @property XYZUser* User;
 @property int AccountId;
-@property (weak, nonatomic) IBOutlet UIButton *BecomeAFan;
 @property NSString* ServerLocation;
-@property (weak, nonatomic) IBOutlet UIImageView *ProfilePic;
 @property BOOL isMelody;
 @property BOOL isFile_Link;
 @property BOOL isTitle;
@@ -48,19 +43,14 @@
 @end
 
 @implementation XYZProfile
-@synthesize Last_Name;
-@synthesize First_Name;
-@synthesize Stage_Name;
 @synthesize isUser;
 @synthesize isFirst_Name;
 @synthesize isLast_Name;
 @synthesize isStage_Name;
 @synthesize User;
 @synthesize AccountId;
-@synthesize BecomeAFan;
 @synthesize ServerLocation;
 @synthesize isPicture_Link;
-@synthesize ProfilePic;
 @synthesize isMelody;
 @synthesize isFile_Link;
 @synthesize isTitle;
@@ -281,12 +271,12 @@
 
 }
 
--(void)assign
+-(void)assign:(XYZProfileInfo*)cell
 {
     NSString* fullpath;
-    Last_Name.text = User.Last_Name;
-    First_Name.text=User.First_Name;
-    Stage_Name.text=User.Stage_Name;
+    cell.LastName.text = User.Last_Name;
+    cell.FirstName.text=User.First_Name;
+    cell.StageName.text=User.Stage_Name;
     if (!User.Picture_link) {
         fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
     }
@@ -294,12 +284,25 @@
     {
         fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
     }
-    ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
+    cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
+    if (AccountId == User.Id)
+    {
+        cell.BecomeAFan.hidden=true;
+        cell.BecomeAFan.enabled=NO;
+    }
+    else
+    {
+        if ((Follower==AccountId)&&(Followed==User.Id))
+        {
+            isFan=true;
+            cell.BecomeAFan.hidden=false;
+            [cell.BecomeAFan setTitle:@"Already a Fan" forState:UIControlStateNormal];
+        }
+    }
 }
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 - (void)viewDidLoad
 {
@@ -312,31 +315,29 @@
     User=[[XYZUser alloc]init];
     Feeds=[[NSMutableArray alloc]init];
     User.Id=UserId;
-    
+    UserId=0;
+    ChosenMelody=0;
+
     ///////////////////////////////////// TO BE REMOVED /////////////////
     
     //User.Id=2;
     
     /////////////////////////////////////
     
-    
     [self InitializeView];
     
-    
-    
-    if (AccountId == User.Id)
-    {
-        BecomeAFan.hidden=true;
-        BecomeAFan.enabled=NO;
-    }
-    else
-    {
-        if ((Follower==AccountId)&&(Followed==User.Id))
-        {
-            isFan=true;
-            [BecomeAFan setTitle:@"Already a Fan" forState:UIControlStateNormal];
-        }
-    }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    //UserId=0;
+    //ChosenMelody=0;
+
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    UserId=0;
     ChosenMelody=0;
 }
 
@@ -347,7 +348,7 @@
     path = [path stringByAppendingString:@"&Follower="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
     [self getData:path];
-    [self assign];
+   // [self assign];
     
     path=[ServerLocation stringByAppendingString:@"GetMelodies.php?UserId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", User.Id]];
@@ -359,6 +360,7 @@
         // Example:
         // NSString *result = [anObject calculateSomething];
         [self getData:path];
+        [MelodyTable reloadData];
         dispatch_sync(dispatch_get_main_queue(), ^{
             // Update UI
             // Example:
@@ -373,15 +375,14 @@
 - (IBAction)melodyPressed:(UIControl*)sender
 {
     ChosenMelody = sender.tag;
-    //[self performSegueWithIdentifier:@"ProfileMelodyPressed" sender:self];
+    [self performSegueWithIdentifier:@"ProfileMelodyPressed" sender:self];
     
 }
 
 -(IBAction)userPressed:(UIControl*)sender
 {
-    [Feeds removeAllObjects];
-    User.Id = sender.tag;
-    [self InitializeView];
+    UserId = sender.tag;
+    [self performSegueWithIdentifier:@"ProfileToProfile" sender:self];
 }
 
 
@@ -390,18 +391,19 @@
     if (isFan)
     {
         path=[ServerLocation stringByAppendingString:@"Unfollow.php?Followed="];
-        [BecomeAFan setTitle:@"Become a Fan" forState:UIControlStateNormal];
+        [sender setTitle:@"Become a Fan" forState:UIControlStateNormal];
     }
     else
     {
         path=[ServerLocation stringByAppendingString:@"Follow.php?Followed="];
-        [BecomeAFan setTitle:@"Already a Fan" forState:UIControlStateNormal];
+        [sender setTitle:@"Already a Fan" forState:UIControlStateNormal];
     }
     isFan=!isFan;
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", User.Id]];
     path = [path stringByAppendingString:@"&Follower="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
     [self getData:path];
+    [MelodyTable reloadData];
     
 }
 
@@ -415,62 +417,61 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [Feeds count];
+
+    return [Feeds count]+1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XYZFeedCell *cell;
-    XYZFeed* DemoFeed;
-    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
-    if ([DemoFeed isKindOfClass:[XYZShare class]]){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ShareCell" forIndexPath:indexPath];
+    UITableViewCell* cell;
+    //NSLog(@"Count of feeds in index path %d",[Feeds count]);
+    //NSLog(@"index path  : %d",indexPath.row);
+    if (indexPath.row==0)
+    {
+        cell =[[XYZProfileInfo alloc]init];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"ProfileInfo" forIndexPath:indexPath];
+        [self assign:(XYZProfileInfo*)cell];
     }
-    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"CreateCell" forIndexPath:indexPath];
+    
+    else
+    {
+        cell = [[XYZFeedCell alloc]init];
+        XYZFeed* DemoFeed;
+        //NSLog(@"Unroll : %d",[Feeds count]-(indexPath.row) );
+        DemoFeed=[Feeds objectAtIndex:[Feeds count]-(indexPath.row)];
+        if ([DemoFeed isKindOfClass:[XYZShare class]])
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ShareCell" forIndexPath:indexPath];
+        }
+        else if ([DemoFeed isKindOfClass:[XYZCreate class]])
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"CreateCell" forIndexPath:indexPath];
+        }
+        [DemoFeed fillCell:(XYZFeedCell*)cell];
     }
-    /*
-    XYZMelodyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Melody" forIndexPath:indexPath];
-    XYZMelody* DemoMel;
-    DemoMel=[[XYZMelody alloc]init];
-    DemoMel= [Melodies objectAtIndex:indexPath.row];
-    cell.MelodyName.text = DemoMel.Title;
-    cell.MelodyDate.text=DemoMel.Date;
-     */
-    [DemoFeed fillCell:cell];
-
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
-    {
-        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-    }
-    else
-    {
-        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    XYZTrack* tempTrack;
-    tempTrack=[tracks objectAtIndex:indexPath.row];
-    tempTrack.isSelected=(!tempTrack.isSelected);
-    [tracks replaceObjectAtIndex:indexPath.row withObject:tempTrack];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     */
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row==0) {
+        return 208;
+    }
+    else{
     XYZFeed* DemoFeed;
-    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
+    DemoFeed=[Feeds objectAtIndex:[Feeds count]-(indexPath.row)];
     if ([DemoFeed isKindOfClass:[XYZShare class]]){
         return 111;
     }
     else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
         return 85;
+    }
     }
     return 102;
 }
@@ -493,17 +494,32 @@
     if ([segue.identifier isEqualToString:@"ProfileMelodyPressed"]) {
         [segue.destinationViewController initializeMelodyId:ChosenMelody];
     }
+    if ([segue.identifier isEqualToString:@"ProfileToProfile"]) {
+        [segue.destinationViewController setId:UserId];
+    }
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
+    /*
+    NSLog(@"check segue : %d",ChosenMelody);
+
     if([identifier isEqualToString:@"ProfileMelodyPressed"])
     {
-        if (ChosenMelody == 0) {
+        if (ChosenMelody==0)
+        {
             return NO;
         }
     }
-    return YES;
+    if ([identifier isEqualToString:@"ProfileToProfile"])
+    {
+        if (UserId==0)
+        {
+            return NO;
+        }
+    }
+     */
+    return NO;
 }
 
 
