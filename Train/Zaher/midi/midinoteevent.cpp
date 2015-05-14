@@ -17,7 +17,15 @@ int MidiNoteEvent::collectData(unsigned char * buff)
     _data[1]=buff[1];      //note launched
     _data[2]=buff[2];      //velocity
 
-    printf("length %d, note %u, vel %u\n",length(),_data[1],_data[2]);
+    printf("length %d, note %u, vel %u,\n",length(),_data[1],_data[2]);
 
+    return 3;
+}
+
+int MidiNoteEvent::writeAData(unsigned char *buff)
+{
+    buff[0]=_data[0]|_NO;
+    buff[1]=_data[1];
+    buff[2]=_data[2];
     return 3;
 }

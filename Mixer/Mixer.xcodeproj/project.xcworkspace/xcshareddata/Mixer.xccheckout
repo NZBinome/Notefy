@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>45B05032-4112-4D41-AEEE-26F58A587F3B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Mixer</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>47D91239522E8F230175B36B7F52B0B20D4F78D8</key>
 		<string>https://github.com/NZBinome/Notefy.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Mixer/Mixer.xcodeproj/project.xcworkspace</string>
+	<string>Mixer/Mixer.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>47D91239522E8F230175B36B7F52B0B20D4F78D8</key>

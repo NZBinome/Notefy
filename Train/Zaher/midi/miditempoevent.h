@@ -16,6 +16,7 @@ class MidiTempoEvent : public MidiEvent
     unsigned int _tempo;
 public:
     int collectData(unsigned char * buff);
+    int writeAData(unsigned char * buff);
 };
 
 #endif /* defined(__Train__miditempoevent__) */

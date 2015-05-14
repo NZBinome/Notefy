@@ -31,7 +31,7 @@ void AudioWrite::set_ba(int ba)
 
 AudioWrite::~AudioWrite()
 {
-    if(_b=0)
+    if(_b==0)
     {
         delete [] _b;
     }

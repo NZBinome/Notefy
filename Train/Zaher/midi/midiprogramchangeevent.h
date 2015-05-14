@@ -16,6 +16,7 @@ class MidiProgramChangeEvent : public MidiEvent
     unsigned char _inst[2];
 public:
     int collectData(unsigned char * buff);
+    int writeAData(unsigned char *buff);
 };
 
 #endif /* defined(__Train__midiprogramchangeevent__) */

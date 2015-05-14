@@ -18,6 +18,7 @@ class MidiNoteEvent : public MidiEvent
 public:
     
     int collectData(unsigned char * buff);
+    int writeAData(unsigned char * buff);
 };
 
 #endif /* defined(__Train__midinoteevent__) */

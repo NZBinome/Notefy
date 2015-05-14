@@ -13,6 +13,8 @@ class MidiEvent
 {
   
     unsigned int _l;  //time when event start
+
+protected:
     unsigned char _t; //event type;
     
 public:
@@ -40,6 +42,8 @@ public:
     
     unsigned char type();
     virtual int collectData(unsigned char * buff);
+    virtual int writeAData(unsigned char * buff);
+    int writeData(unsigned char * buff);
 };
 
 

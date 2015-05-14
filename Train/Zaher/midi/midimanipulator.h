@@ -22,6 +22,9 @@ class MidiManipulator
     std::vector<MidiEvent *> _e;
     std::fstream _f;
     
+    unsigned char * _buff;
+    
+    
     short _mf;  //midi format
     short _nt;  //number of tracks
     short _tpqn;//ticks per quarter notes
@@ -31,10 +34,12 @@ class MidiManipulator
     
 public:
     
+    MidiManipulator();
     void open(const char * filename);
     void readHeader();
     void readBody();
     void quantize(int base);
+    void flush();
     void close();
     ~MidiManipulator();
 };

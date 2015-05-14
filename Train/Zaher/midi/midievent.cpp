@@ -69,7 +69,7 @@ void MidiEvent::vlqSize(unsigned char * buff, int &s)
     s=0;
     while(buff[s++]&0x80)
     {
-
+        //yes this should be empty, don't worry
     }
 }
 
@@ -111,13 +111,12 @@ unsigned int MidiEvent::ucharVlq(unsigned char *vlqc, int s)
 void MidiEvent::vlqUchar(unsigned char *vlqc, int &s, unsigned int vlq)
 {
     s=0;
-    vlqc[s]=((unsigned char)vlq)&0xFF;
+    vlqc[s++]=((unsigned char)vlq)&0xFF;
     
     while(vlq>>=8)
     {
-        vlqc[++s]=((unsigned char)vlq&0XFF);
+        vlqc[s++]=((unsigned char)vlq&0XFF);
     }
-    ++s;
 }
 
 void MidiEvent::setL(unsigned char *vlq, int s)
@@ -137,7 +136,6 @@ void MidiEvent::quantizeL(int base, int &offset, int &last)
         _l=(div+1)*base;
     _l-=last;
     last+=_l;
-    printf("qu %d\n",_l);
 }
 
 unsigned char MidiEvent::type()
@@ -148,4 +146,23 @@ unsigned char MidiEvent::type()
 int MidiEvent::collectData(unsigned char *buff)
 {
     return 0;
+}
+
+int MidiEvent::writeAData(unsigned char *buff)
+{
+    return 0;
+}
+
+int MidiEvent::writeData(unsigned char *buff)
+{
+    unsigned char vlqc[4];
+    int s;
+    vlqUchar(vlqc, s, intVlq(length()));
+    for (int i=0; i<s; ++i)
+    {
+        buff[i]=vlqc[i];
+    }
+    
+    s+=writeAData(buff+s);
+    return s;
 }

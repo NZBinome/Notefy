@@ -11,9 +11,14 @@
 
 using namespace std;
 
+MidiManipulator::MidiManipulator()
+{
+    _buff=0;
+}
+
 void MidiManipulator::open(const char *filename)
 {
-    _f.open(filename,ios::binary|ios::in);
+    _f.open(filename,ios::binary|ios::in|ios::out);
     if(!verifyChunk(_MThd, 0))
         return;
     readHeader();
@@ -65,9 +70,9 @@ void MidiManipulator::readHeader()
 void MidiManipulator::readBody()
 {
     int bs=getToChunk(_MTrk);
-    unsigned char * buff=new unsigned char[bs];
-    _f.read((char *)buff, bs);
-    unsigned char * b=buff;
+    _buff=new unsigned char[bs+bs/5];
+    _f.read((char *)_buff, bs);
+    unsigned char * b=_buff;
     int s=0;
     do
     {
@@ -75,7 +80,6 @@ void MidiManipulator::readBody()
         b+=s;
         b+=((MidiEvent *)_e.back())->collectData(b);
     }while(((MidiEvent *)_e.back())->type()!=MidiEvent::_ME_EOT);
-    delete [] buff;
 }
 
 void MidiManipulator::quantize(int base)
@@ -85,6 +89,32 @@ void MidiManipulator::quantize(int base)
     {
         ((MidiEvent *)_e[i])->quantizeL(base,offset,last);
     }
+}
+
+void MidiManipulator::flush()
+{
+    if (!_f.is_open())
+    {
+        return;
+    }
+    int bs=getToChunk(_MTrk);
+    unsigned char * b=_buff;
+    int s=0;
+    
+    for (int i=0; i<_e.size(); ++i)
+    {
+        s=((MidiEvent *)_e[i])->writeData(b);
+        b+=s;
+    }
+    s=b-_buff;
+//    for(int i=0;i<s;++i)
+//    {
+//        printf("%x ",_buff[i]);
+//    }
+
+    int pos=_f.tellp();
+    printf("%d\n",pos);
+    _f.write((char *)_buff,s);
 }
 
 void MidiManipulator::close()
@@ -98,4 +128,5 @@ MidiManipulator::~MidiManipulator()
     {
         _f.close();
     }
+    delete [] _buff;
 }

@@ -17,6 +17,7 @@ class MidiTextEvent : public MidiEvent
     char * _text;
 public:
     int collectData(unsigned char *buff);
+    int writeAData(unsigned char *buff);
 };
 
 #endif /* defined(__Train__miditextevent__) */
