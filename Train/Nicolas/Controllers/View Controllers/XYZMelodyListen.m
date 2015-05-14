@@ -508,7 +508,6 @@
 
 
 - (IBAction)back:(id)sender {
-    NSLog(@"back pressed");
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -658,13 +657,15 @@
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
+    /*
     if([identifier isEqualToString:@"ProfileFromListen"])
     {
         if (UserId == 0) {
             return NO;
         }
     }
-    return YES;
+     */
+    return NO;
 }
 
 

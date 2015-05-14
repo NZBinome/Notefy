@@ -14,6 +14,7 @@
 #import "../../Objects/XYZCreate.h"
 #import "../../Objects/XYZShare.h"
 #import "XYZMelodyListen.h"
+#import "../Object Controllers/XYZProfileInfo.h"
 
 @interface XYZProfile : UIViewController<UITableViewDelegate,UITableViewDataSource,NSXMLParserDelegate>
 

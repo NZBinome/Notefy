@@ -499,6 +499,7 @@
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
+    /*
     if([identifier isEqualToString:@"Profile"])
     {
         if (UserId == 0) {
@@ -511,7 +512,8 @@
             return NO;
         }
     }
-    return YES;
+     */
+    return NO;
 }
 
 
