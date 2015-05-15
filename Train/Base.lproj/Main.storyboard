@@ -390,11 +390,24 @@
                                     <action selector="Back:" destination="IV4-Q8-QwN" eventType="touchUpInside" id="UWD-th-c0L"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybw-Cz-9RR">
+                                <rect key="frame" x="-4" y="0.0" width="324" height="568"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" placeholderIntrinsicWidth="26" placeholderIntrinsicHeight="20" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="nSD-H7-Yjc">
+                                        <rect key="frame" x="149" y="334" width="26" height="20"/>
+                                        <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.67000000000000004" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="LXA-Lk-Q7c"/>
                     <connections>
+                        <outlet property="ActivityIndicator" destination="nSD-H7-Yjc" id="lAk-Mx-CML"/>
+                        <outlet property="DarkenView" destination="ybw-Cz-9RR" id="WPk-qA-ccK"/>
                         <outlet property="Switch" destination="SF7-wp-aIm" id="lQX-5e-yUZ"/>
                         <outlet property="inputname" destination="5qZ-SK-RIy" id="mDL-t4-XiD"/>
                         <outlet property="recordButton" destination="5kv-nV-t1d" id="8wR-WO-Gwf"/>
@@ -1110,7 +1123,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="oHB-S9-xvn"/>
@@ -1354,8 +1367,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Sdb-d4-mnM"/>
-        <segue reference="xfo-3x-Yfn"/>
+        <segue reference="Pvt-LR-qYQ"/>
+        <segue reference="Imf-yC-SBr"/>
         <segue reference="1rL-Qq-GBr"/>
     </inferredMetricsTieBreakers>
 </document>

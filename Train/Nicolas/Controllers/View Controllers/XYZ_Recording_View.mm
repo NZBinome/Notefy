@@ -35,6 +35,8 @@
 @property XYZAppDelegate *appdel;
 @property NSFileManager *filemgr;
 @property NSString* ServerLocation;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *DarkenView;
 
 
 @end
@@ -64,6 +66,8 @@
 @synthesize appdel;
 @synthesize filemgr;
 @synthesize ServerLocation;
+@synthesize ActivityIndicator;
+@synthesize DarkenView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -342,6 +346,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    ActivityIndicator.hidden = YES;
+    [self.view sendSubviewToBack:DarkenView];
     appdel=[UIApplication sharedApplication].delegate;
     ServerLocation=appdel.ServerLocation;
     [self cleanAudioFiles];
@@ -506,8 +512,13 @@
 }
 
 - (IBAction)share:(id)sender
+{
 
-{dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    [self.view bringSubviewToFront:DarkenView];
+    
+    ActivityIndicator.hidden = NO;
+    [ActivityIndicator startAnimating];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
         // Perform async operation
         // Call your method/function here
@@ -530,6 +541,7 @@
             // Example:
             // self.myLabel.text = result;
             //[self assign];
+            
             [self.navigationController popViewControllerAnimated:YES];
 
         });
