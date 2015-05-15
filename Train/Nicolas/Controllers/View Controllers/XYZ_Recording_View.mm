@@ -571,21 +571,29 @@
             XYZTrack* demotrack;
             demotrack=[tracks objectAtIndex:appdel.selectedtrack];
             demotrack.instrument.Name=chosenInstrument;
-            [tracks replaceObjectAtIndex:appdel.selectedtrack withObject:demotrack];
-            [trackTable reloadData];
+            
             NSString* path;
+            NSString* midpath;
             char array [256];
                 if ([selectedfile isEqualToString:@""])
                 {
                 path=[appdel.path stringByAppendingString:[@"/Default/track" stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];
+                midpath=[appdel.path stringByAppendingString:[@"/Default/track" stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".mid"]]];
                 }
                 else
                 {
                     path=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/track" ] stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".aif"]]];
+                    midpath=[appdel.path stringByAppendingString:[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/track" ] stringByAppendingString:[[NSString stringWithFormat:@"%d",appdel.selectedtrack+1] stringByAppendingString:@".mid"]]];
                 }
+            if (!demotrack.isConverted)
+            {
+                amc.convert((char*)[path UTF8String],array);
+                demotrack.isConverted=TRUE;
+            }
+            [tracks replaceObjectAtIndex:appdel.selectedtrack withObject:demotrack];
             appdel.selectedtrack=-1;
-            amc.convert((char*)[path UTF8String],array);
-            amc.chooseInstrument(appdel.newinstrument.number,array);
+            amc.chooseInstrument(appdel.newinstrument.number,(char*)[midpath UTF8String]);
+            [trackTable reloadData];
         }
 }
 

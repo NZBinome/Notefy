@@ -91,7 +91,7 @@ void MidiManipulator::quantize(int base)
     }
 }
 
-void MidiManipulator::flush()
+void MidiManipulator::flush(const char * filename)
 {
     if (!_f.is_open())
     {
@@ -107,13 +107,12 @@ void MidiManipulator::flush()
         b+=s;
     }
     s=b-_buff;
-//    for(int i=0;i<s;++i)
-//    {
-//        printf("%x ",_buff[i]);
-//    }
+    for(int i=0;i<s;++i)
+    {
+        printf("%x ",_buff[i]);
+    }
 
-    int pos=_f.tellp();
-    printf("%d\n",pos);
+    _f.seekp(_f.tellg());
     _f.write((char *)_buff,s);
 }
 

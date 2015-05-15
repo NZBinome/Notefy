@@ -39,7 +39,7 @@ public:
     void readHeader();
     void readBody();
     void quantize(int base);
-    void flush();
+    void flush(const char * filename=0);
     void close();
     ~MidiManipulator();
 };

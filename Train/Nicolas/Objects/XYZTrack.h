@@ -13,6 +13,7 @@
 @property NSString *trackName;
 @property XYZInstrument* instrument;
 @property BOOL isSelected;
+@property BOOL isConverted;
 -(void) initialize;
 
 @end

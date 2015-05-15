@@ -13,10 +13,12 @@
 @synthesize trackName;
 @synthesize instrument;
 @synthesize isSelected;
+@synthesize isConverted;
 
 -(void) initialize{
     trackName=@"track";
     isSelected=TRUE;
+    isConverted=FALSE;
 }
 
 @end

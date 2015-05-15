@@ -335,7 +335,11 @@ void MelFile::set_dnpqt(int *dnpqt)
         _flags|=QANT;
         _qt=true;
         _dnpqt=dnpqt;
-        ++_dnpqt[_dn];
+        if (_dnpqt)
+        {
+            ++_dnpqt[_dn];
+        }
+        
     }
 }
 

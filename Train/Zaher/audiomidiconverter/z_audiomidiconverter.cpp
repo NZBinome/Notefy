@@ -6,6 +6,7 @@
 #include "../signal/complex.h"
 #include "../signal/signal.h"
 #include "../signal/mixer.h"
+#include "../midi/midimanipulator.h"
 #include "../midi/note.h"
 #include "../signal/melody.h"
 #include "../audioread/wavread.h"
@@ -184,6 +185,16 @@ void Z_audioMidiConverter::fix(char *filename, bool deFix)
         {
             m.decompose();
             mf.set_dft_dnp_dnpqt(m.correct(),m.distPlace(),0,m.distNum());
+        }
+        else if (!mf.isQuantized())
+        {
+            printf("quantizing\n");
+            MidiManipulator mm;
+            mm.open(filename);
+            mm.quantize(50);
+            mm.flush(filename);
+            mm.close();
+            mf.set_dnpqt(0);
         }
         else
         {
