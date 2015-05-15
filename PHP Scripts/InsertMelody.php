@@ -15,4 +15,23 @@ $Melody1->setUser_Id($UserId);
 //$Melody1->display();
 $Melody1->insert();
 
+$arguments = "";
+
+$file = fopen("Melodies/" . $UserId . "/" . $MelodyName . "/Readme.txt","r");
+
+while(! feof($file))
+  {
+  	$string = trim (fgets($file));
+  	if (feof(($file))) 
+  	{
+  		break;
+  	}
+  	$arguments = $arguments . "\"Melodies/" . $UserId . "/" . $MelodyName . "/" . $string . "\" ";
+  }
+
+fclose($file);
+
+
+exec('./Mixer -i '. $arguments  . '-o "Melodies/' . $UserId . '/' . $MelodyName . '/Melody.aif" -c /usr/local/bin/fluidsynth -s SoundFonts/gm_soundfonts.sf2 & &> /dev/null &');
+
 ?>

@@ -53,5 +53,6 @@ $ToSend = $ToSend . "<Body>";
 $ToSend = $ToSend . "</Body>";
 $ToSend = $ToSend . "</Root>";
 echo $ToSend;
+echo count($Feeds);
 
 ?>

@@ -381,6 +381,43 @@
 
 }
 
+
+-(void)writeTxt
+{
+    NSString* path;
+    
+    if ([selectedfile isEqualToString:@""])
+    {
+        path=[appdel.path stringByAppendingString:@"/Default/Readme.txt"];
+    }
+    else
+    {
+        path=[appdel.path stringByAppendingString:[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/Readme.txt"]];
+    }
+    
+    
+    [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:path];
+    
+    int i=0;
+    XYZTrack* demotrack;
+    while (i<[tracks count]) {
+        [fileHandle seekToEndOfFile];
+        demotrack=[tracks objectAtIndex:i];
+        if ([demotrack.instrument.Name isEqualToString:@"mic"])
+        {
+            [fileHandle writeData:[[demotrack.trackName stringByAppendingString:@".aif\n"]dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        else
+        {
+            [fileHandle writeData:[[demotrack.trackName stringByAppendingString:@".mid\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        i=i+1;
+    }
+    [fileHandle closeFile];
+}
+
+
 // (void)navigate_From_Saved Loads the selected saved track, creates the players
 
 -(void)navigate_From_Saved:(NSString*)path
@@ -469,18 +506,35 @@
 }
 
 - (IBAction)share:(id)sender
-{
-    NSString* path;
-    path=[appdel.path stringByAppendingString:appdel.currentdirectory];
-    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
-                                                                        error:NULL];
-    [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *name = (NSString *)obj;
-        [self upload:name];
-    }];
-    
-    [self insertMelody];
-    [self.navigationController popViewControllerAnimated:YES];
+
+{dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        // Perform async operation
+        // Call your method/function here
+        // Example:
+        // NSString *result = [anObject calculateSomething];
+        [self writeTxt];
+        NSString* path;
+        path=[appdel.path stringByAppendingString:appdel.currentdirectory];
+        NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
+                                                                            error:NULL];
+        [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSString *name = (NSString *)obj;
+            [self upload:name];
+        }];
+        
+        [self insertMelody];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            // Update UI
+            // Example:
+            // self.myLabel.text = result;
+            //[self assign];
+            [self.navigationController popViewControllerAnimated:YES];
+
+        });
+    });
+
 }
 
 -(void)insertMelody
