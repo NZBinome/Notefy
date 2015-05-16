@@ -37,11 +37,12 @@
     [cell.SharerName setTitle:Sharer.Stage_Name forState:UIControlStateNormal];
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
-    cell.ShareCount.text = [ShareCount stringByAppendingString:@" S"];
-    cell.ApplauseCount.text = [ApplauseCount stringByAppendingString:@" A"];
-    cell.CommentCount.text = [CommentCount stringByAppendingString:@" C"];
-    cell.Action.text=@"Share";
-    cell.Time.text=Date;
+    cell.ShareCount.text = ShareCount;
+    cell.ApplauseCount.text = ApplauseCount;
+    cell.CommentCount.text = CommentCount;
+    cell.Action.text=@"Shared";
+    
+    cell.Time.text=[self fixDate:Date];
     
     NSString* fullpath;
     if (!User.Picture_link) {
@@ -49,7 +50,7 @@
     }
     else
     {
-        fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
+        fullpath = [ServerLocation stringByAppendingString:Sharer.Picture_link];
     }
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
     cell.MelodyName.tag = Melody.Id;

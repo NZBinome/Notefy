@@ -14,6 +14,7 @@
 @synthesize FirstName;
 @synthesize StageName;
 @synthesize ProfilePic;
+@synthesize FanNumber;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

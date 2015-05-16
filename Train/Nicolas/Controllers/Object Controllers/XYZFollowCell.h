@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *Action;
 @property (weak, nonatomic) IBOutlet UIImageView *FollowerPP;
 @property (weak, nonatomic) IBOutlet UIImageView *FollowedPP;
+@property (weak, nonatomic) IBOutlet UILabel *FollowedFanNumber;
 
 @end

@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *LastName;
 @property (weak, nonatomic) IBOutlet UILabel *StageName;
 @property (weak, nonatomic) IBOutlet UIButton *BecomeAFan;
+@property (weak, nonatomic) IBOutlet UILabel *FanNumber;
 
 @end

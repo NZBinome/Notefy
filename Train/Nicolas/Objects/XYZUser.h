@@ -15,5 +15,6 @@
 @property NSString* Stage_Name;
 @property NSString* Birthday;
 @property NSString* Picture_link;
+@property NSString* FanNumber;
 
 @end

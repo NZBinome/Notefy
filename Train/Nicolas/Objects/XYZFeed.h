@@ -14,6 +14,6 @@
 
 @interface XYZFeed : NSObject
 -(void)fillCell:(XYZFeedCell*)cell;
-
+-(NSString*)fixDate:(NSString*)Date;
 
 @end

@@ -38,9 +38,13 @@
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.Comment.text=Script;
-    cell.Action.text=@"Comment";
-    cell.Time.text=Date;
+    cell.Action.text=@"Commented";
     
+    cell.Time.text=[self fixDate:Date];
+    
+    cell.ShareCount.text = ShareCount;
+    cell.ApplauseCount.text = ApplauseCount;
+    cell.CommentCount.text = CommentCount;
     NSString* fullpath;
     if (!User.Picture_link) {
         fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];

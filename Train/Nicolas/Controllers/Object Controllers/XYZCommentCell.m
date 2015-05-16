@@ -15,7 +15,9 @@
 @synthesize Action;
 @synthesize Time;
 @synthesize Comment;
-
+@synthesize ApplauseCount;
+@synthesize CommentCount;
+@synthesize ShareCount;
 
 - (id)initWithFrame:(CGRect)frame
 {
