@@ -21,6 +21,7 @@
 @property NSString* ApplauseCount;
 @property NSString* ShareCount;
 @property NSString* CommentCount;
+@property BOOL FromProfile;
 -(void)fillCell:(XYZShareCell*)cell;
 
 @end

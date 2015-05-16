@@ -36,7 +36,7 @@
     
     [cell.Follower setTitle:Follower.Stage_Name forState:UIControlStateNormal];
     [cell.Followed setTitle:Followed.Stage_Name forState:UIControlStateNormal];
-    cell.Action.text=@"Followed";
+    cell.Action.text=@"Became a fan of";
     
     cell.Time.text=[self fixDate:Date];
     

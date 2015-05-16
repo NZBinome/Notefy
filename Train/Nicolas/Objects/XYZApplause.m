@@ -39,7 +39,7 @@
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.Action.text=@"Applauded";
     
-    cell.Time.text=[self fixDate:Date];
+    cell.Time.text=[self fixDate:Melody.Date];
     
     cell.ShareCount.text = ShareCount;
     cell.ApplauseCount.text = ApplauseCount;

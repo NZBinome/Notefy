@@ -40,6 +40,9 @@
 		9B61E4981B06220600B60623 /* Comment.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B61E48F1B06220600B60623 /* Comment.png */; };
 		9B61E4991B06220600B60623 /* Share icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B61E4901B06220600B60623 /* Share icon.png */; };
 		9B61E49A1B06220600B60623 /* You're a fan.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B61E4911B06220600B60623 /* You're a fan.png */; };
+		9B61E49C1B07339D00B60623 /* Go.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B61E49B1B07339D00B60623 /* Go.png */; };
+		9B61E49F1B074B9500B60623 /* Cadre melody.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B61E49D1B074B9500B60623 /* Cadre melody.png */; };
+		9B61E4A01B074B9500B60623 /* Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B61E49E1B074B9500B60623 /* Pause.png */; };
 		9B7F28A01A8F9F0900A154F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F289F1A8F9F0900A154F6 /* Foundation.framework */; };
 		9B7F28A21A8F9F0900A154F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A11A8F9F0900A154F6 /* CoreGraphics.framework */; };
 		9B7F28A41A8F9F0900A154F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7F28A31A8F9F0900A154F6 /* UIKit.framework */; };
@@ -189,6 +192,9 @@
 		9B61E48F1B06220600B60623 /* Comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Comment.png; sourceTree = "<group>"; };
 		9B61E4901B06220600B60623 /* Share icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share icon.png"; sourceTree = "<group>"; };
 		9B61E4911B06220600B60623 /* You're a fan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "You're a fan.png"; sourceTree = "<group>"; };
+		9B61E49B1B07339D00B60623 /* Go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Go.png; sourceTree = "<group>"; };
+		9B61E49D1B074B9500B60623 /* Cadre melody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cadre melody.png"; sourceTree = "<group>"; };
+		9B61E49E1B074B9500B60623 /* Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pause.png; sourceTree = "<group>"; };
 		9B7F289C1A8F9F0900A154F6 /* Train.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Train.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7F289F1A8F9F0900A154F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B7F28A11A8F9F0900A154F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -568,6 +574,9 @@
 		9BA95C761AD6BCAF003EE700 /* other images */ = {
 			isa = PBXGroup;
 			children = (
+				9B61E49D1B074B9500B60623 /* Cadre melody.png */,
+				9B61E49E1B074B9500B60623 /* Pause.png */,
+				9B61E49B1B07339D00B60623 /* Go.png */,
 				9B61E4891B06220600B60623 /* Applause.png */,
 				9B61E48A1B06220600B60623 /* Become a fan.png */,
 				9B61E48B1B06220600B60623 /* Cadre 1.png */,
@@ -828,7 +837,9 @@
 				9BE2C78B1AD9406700F2A0BF /* Instru 3.png in Resources */,
 				9B61E4951B06220600B60623 /* Cadre Profile.png in Resources */,
 				9B283BE51AC6FE7C00D38762 /* accordion.png in Resources */,
+				9B61E4A01B074B9500B60623 /* Pause.png in Resources */,
 				9B61E4921B06220600B60623 /* Applause.png in Resources */,
+				9B61E49C1B07339D00B60623 /* Go.png in Resources */,
 				9BE2C7851AD9406700F2A0BF /* Cadre .png in Resources */,
 				9B283BEA1AC6FE7C00D38762 /* trompette.png in Resources */,
 				9BE2C7931AD9406700F2A0BF /* Share.png in Resources */,
@@ -848,6 +859,7 @@
 				9BA95C7E1AD6BCAF003EE700 /* Cadre.png in Resources */,
 				9BA95C841AD6C064003EE700 /* How to.png in Resources */,
 				9BBDF91D1A9E177800322797 /* config.h.in in Resources */,
+				9B61E49F1B074B9500B60623 /* Cadre melody.png in Resources */,
 				9BE2C7901AD9406700F2A0BF /* Rectangle 3.png in Resources */,
 				9BE2C7871AD9406700F2A0BF /* Carré unfilled.png in Resources */,
 				9BA95C7D1AD6BCAF003EE700 /* Background.png in Resources */,

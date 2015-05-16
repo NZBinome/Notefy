@@ -210,7 +210,6 @@
                 {
                     path=[appdel.path stringByAppendingString:[[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/"] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
                 }
-                NSLog(path);
                 amc.fix((char*)[path UTF8String]);
             }
         }

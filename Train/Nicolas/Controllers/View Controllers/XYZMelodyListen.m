@@ -48,16 +48,30 @@
 @property (weak, nonatomic) IBOutlet UIButton *Share;
 @property BOOL didApplaud;
 @property BOOL didShare;
-@property (weak, nonatomic) IBOutlet UITextView *CommentText;
 @property (weak, nonatomic) IBOutlet UIButton *Comment;
+
+@property (weak, nonatomic) IBOutlet UITextField *CommentText;
 @property CGFloat offset;
 @property BOOL isCommentFeed;
 @property NSMutableArray* Comments;
 @property XYZComment* CommentFeed;
 @property (weak, nonatomic) IBOutlet UITableView *CommentTable;
 @property BOOL isScript;
-
-
+@property BOOL isPlaying;
+@property (weak, nonatomic) IBOutlet UIButton *PlayPause;
+@property BOOL isApplauseCount;
+@property BOOL isCommentCount;
+@property BOOL isShareCount;
+@property (weak, nonatomic) IBOutlet UILabel *ApplauseCount;
+@property (weak, nonatomic) IBOutlet UILabel *CommentCount;
+@property (weak, nonatomic) IBOutlet UILabel *ShareCount;
+@property CGPoint OriginalCenter;
+@property (weak, nonatomic) IBOutlet UIButton *MyProfile;
+@property (weak, nonatomic) IBOutlet UIImageView *ApplauseBackground;
+@property (weak, nonatomic) IBOutlet UIImageView *ShareBackground;
+@property (weak, nonatomic) IBOutlet UITextField *SearchBar;
+@property NSString* SearchResult;
+@property BOOL isSearchResult;
 
 
 
@@ -110,6 +124,20 @@
 @synthesize Comments;
 @synthesize CommentTable;
 @synthesize isScript;
+@synthesize isPlaying;
+@synthesize PlayPause;
+@synthesize isApplauseCount;
+@synthesize isCommentCount;
+@synthesize isShareCount;
+@synthesize ApplauseCount;
+@synthesize ShareCount;
+@synthesize CommentCount;
+@synthesize MyProfile;
+@synthesize ShareBackground;
+@synthesize ApplauseBackground;
+@synthesize SearchBar;
+@synthesize SearchResult;
+@synthesize isSearchResult;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -199,14 +227,35 @@
         isMelody=true;
         Melody=[[XYZMelody alloc]init];
     }
+    
+    if ([elementName isEqualToString:@"CommentCount"]) {
+        isCommentCount=true;
+    }
+    
+    if ([elementName isEqualToString:@"ApplauseCount"]) {
+        isApplauseCount=true;
+    }
+    
+    if ([elementName isEqualToString:@"ShareCount"]) {
+        isShareCount=true;
+    }
+    
     if ([elementName isEqualToString:@"Comment"]) {
         isCommentFeed=true;
         CommentFeed = [[XYZComment alloc]init];
+    }
+    if ([elementName isEqualToString:@"SearchResult"]) {
+        isSearchResult=true;
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
+    if (isSearchResult) {
+        SearchResult=string;
+        isSearchResult=false;
+    }
+    
     if (isStage_Name) {
         User1.Stage_Name=string;
         isStage_Name=false;
@@ -264,6 +313,19 @@
         CommentFeed.Script=string;
         isScript=false;
     }
+    if (isCommentCount) {
+        CommentCount.text=string;
+        isCommentCount=false;
+    }
+    if (isShareCount) {
+        ShareCount.text=string;
+        isShareCount=false;
+    }
+    if (isApplauseCount) {
+        ApplauseCount.text=string;
+        isApplauseCount=false;
+    }
+    
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
@@ -279,6 +341,7 @@
     }
     if ([elementName isEqualToString:@"Header"]) {
         Creator = User1;
+        //NSLog(Creator.Stage_Name);
         SelectedMelody = Melody;
     }
     if ([elementName isEqualToString:@"Applause"]) {
@@ -299,7 +362,7 @@
 {
     MelodyName.text = SelectedMelody.Title;
     [UserName setTitle:Creator.Stage_Name forState:UIControlStateNormal];
-    Time.text = SelectedMelody.Date;
+    Time.text = [self fixDate:SelectedMelody.Date];
     NSString* fullpath;
 
     if (!Creator.Picture_link) {
@@ -312,11 +375,13 @@
     ProfilePicture.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
     if ((AccountId==Spectator)&&(SelectedMelody.Id==ListenedMelody)) {
         didApplaud = true;
-        [Applause setTitle:@"You Applauded" forState:UIControlStateNormal];
+        [Applause setAlpha:1.0];
+        [ApplauseBackground setAlpha:1.0];
     }
     if ((AccountId==Sharer)&&(SelectedMelody.Id==SharedMelody)) {
         didShare = true;
-        [Share setTitle:@"You Shared" forState:UIControlStateNormal];
+        [Share setAlpha:1.0];
+        [ShareBackground setAlpha:1.0];
     }
     
 }
@@ -329,8 +394,12 @@
     path = [path stringByAppendingString:@"&Script="];
     path = [path stringByAppendingString:CommentText.text];
     CommentText.text=@"";
+    XYZComment* demoComment;
     [self getData:path];
-    
+    long count = [CommentCount.text integerValue];
+    count+=1;
+    CommentCount.text = [NSString stringWithFormat:@"%ld",count];
+    [self getCommentsOfMelodies];
 }
 
 -(void)InitializeView
@@ -344,31 +413,20 @@
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d",SelectedMelody.Id]];
     [self getData:path];
     [self assign];
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    dispatch_async(queue, ^{
-        // Perform async operation
-        // Call your method/function here
-        // Example:
-        // NSString *result = [anObject calculateSomething];
-//        [self getData:path];
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            // Update UI
-            // Example:
-            // self.myLabel.text = result;
-           // [MelodyTable reloadData];
-            //[self assign];
-            
-        });
-    });
 }
 
 - (IBAction)play:(id)sender {
+    if (isPlaying)
+    {
+        [Player pause];
+        [PlayPause setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
         [Player play];
-}
-
-- (IBAction)pause:(id)sender {
-    [Player pause];
+        [PlayPause setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
+    }
+    isPlaying=!isPlaying;
 }
 
 
@@ -391,6 +449,8 @@
 
 -(void)itemDidFinishPlaying:(NSNotification *) notification {
     // Will be called when AVPlayer finishes playing playerItem
+    [PlayPause setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+    isPlaying=false;
     AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:URL];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
     Player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
@@ -398,6 +458,7 @@
 
 - (void)viewDidLoad
 {
+    SearchResult=@"";
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     ServerLocation = appdel.ServerLocation;
     AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
@@ -414,29 +475,20 @@
     
     UserName.tag = Creator.Id;
     URL = [[NSURL alloc]init];
-    NSString* MelodyPath;
     
     ///////////////////To BE Added When Database Populated //////////////
-    
+  //  NSString* MelodyPath;
+
   //  MelodyPath = [@"Melodies/" stringByAppendingString:[NSString stringWithFormat:@"%d/%@/Melody.aif",Creator.Id,SelectedMelody.Title]];
     
     ///////////////////////////////////////////////////////////////////////
     
     URL = [NSURL URLWithString:[ServerLocation stringByAppendingString:@"Melodies/1/HEllo/track1.aif"]];
-    [self startPlaybackForItemWithURL];
+    //[self startPlaybackForItemWithURL];
+    isPlaying=true;
+    [PlayPause setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
     
-    NSString* path;
-    NSError *error;
-
-    path=[ServerLocation stringByAppendingString:@"GetComments.php?MelodyId="];
-    path=[path stringByAppendingString:[NSString stringWithFormat:@"%d", SelectedMelody.Id]];
-    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-     NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
-    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
-    [parser setDelegate:self];
-    [parser parse];
-    [CommentTable reloadData];
+    [self getCommentsOfMelodies];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -444,22 +496,47 @@
     
     [self.view addGestureRecognizer:tap];
     [self registerForKeyboardNotifications];
-    //[self createStreamer];
-    //[streamer start];
+
+    
+    
     // Do any additional setup after loading the view.
+    self.OriginalCenter = self.view.center;
+    MyProfile.tag=AccountId;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+-(void)getCommentsOfMelodies
+{
+    NSString* path;
+    NSError *error;
+    [Comments removeAllObjects];
+    path=[ServerLocation stringByAppendingString:@"GetComments.php?MelodyId="];
+    path=[path stringByAppendingString:[NSString stringWithFormat:@"%d", SelectedMelody.Id]];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+    [parser setDelegate:self];
+    [parser parse];
+    [CommentTable reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     
     [self deregisterFromKeyboardNotifications];
-    
     [super viewWillDisappear:animated];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    SearchBar.text=@"";
 }
 
 -(void)dismissKeyboard
 {
     [CommentText resignFirstResponder];
+    [SearchBar resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -474,20 +551,30 @@
 
     if (didApplaud) {
         path=[ServerLocation stringByAppendingString:@"DeleteApplause.php?UserId="];
-        [Applause setTitle:@"Applaud" forState:UIControlStateNormal];
+        //[Applause setTitle:@"Applaud" forState:UIControlStateNormal];
+        [Applause setAlpha:0.3];
+        [ApplauseBackground setAlpha:0.5];
+        long count = [ApplauseCount.text integerValue];
+        count-=1;
+        ApplauseCount.text = [NSString stringWithFormat:@"%ld",count];
 
     }
     else
     {
         path=[ServerLocation stringByAppendingString:@"InsertApplause.php?UserId="];
-        [Applause setTitle:@"You Applauded" forState:UIControlStateNormal];
+        //[Applause setTitle:@"You Applauded" forState:UIControlStateNormal];
+        [Applause setAlpha:1.0];
+        [ApplauseBackground setAlpha:1.0];
+        long count = [ApplauseCount.text integerValue];
+        count+=1;
+        ApplauseCount.text = [NSString stringWithFormat:@"%ld",count];
 
     }
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
     path = [path stringByAppendingString:@"&MelodyId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d",SelectedMelody.Id]];
     NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
     didApplaud = !didApplaud;
 }
 
@@ -497,20 +584,28 @@
     
     if (didShare) {
         path=[ServerLocation stringByAppendingString:@"DeleteShare.php?UserId="];
-        [Share setTitle:@"Share" forState:UIControlStateNormal];
-        
+      //  [Share setTitle:@"Share" forState:UIControlStateNormal];
+        [Share setAlpha:0.3];
+        [ShareBackground setAlpha:0.5];
+        long count = [ShareCount.text integerValue];
+        count-=1;
+        ShareCount.text = [NSString stringWithFormat:@"%ld",count];
     }
     else
     {
         path=[ServerLocation stringByAppendingString:@"InsertShare.php?UserId="];
-        [Share setTitle:@"You Shared" forState:UIControlStateNormal];
-        
+       // [Share setTitle:@"You Shared" forState:UIControlStateNormal];
+        [Share setAlpha:1.0];
+        [ShareBackground setAlpha:1.0];
+        long count = [ShareCount.text integerValue];
+        count+=1;
+        ShareCount.text = [NSString stringWithFormat:@"%ld",count];
     }
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
     path = [path stringByAppendingString:@"&MelodyId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d",SelectedMelody.Id]];
     NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
     didShare = !didShare;
 }
 
@@ -547,28 +642,45 @@
     
 }
 
-- (void)keyboardWasShown:(NSNotification *)notification {
-    
+
+
+- (void)keyboardWasShown:(NSNotification *)notification
+{
     NSDictionary* info = [notification userInfo];
     
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    offset= self.view.frame.size.height - CommentText.frame.origin.y - CommentText.frame.size.height;
-    
-    CommentText.frame = CGRectMake(CommentText.frame.origin.x, CommentText.frame.origin.y - keyboardSize.height+ offset, CommentText.frame.size.width, CommentText.frame.size.height);
-    Comment.frame = CGRectMake(Comment.frame.origin.x, Comment.frame.origin.y - keyboardSize.height + offset, Comment.frame.size.width, Comment.frame.size.height);
-    
+    int HeightOfCommentText = self.view.frame.size.height - CommentText.frame.origin.y-CommentText.frame.size.height;
+    if ([CommentText isEditing])
+    {
+        self.view.center = CGPointMake(self.OriginalCenter.x,self.OriginalCenter.y-keyboardSize.height+HeightOfCommentText);
+    }
 }
 
-- (void)keyboardWillBeHidden:(NSNotification *)notification {
-    
-    //[self.scrollView setContentOffset:CGPointZero animated:YES];
-    NSDictionary* info = [notification userInfo];
-    
-    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    CommentText.frame = CGRectMake(CommentText.frame.origin.x, CommentText.frame.origin.y + keyboardSize.height- offset, CommentText.frame.size.width, CommentText.frame.size.height);
-    Comment.frame = CGRectMake(Comment.frame.origin.x, Comment.frame.origin.y + keyboardSize.height - offset, Comment.frame.size.width, Comment.frame.size.height);
+- (void)keyboardWillBeHidden:(NSNotification *)notification
+{
+    self.view.center = self.OriginalCenter;
 }
+
+- (IBAction)Search:(id)sender {
+    NSString* path;
+    NSError* error;
+    [self dismissKeyboard];
+    path=[ServerLocation stringByAppendingString:@"Search_by_StageName.php?StageName="];
+    path = [path stringByAppendingString:SearchBar.text];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+    [parser setDelegate:self];
+    [parser parse];
+    if (![SearchResult isEqualToString:@""]) {
+        UserId = [SearchResult integerValue];
+        [self performSegueWithIdentifier:@"ProfileFromListen" sender:self];
+    }
+}
+
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -610,42 +722,106 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+
+-(NSString*)fixDate:(NSString*)Date
 {
-    /*
-     if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
-     {
-     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-     }
-     else
-     {
-     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-     }
-     XYZTrack* tempTrack;
-     tempTrack=[tracks objectAtIndex:indexPath.row];
-     tempTrack.isSelected=(!tempTrack.isSelected);
-     [tracks replaceObjectAtIndex:indexPath.row withObject:tempTrack];
-     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     */
+    unsigned Flags = NSYearCalendarUnit| NSMonthCalendarUnit| NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSLocale* currentLocale = [NSLocale currentLocale];
+    
+    
+    
+    NSDate *date = [dateFormat dateFromString:Date];
+    
+    NSDate* CurrentDate= [[NSDate alloc]init];
+    [CurrentDate descriptionWithLocale:currentLocale];
+    
+    
+    NSCalendar* CurrentCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* CurrentComponents = [CurrentCalendar components:Flags fromDate:CurrentDate];
+    
+    NSCalendar* Calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* Components = [Calendar components:Flags fromDate:date];
+    
+    if ([Components year]<[CurrentComponents year])
+    {
+        long Year = [CurrentComponents year] - [Components year];
+        if (Year==1)
+        {
+            [NSString stringWithFormat:@"%ld year ago",Year];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%ld years ago",Year];
+        }
+    }
+    
+    else if ([Components month]<[CurrentComponents month])
+    {
+        long Month = [CurrentComponents month] - [Components month];
+        if (Month==1)
+        {
+            return [NSString stringWithFormat:@"%ld month ago",Month];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%ld months ago",Month];
+        }
+    }
+    
+    else if ([Components day]<[CurrentComponents day])
+    {
+        long Day = [CurrentComponents day] - [Components day];
+        if (Day==1)
+        {
+            return [NSString stringWithFormat:@"%ld day ago",Day];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%ld days ago",Day];
+        }
+    }
+    else if ([Components hour]<[CurrentComponents hour])
+    {
+        long Hour = [CurrentComponents hour] - [Components hour];
+        if (Hour==1)
+        {
+            return [NSString stringWithFormat:@"%ld hr ago",Hour];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%ld hrs ago",Hour];
+        }
+    }
+    else if ([Components minute]<[CurrentComponents minute])
+    {
+        long Minute = [CurrentComponents minute] - [Components minute];
+        if (Minute==1)
+        {
+            return [NSString stringWithFormat:@"%ld min ago",Minute];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%ld mins ago",Minute];
+        }
+    }
+    else
+    {
+        long Second = [CurrentComponents second] - [Components second];
+        if (Second==1)
+        {
+            return [NSString stringWithFormat:@"%ld sec ago",Second];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%ld secs ago",Second];
+        }
+    }
+    return @"";
 }
 
-/*
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
- 
-    XYZFeed* DemoFeed;
-    DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
-    if ([DemoFeed isKindOfClass:[XYZShare class]]){
-        return 111;
-    }
-    else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
-        return 85;
-    }
- 
-    return 102;
-}
-
-*/
 
 
 #pragma mark - Navigation
