@@ -39,6 +39,11 @@
 @property BOOL isCreate;
 @property BOOL isShare;
 @property int ChosenMelody;
+@property BOOL isShareCount;
+@property BOOL isCommentCount;
+@property BOOL isApplauseCount;
+@property BOOL isFanNumber;
+
 
 @end
 
@@ -73,7 +78,10 @@
 @synthesize isCreate;
 @synthesize isShare;
 @synthesize ChosenMelody;
-
+@synthesize isShareCount;
+@synthesize isCommentCount;
+@synthesize isApplauseCount;
+@synthesize isFanNumber;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -103,6 +111,9 @@
     if (isFeed)
     {
         isDate=[elementName isEqualToString:@"Date"];
+        isShareCount = [elementName isEqualToString:@"ShareCount"];
+        isCommentCount = [elementName isEqualToString:@"CommentCount"];
+        isApplauseCount = [elementName isEqualToString:@"ApplauseCount"];
     }
     if (isUser)
     {
@@ -111,7 +122,7 @@
         isLast_Name=[elementName isEqualToString:@"Last_Name"];
         isStage_Name=[elementName isEqualToString:@"Stage_Name"];
         isPicture_Link=[elementName isEqualToString:@"Picture_Link"];
-
+        isFanNumber = [elementName isEqualToString:@"FanCount"];
     }
     
     if (isMelody)
@@ -178,6 +189,11 @@
         User1.Picture_link=string;
         isPicture_Link=false;
     }
+    if (isFanNumber) {
+        User1.FanNumber=string;
+        NSLog(string);
+        isFanNumber=false;
+    }
     if (isDate) {
         if (isMelody)
         {
@@ -212,6 +228,34 @@
     {
         Follower=[string intValue];
         isFollower=false;
+    }
+    
+    if (isShareCount) {
+        if (isShare) {
+            Share.ShareCount=string;
+        }
+        if (isCreate) {
+            Create.ShareCount=string;
+        }
+        isShareCount=false;
+    }
+    if (isApplauseCount) {
+        if (isShare) {
+            Share.ApplauseCount=string;
+        }
+        if (isCreate) {
+            Create.ApplauseCount=string;
+        }
+        isApplauseCount=false;
+    }
+    if (isCommentCount) {
+        if (isShare) {
+            Share.CommentCount=string;
+        }
+        if (isCreate) {
+            Create.CommentCount=string;
+        }
+        isCommentCount=false;
     }
     
     if (isId) {
@@ -263,6 +307,7 @@
         User.Picture_link = User1.Picture_link;
         User.Last_Name = User1.Last_Name;
         User.First_Name = User1.First_Name;
+        User.FanNumber = User1.FanNumber;
     }
     if ([elementName isEqualToString:@"Follows"])
     {
@@ -277,7 +322,17 @@
     cell.LastName.text = User.Last_Name;
     cell.FirstName.text=User.First_Name;
     cell.StageName.text=User.Stage_Name;
-    if (!User.Picture_link) {
+    cell.FanNumber.text=User.FanNumber;
+    if ([User.FanNumber isEqualToString:@"1"])
+    {
+        cell.FanNumber.text=[cell.FanNumber.text stringByAppendingString:@" Fan"];
+    }
+    else
+    {
+        cell.FanNumber.text=[cell.FanNumber.text stringByAppendingString:@" Fans"];
+    }
+    if (!User.Picture_link)
+    {
         fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
     }
     else
@@ -296,7 +351,7 @@
         {
             isFan=true;
             cell.BecomeAFan.hidden=false;
-            [cell.BecomeAFan setTitle:@"Already a Fan" forState:UIControlStateNormal];
+            [cell.BecomeAFan setImage:[UIImage imageNamed:@"You're a fan.png"] forState:UIControlStateNormal];
         }
     }
 }
@@ -391,12 +446,12 @@
     if (isFan)
     {
         path=[ServerLocation stringByAppendingString:@"Unfollow.php?Followed="];
-        [sender setTitle:@"Become a Fan" forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"Become a fan.png"] forState:UIControlStateNormal];
     }
     else
     {
         path=[ServerLocation stringByAppendingString:@"Follow.php?Followed="];
-        [sender setTitle:@"Already a Fan" forState:UIControlStateNormal];
+        [sender setImage:[UIImage imageNamed:@"You're a fan.png"] forState:UIControlStateNormal];
     }
     isFan=!isFan;
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", User.Id]];
@@ -438,7 +493,6 @@
     {
         cell = [[XYZFeedCell alloc]init];
         XYZFeed* DemoFeed;
-        //NSLog(@"Unroll : %d",[Feeds count]-(indexPath.row) );
         DemoFeed=[Feeds objectAtIndex:[Feeds count]-(indexPath.row)];
         if ([DemoFeed isKindOfClass:[XYZShare class]])
         {
@@ -460,17 +514,22 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==0) {
-        return 208;
+    if (indexPath.row==0)
+    {
+        if (AccountId == User.Id)
+        {
+            return 230;
+        }
+        return 306;
     }
     else{
     XYZFeed* DemoFeed;
     DemoFeed=[Feeds objectAtIndex:[Feeds count]-(indexPath.row)];
     if ([DemoFeed isKindOfClass:[XYZShare class]]){
-        return 111;
+        return 122;
     }
     else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
-        return 85;
+        return 122;
     }
     }
     return 102;

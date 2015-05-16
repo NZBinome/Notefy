@@ -15,6 +15,7 @@
 @synthesize FollowerPP;
 @synthesize Action;
 @synthesize Time;
+@synthesize FollowedFanNumber;
 
 
 - (id)initWithFrame:(CGRect)frame

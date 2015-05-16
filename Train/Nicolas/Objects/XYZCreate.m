@@ -35,11 +35,13 @@
 {
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
-    cell.Action.text=@"Creation";
-    cell.Time.text=Date;
-    cell.ShareCount.text = [ShareCount stringByAppendingString:@" S"];
-    cell.ApplauseCount.text = [ApplauseCount stringByAppendingString:@" A"];
-    cell.CommentCount.text = [CommentCount stringByAppendingString:@" C"];
+    cell.Action.text=@"Created";
+    
+    cell.Time.text=[self fixDate:Date];
+    
+    cell.ShareCount.text = ShareCount;
+    cell.ApplauseCount.text = ApplauseCount;
+    cell.CommentCount.text = CommentCount;
     NSString* fullpath;
     if (!User.Picture_link) {
         fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];

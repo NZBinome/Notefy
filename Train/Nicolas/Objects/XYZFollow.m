@@ -36,8 +36,20 @@
     
     [cell.Follower setTitle:Follower.Stage_Name forState:UIControlStateNormal];
     [cell.Followed setTitle:Followed.Stage_Name forState:UIControlStateNormal];
-    cell.Action.text=@"Follow";
-    cell.Time.text=Date;
+    cell.Action.text=@"Followed";
+    
+    cell.Time.text=[self fixDate:Date];
+    
+    cell.FollowedFanNumber.text=Followed.FanNumber;
+
+    if ([Followed.FanNumber isEqualToString:@"1"])
+    {
+        cell.FollowedFanNumber.text=[cell.FollowedFanNumber.text stringByAppendingString:@" Fan"];
+    }
+    else
+    {
+        cell.FollowedFanNumber.text=[cell.FollowedFanNumber.text stringByAppendingString:@" Fans"];
+    }
     
     NSString* fullpath;
     if (!Follower.Picture_link) {

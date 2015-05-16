@@ -41,6 +41,7 @@
 @property BOOL isApplauseCount;
 @property BOOL isCommentCount;
 @property BOOL isShareCount;
+@property BOOL isFanNumber;
 
 @end
 
@@ -77,6 +78,8 @@
 @synthesize isApplauseCount;
 @synthesize isCommentCount;
 @synthesize isShareCount;
+@synthesize isFanNumber;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -121,6 +124,7 @@
         isLast_Name=[elementName isEqualToString:@"Last_Name"];
         isStage_Name=[elementName isEqualToString:@"Stage_Name"];
         isPicture_Link=[elementName isEqualToString:@"Picture_Link"];
+        isFanNumber = [elementName isEqualToString:@"FanCount"];
     }
     
     if (isMelody)
@@ -195,6 +199,10 @@
         User1.First_Name=string;
         isFirst_Name=false;
     }
+    if (isFanNumber) {
+        User1.FanNumber=string;
+        isFanNumber=false;
+    }
     if (isPicture_Link) {
         User1.Picture_link=string;
         isPicture_Link=false;
@@ -232,6 +240,12 @@
         if (isCreate) {
             Create.ShareCount=string;
         }
+        if (isComment) {
+            Comment.ShareCount=string;
+        }
+        if (isApplause) {
+            Applause.ShareCount=string;
+        }
         isShareCount=false;
     }
     if (isApplauseCount) {
@@ -241,6 +255,12 @@
         if (isCreate) {
             Create.ApplauseCount=string;
         }
+        if (isComment) {
+            Comment.ApplauseCount=string;
+        }
+        if (isApplause) {
+            Applause.ApplauseCount=string;
+        }
         isApplauseCount=false;
     }
     if (isCommentCount) {
@@ -249,6 +269,12 @@
         }
         if (isCreate) {
             Create.CommentCount=string;
+        }
+        if (isComment) {
+            Comment.CommentCount=string;
+        }
+        if (isApplause) {
+            Applause.CommentCount=string;
         }
         isCommentCount=false;
     }
@@ -457,19 +483,19 @@
     XYZFeed* DemoFeed;
     DemoFeed=[Feeds objectAtIndex:[Feeds count]-1-indexPath.row];
     if ([DemoFeed isKindOfClass:[XYZComment class]]) {
-        return 78;
+        return 153;
     }
     else if ([DemoFeed isKindOfClass:[XYZShare class]]){
-        return 111;
+        return 122;
     }
     else if ([DemoFeed isKindOfClass:[XYZApplause class]]){
-        return 66;
+        return 122;
     }
     else if ([DemoFeed isKindOfClass:[XYZCreate class]]){
-        return 85;
+        return 122;
     }
     else if ([DemoFeed isKindOfClass:[XYZFollow class]]){
-        return 85;
+        return 115;
     }
     return 102;
 }

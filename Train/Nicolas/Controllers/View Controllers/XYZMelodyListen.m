@@ -414,6 +414,14 @@
     
     UserName.tag = Creator.Id;
     URL = [[NSURL alloc]init];
+    NSString* MelodyPath;
+    
+    ///////////////////To BE Added When Database Populated //////////////
+    
+  //  MelodyPath = [@"Melodies/" stringByAppendingString:[NSString stringWithFormat:@"%d/%@/Melody.aif",Creator.Id,SelectedMelody.Title]];
+    
+    ///////////////////////////////////////////////////////////////////////
+    
     URL = [NSURL URLWithString:[ServerLocation stringByAppendingString:@"Melodies/1/HEllo/track1.aif"]];
     [self startPlaybackForItemWithURL];
     
