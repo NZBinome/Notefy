@@ -185,6 +185,7 @@ void Z_audioMidiConverter::fix(char *filename, bool deFix)
         {
             m.decompose();
             mf.set_dft_dnp_dnpqt(m.correct(),m.distPlace(),0,m.distNum());
+            melToMid(m,filename);
         }
         else if (!mf.isQuantized())
         {
@@ -200,10 +201,10 @@ void Z_audioMidiConverter::fix(char *filename, bool deFix)
         {
             m.incScale();
             mf.choose_cs(m.scaleN());
+            melToMid(m,filename);
         }
     }
 
-    melToMid(m,filename);
     mf.flush();
 
     chooseInstrument(inst,filename);
