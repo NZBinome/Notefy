@@ -45,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *SearchBar;
 @property NSString* SearchResult;
 @property BOOL isSearchResult;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ActivityIndicator;
 
 @end
 
@@ -85,7 +86,7 @@
 @synthesize SearchBar;
 @synthesize SearchResult;
 @synthesize isSearchResult;
-
+@synthesize ActivityIndicator;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -389,6 +390,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    ActivityIndicator.hidden=NO;
+    [ActivityIndicator startAnimating];
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     ServerLocation=appdel.ServerLocation;
     int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
@@ -397,7 +400,8 @@
     FeedTable.delegate = self;
     Feeds = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
-    
+    SearchResult=@"";
+
     
     NSString *path=[ServerLocation stringByAppendingString:@"NewsFeed.php?UserId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
@@ -408,16 +412,22 @@
         // Call your method/function here
         // Example:
         // NSString *result = [anObject calculateSomething];
+        ActivityIndicator.hidden=NO;
+        [ActivityIndicator startAnimating];
+
         [self getData:path];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            
             // Update UI
             // Example:
             // self.myLabel.text = result;
+            [ActivityIndicator stopAnimating];
+            ActivityIndicator.hidden=YES;
             [FeedTable reloadData];
 
         });
     });
-    //[self getData:path];
+        //[self getData:path];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];

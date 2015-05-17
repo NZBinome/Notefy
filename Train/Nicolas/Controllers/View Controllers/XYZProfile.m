@@ -47,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *SearchBar;
 @property NSString* SearchResult;
 @property BOOL isSearchResult;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *Loading;
 
 
 @end
@@ -90,6 +91,7 @@
 @synthesize SearchBar;
 @synthesize SearchResult;
 @synthesize isSearchResult;
+@synthesize Loading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -415,7 +417,7 @@
     User.Id=UserId;
     UserId=0;
     ChosenMelody=0;
-
+    SearchResult=@"";
     ///////////////////////////////////// TO BE REMOVED /////////////////
     
     //User.Id=2;
@@ -460,17 +462,23 @@
         // Call your method/function here
         // Example:
         // NSString *result = [anObject calculateSomething];
+        [Loading startAnimating];
+        Loading.hidden=NO;
         [self getData:path];
         [MelodyTable reloadData];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [Loading startAnimating];
             // Update UI
             // Example:
             // self.myLabel.text = result;
+            [Loading stopAnimating];
+            Loading.hidden=YES;
             [MelodyTable reloadData];
             //[self assign];
             
         });
     });
+    
 }
 
 - (IBAction)melodyPressed:(UIControl*)sender
@@ -562,7 +570,7 @@
         {
             return 230;
         }
-        return 306;
+        return 289;
     }
     else{
     XYZFeed* DemoFeed;

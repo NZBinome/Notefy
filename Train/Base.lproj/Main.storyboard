@@ -150,7 +150,7 @@
                                     <action selector="back:" destination="guX-lH-W64" eventType="touchUpInside" id="4CW-d3-Cge"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-JP-xMX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="56" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-JP-xMX">
                                 <rect key="frame" x="21" y="67" width="279" height="481"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -159,12 +159,17 @@
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ListPrototypeCell" rowHeight="51" id="l0d-1y-kAQ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ListPrototypeCell" rowHeight="56" id="l0d-1y-kAQ">
                                         <rect key="frame" x="0.0" y="22" width="279" height="51"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l0d-1y-kAQ" id="g59-LH-XNW">
                                             <rect key="frame" x="0.0" y="0.0" width="246" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dots.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cub-VG-7bZ">
+                                                    <rect key="frame" x="0.0" y="50" width="253" height="7"/>
+                                                </imageView>
+                                            </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -296,7 +301,7 @@
                                     <action selector="Scroll:" destination="IV4-Q8-QwN" eventType="valueChanged" id="swD-BK-Ojn"/>
                                 </connections>
                             </slider>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SF7-wp-aIm">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SF7-wp-aIm">
                                 <rect key="frame" x="7" y="324" width="51" height="31"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="onTintColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -308,7 +313,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="input name" placeholder="input name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5qZ-SK-RIy">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="input name" textAlignment="center" minimumFontSize="17" background="Cadre 1.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5qZ-SK-RIy">
                                 <rect key="frame" x="70" y="53" width="180" height="30"/>
                                 <color key="backgroundColor" red="0.1058823529" green="0.46274509800000002" blue="0.41960784309999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -421,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AW9-RM-gv1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23" y="-3531"/>
+            <point key="canvasLocation" x="28" y="-3531"/>
         </scene>
         <!--Profile-->
         <scene sceneID="5Np-aK-KA0">
@@ -464,6 +469,72 @@
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileInfo" rowHeight="289" id="FtG-n3-yO8" customClass="XYZProfileInfo">
+                                        <rect key="frame" x="0.0" y="22" width="280" height="208"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FtG-n3-yO8" id="0xe-2r-SXC">
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="208"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cadre Profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="uva-ap-WeH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="219"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xgz-Nx-SaR">
+                                                    <rect key="frame" x="141" y="157" width="64" height="37"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Carré photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="1YH-k8-qkI">
+                                                    <rect key="frame" x="8" y="69" width="125" height="125"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rol-rU-hDI">
+                                                    <rect key="frame" x="10" y="72" width="120" height="120"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mJ-by-NKI">
+                                                    <rect key="frame" x="73" y="235" width="142" height="38"/>
+                                                    <state key="normal" image="Become a fan.png">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="followUnfollow:" destination="DfN-5i-gXG" eventType="touchUpInside" id="qeV-tP-nPZ"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="first name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FF-cg-Gjm">
+                                                    <rect key="frame" x="141" y="95" width="76" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fans" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cf-kh-bn7">
+                                                    <rect key="frame" x="147" y="157" width="52" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.29411764705882354" green="0.47058823529411764" blue="0.46274509803921571" alpha="0.70000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="stage name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ge-Ac-FFa">
+                                                    <rect key="frame" x="141" y="66" width="90" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="last name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34e-eN-Xic">
+                                                    <rect key="frame" x="142" y="123" width="75" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="BecomeAFan" destination="7mJ-by-NKI" id="Cdm-0c-i8F"/>
+                                            <outlet property="FanNumber" destination="6cf-kh-bn7" id="5D7-bw-5RB"/>
+                                            <outlet property="FirstName" destination="5FF-cg-Gjm" id="wbw-GH-Q9v"/>
+                                            <outlet property="LastName" destination="34e-eN-Xic" id="dsZ-lc-byi"/>
+                                            <outlet property="ProfilePic" destination="rol-rU-hDI" id="Sdy-ro-fmV"/>
+                                            <outlet property="StageName" destination="0ge-Ac-FFa" id="Cuy-fL-BNa"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateCell" rowHeight="122" id="ZXo-qz-8LW" customClass="XYZCreateCell">
                                         <rect key="frame" x="0.0" y="230" width="280" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -659,69 +730,6 @@
                                             <outlet property="Time" destination="Z20-W8-Dp4" id="qwT-zg-PJJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileInfo" rowHeight="304" id="FtG-n3-yO8" customClass="XYZProfileInfo">
-                                        <rect key="frame" x="0.0" y="22" width="280" height="208"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FtG-n3-yO8" id="0xe-2r-SXC">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="208"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Carré photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="1YH-k8-qkI">
-                                                    <rect key="frame" x="8" y="69" width="125" height="125"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cadre Profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="uva-ap-WeH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="288" height="219"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fans" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cf-kh-bn7">
-                                                    <rect key="frame" x="142" y="171" width="90" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rol-rU-hDI">
-                                                    <rect key="frame" x="10" y="72" width="120" height="120"/>
-                                                </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mJ-by-NKI">
-                                                    <rect key="frame" x="73" y="235" width="142" height="38"/>
-                                                    <state key="normal" image="Become a fan.png">
-                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="followUnfollow:" destination="DfN-5i-gXG" eventType="touchUpInside" id="qeV-tP-nPZ"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="first name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5FF-cg-Gjm">
-                                                    <rect key="frame" x="141" y="72" width="76" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="last name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34e-eN-Xic">
-                                                    <rect key="frame" x="142" y="106" width="75" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="stage name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ge-Ac-FFa">
-                                                    <rect key="frame" x="141" y="141" width="90" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="BecomeAFan" destination="7mJ-by-NKI" id="Cdm-0c-i8F"/>
-                                            <outlet property="FanNumber" destination="6cf-kh-bn7" id="5D7-bw-5RB"/>
-                                            <outlet property="FirstName" destination="5FF-cg-Gjm" id="wbw-GH-Q9v"/>
-                                            <outlet property="LastName" destination="34e-eN-Xic" id="dsZ-lc-byi"/>
-                                            <outlet property="ProfilePic" destination="rol-rU-hDI" id="Sdy-ro-fmV"/>
-                                            <outlet property="StageName" destination="0ge-Ac-FFa" id="Cuy-fL-BNa"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8Q-kg-n1S">
@@ -736,13 +744,16 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUa-Ih-f64">
                                 <rect key="frame" x="274" y="20" width="30" height="30"/>
-                                <state key="normal" image="My profile.png">
+                                <state key="normal" image="ProfileIcon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="userPressed:" destination="DfN-5i-gXG" eventType="touchUpInside" id="TcG-zV-kzS"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DLO-hv-s7M">
+                                <rect key="frame" x="143" y="400" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -750,6 +761,7 @@
                     <navigationItem key="navigationItem" id="j9u-CQ-tSQ"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="Loading" destination="DLO-hv-s7M" id="rQj-6i-pp8"/>
                         <outlet property="MelodyTable" destination="LRy-8V-p7b" id="rBR-xh-F0X"/>
                         <outlet property="MyProfile" destination="PUa-Ih-f64" id="71j-Mp-H3Z"/>
                         <outlet property="SearchBar" destination="Gdv-wc-Euy" id="HhN-0X-9tW"/>
@@ -757,7 +769,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bb4-ta-5vl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-349" y="-2133"/>
+            <point key="canvasLocation" x="-351" y="-2133"/>
         </scene>
         <!--News Feed-->
         <scene sceneID="JhQ-b4-Xh3">
@@ -1215,7 +1227,7 @@
                                                     <color key="textColor" red="0.29411764705882354" green="0.47058823529411764" blue="0.46274509803921571" alpha="0.70000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-Tf-oJt">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-Tf-oJt">
                                                     <rect key="frame" x="76" y="8" width="70" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="User Name">
@@ -1269,7 +1281,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqr-Of-QPK">
                                 <rect key="frame" x="274" y="20" width="30" height="30"/>
-                                <state key="normal" image="My profile.png">
+                                <state key="normal" image="ProfileIcon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1294,6 +1306,10 @@
                                     <action selector="Search:" destination="spL-rT-dtT" eventType="touchUpInside" id="vyq-ie-6FG"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="h8T-Kx-gx2">
+                                <rect key="frame" x="150" y="250" width="37" height="37"/>
+                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1302,6 +1318,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="ActivityIndicator" destination="h8T-Kx-gx2" id="YpC-p3-TZr"/>
                         <outlet property="FeedTable" destination="gqj-cy-YPn" id="QoN-18-IjH"/>
                         <outlet property="MyProfile" destination="kqr-Of-QPK" id="2pK-Cx-E2F"/>
                         <outlet property="SearchBar" destination="ZcZ-4c-ID6" id="ZY5-Pj-opI"/>
@@ -1390,7 +1407,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euV-xa-J4x">
                                 <rect key="frame" x="274" y="20" width="30" height="30"/>
-                                <state key="normal" image="My profile.png">
+                                <state key="normal" image="ProfileIcon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1619,12 +1636,15 @@
         <image name="New Melody.png" width="476" height="257"/>
         <image name="News feed.png" width="320" height="257"/>
         <image name="Play.png" width="219" height="98"/>
+        <image name="ProfileIcon.png" width="126" height="126"/>
         <image name="Record.png" width="200" height="91"/>
+        <image name="Rectangle 1.png" width="708" height="194"/>
         <image name="Save.png" width="157" height="91"/>
         <image name="Saved files.png" width="476" height="257"/>
         <image name="Select all.png" width="251" height="92"/>
         <image name="Share icon.png" width="71" height="61"/>
         <image name="Share.png" width="185" height="91"/>
+        <image name="dots.png" width="300" height="5"/>
         <image name="mic.png" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1634,7 +1654,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="1rL-Qq-GBr"/>
-        <segue reference="Sdb-d4-mnM"/>
-        <segue reference="xfo-3x-Yfn"/>
+        <segue reference="Pvt-LR-qYQ"/>
+        <segue reference="7XV-oH-CiR"/>
     </inferredMetricsTieBreakers>
 </document>

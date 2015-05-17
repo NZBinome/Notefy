@@ -399,6 +399,7 @@
     long count = [CommentCount.text integerValue];
     count+=1;
     CommentCount.text = [NSString stringWithFormat:@"%ld",count];
+    [self dismissKeyboard];
     [self getCommentsOfMelodies];
 }
 
@@ -477,14 +478,14 @@
     URL = [[NSURL alloc]init];
     
     ///////////////////To BE Added When Database Populated //////////////
-  //  NSString* MelodyPath;
+    NSString* MelodyPath;
 
-  //  MelodyPath = [@"Melodies/" stringByAppendingString:[NSString stringWithFormat:@"%d/%@/Melody.aif",Creator.Id,SelectedMelody.Title]];
+    MelodyPath = [@"Melodies/" stringByAppendingString:[NSString stringWithFormat:@"%d/%d/Melody.aif",Creator.Id,SelectedMelody.Id]];
     
     ///////////////////////////////////////////////////////////////////////
     
-    URL = [NSURL URLWithString:[ServerLocation stringByAppendingString:@"Melodies/1/HEllo/track1.aif"]];
-    //[self startPlaybackForItemWithURL];
+    URL = [NSURL URLWithString:[ServerLocation stringByAppendingString:MelodyPath]];
+    [self startPlaybackForItemWithURL];
     isPlaying=true;
     [PlayPause setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
     
@@ -525,6 +526,7 @@
     
     [self deregisterFromKeyboardNotifications];
     [super viewWillDisappear:animated];
+    [Player pause];
     
 }
 
