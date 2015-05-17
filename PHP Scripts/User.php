@@ -119,6 +119,10 @@ class  User
         $this->Stage_Name=$Result[$this->Key_Stage_Name];
         $this->Picture_Link=$Result[$this->Key_Picture_Link];
         $this->Birthday=$Result[$this->Key_Birthday];
+
+        $Toolkit1 = new Toolkit();
+        $Fans = $Toolkit1->getFollowers($this->Id);
+        $this->FanCount = count($Fans);
     }
 
     function select()
@@ -133,6 +137,14 @@ class  User
         $this->setUser($Results[$i]);
         $i=$i+1;
       }
+    }
+
+    function selectByStageName($Stage_Name)
+    {
+      $Keys = array($this->Key_Stage_Name); 
+      $Values = array($Stage_Name);
+      $Results=$this->Converter->select($Keys,$Values);
+      $this->setUser($Results[0]);
     }
 
     function setParameters()
@@ -175,6 +187,7 @@ class  User
       echo "Stage_Name : " . $this->Stage_Name . "<br/>";
       echo "Birthday : " . $this->Birthday . "<br/>";
       echo "Picture_Link : " . $this->Picture_Link . "<br/>";
+      echo "FanCount : ". $this->FanCount . "<br/>";
     }
 
     function toXML()
@@ -186,6 +199,7 @@ class  User
       $echo = $echo . "<Stage_Name>" . $this->Stage_Name . "</Stage_Name>";
       $echo = $echo . "<Birthday>" . $this->Birthday . "</Birthday>";
       $echo = $echo . "<Picture_Link>" . $this->Picture_Link . "</Picture_Link>";
+      $echo = $echo . "<FanCount>" . $this->FanCount . "</FanCount>";
       $echo = $echo . "</User>";
       return $echo ;
     }

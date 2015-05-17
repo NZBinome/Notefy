@@ -6,6 +6,7 @@ include 'Bridge.php';
 include 'Toolkit.php';
 include 'CommentFeed.php';
 include 'Comment.php';
+include 'Follows.php';
 
 $MelodyId = $_GET['MelodyId'];
 
