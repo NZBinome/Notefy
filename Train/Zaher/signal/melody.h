@@ -29,6 +29,7 @@ class Melody
     int _fs;
 
     double _pmax;
+    double _pmin;
 
 
 

@@ -121,6 +121,7 @@
 		9BF7C48A1ADE5FB8007BEEED /* XYZFollowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C4891ADE5FB8007BEEED /* XYZFollowCell.m */; };
 		9BF7C48D1ADE5FEE007BEEED /* XYZCreateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */; };
 		9BF7C4901ADE682F007BEEED /* XYZFollow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF7C48F1ADE682F007BEEED /* XYZFollow.m */; };
+		FF68FE621B07DA520065E47E /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FF68FE601B07DA520065E47E /* log.cpp */; };
 		FFD2ACBB1B025E1B00D269EB /* midimanipulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACB91B025E1B00D269EB /* midimanipulator.cpp */; };
 		FFD2ACBE1B031FF300D269EB /* midievent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACBC1B031FF300D269EB /* midievent.cpp */; };
 		FFD2ACC11B03275A00D269EB /* midinoteevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFD2ACBF1B03275A00D269EB /* midinoteevent.cpp */; };
@@ -313,6 +314,8 @@
 		9BF7C48C1ADE5FEE007BEEED /* XYZCreateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZCreateCell.m; sourceTree = "<group>"; };
 		9BF7C48E1ADE682F007BEEED /* XYZFollow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYZFollow.h; sourceTree = "<group>"; };
 		9BF7C48F1ADE682F007BEEED /* XYZFollow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYZFollow.m; sourceTree = "<group>"; };
+		FF68FE601B07DA520065E47E /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = log.cpp; path = log/log.cpp; sourceTree = "<group>"; };
+		FF68FE611B07DA520065E47E /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log.h; path = log/log.h; sourceTree = "<group>"; };
 		FFD2ACB91B025E1B00D269EB /* midimanipulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midimanipulator.cpp; sourceTree = "<group>"; };
 		FFD2ACBA1B025E1B00D269EB /* midimanipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = midimanipulator.h; sourceTree = "<group>"; };
 		FFD2ACBC1B031FF300D269EB /* midievent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midievent.cpp; sourceTree = "<group>"; };
@@ -561,6 +564,8 @@
 			children = (
 				9B9DAC3D1ACD3A750006A951 /* util.cpp */,
 				9B9DAC3E1ACD3A750006A951 /* util.h */,
+				FF68FE601B07DA520065E47E /* log.cpp */,
+				FF68FE611B07DA520065E47E /* log.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -881,6 +886,7 @@
 				9BF7C48A1ADE5FB8007BEEED /* XYZFollowCell.m in Sources */,
 				9BBDF9171A9E177800322797 /* freqtable.cpp in Sources */,
 				9BBDF9221A9E177800322797 /* pascal.c in Sources */,
+				FF68FE621B07DA520065E47E /* log.cpp in Sources */,
 				FFD2ACC11B03275A00D269EB /* midinoteevent.cpp in Sources */,
 				9BBDF92A1A9E177800322797 /* signal.cpp in Sources */,
 				9B94952B1AEB83E600EA94AE /* audiowrite.cpp in Sources */,

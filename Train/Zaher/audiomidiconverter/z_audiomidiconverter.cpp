@@ -94,18 +94,23 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     Signal s;
 
     Melody m(d.d(),f->fs());
-
+    
+    if (d.d()==0)
+    {
+        return 0;
+    }
     for(int i=0;i<d.d();++i)
     {
         s.set(d[i],f->fs(),d.ld(),f->ba(),f->nc());
         m.append(s.fc(),s.p());
+        
     }
-
     delete f;
 
     m.set_l(s.l());
 
     m.filtreBilateral(gw);
+    m.normalize();
 
     strcpy(midiFile,audioFile);
     midiFile[n-3]='m';
@@ -125,7 +130,6 @@ int Z_audioMidiConverter::convert(char *audioFile, char *midiFile)
     midiFile[n]=0;
 
     melToMid(m,midiFile);
-
     return 1;
 }
 
@@ -155,8 +159,9 @@ void Z_audioMidiConverter::chooseInstrument(unsigned char inst, char * filename)
 
 void Z_audioMidiConverter::fix(char *filename, bool deFix)
 {
-    char melfile[256];
-    int n=strlen(filename);
+    char * melfile;
+    int n=(int)strlen(filename);
+    melfile=new char[n];
 
     strcpy(melfile,filename);
 

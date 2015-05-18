@@ -3,6 +3,7 @@
 #include "signal.h"
 #include "../freq/freqtable.h"
 #include "../util/util.h"
+#include "../util/log/log.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -496,6 +497,7 @@ void Signal::itere(double *fp, int n)
 
 void Signal::methodePMIterre()
 {
+    Log * logger=Log::getLogger("saga.log");
     Freqtable * df=Freqtable::getInstance();
     double min=df->FREQTABLE[12]-df->FREQTABLE[0];
     double max=df->FREQTABLE[df->max()];
@@ -511,6 +513,7 @@ void Signal::methodePMIterre()
     for(int i=0;i<_l/2;++i)
     {
         _f[i]=_F[i].mod();
+        (*logger)<<_f[i]<<" ";
         double f=1.0*i*_fs/(_l*1.0);
 
         if(_f[i]>_pmax)
@@ -529,7 +532,7 @@ void Signal::methodePMIterre()
         }
     }
     itere(fp,n);
-
+    (*logger)<<";\n";
     delete [] fp;
 }
 

@@ -1,4 +1,5 @@
 #include <cmath>
+#include <limits>
 #include "../freq/freqtable.h"
 #include "melody.h"
 #include <string.h>
@@ -37,6 +38,7 @@ Melody::Melody()
     _scales[11]=11;
     _scale=-1;
     _pmax=0;
+    _pmin=std::numeric_limits<double>::max();
 }
 
 Melody::Melody(int n, int fs)
@@ -75,6 +77,7 @@ Melody::Melody(int n, int fs)
     _scales[11]=11;
     _scale=-1;
     _pmax=0;
+    _pmin=std::numeric_limits<double>::max();
 }
 
 Melody::Melody(Melody &o)
@@ -96,6 +99,7 @@ Melody::Melody(Melody &o)
     memcpy(_scales,o._scales,12*sizeof(int));
     _scale=-1;
     _pmax=o._pmax;
+    _pmax=o._pmin;
 }
 
 Melody& Melody::operator =(Melody& o)
@@ -130,6 +134,7 @@ Melody& Melody::operator =(Melody& o)
     memcpy(_scales,o._scales,12*sizeof(int));
     _scale=o._scale;
     _pmax=o._pmax;
+    _pmin=o._pmin;
     return *this;
 }
 
@@ -223,10 +228,25 @@ void Melody::append(double f, double p)
     ++_i;
     if(_pmax<p)
         _pmax=p;
+    if(_pmin>p&&f>2.0&&_pmin>10.0)
+        _pmin=p;
 }
 
 void Melody::normalize()
 {
+    const double midmax=127;
+    const double midmin=90;
+    
+    double a=(midmax-midmin)/(_pmax-_pmin);
+    double b=midmin-_pmin*(midmax-midmin)/(_pmax-_pmin);
+    for(int i=0;i<_i;++i)
+    {
+        if (_f[i]>1)
+        {
+            _p[i]=a*_p[i]+b;
+        }
+
+    }
 }
 
 void Melody::calculDerive(int i,double &d)
@@ -259,8 +279,12 @@ void Melody::decompose()
     _dp[_di]=1;
 }
 
-double *Melody::correct()
+double *Melody::correct() //correction
 {
+    if(_f==0)
+    {
+        return 0;
+    }
     int it=0;
     double avg=0;
     double sum=0;
@@ -298,8 +322,13 @@ double *Melody::correct()
 
 void Melody::filtreBilateral(int gs)
 {
+    if (_f==0)
+    {
+        return;
+    }
     double p=0.5;
-    _pmax=pow(_pmax,p);
+    //_pmax=pow(_pmax,p);
+    //_pmin=pow(_pmin,p);
 
     if(gs!=_gs)
     {

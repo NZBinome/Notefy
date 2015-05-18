@@ -256,7 +256,7 @@ int MelFile::createCoqa()
 
 void MelFile::addQuantized()
 {
-    _file.write((char*)_dnpqt,_dn*sizeof(int));
+    //_file.write((char*)_dnpqt,_dn*sizeof(int));
 }
 
 void MelFile::writeSize(int size)
@@ -369,7 +369,7 @@ bool MelFile::manipulate(char *filename)
         return false;
 
     _file.seekg(0,ios::end);
-    _endof=_file.tellg();
+    _endof=(int)_file.tellg();
     _flags=0;
     return true;
 }
@@ -402,9 +402,9 @@ void MelFile::flush()
         _file.seekg(-8,ios::cur);
         createScal();
     }
-    if((_flags&CORR)||(_flags&DECO))
+    if((_flags&CORR)||(_flags&DECO)||(_flags&QANT))
     {
-        printf("corrected\n");
+        //printf("corrected\n");
         _flags|=SICH;
         s=getToChunk(COQA);
         t=_file.tellg();
