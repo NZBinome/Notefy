@@ -48,6 +48,8 @@
         {
             fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
         }
+        cell.UserName.tag = Sharer.Id;
+        cell.SharerName.tag = User.Id;
     }
     
     else
@@ -61,6 +63,8 @@
         {
             fullpath = [ServerLocation stringByAppendingString:Sharer.Picture_link];
         }
+        cell.UserName.tag = User.Id;
+        cell.SharerName.tag = Sharer.Id;
     }
     
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
@@ -74,8 +78,7 @@
     
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
     cell.MelodyName.tag = Melody.Id;
-    cell.UserName.tag = User.Id;
-    cell.SharerName.tag = Sharer.Id;
+    
 }
 
 @end
