@@ -37,7 +37,7 @@
 {
     
     //////temporary
-    [[NSUserDefaults standardUserDefaults]  setInteger:1 forKey:@"AccountId"];
+    [[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:@"AccountId"];
     ///////////
 
     int isFirstTime;

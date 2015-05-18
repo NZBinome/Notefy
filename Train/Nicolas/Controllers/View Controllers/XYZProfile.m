@@ -43,6 +43,11 @@
 @property BOOL isCommentCount;
 @property BOOL isApplauseCount;
 @property BOOL isFanNumber;
+@property (weak, nonatomic) IBOutlet UIButton *MyProfile;
+@property (weak, nonatomic) IBOutlet UITextField *SearchBar;
+@property NSString* SearchResult;
+@property BOOL isSearchResult;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *Loading;
 
 
 @end
@@ -82,6 +87,11 @@
 @synthesize isCommentCount;
 @synthesize isApplauseCount;
 @synthesize isFanNumber;
+@synthesize MyProfile;
+@synthesize SearchBar;
+@synthesize SearchResult;
+@synthesize isSearchResult;
+@synthesize Loading;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -125,6 +135,10 @@
         isFanNumber = [elementName isEqualToString:@"FanCount"];
     }
     
+    if ([elementName isEqualToString:@"SearchResult"]) {
+        isSearchResult=true;
+    }
+    
     if (isMelody)
     {
         isId = [elementName isEqualToString:@"Id"];
@@ -156,6 +170,7 @@
     }
     if ([elementName isEqualToString:@"Share"]) {
         Share = [[XYZShare alloc]init];
+        Share.FromProfile=true;
         isFeed=true;
         isShare=true;
     }
@@ -173,6 +188,12 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
+    
+    if (isSearchResult) {
+        SearchResult=string;
+        isSearchResult=false;
+    }
+    
     if (isStage_Name) {
         User1.Stage_Name=string;
         isStage_Name=false;
@@ -191,7 +212,6 @@
     }
     if (isFanNumber) {
         User1.FanNumber=string;
-        NSLog(string);
         isFanNumber=false;
     }
     if (isDate) {
@@ -316,6 +336,11 @@
 
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    SearchBar.text=@"";
+}
+
 -(void)assign:(XYZProfileInfo*)cell
 {
     NSString* fullpath;
@@ -359,11 +384,31 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)search:(id)sender {
+    NSString* path;
+    NSError* error;
+    [self dismissKeyboard];
+    path=[ServerLocation stringByAppendingString:@"Search_by_StageName.php?StageName="];
+    path = [path stringByAppendingString:SearchBar.text];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+    [parser setDelegate:self];
+    [parser parse];
+    if (![SearchResult isEqualToString:@""]) {
+        UserId = [SearchResult integerValue];
+        [self performSegueWithIdentifier:@"ProfileToProfile" sender:self];
+    }
+}
+
+
 - (void)viewDidLoad
 {
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     [super viewDidLoad];
     AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
+    MyProfile.tag=AccountId;
     MelodyTable.dataSource = self;
     MelodyTable.delegate = self;
     ServerLocation=appdel.ServerLocation;
@@ -372,7 +417,7 @@
     User.Id=UserId;
     UserId=0;
     ChosenMelody=0;
-
+    SearchResult=@"";
     ///////////////////////////////////// TO BE REMOVED /////////////////
     
     //User.Id=2;
@@ -380,20 +425,23 @@
     /////////////////////////////////////
     
     [self InitializeView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
     
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    //UserId=0;
-    //ChosenMelody=0;
-
+    [self.view addGestureRecognizer:tap];
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     UserId=0;
     ChosenMelody=0;
+}
+
+-(void)dismissKeyboard
+{
+    [SearchBar resignFirstResponder];
 }
 
 -(void)InitializeView
@@ -414,17 +462,23 @@
         // Call your method/function here
         // Example:
         // NSString *result = [anObject calculateSomething];
+        [Loading startAnimating];
+        Loading.hidden=NO;
         [self getData:path];
         [MelodyTable reloadData];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [Loading startAnimating];
             // Update UI
             // Example:
             // self.myLabel.text = result;
+            [Loading stopAnimating];
+            Loading.hidden=YES;
             [MelodyTable reloadData];
             //[self assign];
             
         });
     });
+    
 }
 
 - (IBAction)melodyPressed:(UIControl*)sender
@@ -507,10 +561,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -520,7 +570,7 @@
         {
             return 230;
         }
-        return 306;
+        return 289;
     }
     else{
     XYZFeed* DemoFeed;
@@ -534,7 +584,6 @@
     }
     return 102;
 }
-
 
 - (void)didReceiveMemoryWarning
 {

@@ -210,7 +210,6 @@
                 {
                     path=[appdel.path stringByAppendingString:[[[[@"/" stringByAppendingString:selectedfile] stringByAppendingString:@"/"] stringByAppendingString:temptrack.trackName ] stringByAppendingString:@".mid"]];
                 }
-                NSLog(path);
                 amc.fix((char*)[path UTF8String]);
             }
         }
@@ -526,15 +525,15 @@
         // NSString *result = [anObject calculateSomething];
         [self writeTxt];
         NSString* path;
+        NSString* MelodyId = [self insertMelody];
         path=[appdel.path stringByAppendingString:appdel.currentdirectory];
         NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
                                                                             error:NULL];
         [dirs enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSString *name = (NSString *)obj;
-            [self upload:name];
+            [self upload:name :MelodyId];
         }];
-        
-        [self insertMelody];
+        [self convertMelody:MelodyId];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             // Update UI
@@ -549,7 +548,19 @@
 
 }
 
--(void)insertMelody
+-(void)convertMelody:(NSString*)MelodyId
+{
+    NSError *error;
+    int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
+    NSString *path=[ServerLocation stringByAppendingString:@"ConvertMelody.php?UserId="];
+    path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
+    path = [path stringByAppendingString:@"&MelodyName="];
+    path = [path stringByAppendingString:MelodyId];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+}
+
+-(NSString*)insertMelody
 {
     NSError *error;
     int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
@@ -559,10 +570,10 @@
     path = [path stringByAppendingString:inputname.text];
     NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
-   // NSLog(@"%@",content);
+    return content;
 }
 
--(void)upload:(NSString*)Filename
+-(void)upload:(NSString*)Filename :(NSString*)MelodyId
 {
     int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
     NSString* UserId = [NSString stringWithFormat:@"%d",AccountId];
@@ -601,7 +612,7 @@
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"Content-Disposition: form-data; name= \"MelodyName\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[inputname.text dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[MelodyId dataUsingEncoding:NSUTF8StringEncoding]];
     
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];

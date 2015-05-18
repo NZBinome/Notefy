@@ -42,6 +42,10 @@
 @property BOOL isCommentCount;
 @property BOOL isShareCount;
 @property BOOL isFanNumber;
+@property (weak, nonatomic) IBOutlet UITextField *SearchBar;
+@property NSString* SearchResult;
+@property BOOL isSearchResult;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ActivityIndicator;
 
 @end
 
@@ -79,6 +83,10 @@
 @synthesize isCommentCount;
 @synthesize isShareCount;
 @synthesize isFanNumber;
+@synthesize SearchBar;
+@synthesize SearchResult;
+@synthesize isSearchResult;
+@synthesize ActivityIndicator;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -125,6 +133,10 @@
         isStage_Name=[elementName isEqualToString:@"Stage_Name"];
         isPicture_Link=[elementName isEqualToString:@"Picture_Link"];
         isFanNumber = [elementName isEqualToString:@"FanCount"];
+    }
+    
+    if ([elementName isEqualToString:@"SearchResult"]) {
+        isSearchResult=true;
     }
     
     if (isMelody)
@@ -182,6 +194,11 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
+    if (isSearchResult) {
+        SearchResult=string;
+        isSearchResult=false;
+    }
+    
     if (isStage_Name) {
         User1.Stage_Name=string;
         isStage_Name=false;
@@ -365,19 +382,26 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    SearchBar.text=@"";
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    ActivityIndicator.hidden=NO;
+    [ActivityIndicator startAnimating];
     XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
     ServerLocation=appdel.ServerLocation;
     int AccountId=[[NSUserDefaults standardUserDefaults] integerForKey:@"AccountId"];
     MyProfile.tag = AccountId;
-    
     FeedTable.dataSource = self;
     FeedTable.delegate = self;
     Feeds = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
-    
+    SearchResult=@"";
+
     
     NSString *path=[ServerLocation stringByAppendingString:@"NewsFeed.php?UserId="];
     path = [path stringByAppendingString:[NSString stringWithFormat:@"%d", AccountId]];
@@ -388,16 +412,32 @@
         // Call your method/function here
         // Example:
         // NSString *result = [anObject calculateSomething];
+        ActivityIndicator.hidden=NO;
+        [ActivityIndicator startAnimating];
+
         [self getData:path];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            
             // Update UI
             // Example:
             // self.myLabel.text = result;
+            [ActivityIndicator stopAnimating];
+            ActivityIndicator.hidden=YES;
             [FeedTable reloadData];
 
         });
     });
-    //[self getData:path];
+        //[self getData:path];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard
+{
+    [SearchBar resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -459,25 +499,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    /*
-     if([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark)
-     {
-     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-     }
-     else
-     {
-     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-     }
-     XYZTrack* tempTrack;
-     tempTrack=[tracks objectAtIndex:indexPath.row];
-     tempTrack.isSelected=(!tempTrack.isSelected);
-     [tracks replaceObjectAtIndex:indexPath.row withObject:tempTrack];
-     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     */
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XYZFeed* DemoFeed;
@@ -500,8 +521,29 @@
     return 102;
 }
 
-- (IBAction)back:(id)sender {
+- (IBAction)back:(id)sender
+{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (IBAction)Search:(id)sender
+{
+    NSString* path;
+    NSError* error;
+    [self dismissKeyboard];
+    path=[ServerLocation stringByAppendingString:@"Search_by_StageName.php?StageName="];
+    path = [path stringByAppendingString:SearchBar.text];
+    NSString *furl=[[NSString stringWithFormat:@"%@",path]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content=[NSString stringWithContentsOfURL:[[NSURL alloc] initWithString:furl]encoding:NSUTF8StringEncoding error:&error];
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+    [parser setDelegate:self];
+    [parser parse];
+    if (![SearchResult isEqualToString:@""]) {
+        UserId = [SearchResult integerValue];
+        [self performSegueWithIdentifier:@"Profile" sender:self];
+    }
 }
 
 

@@ -16,6 +16,7 @@
 @synthesize ApplauseCount;
 @synthesize ShareCount;
 @synthesize CommentCount;
+@synthesize FromProfile;
 @synthesize Sharer;
 
 - (id)init
@@ -26,6 +27,7 @@
         XYZAppDelegate *appdel=[UIApplication sharedApplication].delegate;
         User=[[XYZUser alloc]init];
         Melody=[[XYZMelody alloc]init];
+        FromProfile=NO;
         ServerLocation=appdel.ServerLocation;
         
     }
@@ -34,24 +36,42 @@
 
 -(void)fillCell:(XYZShareCell *)cell
 {
-    [cell.SharerName setTitle:Sharer.Stage_Name forState:UIControlStateNormal];
+    NSString* fullpath;
+    if (FromProfile)
+    {
+        [cell.SharerName setTitle:User.Stage_Name forState:UIControlStateNormal];
+        cell.Action.text=@"Created";
+        if (!User.Picture_link) {
+            fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
+        }
+        else
+        {
+            fullpath = [ServerLocation stringByAppendingString:User.Picture_link];
+        }
+    }
+    
+    else
+    {
+        [cell.SharerName setTitle:Sharer.Stage_Name forState:UIControlStateNormal];
+        cell.Action.text=@"Amplified";
+        if (!Sharer.Picture_link) {
+            fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
+        }
+        else
+        {
+            fullpath = [ServerLocation stringByAppendingString:Sharer.Picture_link];
+        }
+    }
+    
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.ShareCount.text = ShareCount;
     cell.ApplauseCount.text = ApplauseCount;
     cell.CommentCount.text = CommentCount;
-    cell.Action.text=@"Shared";
     
-    cell.Time.text=[self fixDate:Date];
+    cell.Time.text=[self fixDate:Melody.Date];
     
-    NSString* fullpath;
-    if (!User.Picture_link) {
-        fullpath= [ServerLocation stringByAppendingString:@"Pictures/No_Profile_Picture.png"];
-    }
-    else
-    {
-        fullpath = [ServerLocation stringByAppendingString:Sharer.Picture_link];
-    }
+    
     cell.ProfilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:fullpath]]];
     cell.MelodyName.tag = Melody.Id;
     cell.UserName.tag = User.Id;

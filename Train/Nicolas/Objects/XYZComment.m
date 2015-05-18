@@ -38,9 +38,9 @@
     [cell.UserName setTitle:User.Stage_Name forState:UIControlStateNormal];
     [cell.MelodyName setTitle:Melody.Title forState:UIControlStateNormal];
     cell.Comment.text=Script;
-    cell.Action.text=@"Commented";
+    cell.Action.text=@"Commented on";
     
-    cell.Time.text=[self fixDate:Date];
+    cell.Time.text=[self fixDate:Melody.Date];
     
     cell.ShareCount.text = ShareCount;
     cell.ApplauseCount.text = ApplauseCount;

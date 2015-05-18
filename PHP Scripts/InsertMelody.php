@@ -12,9 +12,9 @@ $Melody1->setFile_Link("Melodies/" . $UserId . "/" . $MelodyName);
 date_default_timezone_set("Asia/Beirut");
 $Melody1->setDate(date("Y-m-d H:i:s"));
 $Melody1->setUser_Id($UserId);
-//$Melody1->display();
 $Melody1->insert();
-
+echo $Melody1->getId();
+/*
 $arguments = "";
 
 $file = fopen("Melodies/" . $UserId . "/" . $MelodyName . "/Readme.txt","r");
@@ -33,5 +33,5 @@ fclose($file);
 
 
 exec('./Mixer -i '. $arguments  . '-o "Melodies/' . $UserId . '/' . $MelodyName . '/Melody.aif" -c /usr/local/bin/fluidsynth -s SoundFonts/gm_soundfonts.sf2 & &> /dev/null &');
-
+*/
 ?>
